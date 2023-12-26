@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 from urllib import request
 import db_settings
+import allowed_host
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,8 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
+ALLOWED_HOSTS = allowed_host.ALLOWED_HOSTS
+SECRET_KEY = db_settings.SECRET_KEY
 
 # Application definition
 
@@ -36,7 +39,7 @@ INSTALLED_APPS = [
     'users_app',
     
     # 리액트 연동    
-    # 'rest_framework',
+    'rest_framework',
     'rest_framework.authtoken',    
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
