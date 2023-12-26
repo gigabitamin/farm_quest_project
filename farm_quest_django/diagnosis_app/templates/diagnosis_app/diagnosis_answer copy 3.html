@@ -1,0 +1,224 @@
+{% load static %}
+{% block content %}
+
+<main class="diagnosis_answer_main diagnosis_main">
+  <section class="diagnosis_answer_section">
+    <article class="diagnosis_answer_article">
+      <div class="diagnosis_answer_wrap">
+        <form id="diagnosis_answer_form">
+          <h2>문진표</h2>
+          {% for question in diagnosis_questions %}
+            <div>
+              <div>{{ question.diagnosis_question_content }}</div>
+              <label>
+                <input type="checkbox" name="question{{ question.id }}_answer" value="예"> 예
+              </label>
+              <label>
+                <input type="checkbox" name="question{{ question.id }}_answer" value="아니오"> 아니오
+              </label>
+            </div>
+          {% endfor %}
+          <button type="button" onclick="answer_submit_form()">답변완료</button>
+        </form>
+      </div>
+    </article>
+  </section>
+</main>
+
+<script>
+  function answer_submit_form() {
+    let form = document.getElementById('diagnosis_answer_form');
+    let selectedOptions = {};
+
+    {% for question in diagnosis_questions %}
+      let inputFields = form.elements['question{{ question.id }}_answer'];
+      selectedOptions[{{ question.id }}] = getSelectedOptions(inputFields);
+    {% endfor %}
+
+    if (validateSelectedOptions(selectedOptions)) {
+      let alertMessage = '';
+
+      {% for question in diagnosis_questions %}
+        alertMessage += '질문{{ question.id }}: ' + selectedOptions[{{ question.id }}].join(', ') + '\\n';
+      {% endfor %}
+
+      alert(alertMessage);
+    } else {
+      alert('각 질문에 대해 적어도 하나의 항목을 선택하세요.');
+    }
+  }
+
+  function getSelectedOptions(checkboxGroup) {
+    let selectedOptions = [];
+    for (let i = 0; i < checkboxGroup.length; i++) {
+      if (checkboxGroup[i].checked) {
+        selectedOptions.push(checkboxGroup[i].value);
+      }
+    }
+    return selectedOptions;
+  }
+
+  function validateSelectedOptions(options) {
+    for (let key in options) {
+      if (options[key].length === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+</script>
+
+{% endblock content %}
+
+
+
+{% load static %}
+{% block content %}
+
+<main class="diagnosis_answer_main diagnosis_main">
+  <section class="diagnosis_answer_section">
+    <article class="diagnosis_answer_article">
+      <div class="diagnosis_answer_wrap">
+        <form id="diagnosis_answer_form">
+          <h2>문진표</h2>
+          {% for question in diagnosis_questions %}
+            <div>
+              <div>{{ question.question_text }}</div>
+              <label>
+                <input type="radio" name="question{{ question.id }}" value="예">예
+                <input type="radio" name="question{{ question.id }}" value="아니오">아니오
+              </label>
+            </div>
+          {% endfor %}
+          <button type="button" onclick="answer_submit_form()">답변완료</button>
+        </form>
+      </div>
+    </article>
+  </section>
+</main>
+
+<script>
+  function answer_submit_form() {
+    let form = document.getElementById('diagnosis_answer_form');
+    let selectedOptions = [];
+
+    {% for question in diagnosis_questions %}
+      let question{{ question.id }} = getSelectedOption(form.elements['question{{ question.id }}']);
+      selectedOptions.push({{ question.id }}: question{{ question.id }});
+    {% endfor %}
+
+    if (validateSelectedOptions(selectedOptions)) {
+      let alertMessage = '';
+
+      {% for question in diagnosis_questions %}
+        alertMessage += '질문{{ question.id }}: ' + selectedOptions[{{ question.id }}] + '\\n';
+      {% endfor %}
+
+      alert(alertMessage);
+    } else {
+      alert('모든 항목을 선택하세요.');
+    }
+  }
+
+  function getSelectedOption(radioGroup) {
+    for (let i = 0; i < radioGroup.length; i++) {
+      if (radioGroup[i].checked) {
+        return radioGroup[i].value;
+      }
+    }
+    return null;
+  }
+
+  function validateSelectedOptions(options) {
+    for (let i = 0; i < options.length; i++) {
+      if (!options[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+</script>
+
+{% endblock content %}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문진표</title>
+</head>
+<body>
+    <form id="diagnosis_answer_form">
+        <h2>문진표</h2>            
+        <div>질문1 
+            <label>
+                <input type="radio" name="question1" value="예">예
+                <input type="radio" name="question1" value="아니오">아니오                
+            </label>
+        </div>
+        <div>질문2 
+            <label>
+                <input type="radio" name="question2" value="예">예
+                <input type="radio" name="question2" value="아니오">아니오
+            </label>
+        </div>
+        <div>질문3 
+            <label>
+                <input type="radio" name="question3" value="예">예
+                <input type="radio" name="question3" value="아니오">아니오
+            </label>
+        </div>
+        <div>질문4 
+            <label>
+                <input type="radio" name="question4" value="예">예
+                <input type="radio" name="question4" value="아니오">아니오
+            </label>
+        </div>
+        <div>질문5 
+            <label>
+                <input type="radio" name="question5" value="예">예
+                <input type="radio" name="question5" value="아니오">아니오
+            </label>
+        </div>
+        <div>질문6 
+            <label>
+                <input type="radio" name="question6" value="예">예
+                <input type="radio" name="question6" value="아니오">아니오
+            </label>
+        </div>
+        <button type="button" onclick="answer_submit_form()">답변완료</button>
+    </form>
+
+    <script>
+        function answer_submit_form() {
+            var form = document.getElementById('diagnosis_answer_form');
+            var question1 = getSelectedOption(form.elements['question1']);
+            var question2 = getSelectedOption(form.elements['question2']);
+            var question3 = getSelectedOption(form.elements['question3']);
+            var question4 = getSelectedOption(form.elements['question4']);
+            var question5 = getSelectedOption(form.elements['question5']);
+            var question6 = getSelectedOption(form.elements['question6']);
+
+            if (question1 && question2 && question3 && question4 && question5 && question6) {
+                alert('질문1: ' + question1 + '\n질문2: ' + question2 + '\n질문3: ' + question3 + '\n질문4: ' + question4 + '\n질문5: ' + question5 + '\n질문6: ' + question6);
+            } else {
+                alert('모든 항목을 선택하세요.');
+            }
+        }
+
+        function getSelectedOption(radioGroup) {
+            for (var i = 0; i < radioGroup.length; i++) {
+                if (radioGroup[i].checked) {
+                    return radioGroup[i].value;
+                }
+            }
+            return null;
+        }
+    </script>
+</body>
+</html>

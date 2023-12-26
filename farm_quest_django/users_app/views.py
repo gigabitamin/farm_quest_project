@@ -112,9 +112,11 @@ def sign_up(request):
 def sign_up2(request):   
     if request.method == 'POST':
         
-        username = request.POST['username']        
+                
         email = request.POST['email']
         password = request.POST['password']
+        username = request.POST['username']
+        
         # user_name = request.POST['user_name']
         # user_phone = request.POST['user_phone']
         # user_address = request.POST['user_address']    
@@ -139,14 +141,10 @@ def sign_up2(request):
     return render(request, 'users_app/sign_up2.html', {'form':form})
 
 
-
-
-
-# 마이페이지에 유저의 선호도 지정 키워드 -> 구글트렌드 관련검색어, 네이버 검색트렌드 에 입력 후 반환 된 결과 matplotlib 그래프로 추가
+# 마이페이지
 @login_required
 def my_page(request):
-    user_info = request.user  # 현재 로그인한 사용자    
-
+    user_info = request.user  # 현재 로그인한 사용자
     return render(request, 'users_app/my_page.html', {'user_info' : user_info})
 
 

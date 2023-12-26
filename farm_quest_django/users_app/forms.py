@@ -56,7 +56,7 @@ class UserInfoForm(forms.ModelForm):
         
         fields = (
             # 'profile_image'
-            'username',
+            # 'username',
             'email',                     
             # 'user_name',
             # 'user_phone',
@@ -65,11 +65,11 @@ class UserInfoForm(forms.ModelForm):
 
         labels = {
             # 'profile_image':'프로필 이미지'
-            'username':'아이디',
+            # 'username':'아이디',
             'email':'이메일',            
             # 'user_name':'성명',
             # 'user_phone':'전화번호',
-            # 'user_address':'주소',   
+            # 'user_address':'주소',
         }
 
 
@@ -80,17 +80,17 @@ class UserInfoForm_custom(forms.ModelForm):
         
         fields = (
             'email',                     
-            'user_name',
+            # 'user_name',
             # 'user_phone',
             # 'user_address',
-            # 'profile_image'    
+            # 'profile_image',
         )
 
         labels = {            
             'email':'이메일',            
-            'user_name':'성명',
+            # 'user_name':'성명',
             # 'user_phone':'전화번호',
             # 'user_address':'주소',
-            # 'profile_image':'프로필 이미지'            
+            # 'profile_image':'프로필 이미지',
         }
 

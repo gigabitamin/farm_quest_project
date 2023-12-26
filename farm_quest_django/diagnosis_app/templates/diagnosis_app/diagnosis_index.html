@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    .diagnosis_main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .diagnosis_choice_box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .diagnosis_answer_box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .diagnosis_image_box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
+    }    
+
+</style>
+
+<script>
+
+</script>
+
+
+<div class="diagnosis_index_box">
+    <div class="diagnosis_choice_box">{% include "./diagnosis_choice.html" %}</div>
+    <div class="diagnosis_answer_box">{% include "./diagnosis_answer.html" %}</div>
+    <div class="diagnosis_image_box">{% include "./diagnosis_image.html" %}</div>
+</div>
+
+
+
+{% endblock content %}

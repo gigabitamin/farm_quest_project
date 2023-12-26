@@ -1,0 +1,72 @@
+{% load static %}
+{% block content %}
+
+<main class="diagnosis_answer_main diagnosis_main">
+  <section class="diagnosis_answer_section">
+    <article class="diagnosis_answer_article">
+      <div class="diagnosis_answer_wrap">
+        <form id="diagnosis_answer_form">
+          <h2>문진표</h2>
+          {% for question in diagnosis_questions %}
+            <div>
+              <div>{{ question.diagnosis_question_content }}</div>
+              <label>
+                <input type="checkbox" name="question{{ question.id }}_answer" value="예"> 예
+              </label>
+              <label>
+                <input type="checkbox" name="question{{ question.id }}_answer" value="아니오"> 아니오
+              </label>
+            </div>
+          {% endfor %}
+          <button type="button" onclick="answer_submit_form()">답변완료</button>
+        </form>
+      </div>
+    </article>
+  </section>
+</main>
+
+<script>
+  function answer_submit_form() {
+    let form = document.getElementById('diagnosis_answer_form');
+    let selectedOptions = {};
+
+    {% for question in diagnosis_questions %}
+      let inputFields = form.elements['question{{ question.id }}_answer'];
+      selectedOptions[{{ question.id }}] = getSelectedOptions(inputFields);
+    {% endfor %}
+
+    if (validateSelectedOptions(selectedOptions)) {
+      let alertMessage = '';
+
+      {% for question in diagnosis_questions %}
+        alertMessage += '질문{{ question.id }}: ' + selectedOptions[{{ question.id }}].join(', ') + '\\n';
+      {% endfor %}
+
+      alert(alertMessage);
+    } else {
+      alert('각 질문에 대해 적어도 하나의 항목을 선택하세요.');
+    }
+  }
+
+  function getSelectedOptions(checkboxGroup) {
+    let selectedOptions = [];
+    for (let i = 0; i < checkboxGroup.length; i++) {
+      if (checkboxGroup[i].checked) {
+        selectedOptions.push(checkboxGroup[i].value);
+      }
+    }
+    return selectedOptions;
+  }
+
+  function validateSelectedOptions(options) {
+    for (let key in options) {
+      if (options[key].length === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+</script>
+
+{% endblock content %}
+

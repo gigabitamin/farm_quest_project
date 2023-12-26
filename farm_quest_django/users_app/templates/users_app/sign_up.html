@@ -2,14 +2,21 @@
 {% load static %}
 {% block content %}
 
+<style>
+
+</style>
+
+
 <div class="sign_up_box">    
-    <form method="post">
+    <form method="post" class="sign_up_post">
         <br><div><h1>회원가입</h1></div><br>
         {% csrf_token %}
-        <table id="form_tbl">
+        
+        <table class="form_tbl">
             {{ form }}
         </table><br>
-        <button id=signUpBtn type="submit" class="btn-primary">가입 완료</button>
+        <button type="submit" class="btn-primary signUpBtn">가입 완료</button>
+        
     </form>
 </div>
 

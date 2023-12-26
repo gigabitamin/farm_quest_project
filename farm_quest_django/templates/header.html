@@ -11,8 +11,7 @@
                 <div class="navbar-brand d-flex" style="display:flex; align-items: center; background-color: white;">
                     <img src="{% static 'image/logo/farm_quest_site.png' %}" style="width: 3vh; height: 3vh;">
                     <h3 style="margin:0;">팜 퀘스트</h3>
-                </div>
-                
+                </div>                
             </a>
         </div>
 
@@ -37,16 +36,16 @@
 
             
             {% comment %} 로그인 user만 마이페이지에 접근가능, 로그인 안한 사용자의 경우 자동으로 로그인 창으로 리다이렉트 {% endcomment %}  
-            <!-- 회원가입 로그인 박스 시작 - kdy -->
+            <!-- 회원가입 로그인 박스 시작   - kdy -->
         <div class="navbar-nav ms-auto">    
-            <div id="loginBox" class="navbar-nav ms-auto">    
+            <div class="loginBox" class="navbar-nav ms-auto">    
                 {% if user.is_authenticated %}
                     <div id="loginSignIn">{{ user.username }}</div>
                     <a href="{% url 'sign_out' %}"><div id="loginSignOut" class="btn-primary">Logout</div></a>
 
                 {% else %}
-                    <div id="loginSignUp"><a href="{% url 'sign_up' %}">회원가입</a></div>
-                    <div id="loginSignIn"><a href="{% url 'sign_in' %}">로그인</a></div>
+                    <div class="loginSignUp"><a href="{% url 'sign_up2' %}">회원가입</a></div>
+                    <div class="loginSignIn"><a href="{% url 'sign_in' %}">로그인</a></div>
                 {% endif %}    
             </div>
             <!-- 회원가입 로그인 박스 끝 - kdy -->

@@ -1,0 +1,36 @@
+{% load static %}
+{% block content %}
+<main class="diagnosis_choice_main diagnosis_main">
+    <section class="diagnosis_choice_section">        
+        <article class="diagnosis_choice_article">
+            <div class="diagnosis_choice_wrap">
+                <form id="diagnosis_choice_form">
+                    <h2>작물 선택</h2>
+                    {% for plant in plant_species %}
+                        <label>
+                            <input type="radio" name="choice_plant" value="{{ plant.plant_name }}">{{ plant.plant_name }}
+                        </label>
+                    {% endfor %}
+                    <button type="button" onclick="choice_submit_form()">선택완료</button>
+                </form>
+            </div>                        
+        </article>        
+    </section>
+</main>
+
+<script>
+
+    function choice_submit_form() {
+        let selectedPlant = document.querySelector('input[name="choice_plant"]:checked');
+    
+        if (selectedPlant) {
+            let selectedValue = selectedPlant.value;                        
+            alert("선택한 작물:" +  selectedValue);
+        } else {
+            alert("진단하실 작물을 선택해주세요");
+        }
+    }
+
+</script>
+
+{% endblock content %}
