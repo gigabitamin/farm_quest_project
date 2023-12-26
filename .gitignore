@@ -206,3 +206,5 @@ poetry.lock
 
 # migrations
 migrations/
+
+.allowed_host
