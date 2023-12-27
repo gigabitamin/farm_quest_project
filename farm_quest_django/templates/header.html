@@ -12,7 +12,7 @@
             <ul style="margin: 0; ">
             {% if user.is_authenticated %}
             <li class='signbar'><a href="{% url 'sign_out' %}">로그아웃</a></li>
-            <li class='signbar'><a href="{% url 'user_mypage' %}">{{ user.username }}님 환영합니다!</a></li>
+            {% comment %}<li class='signbar'><a href="{% url 'user_mypage' %}">{{ user.username }}님 환영합니다!</a></li> {% endcomment %}
 
             {% else %}
                 <li class='signbar'><a href="{% url 'sign_up' %}">회원가입</a></li>
