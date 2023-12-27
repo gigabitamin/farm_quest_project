@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}   
+{% block content %}   
+
+
+
+<div id='userinqbox'>
+<form method="post">
+    {% csrf_token %}
+        <div class='mypage_table'  id="iquire_box">
+            <br>
+            <span id='inquire_title'>문의하기</span>
+
+            <div>
+                <input type="hidden" name="id" value='{{ user.id }}'>
+                <input type="hidden" name="inq_date" value='{% now "Y-m-d" %}'>
+                <br><label class="userinq">제목</label><br><p></p>
+                <input id="userinqtitle" type="text" name="inq_title" id="inq_title">
+            </div>
+            <br>    
+            <div>
+                <br><label class="userinq">문의내용</label><br><br>
+                <textarea id="userinqcontent" name="inq_content" rows="4" cols="50"></textarea>
+            </div><br>
+        </div>
+    <button class="userinqbtn" id="inquire_form_btn" type="submit">보내기</button>
+    <br><br>
+</form>
+</div>
+{% endblock content %}
+
+
+
+

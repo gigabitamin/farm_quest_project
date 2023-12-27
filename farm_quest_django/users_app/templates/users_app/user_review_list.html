@@ -1,0 +1,44 @@
+{% load static %}   
+{% block content %}   
+{% csrf_token %}
+
+<span class='mypage_title'>리뷰내역</span><br><br>
+
+<div>
+    {% if reviews %}
+        <table  class='mypage_table' id="camp_review">
+            <tr>
+                <th>리뷰번호</th>
+                <th>캠핑장</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성일</th>
+                <th>별점</th>
+                <th>리뷰 수정</th>
+                <th>리뷰 삭제</th>
+            </tr>
+            {% for review in reviews %}
+            <tr>
+                <td>
+                    {{ forloop.counter }}</td>
+                {% comment %} <td><a href="{% url 'camping_detail' review.camp_no %}"> {% endcomment %}
+                    <td>{{ review.camp_no.camp_name }}</a></td>
+                <td>{{ review.rev_title }}</td>
+                <td>{{ review.rev_content }}</td>
+                <td>{{ review.rev_date|date:"Y-m-d" }}</td>
+                <td>{{ review.rev_rate }}</td>
+                <td><a href="{% url 'user_review_update' review.review_no %}">
+                    <button class='btn btn-cancel'>수정</button></a></td>
+                <td>
+                    <a href="{% url 'user_review_delete' review.review_no %}" 
+                    onclick="if (confirm('삭제하시겠습니까?')) { showCancellationMessage(); return true; } else { return false; }">
+                    <button class='btn btn-cancel'>삭제</button></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>작성한 리뷰가 없습니다.</p>
+    {% endif %}
+</div>
+
+{% endblock content %}

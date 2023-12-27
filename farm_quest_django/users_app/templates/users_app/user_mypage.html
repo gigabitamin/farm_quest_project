@@ -21,18 +21,29 @@
     <div id="sidebar">
         <li id='mypage_title'>마이페이지</li>
         <ul>
-            <li><a class="menu-link sidemenus" href="{% url 'user_plant' %}" data-page="1"
-                id='user_plant'>나의 작물</a></li>
+            <li><a class="menu-link sidemenus" href="{% url 'user_booked' %}" data-page="1"
+                id='user_booked'>예약내역</a></li>
             <li><a class="menu-link sidemenus" href="{% url 'user_favorite_list' %}" data-page="2"
-                id='user_favorite_list'>나의 팜로그</a></li>
+                id='user_favorite_list'>내가 찜한 캠핑장</a></li>
             <li><a class="menu-link sidemenus" href="{% url 'user_review_list' %}" data-page="3"
-                id='user_review_list'>나의 QnA</a></li>
+                id='user_review_list'>리뷰내역</a></li>
             <li><a class="menu-link sidemenus" href="{% url 'user_inquiry_list' %}" data-page="4"
-                id='user_inquire'>북마크</a></li>
+                id='user_inquire'>문의내역</a></li>
+            <li><a class="menu-link sidemenus" href="{% url 'sign_up2' %}" data-page="5"
+                 id='sign_up2'>기업회원 전환</a></li>
+            {% comment %} <li><a type='hidden' class="menu-link sidemenu" href="{% url 'user_inquiry_rep' %}" data-page="6"
+                id='user_inquiry_rep'></a></li> {% endcomment %}
+            {% comment %} <li><a class="menu-link sidemenu" href="{% url 'user_regi_req' %}" data-page="6"
+                    id='user_regi_req'>캠핑장 관리하기</a></li> {% endcomment %}
         </ul>
     </div>
     <div id="mycontent">
-
+        {% comment %} <li id='mypage_title'> {% endcomment %}
+            {% comment %} {% if user.id in companyuser.user_ptr_id.id %}
+                파트너 {{ user.username }} 님, 무엇을 도와드릴까요?
+            {% else %}
+                {{ user.username }} 님, 무엇을 도와드릴까요?
+            {% endif %} {% endcomment %}
             <div>
                 <span class='mypage_title'>등록내역</span><br><br>
                 {% if reg_requests %}
@@ -70,6 +81,7 @@
                 {% endif %}
         </li>
         <br>
+        <!-- 나머지 내용 추가 -->
     </div>
     
 </div>

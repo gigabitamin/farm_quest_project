@@ -188,3 +188,17 @@ def my_page_delete(request):
     return render(request, 'users_app/my_page_delete_confirm.html')
 
 
+# 마이페이지
+
+def user_plant_render(request):
+    return render(request, 'users_app/user_plant.html')
+
+def user_plant(request):
+    template_name = 'users_app/user_plant.html'
+    rendered_template = render(request, template_name)
+    response_data = {
+        'html': rendered_template.content.decode('utf-8')
+    }
+
+    return JsonResponse(response_data)
+
