@@ -27,7 +27,7 @@ urlpatterns = [
     path('my_page/delete/view/', views.MyPageDeleteView.as_view(), name='my_page_delete_view'),
 
     # 마이페이지
-    # path('user/mypage', views.camp_register, name='user_mypage'),
+    path('user/mypage', views.user_mypage, name='user_mypage'),
     path('user/mypage/1', views.user_plant, name='user_plant'),
     # path('user/mypage/2', views.user_review_list, name='user_review_list'),
     # path('user/mypage/3', views.user_favorite_list, name='user_favorite_list'),

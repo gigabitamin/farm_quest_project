@@ -190,6 +190,9 @@ def my_page_delete(request):
 
 # 마이페이지
 
+def user_mypage(request):
+    return render(request, 'users_app/user_mypage.html')
+
 def user_plant_render(request):
     return render(request, 'users_app/user_plant.html')
 

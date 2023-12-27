@@ -1,41 +1,51 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
 
-<style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Web</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
 
-.index_section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-}
+<body>
+    <header>
+        <div class="headerMenu">
+            <img src="logo.png" alt="Logo" id="logo">
+            <form action="/search" method="get">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            <a href="login.html" class="highlight">로그인</a>
+            <a href="register.html" class="highlight">회원가입</a>
+        </div>
+        <div class="navbar">
+            <ul>
+                <li><a href="#">메뉴1</a></li>
+                <li><a href="#">메뉴2</a></li>
+                <li><a href="#">메뉴3</a></li>
+                <li><a href="/user_mypage">마이페이지(임시통로)</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <a href="#" class="btn">가이드</a>
+        <a href="/scheduler_general" class="btn">스케쥴러</a>
+        <a href="#" class="btn">커뮤니티</a>
+        <a href="#" class="btn">가드닝샵</a>
+        <a href="#" class="btn">질병서치</a>
+        <a href="#" class="btn">해충서치</a>
+        <a href="#" class="btn">Photo</a>
+        <a href="#" class="btn">QNA</a>
+        <a href="#" class="btn">Calendar</a>
+    </main>
+    <footer>
+        <ul>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#">개인정보처리방침</a></li>
+            <li><a href="#">청소년보호정책</a></li>
+        </ul>
+    </footer>
+</body>
 
-
-</style>
-
-<main class="container index_main">
-    <section class="index_section">
-        팜 퀘스트 <br>
-        <li class='signbar'><a href="{% url 'my_page' %}">{{ user.username }}님 환영합니다!</a></li>
-
-        팜 퀘스트 <br>
-        팜 퀘스트 <br>
-        팜 퀘스트 <br>
-        팜 퀘스트 <br>
-        팜 퀘스트 <br>
-        팜 퀘스트 <br>
-        팜 퀘스트 <br>
-        팜 퀘스트 <br>
-        팜 퀘스트 <br>
-        팜 퀘스트 <br>
-        팜 퀘스트 <br>
-
-        <input type='radio'>
-        
-
-
-    </section>
-</main>
-
-{% endblock content %}
+</html>

@@ -1,49 +1,49 @@
-{% extends 'base.html' %}
-{% load static %}
- 
-{% block extrahead %}
-<link rel="stylesheet" href="{% static '/css/mypage_table.css' %}">
+<!DOCTYPE html>
+<html lang="en">
 
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Web</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
 
-{% block content %}  
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+<body>
+    <header>
+        <div class="headerMenu">
+            <img src="logo.png" alt="Logo" id="logo">
+            <form action="/search" method="get">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            <a href="login.html" class="highlight">로그인</a>
+            <a href="register.html" class="highlight">회원가입</a>
+        </div>
+        <div class="navbar">
+            <ul>
+                <li><a href="#">메뉴1</a></li>
+                <li><a href="#">메뉴2</a></li>
+                <li><a href="#">메뉴3</a></li>
+                <li><a href="/user_mypage">마이페이지(임시통로)</a></li>
+            </ul>
+        </div>
+    </header>
 
-<div id='mypage'>
-    {% csrf_token %}
-<br>
-    <div id="sidebar">
-        <li id='mypage_title'>마이페이지</li>
-        <ul>
-            <li><a class="menu-link sidemenus" href="{% url 'user_booked' %}" data-page="1"
-                id='user_booked'>예약내역</a></li>
-            <li><a class="menu-link sidemenus" href="{% url 'user_favorite_list' %}" data-page="2"
-                id='user_favorite_list'>내가 찜한 캠핑장</a></li>
-            <li><a class="menu-link sidemenus" href="{% url 'user_review_list' %}" data-page="3"
-                id='user_review_list'>리뷰내역</a></li>
-            <li><a class="menu-link sidemenus" href="{% url 'user_inquiry_list' %}" data-page="4"
-                id='user_inquire'>문의내역</a></li>
-            <li><a class="menu-link sidemenus" href="{% url 'sign_up2' %}" data-page="5"
-                 id='sign_up2'>기업회원 전환</a></li>
-            {% comment %} <li><a type='hidden' class="menu-link sidemenu" href="{% url 'user_inquiry_rep' %}" data-page="6"
-                id='user_inquiry_rep'></a></li> {% endcomment %}
-            {% comment %} <li><a class="menu-link sidemenu" href="{% url 'user_regi_req' %}" data-page="6"
-                    id='user_regi_req'>캠핑장 관리하기</a></li> {% endcomment %}
-        </ul>
+    <main>
+        <div id="sidebar">
+            <li id='mypage_title'>마이페이지</li>
+            <ul>
+                <li><a class="menu-link sidemenus" href="/scheduler_general" data-page="1"
+                    id='user_plant'>나의 작물</a></li>
+                <li><a class="menu-link sidemenus" href="/scheduler_general" data-page="2"
+                    id='user_farmlog'>나의 팜로그</a></li>
+                <li><a class="menu-link sidemenus" href="/scheduler_general" data-page="3"
+                    id='user_QnA'>나의 QnA</a></li>
+                <li><a class="menu-link sidemenus" href="/scheduler_general" data-page="4"
+                    id='user_bookmark'>즐겨찾기</a></li>
+            </ul>
     </div>
     <div id="mycontent">
-        {% comment %} <li id='mypage_title'> {% endcomment %}
-            {% comment %} {% if user.id in companyuser.user_ptr_id.id %}
-                파트너 {{ user.username }} 님, 무엇을 도와드릴까요?
-            {% else %}
-                {{ user.username }} 님, 무엇을 도와드릴까요?
-            {% endif %} {% endcomment %}
             <div>
                 <span class='mypage_title'>등록내역</span><br><br>
                 {% if reg_requests %}
@@ -81,10 +81,18 @@
                 {% endif %}
         </li>
         <br>
-        <!-- 나머지 내용 추가 -->
     </div>
     
 </div>
 
+</main>
+<footer>
+    <ul>
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보처리방침</a></li>
+        <li><a href="#">청소년보호정책</a></li>
+    </ul>
+</footer>
+</body>
 
-{% endblock content %}
+</html>

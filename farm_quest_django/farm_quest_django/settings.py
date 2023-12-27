@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'farm_quest_app',
     'users_app',
+    'scheduler_app',
     
     # 리액트 연동    
     'rest_framework',

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+.index_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+
+</style>
+
+<main class="container index_main">
+    <section class="index_section">
+        팜 퀘스트 <br>
+        <li class='signbar'><a href="{% url 'my_page' %}">{{ user.username }}님 환영합니다!</a></li>
+        <li class='signbar'><a href="{% url 'scheduler_general' %}">{{ user.username }}스케줄러</a></li>
+        <li class='signbar'><a href="{% url 'scheduler_personal' %}">{{ user.username }}개인 스케줄러</a></li>
+
+        팜 퀘스트 <br>
+        팜 퀘스트 <br>
+        팜 퀘스트 <br>
+        팜 퀘스트 <br>
+        팜 퀘스트 <br>
+        팜 퀘스트 <br>
+        팜 퀘스트 <br>
+        팜 퀘스트 <br>
+        팜 퀘스트 <br>
+        팜 퀘스트 <br>
+        팜 퀘스트 <br>
+
+        <input type='radio'>
+        
+
+
+    </section>
+</main>
+
+{% endblock content %}
