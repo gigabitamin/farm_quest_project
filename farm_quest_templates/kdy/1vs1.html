@@ -110,10 +110,15 @@
 
 
     .customer_center_image_img {        
-        height: 1px;
+        height: 20px;
         opacity: 0.1;
         z-index: -1; 
-      }
+    }
+
+    .customer_center_image_text {
+        position: relative;
+        z-index: 20; 
+    }
       
     .customer_center_answer_tab > a:nth-child(1){
         background-color:red;
@@ -125,7 +130,17 @@
 
     .customer_center_answer_tab > a:nth-child(3){
         background-color:green;
+    }   
+
+    .customer_center_answer_tab {
+        display:flex;
+        justify-content: center;
+        align-items: center;
     }    
+
+    .customer_center_answer_tab > div {
+        align-items:center;
+    }
 
 </style>
 
@@ -179,9 +194,7 @@
                           <article class="customer_center_answer_article">
                             <div class="customer_center_answer_wrap">
                               <div class="customer_center_answer_tab">
-                                <a href="#"><div>사이트 이용 문의</div></a>
-                                <a href="#"><div>결제 관련 문의</div></a>
-                                <a href="#"><div>회원가입 문의</div></a>
+                                <div><h2>1:1 문의</h2></div>
                               </div>
                             </div>
                           </article>
@@ -198,17 +211,31 @@
                                 </div>
                                 <div class="customer_center_image_text">
                                     <div>
-                                        <ol>
-                                            <li>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            </li>
-                                            <li>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            </li>
-                                            <li>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            </li>                                        
-                                        </ol>
+                                        
+                                        <p>문의에 대한 답변은 기입하신 이메일로 발송됩니다</p>
+                                        <br>
+                                        <form>
+                                            <label for="category">문의 유형 선택</label>
+                                            <br>
+                                            <select id="category" name="category">
+                                              <option value="option1">사이트 이용</option>
+                                              <option value="option2">결제 관련</option>
+                                              <option value="option3">회원가입</option>
+                                            </select>
+                                            <br>
+                                            <br>
+
+                                            <label>이름:</label>
+                                            <input type="text" />
+                                            <br/>
+                                            <label>이메일:</label>
+                                            <input type="email" />
+                                            <br/>
+                                            <label>문의 내용:</label>
+                                            <textarea rows="4"></textarea>
+                                            <br/>
+                                            <button type="submit">문의 제출</button>
+                                        </form>
                                     </div>                                    
                                 </div>
                             </article>

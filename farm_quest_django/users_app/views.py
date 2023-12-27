@@ -29,6 +29,15 @@ from .models import Profile
 from .models import User
 
 
+
+
+
+
+
+
+
+
+
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
