@@ -1,11 +1,81 @@
 {% extends 'base.html' %}
-{% load humanize %}
 {% load static %}
+ 
+{% block extrahead %}
+<link rel="stylesheet" href="{% static '/css/mypage_table.css' %}">
 
-<!-- base.html 랑 다른 title -->
-{% block title %} {{ user_info.username }} 님의 마이페이지 {% endblock %}
+{% endblock %}
 
-{% block content %} 
+{% block content %}  
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div id='mypage'>
+    {% csrf_token %}
+<br>
+    <div id="sidebar">
+        <li id='mypage_title'>마이페이지</li>
+        <ul>
+            <li><a class="menu-link sidemenus" href="{% url 'user_plant' %}" data-page="1"
+                id='user_plant'>나의 작물</a></li>
+            <li><a class="menu-link sidemenus" href="{% url 'user_favorite_list' %}" data-page="2"
+                id='user_favorite_list'>나의 팜로그</a></li>
+            <li><a class="menu-link sidemenus" href="{% url 'user_review_list' %}" data-page="3"
+                id='user_review_list'>나의 QnA</a></li>
+            <li><a class="menu-link sidemenus" href="{% url 'user_inquiry_list' %}" data-page="4"
+                id='user_inquire'>북마크</a></li>
+        </ul>
+    </div>
+    <div id="mycontent">
+
+            <div>
+                <span class='mypage_title'>등록내역</span><br><br>
+                {% if reg_requests %}
+                    <table class='mypage_table' id="reg_request_list">
+                        <tr>
+                            <th>등록번호</th>
+                            <th>캠핑장 이름</th>
+                            <th>주소</th>
+                            <th>전화번호</th>
+                            <th>승인여부</th>
+                            <th>등록신청 취소</th>
+                        </tr>
+                        {% for reg_request in reg_requests %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ reg_request.camp_name }}</td>
+                                <td>{{ reg_request.camp_address }}</td>
+                                <td>{{ reg_request.camp_call }}</td>
+                                <td>
+                                    {% if reg_request.approve is not null %}
+                                        {{ reg_request.approve }}
+                                    {% else %}
+                                        검토대기
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'camp_register_delete' reg_request.camp_no %}" 
+                                    onclick="if (confirm('신청을 취소하시겠습니까?')) { showCancellationMessage(); return true; } else { return false; }">
+                                    <button class='btn btn-cancel'>취소</button></a></td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                {% else %}
+                    <p>등록 내역이 없습니다.</p>
+                {% endif %}
+        </li>
+        <br>
+    </div>
+    
+</div>
+
+
+
 
 <div class="sign_up_box">
     <form action="#" method="post">
@@ -38,5 +108,5 @@
 </div>
 
 
-{% endblock content %}
 
+{% endblock content %}

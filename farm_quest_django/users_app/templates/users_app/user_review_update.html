@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  html,
+  body {
+      padding: 0;
+      margin: 0;
+      font-family: 'Nanum Gothic', '나눔고딕', Dotum, '돋움', Helvetica, AppleGothic, Sans-serif, 'Tahoma', 'MS PGothic';
+      color: #626262;
+      letter-spacing: -1px;
+      height: 100%;
+  }
+  select {
+    font-family: inherit;
+  }
+  #form_tbl {
+      width: 500px;
+      margin: 0 auto;
+  }
+  #form_tbl th {
+      background-color: transparent;
+      color:black;
+      text-align: left;
+      width: 40%;
+      padding-bottom: 5px;
+  }
+  #form_tbl td {
+    padding-bottom: 15px;
+  }
+  label {
+      font-weight: bold;
+      color: black;
+      display: inline-block;
+      width: 100%;
+  }
+  input[type="text"]#id_rev_title,
+  input[type="number"]#id_rev_rate,
+  input[type="date"]#id_rev_date {
+      width: 100%;
+      padding: 8px;
+      /* margin-bottom: 10px; */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-family: inherit;
+      box-shadow: none;
+  }
+  textarea,
+  select {
+      width: 100%;
+      padding: 8px;
+      /* margin-bottom: 10px; */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+  button#form_btn {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      margin-bottom: 35px;
+  }
+  tr {
+        margin-bottom: 10px;
+    }
+    /* Style for the first row containing 평점 and 사용자ID */
+    tr.first-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    /* Style for 평점 and 사용자ID labels */
+    th.rate-id-label {
+        text-align: left;
+    }
+</style>
+<script>
+  window.onload = function() {
+    // 'td' 요소를 선택합니다.
+    var tdElements = document.getElementsByTagName('td');
+
+    // 각 'td' 요소에 대해,
+    for (var i = 0; i < tdElements.length; i++) {
+        var td = tdElements[i];
+
+        // 'td' 요소의 모든 자식 노드에 대해,
+        for (var j = 0; j < td.childNodes.length; j++) {
+            var node = td.childNodes[j];
+
+            // 만약 노드가 텍스트 노드이고, 그 텍스트가 '">'를 포함하고 있다면,
+            if (node.nodeType === Node.TEXT_NODE && node.textContent.includes('">')) {
+                // 그 노드를 제거합니다.
+                td.removeChild(node);
+            }
+        }
+    }
+};
+</script>
+<h2 style="font-family: 'Nanum Gothic'; color: black; margin : 30px 0 40px 0;">리뷰 수정</h2>
+<form method="post">
+    {% csrf_token %}
+    <!-- # form 취약한 해킹코드 방지, 입력한 다음 값 못들어오도록 막아줌 -->
+    <table id="form_tbl">
+      <tr>
+        <th><label for="id_camp_no">캠핑장</label></th></tr>
+        <tr>
+        <td>
+            <select name="camp_no" required id="id_camp_no" disabled>
+              <!-- <option value="{{rform.camp_no}}"></option> -->
+              <!-- <option value="{% autoescape on %}{{rform.camp_no}}{% endautoescape %}"></option> -->
+              <option value="{% autoescape on %}{{form.camp_no}}{% endautoescape %}"></option>
+            </select>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="id_rev_date">최초 작성일</label></th></tr>
+        <tr>
+        <td>
+          <input type="date" name="rev_date" required id="id_rev_date" disabled>
+          <script>document.getElementById('id_rev_date').value = new Date().toISOString().substring(0, 10)</script>
+          </td>
+      </tr>
+      <tr>
+        <th><label for="id_rev_title">제목</label></th>
+      </tr>
+        <tr>
+          <td>
+            <input type="text" name="rev_title" maxlength="100" id="id_rev_title">
+          </td>
+        </tr>
+        <tr>
+          <th><label for="id_rev_rate">평점</label></th></tr>
+          <tr>
+          <td>
+            <input type="number" name="rev_rate" step="any" id="id_rev_rate"
+            max="5" min="0" value="5">
+          </td>
+        </tr>
+  <tr>
+    <th><label for="id_rev_content">리뷰 내용</label></th>
+    </tr>
+    <tr>
+    <td>
+      <textarea name="rev_content" cols="40" rows="10" id="id_rev_content" style="font-family: inherit;">
+</textarea>
+    </td>
+  </tr>
+  <tr style="display: none;">
+    <th><label for="id_id">사용자ID</label></th>
+    <td>
+        <select name="id" id="id_id">
+            <option value="{{user.id}}" selected>{{user.username}}</option>
+        </select>
+    </td>
+  </tr>
+    </table><br>
+    <button id="form_btn" type="submit">등록</button>
+</form>
+{% endblock content %}

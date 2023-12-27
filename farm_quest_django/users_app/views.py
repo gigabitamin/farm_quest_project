@@ -195,3 +195,19 @@ def my_page_delete(request):
     return render(request, 'users_app/my_page_delete_confirm.html')
 
 
+# 마이페이지
+
+def mypage(request):
+    return render(request, 'users_app/mypage.html')
+
+def user_plant_render(request):
+    return render(request, 'users_app/user_plant.html')
+
+def user_farmlog_render(request):
+    return render(request, 'users_app/user_farmlog.html')
+
+def user_QnA_render(request):
+    return render(request, 'users_app/user_QnA.html')
+
+def user_bookmark_render(request):
+    return render(request, 'users_app/user_bookmark.html')

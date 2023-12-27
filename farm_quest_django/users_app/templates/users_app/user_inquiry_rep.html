@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}   
+{% block content %}
+
+<div id='userinqrep'>
+    <div class="userinqrep">
+        <span id="mypage_title_inq" class='mypage_title'>문의</span>
+    <br><br>
+        <div class="rep_p"><p class="reptitle"><strong>문의 제목 : </strong></p> <p class="repcon">{{ inquiry.inq_title }}</p></div>
+        <div class="rep_p"><p class="reptitle"><strong>문의 날짜 : </strong></p> <p class="repcon"> {{ inquiry.inq_date }}</p></div>
+        <div class="rep_p"><p class="reptitle"><strong>답변 상태 : </strong></p> <p class="repcon"> {{ inquiry.rep_status }}</p></div>
+        <div class="rep_p"><p class="reptitle"><strong>문의 내용 : </strong></p> <p class="repcon">{{ inquiry.inq_content }}</p></div>
+    </div>
+
+        {% if reply %}
+            <div class="userinqrep"> 
+                <span id="mypage_title_inq" class='mypage_title'>답변</span>
+                <div class="rep_p"><p class="reptitle"><strong>답변 날짜 : </strong></p> <p class="repcon"> {{ reply.rep_date }}</p></div>
+                <div class="rep_p"><p class="reptitle"><strong>답변 내용 : </strong></p> <p class="repcon"> {{ reply.rep_content }}</p></div>
+            </div>
+        {% else %}
+        <p>아직 답변이 작성되지 않았습니다.</p>
+        {% endif %}
+
+    <a href="{% url 'user_mypage' %}" class="btn btnback">돌아가기</a>
+
+</div>
+<div>
+
+{% endblock content %}

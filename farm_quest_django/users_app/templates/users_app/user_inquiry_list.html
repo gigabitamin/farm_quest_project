@@ -1,0 +1,36 @@
+{% load static %}
+{% block content %}
+{% csrf_token %}
+<span class='mypage_title'>문의내역</span><br><br>
+
+<div>
+    {% if inquiries %}
+        <table id="user_inquiries" class='mypage_table' >
+            <tr>
+                <th>문의번호</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성일</th>
+                <th>답변여부</th>
+            </tr>
+            {% for inquiry in inquiries %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td expandable-cell>{{ inquiry.inq_title }}</td>
+                <td expandable-cell>{{ inquiry.inq_content }}</td>
+                <td>{{ inquiry.inq_date }}</td>
+                <td>{% if inquiry.rep_status %}
+                    <a href="{% url 'user_inquiry_rep' inq_no=inquiry.inq_no %}">
+                        {{ inquiry.rep_status }}</a>
+                {% else %}
+                    답변대기
+                {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>문의 내역이 없습니다.</p>
+    {% endif %}
+</div>
+
+{% endblock content %}

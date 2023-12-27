@@ -1,0 +1,99 @@
+/* .hide {
+  display: none;
+  } */
+
+
+/* @font-face {
+  font-family: 'NanumSquareRoundOTFB';
+  src: url('/static/font/NanumSquareRoundOTFB.otf') format('opentype');
+} */
+
+
+/* 마이페이지 */
+
+/* 좌측 메뉴 스타일 */
+
+#mypage_section{
+  float:left;
+}
+#mypage_sidebar {
+  width: 250px;
+  float: left;
+  background-color: rgb(9, 122, 5);
+  color: black;
+  border-top-right-radius:40px;
+}
+
+#sidebar ul {
+  list-style-type: none;
+  padding-bottom: 20px;
+  margin: 20px;
+}
+
+div #mypage_title {
+  padding: 10px;
+  margin: 10px;
+  list-style-type: none;
+}
+
+#sidebar li {
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+
+.mypage_title{
+  font-family: 'NanumSquareRoundOTFB';
+  font-size:16pt;
+}
+
+#mypage_title{
+  font-size:18px;
+  font-family: 'NanumSquareRoundOTFB';
+
+}
+.sidemenus {
+  font-family: 'NanumSquareRoundOTFB';
+  font-size: 12pt;
+}
+
+.sidemenus a {
+  text-decoration: none;
+  text-decoration-color: black;
+
+}
+
+
+.sidemenus a:visited {
+  color: inherit;
+}
+
+.sidemenus a:active {
+  color: inherit;
+}
+
+.sidemens a:hover {
+  color: goldenrod;
+  transition: color 0.15s ease;
+}
+
+/* 우측 내용 스타일 */
+#mypage_contents {
+  background-color: palegreen;
+  width:80%;
+  height:90%;
+}
+
+.page_title{
+  font-size: 14pt;
+}
+
+
+
+
+
+/* mypage main 수정 */
+.mypage_main {
+  display:flex;
+  flex-direction: row;
+}
+

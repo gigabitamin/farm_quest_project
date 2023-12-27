@@ -6,6 +6,20 @@
     <!-- 헤더 시작 -->
 
     <header class="d-flex">
+        
+        <div class='signbar' style="height: 55px; box-sizing: border-box; display: block; text-align: center;">
+            
+            <ul style="margin: 0; ">
+            {% if user.is_authenticated %}
+            <li class='signbar'><a href="{% url 'sign_out' %}">로그아웃</a></li>
+            <li class='signbar'><a href="{% url 'user_mypage' %}">{{ user.username }}님 환영합니다!</a></li>
+
+            {% else %}
+                <li class='signbar'><a href="{% url 'sign_up' %}">회원가입</a></li>
+                <li class='signbar'><a href="{% url 'sign_in' %}">로그인</a></li>
+            {% endif %}
+            </ul>
+        </div>
         <div class="header_logo">
             <a href="{% url 'index' %}" class="navbar-brand d-flex">
                 <div class="navbar-brand d-flex" style="display:flex; align-items: center; background-color: white;">
