@@ -1,26 +1,17 @@
+
 .index_main {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.btn_section {
-    display: inline-block;
-    gap: 20px;
-    margin-top: 20px;
-    width: 120px;
-}
-
-.scheduler_btn {
-    /* 버튼에 적용할 스타일을 여기에 추가하세요 */
-    display: inline-block;
-    background-color: #3498db;
-    color: #fff;
-    padding: 5px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin: 0 10px;
-    transition: background-color 0.3s ease;
+.scheduler_btn{
+    float:left;
+    list-style:none;
+    margin-right: 20px;
+    background-color:rgb(122, 122, 192);
+    padding:5px;
+    margin-bottom: 0px;
 }
 
 .scheduler_btn:hover {
@@ -41,6 +32,11 @@
     width: 20%;
     height: 300px;
 }
+
+#schedule_filter{
+    list-style-type: none;
+}
+
 #scheduler_content {
     background-color: #ecf0f1;
     padding: 20px;

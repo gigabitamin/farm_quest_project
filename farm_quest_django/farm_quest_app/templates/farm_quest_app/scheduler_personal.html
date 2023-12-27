@@ -5,62 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>myschedule</title>
-    <!-- <link rel="stylesheet" href="static/css/style.css"> -->
-    <!-- <link rel="stylesheet" href="static/css/scheduler.css"> -->
-    <style>
-    .index_main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .scheduler_btn{
-        float:left;
-        list-style:none;
-        margin-right: 20px;
-        background-color:rgb(122, 122, 192);
-        padding:5px;
-        margin-bottom: 0px;
-    }
-    
-    .scheduler_btn:hover {
-        background-color: #2980b9;
-    }
-    
-    .content_section {
-        display: flex;
-        gap: 20px;
-        margin-top: 20px;
-        width: 90%;
-    }
-    
-    #scheduler_filter {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 5px;
-        width: 20%;
-        height: 300px;
-    }
-
-    #schedule_filter{
-        list-style-type: none;
-    }
-    
-    #scheduler_content {
-        background-color: #ecf0f1;
-        padding: 20px;
-        border-radius: 5px;
-        width: 70%;
-        height: 600px;
-    
-    }
-</style>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/scheduler.css">
+    <style></style>
     
 </head>
 <body>
     <header>
         <div class="headerMenu">
-            <img src="logo.png" alt="Logo" id="logo">
+            <a href="/"><img src="logo.png" alt="Logo" id="logo"></a>
             <form action="/search" method="get">
                 <input type="text" name="query" placeholder="Search...">
                 <button type="submit">Search</button>
@@ -73,6 +26,7 @@
                 <li><a href="#">메뉴1</a></li>
                 <li><a href="#">메뉴2</a></li>
                 <li><a href="#">메뉴3</a></li>
+                <li><a href="users/mypage">마이페이지(임시통로)</a></li>
             </ul>
         </div>
     </header>

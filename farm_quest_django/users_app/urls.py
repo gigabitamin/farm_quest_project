@@ -27,12 +27,11 @@ urlpatterns = [
     path('my_page/delete/view/', views.MyPageDeleteView.as_view(), name='my_page_delete_view'),
 
     # 마이페이지
-    path('user/mypage', views.user_mypage, name='user_mypage'),
-    path('user/mypage/1', views.user_plant, name='user_plant'),
-    # path('user/mypage/2', views.user_review_list, name='user_review_list'),
-    # path('user/mypage/3', views.user_favorite_list, name='user_favorite_list'),
-    # path('user/mypage/4', views.user_inquiry_list, name='user_inquiry_list'),
-    path('user/mypage/5', views.sign_up2, name='sign_up2'),
+    path('mypage/', views.mypage, name='mypage'),
+    path('mypage/', views.user_plant_render, name='user_plant'),
+    path('mypage/', views.user_farmlog_render, name='user_farmlog'),
+    path('mypage/', views.user_QnA_render, name='user_QnA'),
+    path('mypage/', views.user_bookmark_render, name='user_bookmark'),
 
     # path('user/mypage/1/delete/<str:book_no>/', views.user_booked_delete, name='user_booked_delete'),
     # path('user/mypage/3/delete/<str:fav_id>/', views.user_favorite_delete, name='user_favorite_delete'),

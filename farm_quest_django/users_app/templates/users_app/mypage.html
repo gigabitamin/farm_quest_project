@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Web</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/mypage.css">
+</head>
+
+<body>
+    <header>
+        <div class="headerMenu">
+            <a href="/"><img src="logo.png" alt="Logo" id="logo"></a>
+            <form action="/search" method="get">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            <a href="login.html" class="highlight">로그인</a>
+            <a href="register.html" class="highlight">회원가입</a>
+        </div>
+        <div class="navbar">
+            <ul>
+                <li><a href="#">메뉴1</a></li>
+                <li><a href="#">메뉴2</a></li>
+                <li><a href="#">메뉴3</a></li>
+                <li><a href="users/mypage">마이페이지(임시통로)</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section id="mypage_section">
+            <div id="mypage_sidebar">
+                <li id='mypage_title'>마이페이지</li>
+                <ul>
+                    <li><a class="menu-link sidemenus" href="/user_plant"
+                        id='user_plant'>나의 작물</a></li>
+                    <li><a class="menu-link sidemenus" href="/user_farmlog"
+                        id='user_farmlog'>나의 팜로그</a></li>
+                    <li><a class="menu-link sidemenus" href="/user_QnA"
+                        id='user_QnA'>나의 QnA</a></li>
+                    <li><a class="menu-link sidemenus" href="/user_bookmark"
+                        id='user_bookmark'>즐겨찾기</a></li>
+                </ul>
+            </div>
+            <div id="mypage_contents">
+                contents
+            </div>
+        </section>
+
+    </main>
+<footer>
+    <ul>
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보처리방침</a></li>
+        <li><a href="#">청소년보호정책</a></li>
+    </ul>
+</footer>
+</body>
+
+</html>
