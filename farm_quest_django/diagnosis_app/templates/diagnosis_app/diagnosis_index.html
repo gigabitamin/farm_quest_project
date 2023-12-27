@@ -5,78 +5,97 @@
 {% block content %}
 
 <style>
-    {% comment %} .diagnosis_main {
+      
+        
+    .diagnosis_wrap_box {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: row;             
+        flex-wrap: nowrap;
+        border: 1px solid black;
+        width:100%;        
         margin: 0 auto;
-        text-align: center;
     }
 
-    .diagnosis_choice_box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .diagnosis_ad_box { 
+        display:flex;
+        flex: 1 0 20%;
+        border: 1px solid black;
         margin: 0 auto;
-        text-align: center;
+        align-items:center;
+        justify-content: center;
     }
+
+    .diagnosis_ad_content{        
+        border: 1px solid black;        
+    }
+
+    .diagnosis_index_box { 
+        flex-direction: column;             
+        flex-wrap: nowrap;
+        display:flex;
+        flex: 0 0 80%;
+        border: 1px solid black;
+        margin: 0 auto;
+        align-items:center;
+        justify-content: center;       
+    }    
+
+    .diagnosis_choice_box {
+        display: flex;        
+        justify-content: center;
+        align-items: center;        
+        text-align: center;                
+        border: 1px solid black;
+    }
+
+    .diagnosis_choice_result_box {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;                
+        text-align: center;                   
+        justify-content: center;
+        border: 1px solid black;   
+    }
+
 
     .diagnosis_answer_box {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 0 auto;
         text-align: center;
+        border: 1px solid black;
+        width:35vh;
     }
     
     .diagnosis_image_box {
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
-        margin: 0 auto;
+        align-items: center;        
         text-align: center;
-    }    
-
-    .diagnosis_choice_result_box {
-        display: flex;
-        text-align: center;                   
-        justify-content: center;
-    }
-
-    .diagnosis_ad_box {
-        width:100vh;
-        display: flex;
-        text-align: center;                   
-        justify-content: center;
-    } {% endcomment %}
-
-    .diagnosis_wrap {
- 
-        display: grid;
-        grid:
-          "diagnosis_ad_box diagnosis_index_box" 1fr
-          / auto 1fr;
-        gap: 8px;
-        
         border: 1px solid black;
-    }
-
-      .diagnosis_ad_box { grid-area: diagnosis_ad_box; border: 1px solid black;}
-      .diagnosis_index_box { grid-area: diagnosis_index_box; border: 1px solid black;}    
+    }        
 
 </style>
 
-<div class"diagnosis_wrap">
+
+
+<div class="diagnosis_wrap_box">
     <div class="diagnosis_ad_box">광고</div>
     <div class="diagnosis_index_box">
         <div class="diagnosis_choice_box">{% include "./diagnosis_choice.html" %}</div>
         <div class="diagnosis_choice_result_box">
             <div class="diagnosis_answer_box">{% include "./diagnosis_answer.html" %}</div>
             <div class="diagnosis_image_box">{% include "./diagnosis_image.html" %}</div>
-        <div>
-    </div>
-    
+        </div>
+    </div>    
 </div>
+
+
+
+
 
 <script>
 </script>
