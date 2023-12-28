@@ -28,8 +28,8 @@ urlpatterns = [
 
     # 마이페이지
     path('mypage/', views.mypage, name='mypage'),
-    path('./', views.user_plant_render, name='user_plant'),
-    path('mypage/', views.user_farmlog_render, name='user_farmlog'),
-    path('mypage/', views.user_QnA_render, name='user_QnA'),
-    path('mypage/', views.user_bookmark_render, name='user_bookmark'),
+    path('user_plant/', views.user_plant_render, name='user_plant'),
+    path('user_farmlog/', views.user_farmlog_render, name='user_farmlog'),
+    path('user_QnA/', views.user_QnA_render, name='user_QnA'),
+    path('user_bookmark/', views.user_bookmark_render, name='user_bookmark'),
 ]
