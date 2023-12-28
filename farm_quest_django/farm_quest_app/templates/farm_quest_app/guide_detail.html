@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layout Design</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  .wrapper {
+    display: flex;
+    max-width: 900px;
+    margin: auto;
+    border: 2px solid black;
+    min-height: 600px;
+  }
+  .sidebar {
+    flex: 1;
+    border-right: 2px solid black;
+    padding: 10px;
+  }
+  .main-content {
+    flex: 3;
+    padding: 10px;
+  }
+  .menu-item {
+    margin-bottom: 10px;
+  }
+  .main-title {
+    font-size: 24px;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  .box-container {
+    display: flex;
+  }
+  .box {
+    border: 2px solid black;
+    flex: 1;
+    margin-right: 10px;
+    text-align: center;
+    padding: 20px;
+  }
+  .box:last-child {
+    margin-right: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="sidebar">
+    <div class="menu-item">메뉴1</div>
+    <div class="menu-item">메뉴2</div>
+    <div class="menu-item">메뉴3</div>
+    <div class="menu-item">메뉴4</div>
+    <div class="menu-item">메뉴5</div>
+  </div>
+  <div class="main-content">
+    <div class="main-title">제목 시간</div>
+    <div class="box-container">
+      <div class="box">영상1</div>
+      <div class="box">영상2</div>
+      <div class="box">영상3</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

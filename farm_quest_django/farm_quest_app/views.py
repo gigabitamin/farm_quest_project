@@ -22,3 +22,8 @@ def cs_notice(request):
 def commumnity(request):    
     return render(request, 'farm_quest_app/commumnity.html')
 
+def guide_index(request):    
+    return render(request, 'farm_quest_app/guide_index.html')
+
+def guide_detail(request):    
+    return render(request, 'farm_quest_app/guide_detail.html')

@@ -8,5 +8,7 @@ urlpatterns = [
     path('cs_1vs1/', views.cs_1vs1, name='cs_1vs1'),
     path('cs_faq/', views.cs_faq, name='cs_faq'),
     path('cs_notice/', views.cs_notice, name='cs_notice'),
-    path('commumnity/', views.commumnity, name='commumnity'),    
+    path('commumnity/', views.commumnity, name='commumnity'),
+    path('guide_index/', views.guide_index, name='guide_index'), 
+    path('guide_detail/', views.guide_detail, name='guide_detail'), 
 ]

@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Web</title>
+    <link rel="stylesheet" href="{% static 'css/guide.css' %}">
+</head>
+
+<body>
+    <header>
+        <div class="headerMenu">
+            <img src="logo.png" alt="Logo" id="logo">
+            <form action="/search" method="get">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            <a href="login.html" class="highlight">로그인</a>
+            <a href="register.html" class="highlight">회원가입</a>
+        </div>
+        <div class="navbar">
+            <ul>
+                <li><a href="#">메뉴1</a></li>
+                <li><a href="#">메뉴2</a></li>
+                <li><a href="#">메뉴3</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="content">
+            <div class="row">
+                <div class="product">
+                    <img src="strawberry.png" alt="딸기">
+                    <p>딸기</p>
+                </div>
+                <div class="product">
+                    <img src="grapes.png" alt="포도">
+                    <p>포도</p>
+                </div>
+                <div class="product">
+                    <img src="carrot.png" alt="당근">
+                    <p>당근</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="product">
+                    <img src="pepper.png" alt="피망">
+                    <p>피망</p>
+                </div>
+                <div class="product">
+                    <img src="tomato.png" alt="토마토">
+                    <p>토마토</p>
+                </div>
+                <div class="product">
+                    <img src="chili.png" alt="고추">
+                    <p>고추</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <ul>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#">개인정보처리방침</a></li>
+            <li><a href="#">청소년보호정책</a></li>
+        </ul>
+    </footer>
+</body>
+
+</html>
