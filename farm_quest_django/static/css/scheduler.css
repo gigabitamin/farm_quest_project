@@ -45,3 +45,12 @@
     height: 600px;
 
 }
+
+
+/* 푸터 하단 고정 - kdy 231228_1326 */
+/* footer {
+    position:fixed;
+    bottom:0vh;
+    width:100vw;    
+    height:5vh;
+} */

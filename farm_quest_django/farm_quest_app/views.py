@@ -19,4 +19,6 @@ def cs_faq(request):
 def cs_notice(request):    
     return render(request, 'farm_quest_app/cs_notice.html')
 
+def commumnity(request):    
+    return render(request, 'farm_quest_app/commumnity.html')
 

@@ -3,7 +3,7 @@
 import os
 from pathlib import Path
 from urllib import request
-import db_settings
+import db_settings as db_settings
 import allowed_host
 
 
