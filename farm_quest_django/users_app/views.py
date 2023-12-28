@@ -201,7 +201,7 @@ def mypage(request):
     return render(request, 'users_app/mypage.html')
 
 def user_plant_render(request):
-    return render(request, 'users_app/user_plant.html')
+    return render(request, 'users_app/mypage/user_plant.html')
 
 def user_farmlog_render(request):
     return render(request, 'users_app/user_farmlog.html')

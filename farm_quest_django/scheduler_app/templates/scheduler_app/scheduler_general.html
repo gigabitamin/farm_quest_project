@@ -4,74 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myschedule</title>
-    <!-- <link rel="stylesheet" href="static/css/style.css"> -->
-    <!-- <link rel="stylesheet" href="static/css/scheduler.css"> -->
-    <style>
-    .index_main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    <title>Plant Web</title>
 
-    .scheduler_btn{
-        float:left;
-        list-style:none;
-        margin-right: 20px;
-        background-color:rgb(122, 122, 192);
-        padding:5px;
-    }
-    
-    .scheduler_btn:hover {
-        background-color: #2980b9;
-    }
-    
-    .content_section {
-        display: flex;
-        gap: 20px;
-        margin-top: 20px;
-        width: 90%;
-    }
-    
-    #scheduler_filter {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 5px;
-        width: 20%;
-        height: 300px;
-    }
-
-    #schedule_filter{
-        list-style-type: none;
-    }
-
-    #scheduler_content {
-        background-color: #ecf0f1;
-        padding: 20px;
-        border-radius: 5px;
-        width: 70%;
-        height: 600px;
-    
-    }
-</style>
+    <link rel="stylesheet" href="../../../static/css/style_ltj.css">
+    <link rel="stylesheet" href="../../../static/css/scheduler.css">
     
 </head>
+
 <body>
     <header>
         <div class="headerMenu">
-            <img src="logo.png" alt="Logo" id="logo">
+            <a href="/"><img src="../../../static/image/logo/farm_quest_site.svg" alt="Logo" id="logo"></a>
             <form action="/search" method="get">
                 <input type="text" name="query" placeholder="Search...">
                 <button type="submit">Search</button>
             </form>
-            <a href="login.html" class="highlight">로그인</a>
-            <a href="register.html" class="highlight">회원가입</a>
+            <a href="/sign_in" class="highlight">로그인</a>
+            <a href="/sign_up2" class="highlight">회원가입</a>
         </div>
         <div class="navbar">
             <ul>
-                <li><a href="#">메뉴1</a></li>
-                <li><a href="#">메뉴2</a></li>
-                <li><a href="#">메뉴3</a></li>
+                <li><a href="/diagnosis_temp">진단2</a></li>
+                <li><a href="/diagnosis_temp">진단</a></li>
+                <li><a href="/customer_service_center">고객센터</a></li>
+                <li><a href="/mypage">마이페이지(임시통로)</a></li>
             </ul>
         </div>
     </header>
@@ -79,33 +35,33 @@
 <!-- 메인 -->
     <main class="container index_main">
 
-    <section class="btn_section">
-            <a class="scheduler_btn" href="{% url 'scheduler_general' %}">
-                <div class="scheduler_btn">gen_btn</div>
-            </a>
-            <a class="scheduler_btn" href="{% url 'scheduler_personal' %}">
-                <div class="scheduler_btn">per_btn</div>
-            </a>
-    </section>
-    <br>
-    <section class="content_section">
-        <div id="scheduler_filter">filter
-            <p>
-                <ul id="schedule_filter">
-                    <li><input type="checkbox" id="ck1" name="ck1" value="1" >
-                        <label for="ck1">24절기</label></li>
-                    <li><input type="checkbox" id="ck2" name="ck2" value="1" >
-                        <label for="ck2">비오는날</label></li>
-                    <li><input type="checkbox" id="ck3" name="ck3" value="1" >
-                        <label for="ck3">눈오는날</label></li>
-                    <li><input type="checkbox" id="ck4" name="ck4" value="1" >
-                        <label for="ck4">심기</label></li>
-                </ul>
-            </p>
-        </div>
-        <div id="scheduler_content">scheduler</div>
-    </section>
-</main>
+        <section class="scd_btn_section">
+                <a class="scheduler_btn" href="{% url 'scheduler_general' %}">
+                    <div class="scheduler_btn">gen_btn</div>
+                </a>
+                <a class="scheduler_btn" href="{% url 'scheduler_personal' %}">
+                    <div class="scheduler_btn">per_btn</div>
+                </a>
+        </section>
+        <br>
+        <section class="scd_content_section">
+            <div id="scheduler_filter">filter
+                <p>
+                    <ul id="schedule_filter">
+                        <li><input type="checkbox" id="ck1" name="ck1" value="1" >
+                            <label for="ck1">24절기</label></li>
+                        <li><input type="checkbox" id="ck2" name="ck2" value="1" >
+                            <label for="ck2">비오는날</label></li>
+                        <li><input type="checkbox" id="ck3" name="ck3" value="1" >
+                            <label for="ck3">눈오는날</label></li>
+                        <li><input type="checkbox" id="ck4" name="ck4" value="1" >
+                            <label for="ck4">심기</label></li>
+                    </ul>
+                </p>
+            </div>
+            <div id="scheduler_content">scheduler</div>
+        </section>
+    </main>
 
 
 
