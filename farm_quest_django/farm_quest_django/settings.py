@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'users_app',
     'diagnosis_app',
     'scheduler_app',
+    'gardening_shop_app',
     
     # 리액트 연동    
     'rest_framework',
