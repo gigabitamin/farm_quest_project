@@ -10,7 +10,8 @@ urlpatterns = [
     path('', include("farm_quest_app.urls")),
     path('', include("scheduler_app.urls")),
     # path('', include('posts.urls')),        
-    path('', include("diagnosis_app.urls")),    
+    path('', include("diagnosis_app.urls")),
+    path('', include("gardening_shop_app.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

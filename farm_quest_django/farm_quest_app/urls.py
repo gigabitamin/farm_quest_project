@@ -10,5 +10,6 @@ urlpatterns = [
     path('cs_notice/', views.cs_notice, name='cs_notice'),
     path('commumnity/', views.commumnity, name='commumnity'),
     path('guide_index/', views.guide_index, name='guide_index'), 
-    path('guide_detail/', views.guide_detail, name='guide_detail'), 
+    path('guide_detail/', views.guide_detail, name='guide_detail'),     
+    
 ]
