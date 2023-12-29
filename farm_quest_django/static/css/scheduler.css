@@ -31,7 +31,6 @@
 
 /* 내용섹션 */
 .scd_content_section {
-
     display: flex;
     gap: 20px;
     margin-top: -15px;

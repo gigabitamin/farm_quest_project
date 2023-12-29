@@ -198,16 +198,16 @@ def my_page_delete(request):
 # 마이페이지
 
 def mypage(request):
-    return render(request, 'users_app/mypage.html')
+    return render(request, 'users_app/mypages/mypage.html')
 
 def user_plant_render(request):
-    return render(request, 'users_app/mypage/user_plant.html')
+    return render(request, 'users_app/mypages/user_plant.html')
 
 def user_farmlog_render(request):
-    return render(request, 'users_app/user_farmlog.html')
+    return render(request, 'users_app/mypages/user_farmlog.html')
 
 def user_QnA_render(request):
-    return render(request, 'users_app/user_QnA.html')
+    return render(request, 'users_app/mypages/user_QnA.html')
 
 def user_bookmark_render(request):
-    return render(request, 'users_app/user_bookmark.html')
+    return render(request, 'users_app/mypages/user_bookmark.html')
