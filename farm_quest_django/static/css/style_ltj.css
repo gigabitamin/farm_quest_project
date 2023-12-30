@@ -60,8 +60,26 @@ nav a:hover {
 }
 
 #logo {
-    height: 60px;
+    height: 2em;
 }
+
+
+main {
+    padding: 50px 20px;
+}
+
+.container {
+    /* 주석처리 - kdy */
+    /* max-width: 600px; */
+    margin: auto;
+    padding: 10px;
+    border: 2px solid black;
+  }
+  
+.row {
+    display: flex;
+}
+
 
 
 .btn {
@@ -81,10 +99,43 @@ nav a:hover {
 }
 
 
+
+.box {
+    border: 2px solid black;
+    margin: 5px;
+    flex-grow: 1;
+    text-align: center;
+    padding: 20px;
+}
+
+.box.large {
+    flex: 2;
+}
+
+.box-3 {
+    flex-grow: 2;
+}
+
+.box-6, .box-9 {
+    flex-basis: 100%;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+
 footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    text-align: center;
     background-color: #333;
     color: white;
     padding: 20px;

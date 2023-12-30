@@ -3,71 +3,69 @@
 {% block content %}  
 
 
-    <!-- 헤더 시작 -->
-
-    <header class="d-flex">
+<header>
+    <div class="headerMenu">
+        <a href="/"><img src="{% static 'image/logo/farm_quest_site.svg' %}" alt="Logo" id="logo"></a>
+        <!-- 주석처리 - kdy -->
+        <!-- <form action="/search" method="get">
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit">Search</button>            
+        </form> --> 
         
-        <div class='signbar' style="height: 55px; box-sizing: border-box; display: block; text-align: center;">
-            
-            <ul style="margin: 0; ">
+        <!-- 통합 검색창 시작 - kdy -->
+        <!-- 원하는 카테고리 선택후 검색어 입력 -> 검색 클릭 시 portal_search() js 함수 호출 -->
+        <div class="portal_search">
+            <select id="portal_select">
+                <option selected>선택</option>
+                <option value="gardening_shop_search">가드닝 샵</option>
+                <option value="customer_service_center">고객센터</option>                
+            </select>                                
+            <input type="text" id="search_keyword" placeholder="검색">
+            <button onclick="portal_search()">검색</button>
+        </div>
+        <!-- 통합 검색창 끝 -->
+
+        <!-- 통합 검색창 js 함수 시작 -->
+        <!-- 검색창에 입력된 키워드 받아서 select 된 option 이 위치한 url로 이동 (해당 url은 <str:keyword> 를 활용하는 url이어야 함)-->
+        <script>
+            function portal_search() {
+                let keyword = document.getElementById("search_keyword").value;
+                window.location.href = keyword;
+            }
+        </script>
+        <!-- 통합 검색창 js 함수 시작 -->
+                
+        <!-- 회원가입 로그인 박스 시작 login.css - kdy -->
+        <div class="loginBox">
             {% if user.is_authenticated %}
-            <li class='signbar'><a href="{% url 'sign_out' %}">로그아웃</a></li>
-            {% comment %}<li class='signbar'><a href="{% url 'user_mypage' %}">{{ user.username }}님 환영합니다!</a></li> {% endcomment %}
-
+                <div class="login_sign_in">{{ user.username }}</div>
+                <div class="login_sign_out"><a href="{% url 'sign_out' %}">Logout</a></div>
             {% else %}
-                <li class='signbar'><a href="{% url 'sign_up' %}">회원가입</a></li>
-                <li class='signbar'><a href="{% url 'sign_in' %}">로그인</a></li>
-            {% endif %}
-            </ul>
+                <div class="login_sign_up"><a href="{% url 'sign_up2' %}">회원가입</a></div>
+                <div class="login_sign_in"><a href="{% url 'sign_in' %}">로그인</a></div>
+            {% endif %}    
         </div>
-        <div class="header_logo">
-            <a href="{% url 'index' %}" class="navbar-brand d-flex">
-                <div class="navbar-brand d-flex" style="display:flex; align-items: center; background-color: white;">
-                    <img src="{% static 'image/logo/farm_quest_site.png' %}" style="width: 3vh; height: 3vh;">
-                    <h3 style="margin:0;">팜 퀘스트</h3>
-                </div>                
-            </a>
-        </div>
+        <!-- 회원가입 로그인 박스 끝 - kdy -->
+                  
+    </div>
 
-        <div class="navbar-brand">
-            <div class="navbar-brand">
-                <div class="row g-4">
-                    <div class="col-3">
-                        <select id="portal_select" class="form-select">
-                            <option selected>선택</option>
-                            <option value="customer_service_center">고객센터</option>
-                        </select>                    
-                    </div>
-                    <div class="col-4">                
-                        <input type="text" class="form-control" id="search_keyword" placeholder="검색">          
-                    </div>
-                    <div class="col-2">
-                        <button class="btn btn-dark border-0" onclick="total_search()">검색</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-            
-            {% comment %} 로그인 user만 마이페이지에 접근가능, 로그인 안한 사용자의 경우 자동으로 로그인 창으로 리다이렉트 {% endcomment %}  
-            <!-- 회원가입 로그인 박스 시작   - kdy -->
-        <div class="navbar-nav ms-auto">    
-            <div class="loginBox" class="navbar-nav ms-auto">    
-                {% if user.is_authenticated %}
-                    <div id="loginSignIn">{{ user.username }}</div>
-                    <a href="{% url 'sign_out' %}"><div id="loginSignOut" class="btn-primary">Logout</div></a>
-
-                {% else %}
-                    <div class="loginSignUp"><a href="{% url 'sign_up2' %}">회원가입</a></div>
-                    <div class="loginSignIn"><a href="{% url 'sign_in' %}">로그인</a></div>
-                {% endif %}    
-            </div>
-            <!-- 회원가입 로그인 박스 끝 - kdy -->
-        </div>
-
-    </header>    
-    <!-- 헤더 끝 -->
-
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'scheduler_general' %}">스케쥴러</a></li>
+            <li><a href="{% url 'gardening_shop_index' %}">가드닝 샵</a></li>
+            <li><a href="{% url 'guide_index' %}">가이드</a></li>
+            <li><a href="{% url 'guide_detail' %}">가이드 상세</a></li>
+            <li><a href="{% url 'commumnity' %}">커뮤니티</a></li>
+            <li><a href="{% url 'diagnosis_temp' %}">진단</a></li>
+            <li><a href="{% url 'diagnosis_index' %}">진단2</a></li>
+            <li><a href="{% url 'customer_service_center' %}">고객센터</a></li>
+            <li><a href="{% url 'mypage' %}">마이페이지(임시통로)</a></li>  
+        </ul>
+    </nav>
+</header>
 
 
 {% endblock content %}
+
+
+

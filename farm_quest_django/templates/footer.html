@@ -7,47 +7,20 @@
 
 </style>
 
+<footer>
+    <ul>
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보처리방침</a></li>
+        <li><a href="#">청소년보호정책</a></li>
+    </ul>
+    <div class="d-flex">
+        <a class="btn_ltj btn-social" href="#"><i class="fab fa-twitter"></i></a>
+        <a class="btn_ltj btn-social" href="#"><i class="fab fa-facebook-f"></i></a>
+        <a class="btn_ltj btn-social" href="#"><i class="fab fa-youtube"></i></a>
+        <a class="btn_ltj btn-social" href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+</footer>
 
-    <!-- 푸터 시작 -->
-    
-    <footer>
-        <div class="bg-dark footer">
-            <div class="container">
-                <div class="row g-3">
-                    <div class="col-lg-6">
-                        <div class="d-flex">
-                            <a class="btn btn-social" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-social" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-social" href="#"><i class="fab fa-youtube"></i></a>
-                            <a class="btn btn-social" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6">
-                            Farm Quest, All Right Reserved <br>
-                            made by Team Final Farmtasy ★
-                        </div>
-                        <div class="col-md-6 text-center text-md-end foot-menu-box">
-                            <div class="footer-menu">
-
-                                <a href="#">임시1</a>
-                                <a href="#">임시2</a>
-                                <a href="#">임시3</a>
-                                <a href="#">임시4</a>
-        
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- 푸터 끝 -->
-    
 
     <!-- Back to Top 버튼 -->  
     <!-- 카카오톡 상당하기 버튼 시작 -->
@@ -63,6 +36,28 @@
         class="btn-lg btn-lg-square back-to-top"
     ></a>
     <!-- 카카오톡 상당하기 버튼 끝 -->
-    
+
+    <!-- 카카오톡 상담하기 버튼 추가를 위한 script - kdy -->
+    <script>
+        window.kakaoAsyncInit = function() {
+          Kakao.Channel.createChatButton({
+            container: '#kakao-talk-channel-chat-button',          
+          });
+        };
+      
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.channel.min.js'; // 경로 수정 -kdy
+          
+          js.crossOrigin = 'anonymous';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'kakao-js-sdk');      
+    </script>
+  
+
 
     {% endblock content %}  
+
+    

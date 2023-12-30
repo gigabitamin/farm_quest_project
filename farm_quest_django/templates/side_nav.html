@@ -6,35 +6,37 @@
 
 <style>
     .main_side_nav {
-        padding: 1vh;
-        border: 1px solid rgba(0, 185, 142);
-        border-radius: 5px;
+        position : relative;
+        z-index: 20;
+        padding: 0.1em;
+        border: 0.1em solid white;        
         position: fixed;
-        bottom: 30vh;
-        left: 0; 
-        width:18vh;
+        bottom: 0vh;
+        left: 0;         
+        text-align: center;
+        background-color: white;         
     }
 
+    .side_nav_item {
+        background-color:  #4CAF50;
+        font-size:0.8em;
+        padding:0.4em;
+    }
 
 </style>
 
 
-<div class="main_side_nav">
-
-    <div><a href="{% url 'index' %}" class="nav-link btn btn-outline-primary">홈</a></div>
+<div class="main_side_nav">    
+    <div class="side_nav_item"><a href="{% url 'index' %}" class="btn_kdy2">홈</a></div>
     <hr>
-    <div>
-    {% comment %} 로그인 user만 마이페이지에 접근가능, 로그인 안한 사용자의 경우 자동으로 로그인 창으로 리다이렉트 {% endcomment %}                    
+    <div class="side_nav_item">
+    {% comment %} 로그인 user만 마이페이지에 접근가능, 로그인 안한 사용자의 경우 자동으로 로그인 창으로 리다이렉트 {% endcomment %}
     {% if user_info.is_authenticated %}
-        <a href="{% url 'my_page' %}" class="nav-link btn btn-outline-primary">{{user.username}}<hr>마이 팜</a>
+        <a href="{% url 'mypage' %}" class="btn_kdy2">{{user.username}}<hr>마이팜</a>
     {% else %}
-        <a href="{% url 'sign_in' %}" class="nav-link btn btn-outline-primary">마이 팜</a>
+        <a href="{% url 'sign_in' %}" class="btn_kdy2">마이팜</a>
     {% endif %}
     </div>
-
-    
-
-
 </div>
 
 {% endblock content %}

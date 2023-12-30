@@ -1,61 +1,17 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
+<main>
+    <a href="#" class="btn">가이드</a>
+    <a href="/scheduler_general" class="btn">스케쥴러</a>
+    <a href="#" class="btn">커뮤니티</a>
+    <a href="#" class="btn">가드닝샵</a>
+    <a href="#" class="btn">질병서치</a>
+    <a href="#" class="btn">해충서치</a>
+    <a href="#" class="btn">Photo</a>
+    <a href="#" class="btn">QNA</a>
+    <a href="#" class="btn">Calendar</a>
+</main>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Web</title>
-
-    <link rel="stylesheet" href="../../../static/css/style_ltj.css">
-    <link rel="stylesheet" href="../../../static/css/common.css">
-    
-</head>
-
-<body>
-    <header>
-        <div class="headerMenu">
-            <a href="/"><img src="../../../static/image/logo/farm_quest_site.svg" alt="Logo" id="logo"></a>
-            <form action="/search" method="get">
-                <input type="text" name="query" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>
-            <a href="/sign_in" class="highlight">로그인</a>
-            <a href="/sign_up2" class="highlight">회원가입</a>
-        </div>
-        <div class="navbar">
-            <ul>
-                
-                <li><a href="{% url 'gardening_shop_index' %}">가드닝 샵</a></li>
-                <li><a href="/guide_index">가이드</a></li>
-                <li><a href="/guide_detail">가이드 상세</a></li>
-                <li><a href="/commumnity">커뮤니티</a></li>
-                <li><a href="/diagnosis_temp">진단</a></li>
-                <li><a href="/diagnosis_index">진단2</a></li>
-                <li><a href="/customer_service_center">고객센터</a></li>
-                <li><a href="/mypage">마이페이지(임시통로)</a></li>                
-            </ul>
-        </div>
-    </header>
-    <main>
-        <a href="#" class="btn">가이드</a>
-        <a href="/scheduler_general" class="btn">스케쥴러</a>
-        <a href="#" class="btn">커뮤니티</a>
-        <a href="#" class="btn">가드닝샵</a>
-        <a href="#" class="btn">질병서치</a>
-        <a href="#" class="btn">해충서치</a>
-        <a href="#" class="btn">Photo</a>
-        <a href="#" class="btn">QNA</a>
-        <a href="#" class="btn">Calendar</a>
-    </main>
-    <footer>
-        <ul>
-            <li><a href="#">이용약관</a></li>
-            <li><a href="#">개인정보처리방침</a></li>
-            <li><a href="#">청소년보호정책</a></li>
-        </ul>
-    </footer>
-</body>
-
-</html>
+{% endblock content %}
