@@ -31,7 +31,7 @@
 
 
 /*** Button ***/
-.btn {
+.btn_kdy {
     transition: .5s;
 }
 
@@ -171,7 +171,7 @@
     }
 }
 
-.header-carousel .owl-nav {
+.header-carousel .nav {
     position: absolute;
     top: 50%;
     left: -25px;
@@ -454,3 +454,24 @@
   }
 
 /* accommodation_detail.html 끝  */
+
+
+.btn_kdy2 {        
+    color: white;
+    padding: 0.2em;
+    text-decoration: none;
+    border-radius: 5px;        
+    transition: background-color 0.3s ease;    
+}
+
+.btn_ltj {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
