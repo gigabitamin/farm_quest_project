@@ -43,7 +43,9 @@
     }    
 
     .diagnosis_choice_box {
-        display: flex;        
+        display: flex;
+        display:flex;
+        flex-direction: row; 
         justify-content: center;
         align-items: center;        
         text-align: center;                
@@ -52,7 +54,7 @@
 
     .diagnosis_choice_result_box {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: nowrap;                
         text-align: center;                   
         justify-content: center;
@@ -62,7 +64,7 @@
 
     .diagnosis_answer_box {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
         margin: 0 auto;
@@ -77,20 +79,44 @@
         justify-content: center;
         align-items: center;        
         text-align: center;
+        border: 1px solid black;        
+    }
+    .diagnosis_image_box div{
         border: 1px solid black;
-    }        
+        display:flex;
+        flex-direction: row;
+    }
+
+    .diagnosis_image_limit{
+        width: 100%   
+    }
 
 </style>
 
 
 
 <div class="diagnosis_wrap_box">
-    <div class="diagnosis_ad_box">광고</div>
+    <div class="diagnosis_ad_box">카테고리</div>
     <div class="diagnosis_index_box">
-        <div class="diagnosis_choice_box">{% include "./diagnosis_choice.html" %}</div>
-        <div class="diagnosis_choice_result_box">
-            <div class="diagnosis_answer_box">{% include "./diagnosis_answer.html" %}</div>
-            <div class="diagnosis_image_box">{% include "./diagnosis_image.html" %}</div>
+        <div class="diagnosis_image_box">
+            <div class="diagnosis_image_limit">{% include "./diagnosis_image.html" %}</div>
+            <div>bbb</div>
+            <div>ccc</div>
+
+        </div>
+
+        <div class="diagnosis_choice_result_box">            
+            <div class="diagnosis_answer_box">
+                <!-- <div>{% include "./diagnosis_answer.html" %}</div> -->
+                <div><input type="radio">11</div> 
+                <div><input type="radio">22</div>                
+                <div><input type="radio">33</div>
+            </div>
+            <div class="diagnosis_choice_box">
+                <!-- <div>{% include "./diagnosis_choice.html" %}</div> -->
+                <div><input type="radio">444%</div>
+                <div><input type="radio">555%</div>
+            </div>    
         </div>
     </div>    
 </div>

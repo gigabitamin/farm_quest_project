@@ -13,6 +13,8 @@
 
 ### v0.2.4  
 - django 전 페이지 기본 app 생성 및 페이지 링크 완료, models.py 및 views.py CRUD 형식 작성 완료 - kdy
+- 개인/일반 스케쥴러, 마이페이지 레이아웃 수정 - psh
+- 진단 결과 레이아웃 수정
 
 ### v0.2.3  
 - 검색창 가드닝샵 url 'gardening_shop_search/(str:keyword)' -> '(str:keyword)/' 로 수정 -> 정상 작동  - kdy   
