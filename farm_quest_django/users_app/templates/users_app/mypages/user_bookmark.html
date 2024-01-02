@@ -1,38 +1,10 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Web</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
     <link rel="stylesheet" href="../../../static/css/style_ltj.css">    
     <link rel="stylesheet" href="../../../static/css/mypage.css">
     <link rel="stylesheet" href="../../../static/css/common.css">
-    
-</head>
-
-<body>
-    <header>
-        <div class="headerMenu">
-            <a href="/"><img src="../../../static/image/logo/farm_quest_site.svg" alt="Logo" id="logo"></a>
-            <form action="/search" method="get">
-                <input type="text" name="query" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>
-            <a href="/sign_in" class="highlight">로그인</a>
-            <a href="/sign_up2" class="highlight">회원가입</a>
-        </div>
-        <div class="navbar">
-            <ul>
-                <li><a href="/diagnosis_temp">진단2</a></li>
-                <li><a href="/diagnosis_index">진단</a></li>
-                <li><a href="/customer_service_center">고객센터</a></li>
-                <li><a href="./">마이페이지(임시통로)</a></li>
-            </ul>
-        </div>
-    </header>
 
     <main class="mypage_main">
 
@@ -59,13 +31,8 @@
         </section>
 
     </main>
-<footer>
-    <ul>
-        <li><a href="#">이용약관</a></li>
-        <li><a href="#">개인정보처리방침</a></li>
-        <li><a href="#">청소년보호정책</a></li>
-    </ul>
-</footer>
-</body>
 
-</html>
+
+
+
+    {% endblock content %}

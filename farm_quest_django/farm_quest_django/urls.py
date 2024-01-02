@@ -12,6 +12,10 @@ urlpatterns = [
     # path('', include('posts.urls')),        
     path('', include("diagnosis_app.urls")),
     path('', include("gardening_shop_app.urls")),
+    path('', include("customer_service_app.urls")),
+    path('', include("community_app.urls")),
+    path('', include("guide_app.urls")),
+            
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -23,18 +23,23 @@
   </section>
 </div>
 
-{% endblock content %}
+
+
+<!-- 
+{% for question in diagnosis_questions %}
+let questionNo = '{{ question.diagnosis_question_no }}';
+let questionValue = getSelectedOption(form.elements['question_' + questionNo]);
+selectedOptions[questionNo] = questionValue;
+{% endfor %}
+ -->
 
 <script defer>
   function answer_submit_form() {
     let form = document.getElementById('diagnosis_answer_form');
     let selectedOptions = {};
 
-    {% for question in diagnosis_questions %}
-      let questionNo = '{{ question.diagnosis_question_no }}';
-      let questionValue = getSelectedOption(form.elements['question_' + questionNo]);
-      selectedOptions[questionNo] = questionValue;
-    {% endfor %}
+    <!-- for 문 자리 -->
+
 
     if (validateSelectedOptions(selectedOptions)) {
       // POST 요청 보내기
@@ -83,3 +88,6 @@
   // 이벤트 핸들러 등록
   document.getElementById('submit_button').addEventListener('click', answer_submit_form);
 </script>
+
+
+{% endblock content %}

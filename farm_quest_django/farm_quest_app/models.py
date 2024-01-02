@@ -1,6 +1,4 @@
 from django.db import models
-
-# Create your models here.
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -41,12 +39,26 @@ class AuthtokenToken(models.Model):
         db_table = 'authtoken_token'
 
 
+class CartTb(models.Model):
+    cart_no = models.BigIntegerField(primary_key=True)
+    cart_productid = models.IntegerField(db_column='cart_productId', blank=True, null=True)  # Field name made lowercase.
+    user_id = models.BigIntegerField(blank=True, null=True)
+    cart_datetime = models.DateTimeField(blank=True, null=True)
+    cart_quantity = models.IntegerField(blank=True, null=True)
+    product_price = models.IntegerField(blank=True, null=True)
+    cart_price = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'cart_tb'
+
+
 class CommunityCmtTb(models.Model):
     cmt_no = models.AutoField(primary_key=True)
     cmt_content = models.TextField()
     cmt_date = models.DateTimeField(blank=True, null=True)
-    thread_no = models.ForeignKey('CommunityTb', models.DO_NOTHING, db_column='thread_no') 
-    user_no = models.ForeignKey('UserTb', models.DO_NOTHING, db_column='user_no')
+    thread_no = models.ForeignKey('CommunityTb', models.DO_NOTHING, db_column='thread_no')
+    user = models.ForeignKey('UsersAppUser', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -60,7 +72,7 @@ class CommunityTb(models.Model):
     thread_img = models.TextField(blank=True, null=True)
     thread_date = models.DateTimeField(blank=True, null=True)
     thread_type = models.IntegerField(blank=True, null=True)
-    user_no = models.ForeignKey('UserTb', models.DO_NOTHING, db_column='user_no')
+    user = models.ForeignKey('UsersAppUser', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -85,7 +97,7 @@ class CsTb(models.Model):
     cs_content = models.TextField()
     cs_date = models.DateTimeField(blank=True, null=True)
     cs_img = models.TextField(blank=True, null=True)
-    user_no = models.ForeignKey('UserTb', models.DO_NOTHING, db_column='user_no')
+    user = models.ForeignKey('UsersAppUser', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -94,12 +106,21 @@ class CsTb(models.Model):
 
 class DiagnosisHistory(models.Model):
     diagnosis_history_no = models.CharField(primary_key=True, max_length=45)
-    diagnosis_history_content = models.CharField(max_length=45, blank=True, null=True)     
-    user_no = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_history_content = models.CharField(max_length=45, blank=True, null=True)
+    user = models.ForeignKey('UsersAppUser', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'diagnosis_history'
+
+
+class DiagnosisQuestion(models.Model):
+    diagnosis_question_no = models.AutoField(primary_key=True)
+    diagnosis_question_content = models.CharField(max_length=45)
+
+    class Meta:
+        managed = False
+        db_table = 'diagnosis_question'
 
 
 class DjangoAdminLog(models.Model):
@@ -166,6 +187,18 @@ class GrowPlant(models.Model):
     class Meta:
         managed = False
         db_table = 'grow_plant'
+
+
+class GuideTb(models.Model):
+    guide_no = models.BigIntegerField(primary_key=True)
+    guide_title = models.CharField(max_length=45, blank=True, null=True)
+    plant_descript = models.TextField(blank=True, null=True)
+    farm_guide = models.TextField(blank=True, null=True)
+    plant_image_url = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'guide_tb'
 
 
 class PSchedulerTb(models.Model):
@@ -250,13 +283,58 @@ class SearchPlantTb(models.Model):
         db_table = 'search_plant_tb'
 
 
+class ShopingTb(models.Model):
+    shoping_tb_no = models.AutoField(primary_key=True)
+    shoping_tb_s = models.JSONField(blank=True, null=True)
+    shoping_tb_rss_channel = models.JSONField(blank=True, null=True)
+    shoping_tb_rss_channel_lastbuilddate = models.DateTimeField(db_column='shoping_tb_rss_channel_lastBuildDate', blank=True, null=True)  # Field name made lowercase.
+    shoping_tb_rss_channel_total = models.IntegerField(blank=True, null=True)
+    shoping_tb_rss_channel_start = models.IntegerField(blank=True, null=True)
+    shoping_tb_rss_channel_display = models.IntegerField(blank=True, null=True)
+    shoping_tb_rss_channel_item = models.JSONField(blank=True, null=True)
+    shoping_tb_rss_channel_item_title = models.CharField(max_length=255, blank=True, null=True)
+    shoping_tb_rss_channel_item_link = models.CharField(max_length=255, blank=True, null=True)
+    shoping_tb_rss_channel_item_image = models.CharField(max_length=255, blank=True, null=True)
+    shoping_tb_rss_channel_item_lprice = models.IntegerField(blank=True, null=True)
+    shoping_tb_rss_channel_item_hprice = models.IntegerField(blank=True, null=True)
+    shoping_tb_rss_channel_item_mallname = models.CharField(db_column='shoping_tb_rss_channel_item_mallName', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    shoping_tb_rss_channel_item_productid = models.IntegerField(db_column='shoping_tb_rss_channel_item_productId', blank=True, null=True)  # Field name made lowercase.
+    shoping_tb_rss_channel_item_producttype = models.IntegerField(db_column='shoping_tb_rss_channel_item_productType', blank=True, null=True)  # Field name made lowercase.
+    shoping_tb_rss_channel_item_maker = models.CharField(max_length=255, blank=True, null=True)
+    shoping_tb_rss_channel_item_brand = models.CharField(max_length=255, blank=True, null=True)
+    shoping_tb_rss_channel_item_category1 = models.CharField(max_length=255, blank=True, null=True)
+    shoping_tb_rss_channel_item_category2 = models.CharField(max_length=255, blank=True, null=True)
+    shoping_tb_rss_channel_item_category3 = models.CharField(max_length=255, blank=True, null=True)
+    shoping_tb_rss_channel_item_category4 = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'shoping_tb'
+
+
+class ShoppingReview(models.Model):
+    shopping_review_no = models.IntegerField(primary_key=True)
+    shopping_review_content = models.TextField(blank=True, null=True)
+    shopping_review_rank = models.IntegerField(blank=True, null=True)
+    shopping_review_rank_positive_negative = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'shopping_review'
+
+
 class SolutionTb(models.Model):
-    disease_code = models.IntegerField(primary_key=True)
-    disease_name = models.CharField(max_length=60, blank=True, null=True)
-    disease_category = models.CharField(max_length=60, blank=True, null=True)
-    plant_no = models.ForeignKey(PlantTb, models.DO_NOTHING, db_column='plant_no')
+    disease_code = models.IntegerField(blank=True, null=True)
+    plant_no = models.IntegerField(blank=True, null=True)
+    disease_category = models.TextField(blank=True, null=True)
+    disease_name = models.TextField(blank=True, null=True)
+    chinese_character = models.TextField(db_column='Chinese_character', blank=True, null=True)  # Field name made lowercase.
+    english_name = models.TextField(blank=True, null=True)
+    pathogen = models.TextField(blank=True, null=True)
+    occurence_environment = models.TextField(blank=True, null=True)
+    symptom = models.TextField(blank=True, null=True)
     solution_content = models.TextField(blank=True, null=True)
-    solution_word = models.CharField(max_length=60, blank=True, null=True)
+    solution_word = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -266,7 +344,7 @@ class SolutionTb(models.Model):
 class TokenBlacklistBlacklistedtoken(models.Model):
     id = models.BigAutoField(primary_key=True)
     blacklisted_at = models.DateTimeField()
-    token = models.OneToOneField('TokenBlacklistOutstandingtoken', models.DO_NOTHING)      
+    token = models.OneToOneField('TokenBlacklistOutstandingtoken', models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -289,23 +367,12 @@ class TokenBlacklistOutstandingtoken(models.Model):
 class UserPlantTb(models.Model):
     user_plant_no = models.AutoField(primary_key=True)
     user_plant_img = models.TextField(blank=True, null=True)
-    user_no = models.ForeignKey('UserTb', models.DO_NOTHING, db_column='user_no')
+    user = models.ForeignKey('UsersAppUser', models.DO_NOTHING, blank=True, null=True)
     plant_no = models.ForeignKey(PlantTb, models.DO_NOTHING, db_column='plant_no')
 
     class Meta:
         managed = False
         db_table = 'user_plant_tb'
-
-
-class UserTb(models.Model):
-    user_no = models.AutoField(primary_key=True)
-    user_name = models.CharField(max_length=45)
-    user_address = models.CharField(max_length=60, blank=True, null=True)
-    user_pref_plant = models.CharField(max_length=60, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'user_tb'
 
 
 class UsersAppProfile(models.Model):

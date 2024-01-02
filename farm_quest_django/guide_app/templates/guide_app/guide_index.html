@@ -1,32 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Web</title>
-    <link rel="stylesheet" href="guide2.css">
-</head>
+<link rel="stylesheet" href="guide2.css">
 
-<body>
-    <header>
-        <div class="headerMenu">
-            <img src="logo.png" alt="Logo" id="logo">
-            <form action="/search" method="get">
-                <input type="text" name="query" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>
-            <a href="login.html" class="highlight">로그인</a>
-            <a href="register.html" class="highlight">회원가입</a>
-        </div>
-        <div class="navbar">
-            <ul>
-                <li><a href="#">메뉴1</a></li>
-                <li><a href="#">메뉴2</a></li>
-                <li><a href="#">메뉴3</a></li>
-            </ul>
-        </div>
-    </header>
+
     <div class="container">
       <aside class="sidebar">
         <nav class="menu">
@@ -70,13 +48,5 @@
         </div>
       </main>
     </div>
-    <footer>
-        <ul>
-            <li><a href="#">이용약관</a></li>
-            <li><a href="#">개인정보처리방침</a></li>
-            <li><a href="#">청소년보호정책</a></li>
-        </ul>
-    </footer>
-</body>
 
-</html>
+  {% endblock content %}  

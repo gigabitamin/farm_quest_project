@@ -2,16 +2,13 @@
 {% load static %}
 {% block content %}
 
-
-
-
 <link rel="stylesheet" href="index2.css">
 
 
 <style>
       
         
-    .diagnosis_wrap_box {
+    .customer_service_wrap_box {
         display: flex;
         flex-direction: row;             
         flex-wrap: nowrap;
@@ -20,7 +17,7 @@
         margin: 0 auto;
     }
 
-    .diagnosis_ad_box { 
+    .customer_service_ad_box { 
         display:flex;
         flex: 1 0 20%;
         border: 1px solid black;
@@ -29,11 +26,11 @@
         justify-content: center;
     }
 
-    .diagnosis_ad_content{        
+    .customer_service_ad_content{        
         border: 1px solid black;        
     }
 
-    .diagnosis_index_box { 
+    .customer_service_index_box { 
         flex-direction: column;             
         flex-wrap: nowrap;
         display:flex;
@@ -44,7 +41,7 @@
         justify-content: center;       
     }    
 
-    .diagnosis_choice_box {
+    .customer_service_choice_box {
         display: flex;        
         justify-content: center;
         align-items: center;        
@@ -52,7 +49,7 @@
         border: 1px solid black;
     }
 
-    .diagnosis_choice_result_box {
+    .customer_service_choice_result_box {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;                
@@ -62,7 +59,7 @@
     }
 
 
-    .diagnosis_answer_box {
+    .customer_service_answer_box {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -73,7 +70,7 @@
         width:35vh;
     }
     
-    .diagnosis_image_box {
+    .customer_service_image_box {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -86,13 +83,13 @@
 
 
 
-<div class="diagnosis_wrap_box">
-    <div class="diagnosis_ad_box">광고</div>
-    <div class="diagnosis_index_box">
-        <div class="diagnosis_choice_box">{% include "./diagnosis_choice.html" %}</div>
-        <div class="diagnosis_choice_result_box">
-            <div class="diagnosis_answer_box">{% include "./diagnosis_answer.html" %}</div>
-            <div class="diagnosis_image_box">{% include "./diagnosis_image.html" %}</div>
+<div class="customer_service_wrap_box">
+    <div class="customer_service_ad_box">1111</div>
+    <div class="customer_service_index_box">
+        <div class="customer_service_choice_box">{% include "./customer_service_notice.html" %}</div>
+        <div class="customer_service_choice_result_box">
+            <div class="customer_service_answer_box">{% include "./customer_service_faq.html" %}</div>
+            <div class="customer_service_image_box">{% include "./customer_service_1vs1.html" %}</div>
         </div>
     </div>    
 </div>

@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     'diagnosis_app',
     'scheduler_app',
     'gardening_shop_app',
+    'customer_service_app',
+    'guide_app',
+    'community_app',
     
+        
     # 리액트 연동    
     'rest_framework',
     'rest_framework.authtoken',    
