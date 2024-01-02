@@ -25,4 +25,7 @@ def gardening_shop_search(request, keyword):
         # 'shopping_items' : shopping_keyword,
     }
     
+    for s in shopping_review_keyword:
+        print(s)
+    
     return render(request, 'gardening_shop_app/gardening_shop_index.html', context)
