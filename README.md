@@ -5,14 +5,17 @@
 
 -> 검색창 수정, 가드닝샵 선택 후 검색어 입력시 gardening_shop_search 경로에서 인식 되는 점 -> root 경로로 바꾼 후 정상 작동
 
-test
+- base 사용 후 header footer 통합 문제로 css 무너진 부분 체크 후 수정해서 push 바람
 
 ====================================================
 <!-- version -->
 
 
+### v0.2.4  
+- django 전 페이지 기본 app 생성 및 페이지 링크 완료, models.py 및 views.py CRUD 형식 작성 완료 - kdy
+
 ### v0.2.3  
-- 검색창 가드닝샵 url 'gardening_shop_search/(str:keyword)' -> '(str:keyword)/' 로 수정 -> 정상 작동  
+- 검색창 가드닝샵 url 'gardening_shop_search/(str:keyword)' -> '(str:keyword)/' 로 수정 -> 정상 작동  - kdy   
 
 ### v0.2.2  
 - 가드닝샵 상품 리뷰 필터링 기능 추가  - kdy  
