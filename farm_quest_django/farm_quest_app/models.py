@@ -1,4 +1,7 @@
 from django.db import models
+
+
+
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -107,7 +110,8 @@ class CsTb(models.Model):
 class DiagnosisHistory(models.Model):
     diagnosis_history_no = models.CharField(primary_key=True, max_length=45)
     diagnosis_history_content = models.CharField(max_length=45, blank=True, null=True)
-    user = models.ForeignKey('UsersAppUser', models.DO_NOTHING, blank=True, null=True)
+    user_plant_no = models.ForeignKey('UserPlantTb', models.DO_NOTHING, db_column='user_plant_no')
+    solution_id = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -313,10 +317,13 @@ class ShopingTb(models.Model):
 
 
 class ShoppingReview(models.Model):
-    shopping_review_no = models.IntegerField(primary_key=True)
+    shopping_review_no = models.AutoField(primary_key=True)
     shopping_review_content = models.TextField(blank=True, null=True)
     shopping_review_rank = models.IntegerField(blank=True, null=True)
     shopping_review_rank_positive_negative = models.IntegerField(blank=True, null=True)
+    shopping_review_predict = models.IntegerField(blank=True, null=True)
+    shopping_review_predict_rate = models.TextField(blank=True, null=True)
+    shoping_tb_no = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -324,8 +331,10 @@ class ShoppingReview(models.Model):
 
 
 class SolutionTb(models.Model):
-    disease_code = models.IntegerField(blank=True, null=True)
+    solution_id = models.IntegerField(blank=True, null=True)
+    disease_code = models.TextField(blank=True, null=True)
     plant_no = models.IntegerField(blank=True, null=True)
+    plant_name = models.TextField(blank=True, null=True)
     disease_category = models.TextField(blank=True, null=True)
     disease_name = models.TextField(blank=True, null=True)
     chinese_character = models.TextField(db_column='Chinese_character', blank=True, null=True)  # Field name made lowercase.

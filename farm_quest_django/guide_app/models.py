@@ -11,3 +11,5 @@ class GuideTb(models.Model):
     class Meta:
         managed = False
         db_table = 'guide_tb'
+        
+        
