@@ -10,6 +10,9 @@
 ====================================================
 <!-- version -->
 
+### v0.2.5  
+- solution_tb diagrnosis_history 기타 db 업데이트 migrate  -kdy  
+
 
 ### v0.2.4a  
 - django 전 페이지 기본 app 생성 및 페이지 링크 완료, models.py 및 views.py CRUD 형식 작성 완료 - kdy
