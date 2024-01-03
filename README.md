@@ -3,15 +3,17 @@
 <!-- notice -->
 ### 공지
 
+메뉴 호출 문제 수정 확인 후 피드백  
 
-test5
-
--> 검색창 수정, 가드닝샵 선택 후 검색어 입력시 gardening_shop_search 경로에서 인식 되는 점 -> root 경로로 바꾼 후 정상 작동
-
-- base 사용 후 header footer 통합 문제로 css 무너진 부분 체크 후 수정해서 push 바람
 
 ====================================================
 <!-- version -->
+
+### v0.2.6  
+- 네비게이션 드롭다운 메뉴 추가, 각 메뉴 세부페이지 연결 추가  - kdy
+- community 등 다른 메뉴에서 가드닝샵 index가 호출되는 문제 수정
+- static/js/jquery-3.4.1.min.js 추가
+- 기타 오류 수정
 
 ### v0.2.5  
 - solution_tb diagrnosis_history 기타 db 업데이트 migrate  -kdy  

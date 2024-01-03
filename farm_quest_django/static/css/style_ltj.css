@@ -22,7 +22,9 @@ header {
 nav ul {
     display: flex;
     list-style-type: none;
-    margin: 0;
+    /* 네비게이션 바 중앙정렬을 위해 margin:0 auto; 로 수정 -kdy */
+    /* margin: 0;  */
+    margin: 0 auto;
     padding: 0;
 }
 

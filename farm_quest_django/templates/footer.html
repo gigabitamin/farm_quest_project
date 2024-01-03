@@ -37,7 +37,7 @@
     ></a>
     <!-- 카카오톡 상당하기 버튼 끝 -->
 
-    <!-- 카카오톡 상담하기 버튼 추가를 위한 script - kdy -->
+    <!-- 카카오톡 상담하기 버튼 추가를 위한 script 시작 - kdy -->
     <script>
         window.kakaoAsyncInit = function() {
           Kakao.Channel.createChatButton({
@@ -53,10 +53,9 @@
           
           js.crossOrigin = 'anonymous';
           fjs.parentNode.insertBefore(js, fjs);
-        })(document, 'script', 'kakao-js-sdk');      
+        })(document, 'script', 'kakao-js-sdk');
     </script>
-  
-
+      <!-- 카카오톡 상담하기 버튼 추가를 위한 script 끝 - kdy -->
 
     {% endblock content %}  
 

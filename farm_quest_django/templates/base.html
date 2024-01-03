@@ -29,28 +29,29 @@
     <!-- ----------------- user costum ------------------- -->
 
     <!-- user css -->
+    <link rel="stylesheet" href="{% static 'css/common.css' %}"> <!-- 팀 공통 -->  
     <link rel="stylesheet" href="{% static 'css/style_kdy.css' %}"> <!-- kdy -->
     <link rel="stylesheet" href="{% static 'css/login.css' %}"> <!-- kdy -->
     <link rel="stylesheet" href="{% static 'css/scheduler.css' %}"> <!-- psh -->
-    <link rel="stylesheet" href="{% static 'css/style_ltj.css' %}">  <!-- ltj -->
-    <link rel="stylesheet" href="{% static 'css/common.css' %}"> <!-- 팀 공통 -->
+    <link rel="stylesheet" href="{% static 'css/style_ltj.css' %}">  <!-- ltj -->    
+    <link rel="stylesheet" href="{% static 'css/commumnity.css' %}"> <!-- jsh -->
 
 </head>
 <body>
     
-    <div class="container">
+    <div class="header_wrap">        
+    </div>
+
         {% include "header.html" %}
         {% include "side_nav.html" %}
-    </div>
-    
 
         {% block content %}      
         {% endblock content %}
 
-    
-    <div class="footer_wrap">
         {% include "footer.html" %}
         {% include "footer_js.html" %}
+        
+    <div class="footer_wrap">
     </div>
 
 </body>

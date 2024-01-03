@@ -1,10 +1,10 @@
 
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import CommunityCmtForm, CommunityForm
+from .models import CommunityCmtTb, CommunityTb
 
 def community_index(request):    
-    community_content = CommunityForm.objects.all()
-    community_comment = CommunityCmtForm.objects.all()
+    community_content = CommunityTb.objects.all()
+    community_comment = CommunityCmtTb.objects.all()
     
     community_context = {
         'community_content':community_content,
