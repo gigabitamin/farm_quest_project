@@ -1,5 +1,5 @@
 from django.db import models
-from farm_quest_app.models import *
+# from farm_quest_app.models import *
 
 class DiagnosisQuestion(models.Model):
     diagnosis_question_no = models.AutoField(primary_key=True)
@@ -29,10 +29,9 @@ class DiagnosisHistory(models.Model):
         managed = False
         db_table = 'diagnosis_history'                    
         
-        
-
+       
 class SolutionTb(models.Model):
-    solution_id = models.IntegerField(blank=True, null=True)
+    solution_id = models.AutoField(primary_key=True)
     disease_code = models.TextField(blank=True, null=True)
     plant_no = models.IntegerField(blank=True, null=True)
     plant_name = models.TextField(blank=True, null=True)
@@ -48,7 +47,6 @@ class SolutionTb(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'solution_tb'
 
 
 

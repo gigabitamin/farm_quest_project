@@ -5,10 +5,13 @@ from .models import DiagnosisQuestion, PlantTb, SolutionTb
 def diagnosis_index(request):
     diagnosis_questions = DiagnosisQuestion.objects.all()
     plant_species = PlantTb.objects.all()
+    solution_content = SolutionTb.objects.all()
+    
     
     diagnosis_context = {
         'diagnosis_questions':diagnosis_questions,
-        'plant_species':plant_species
+        'plant_species':plant_species,
+        'solution_content' : solution_content,
     }
     
     return render(request, 'diagnosis_app/diagnosis_index.html', diagnosis_context)
@@ -16,12 +19,10 @@ def diagnosis_index(request):
 def diagnosis_result(request):
     diagnosis_questions = DiagnosisQuestion.objects.all()
     plant_species = PlantTb.objects.all()
-    solution_content = SolutionTb.objects.all()
-    
+
     diagnosis_context = {
         'diagnosis_questions':diagnosis_questions,
-        'plant_species':plant_species,
-        'solution_content' : solution_content,
+        'plant_species':plant_species,        
     }
     
     return render(request, 'diagnosis_app/diagnosis_result.html', diagnosis_context)

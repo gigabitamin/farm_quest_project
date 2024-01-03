@@ -331,7 +331,7 @@ class ShoppingReview(models.Model):
 
 
 class SolutionTb(models.Model):
-    solution_id = models.IntegerField(blank=True, null=True)
+    solution_id = models.AutoField(primary_key=True)
     disease_code = models.TextField(blank=True, null=True)
     plant_no = models.IntegerField(blank=True, null=True)
     plant_name = models.TextField(blank=True, null=True)
@@ -347,8 +347,6 @@ class SolutionTb(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'solution_tb'
-
 
 class TokenBlacklistBlacklistedtoken(models.Model):
     id = models.BigAutoField(primary_key=True)
