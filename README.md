@@ -3,6 +3,9 @@
 <!-- notice -->
 ### 공지
 
+
+test5
+
 -> 검색창 수정, 가드닝샵 선택 후 검색어 입력시 gardening_shop_search 경로에서 인식 되는 점 -> root 경로로 바꾼 후 정상 작동
 
 - base 사용 후 header footer 통합 문제로 css 무너진 부분 체크 후 수정해서 push 바람
