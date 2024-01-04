@@ -42,6 +42,7 @@
                 <div class="login_sign_out"><a href="{% url 'sign_out' %}">Logout</a></div>
             {% else %}
                 <div class="login_sign_up"><a href="{% url 'sign_up2' %}">회원가입</a></div>
+                <div> / </div>
                 <div class="login_sign_in"><a href="{% url 'sign_in' %}">로그인</a></div>
             {% endif %}    
         </div>
@@ -119,6 +120,20 @@
         </ul>
     </nav>
 </header>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navItems = document.querySelectorAll('.nav-item');
+    
+        navItems.forEach(item => {
+            item.addEventListener('mouseover', function () {
+                this.querySelector('.dropdown-menu').style.display = 'block';
+            });
+            item.addEventListener('mouseout', function () {
+                this.querySelector('.dropdown-menu').style.display = 'none';
+            });
+        });
+    });
+</script>
 
 
 {% endblock content %}

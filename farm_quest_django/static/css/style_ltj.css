@@ -11,12 +11,28 @@ header {
 
 .headerMenu {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
 }
 
 .headerMenu a.highlight {
     margin-left: 10px;
     color: #ffcc00;
+}
+
+.portal_search {
+    display: flex;
+    align-items: center;
+}
+
+#search_keyword {
+    margin-left: 10px;
+}
+
+.loginBox {
+    display: flex;
+    align-items: center;
 }
 
 nav ul {
