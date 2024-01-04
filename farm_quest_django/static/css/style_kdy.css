@@ -38,6 +38,17 @@
 .btn.btn-primary,
 .btn.btn-secondary {
     color: #FFFFFF;
+
+    /*ltj*/
+    background-color: var(--primary); /* Assuming a primary color is defined */
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .btn-square {
@@ -64,6 +75,9 @@
     justify-content: center;
     font-weight: normal;
     border-radius: 50px;
+    /**ltj**/
+    border: none;
+    cursor: pointer;
 }
 
 
@@ -96,11 +110,15 @@
     padding: 0;
     margin: 0;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav-item {
     /**ltj**/
     position: relative;
+    margin-right: 1rem;
+    transition: background-color 0.3s;
 }
 
 .nav-link {
@@ -114,20 +132,28 @@
 
 .dropdown-item {
     /**ltj**/
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     color: var(--dark);
     text-decoration: none;
     display: block;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .dropdown-item:hover {
     /**ltj**/
     background-color: var(--secondary);
+    color: white;
 }
 
 .nav-item:hover .dropdown-menu {
     /**ltj**/
     display: block;
+}
+
+.nav-item:hover {
+    /**ltj**/
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
 }
 
 .dropdown-menu {
@@ -139,6 +165,20 @@
     margin: 0;
     list-style: none;
     min-width: 150px;
+
+    /**ltj**/
+    border-radius: 5px;
+    z-index: 1;
+}
+
+    /**ltj**/
+.dropdown-item.btn {
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .navbar .dropdown-toggle::after {
@@ -264,6 +304,11 @@
     color: #DDDDDD;
 }
 
+/**ltj**/
+.btn:hover {
+    background-color: var(--secondary); 
+    color: white;
+}
 
 /*** Icon ***/
 .icon {
@@ -364,6 +409,8 @@
     color: #FFFFFF;
     background: var(--primary);
 }
+
+
 
 .team-item:hover {
     border-color: var(--secondary) !important;

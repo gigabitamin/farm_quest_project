@@ -5,7 +5,7 @@ header {
     flex-direction: column; /* headerMenu와 navbar를 세로로 배치 */
     align-items: center;
     padding: 20px;
-    background-color: #333;
+    background-color: #408055;
     color: white;
 }
 
@@ -26,60 +26,103 @@ header {
     align-items: center;
 }
 
+.portal_search button {
+    background-color: #4a8060; /* 버튼 배경색 */
+    border: none;
+    padding: 6px 12px;
+    margin-left: 5px;
+    color: white;
+    cursor: pointer;
+}
+
 #search_keyword {
     margin-left: 10px;
+    padding: 5px;
+    background-color: #5a9970; /* 헤더 색상과 조화를 이루는 배경색 */
+    border: none;
+    color: white;
 }
 
-.loginBox {
+.loginBox_hd {
+
     display: flex;
     align-items: center;
 }
 
-nav ul {
-    display: flex;
-    list-style-type: none;
-    /* 네비게이션 바 중앙정렬을 위해 margin:0 auto; 로 수정 -kdy */
-    /* margin: 0;  */
-    margin: 0 auto;
-    padding: 0;
-}
-
-nav li {
-    margin-left: 20px;
-}
-
-nav a {
-    color: white;
+.loginBox_hd a {
+    color: #c0d8c0; /* 연한 녹색으로 링크 표시 */
     text-decoration: none;
+    margin: 0 5px;
 }
 
-nav a:hover {
-    text-decoration: underline;
-}
-
-.navbar {
-    width: 100%;
-    background-color: #333;
-}
-
-.navbar ul {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-}
-
-.navbar a:hover {
-    color: #ddd;
-}
 
 #logo {
     height: 2em;
 }
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* navbar */
+.navbar_hd {
+    background-color: #f2f5f3; 
+    font-family: Arial, sans-serif;
+}
+
+.navbar_hd ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+
+.nav-item_hd {
+    position: relative;
+    text-align: center; 
+    min-width: 150px;
+}
+
+.nav-link_hd {
+    text-decoration: none;
+    color: #27633b;
+    padding: 10px;
+    display: block;
+}
+
+.nav-link_hd:hover,
+.btn_hd:hover {
+    color: #f8f9fa; 
+    background-color: #408055; 
+}
+
+.dropdown-menu_hd {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    min-width: 100%;
+}
+
+.nav-item_hd:hover .dropdown-menu_hd {
+    display: block;
+}
+
+.btn_hd {
+    text-decoration: none;
+    color: #5a755d;
+    padding: 10px;
+    display: block;
+    white-space: nowrap;
+}
+/* end_navbar */
+
+
 
 
 main {
