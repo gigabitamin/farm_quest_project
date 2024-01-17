@@ -1,76 +1,20 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-header {
-    display: flex;
-    flex-direction: column; /* headerMenu와 navbar를 세로로 배치 */
-    align-items: center;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-}
-
-.headerMenu {
-    display: flex;
-    align-items: center;
-}
-
-.headerMenu a.highlight {
-    margin-left: 10px;
-    color: #ffcc00;
-}
-
-
-
-.navbar {
-    width: 100%;
-    background-color: #333;
-}
-
-.navbar ul {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-}
-
-.navbar a:hover {
-    color: #ddd;
-}
-
-#logo {
-    height: 60px;
-}
- 
-  body, html {
-    height: 100%;
-    font-family: Arial, sans-serif;
-  }
-
-.container {
+.container_gd2 {
 display: flex;
-height: 100%;
+height: 2000px;
 }
 
-.sidebar {
-width: 15%; 
-background-color: #f7f7f7;
+.sidebar_gd2 {
+width: 10%; 
+background-color: #F2F1EB;
 border-right: 1px solid #ddd;
 padding: 20px;
 }
 
-.menu ul {
+.menu_gd2 ul {
 list-style: none;
 }
 
-.menu ul li a {
+.menu_gd2 ul li a {
 display: block;
 padding: 10px;
 color: black;
@@ -79,97 +23,88 @@ border-bottom: 1px solid #ddd;
 transition: background-color 0.3s ease;
 }
 
-.menu ul li a:hover {
+.menu_gd2 ul li a:hover {
 background-color: #eaeaea;
 }
-
-.content {
-flex-grow: 1;
-padding: 20px;
-overflow-y: auto;
-}
-
-.crop-info {
-display: inline-block;
-width: calc(100% - 320px); 
-}
-
-.crop-heading h1, .crop-guide h2, .crop-description h2 {
-margin-bottom: 10px;
-}
-
-.crop-description p, .crop-guide p {
-margin-bottom: 20px;
-}
-
-.crop-image {
-width: 300px;
-float: right; 
-}
-
-.crop-image img {
-width: 100%;
-height: auto;
-}
-
-.videos {
-display: flex;
-justify-content: space-between;
-clear: both; 
-margin-top: 20px; 
-}
-
-.videos .video {
-width: calc(33.333% - 10px);
-}
-
-.videos .video iframe {
-width: 100%;
-height: 200px;
-border: 1px solid #ddd;
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .content {
-        padding: 20px;
-    }
-
-    .crop-info, .crop-image {
-        width: 100%;
-        float: none;
-        margin-bottom: 20px;
-    }
-
-    .videos .video {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .videos .video:last-child {
-        margin-bottom: 0;
-    }
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
+.content_gd2 {
+    margin-left: 20px;
+    margin-top: 20px;
     width: 100%;
+  }
+  .crop-info_gd2 {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #333;
-    color: white;
-    padding: 20px;
-}
+    flex-direction: column;
+  }
 
-footer ul {
+  .crop-body_gd2 {
     display: flex;
-    list-style-type: none;
-    margin: 0;
-}
+    align-items: flex-start;
+  }
+  
+  .crop-description_gd2{
+    margin-top: 20px;
+    width: 700px;
+  }
+ 
+  .crop-image_gd2 img {
+    width: 300px; /* 이미지 크기 고정 */
+    height: auto; /* 이미지 비율 유지 */
+  }
+  
+  
+  .videos_gd2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* 가로로 정렬 */
+    gap: 15px; /* 비디오 간 간격 */
+    margin-top: 20px;
+  }
+  
+  .video_gd2 {
+    flex: 0 0 350px; /* 폭 고정, 성장 및 축소 방지 */
+    height: 200px; /* 높이 고정 */
+    margin-bottom: 20px;
+  }
+  
+  .video_gd2 iframe {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  @media (max-width: 768px) {
+    .content_gd2 {
+      padding: 20px;
+    }
+  
+    .crop-image_gd2 {
+      width: 100%;
+      float: none;
+    }
+
+    .videos_gd2 {
+        justify-content: center; /* 화면이 작을 때 중앙 정렬 */
+      }  
+
+    .video_gd2 {
+        flex-basis: 100%; /* 화면이 작아졌을 때 전체 너비를 차지하도록 설정 */
+        max-width: 350px; /* 최대 폭 제한 */
+        height: auto; /* 높이 자동 조정 */
+    }
+  
+    .video_gd2:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+
+  @media (max-width: 600px) {
+    .crop-body_gd2 {
+      flex-direction: column;
+    }
+  
+    .crop-image_gd2 img {
+      width: 100%; /* 모바일 디바이스에서 이미지 크기 조정 */
+    }
+  }  
+  
