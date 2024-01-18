@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './pages/Header';
 import Footer from './pages/Footer';
@@ -8,7 +7,9 @@ import './css/style_kdy.css';
 import './css/login.css';
 import './css/scheduler.css';
 import './css/style_ltj.css';
-import './css/commumnity.css';
+import './css/community.css';
+
+
 
 function App() {
   return (

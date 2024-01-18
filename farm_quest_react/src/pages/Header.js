@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {Link, Routes, Route} from 'react-router-dom';
+import DiagnosisIndex from "./diagnosis/DiagnosisIndex"
+import DiagnosisAnswer from "./diagnosis/DiagnosisAnswer"
+import DiagnosisResult from "./diagnosis/DiagnosisResult"
+import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
 
 const Header = () => {
     const portal_search = () => {
         let keyword = document.getElementById("search_keyword").value;
         console.log(keyword)
         return false
-        window.location.href = keyword;
-    };
+        // window.location.href = keyword;
+    };    
 
     // document.addEventListener('DOMContentLoaded', function () {
     //     const navItems = document.querySelectorAll('.nav-item_hd');
@@ -20,11 +25,16 @@ const Header = () => {
     //         });
     //     });
     // });
+    
+    const [solutionContent, setSolutionContent] = useState([]);
+    const [diagnosisQuestions, setDiagnosisQuestions] = useState([]);
 
+    
+    
     return (
         <header>
             <div className="headerMenu">
-                <a href="/"><img src="../images/farm_quest_site.svg" alt="Logo" id="logo"/></a>
+                <a href="/"><img src={FarmQuestSiteLogo} alt="Logo" id="logo"/></a>
                 {/* 주석처리 - kdy
                 <form action="/search" method="get">
                     <input type="text" name="query" placeholder="Search...">
@@ -65,7 +75,8 @@ const Header = () => {
             <nav className="navbar_hd">
                 <ul> 
                     {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}
-                    <div className="nav-item_hd">
+                    <div className="btn_hd"><Link to="http://127.0.0.1:8000">장고로 이동</Link></div>
+                    <div className="nav-item_hd">                        
                         <div><a href="{% url 'customer_service_index' %}" className="nav-link_hd">고객센터</a></div>
                         <div className="dropdown-menu_hd">                 
                             <div><a href="{% url 'customer_service_notice' %}" className="btn_hd">공지사항</a></div>
@@ -90,13 +101,15 @@ const Header = () => {
                         </div>
                     </div>
 
-                    <div className="nav-item_hd">
-                        <div><a href="{% url 'diagnosis_index' %}" className="nav-link_hd">작물 진단</a></div>
+                    {/* diagnosis Link start */}
+                    <div className="nav-item_hd">                        
+                        <div className="nav-link_hd"><Link to="/diagnosis_index">작물 진단</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'diagnosis_index' %}" className="btn_hd">진단 문진표 작성</a></div>
-                            <div><a href="{% url 'diagnosis_result' %}" className="btn_hd">진단 결과</a></div>                    
+                            <div className="btn_hd"><Link to="/diagnosis_answer">진단 문진표 작성</Link></div>
+                            <div className="btn_hd"><Link to="/diagnosis_result">진단 결과</Link></div>
                         </div>
                     </div>
+                    {/* diagnosis Link end */}
 
                     <div className="nav-item_hd">
                         <div><a href="{% url 'community_index' %}" className="nav-link_hd">커뮤니티</a></div>
@@ -125,6 +138,11 @@ const Header = () => {
                     </div>
                 </ul>
             </nav>
+            <Routes>
+                <Route path="/diagnosis_index" element={<DiagnosisIndex solutionContent={solutionContent} setSolutionContent={setSolutionContent} />} />
+                <Route path="/diagnosis_answer" element={<DiagnosisAnswer diagnosisQuestions={diagnosisQuestions} setDiagnosisQuestions={setDiagnosisQuestions} />} />
+                <Route path="/diagnosis_result" element={<DiagnosisResult />} />
+            </Routes>
         </header>
     );
 };

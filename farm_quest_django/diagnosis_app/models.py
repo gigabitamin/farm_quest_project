@@ -9,6 +9,23 @@ class DiagnosisQuestion(models.Model):
         managed = False
         db_table = 'diagnosis_question'
         
+class DiagnosisQuestionHistory(models.Model):
+    diagnosis_question_history_id = models.AutoField(primary_key=True)
+    diagnosis_question_1 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_2 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_3 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_4 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_5 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_6 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_7 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_8 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_9 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_10 = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'diagnosis_question_history'                    
+        
 class PlantTb(models.Model):
     plant_no = models.AutoField(primary_key=True)
     plant_name = models.CharField(max_length=60)

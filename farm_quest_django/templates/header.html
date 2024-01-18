@@ -55,6 +55,7 @@
     <nav class="navbar_hd">
         <ul> 
             <!-- 네비게이션 드롭다운 수정, 최상단 class="navbar" 에 맞췄으니 수정시 주의 -kdy -->
+            <div><a href="http://127.0.0.1:3000">리액트 페이지로 이동</a></div>
             <div class="nav-item_hd">
                 <div><a href="{% url 'customer_service_index' %}" class="nav-link_hd">고객센터</a></div>
                 <div class="dropdown-menu_hd">                 
@@ -120,20 +121,7 @@
         </ul>
     </nav>
 </header>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const navItems = document.querySelectorAll('.nav-item_hd');
-    
-        navItems.forEach(item => {
-            item.addEventListener('mouseover', function () {
-                this.querySelector('.dropdown-menu_hd').style.display = 'block';
-            });
-            item.addEventListener('mouseout', function () {
-                this.querySelector('.dropdown-menu_hd').style.display = 'none';
-            });
-        });
-    });
-</script>
+
 
 
 {% endblock content %}
