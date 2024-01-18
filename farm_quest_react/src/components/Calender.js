@@ -120,5 +120,4 @@ export const Calender = () => {
     );
 };
 
-
-export default Scheduler;
+export default Calender;  // 내보내기

@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import Scheduler from './components/Scheduler';
+import Calender from './components/Calender.js';
 
 function App() {
   return (
     <div className="App">
-        <Scheduler></Scheduler>
+        <Calender></Calender>
     </div>
   );
 }
