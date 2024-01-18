@@ -3,21 +3,37 @@
 <!-- notice -->
 ### 공지
 
--> 검색창 수정, 가드닝샵 선택 후 검색어 입력시 gardening_shop_search 경로에서 인식 되는 점 -> root 경로로 바꾼 후 정상 작동
+메뉴 호출 문제 수정 확인 후 피드백  
 
-- base 사용 후 header footer 통합 문제로 css 무너진 부분 체크 후 수정해서 push 바람
 
 ====================================================
 <!-- version -->
 
+
+### v0.2.9 - kdy  
+- farm_quest_project 가상환경에서 django - react CRUD 테스트 완료  
+- diagnosis_app 리액트 마이그레이션 완료  
+- app.js index.js header footer SideNav 마이그레이션 완료  
+
+### v0.2.8  - jsh  
+- React Template 마이그레이션 테스트
+
+### v0.2.7 - ltj  
+- 가드닝샵, 메인페이지 레이아웃 및 css 세부 손질  
+
+### v0.2.6  - kdy
+- 네비게이션 드롭다운 메뉴 추가, 각 메뉴 세부페이지 연결 추가    - kdy
+- community 등 다른 메뉴에서 가드닝샵 index가 호출되는 문제 수정     - kdy
+- static/js/jquery-3.4.1.min.js 추가    - kdy
+- 기타 오류 수정    - kdy
+
 ### v0.2.5  
 - solution_tb diagrnosis_history 기타 db 업데이트 migrate  -kdy  
-
 
 ### v0.2.4a  
 - django 전 페이지 기본 app 생성 및 페이지 링크 완료, models.py 및 views.py CRUD 형식 작성 완료 - kdy
 - 개인/일반 스케쥴러, 마이페이지 레이아웃 수정 - psh
-- 진단 결과 레이아웃 수정
+- 진단 결과 레이아웃 수정  - kdy
 
 ### v0.2.3  
 - 검색창 가드닝샵 url 'gardening_shop_search/(str:keyword)' -> '(str:keyword)/' 로 수정 -> 정상 작동  - kdy   
@@ -25,12 +41,12 @@
 ### v0.2.2  
 - 가드닝샵 상품 리뷰 필터링 기능 추가  - kdy  
 - 통합 검색창 기능 추가  -kdy  
-- 검색 카테고리 선택 후 검색어 입력시 해당 카테고리 페이지로 이동 후 해당 카테고리 db에서 키워드로 검색 후 검색 결과 리스트로 받아와서 출력 
-- 가드닝 샵 검색창 정상 작동 확인  
-- index -> base footer header 분리 templates 폴더
+- 검색 카테고리 선택 후 검색어 입력시 해당 카테고리 페이지로 이동 후 해당 카테고리 db에서 키워드로 검색 후 검색 결과 리스트로 받아와서 출력  - kdy
+- 가드닝 샵 검색창 정상 작동 확인   - kdy
+- index -> base footer header 분리 templates 폴더  -kdy  
 
 ### v0.2.1  
-- 가드닝샵 상품 리뷰 별점 분석 긍/부 - ltj  
+- 가드닝샵 상품 리뷰 별점 분석 긍/부 - ltj
 - 가드닝샵 django app 추가 shopping_shop_review 테이블 crud 출력 - kdy
 
 ### v0.2.0

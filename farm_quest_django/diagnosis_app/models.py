@@ -1,5 +1,5 @@
 from django.db import models
-from farm_quest_app.models import *
+# from farm_quest_app.models import *
 
 class DiagnosisQuestion(models.Model):
     diagnosis_question_no = models.AutoField(primary_key=True)
@@ -8,6 +8,23 @@ class DiagnosisQuestion(models.Model):
     class Meta:
         managed = False
         db_table = 'diagnosis_question'
+        
+class DiagnosisQuestionHistory(models.Model):
+    diagnosis_question_history_id = models.AutoField(primary_key=True)
+    diagnosis_question_1 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_2 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_3 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_4 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_5 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_6 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_7 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_8 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_9 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_10 = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'diagnosis_question_history'                    
         
 class PlantTb(models.Model):
     plant_no = models.AutoField(primary_key=True)
@@ -29,10 +46,9 @@ class DiagnosisHistory(models.Model):
         managed = False
         db_table = 'diagnosis_history'                    
         
-        
-
+       
 class SolutionTb(models.Model):
-    solution_id = models.IntegerField(blank=True, null=True)
+    solution_id = models.AutoField(primary_key=True)
     disease_code = models.TextField(blank=True, null=True)
     plant_no = models.IntegerField(blank=True, null=True)
     plant_name = models.TextField(blank=True, null=True)
@@ -48,7 +64,6 @@ class SolutionTb(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'solution_tb'
 
 
 

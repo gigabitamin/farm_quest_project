@@ -39,9 +39,9 @@ class UsersAppUser(models.Model):
     is_staff = models.IntegerField()
     is_active = models.IntegerField()
     date_joined = models.DateTimeField()
-    # user_name = models.CharField(max_length=30)
-    # user_phone = models.CharField(max_length=20)
-    # user_address = models.CharField(max_length=200)    
+    user_name = models.CharField(max_length=30)
+    user_phone = models.CharField(max_length=20)
+    user_address = models.CharField(max_length=200)    
     profile_image = models.TextField(blank=True, null=True)
 
     class Meta:

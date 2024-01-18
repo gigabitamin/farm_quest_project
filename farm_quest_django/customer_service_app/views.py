@@ -21,4 +21,4 @@ def customer_service_faq(request):
     return render(request, 'customer_service_app/customer_service_faq.html')
 
 def customer_service_1vs1(request):    
-    return render(request, 'customer_service_app/customer_service_1v1.html')
+    return render(request, 'customer_service_app/customer_service_1vs1.html')

@@ -4,51 +4,12 @@
 
 {% block content %}
 
-  <div class="container">
-    <aside class="sidebar">
-      <nav class="menu">
-        <ul>
-          <li><a href="#strawberry">딸기</a></li>
-          <li><a href="#grape">포도</a></li>
-          <li><a href="#cucumber">오이</a></li>
-          <li><a href="#bellpepper">피망</a></li>
-          <li><a href="#tomato">토마토</a></li>
-          <li><a href="#chili">고추</a></li>
-        </ul>
-      </nav>
-    </aside>
-    <main class="content">
-      <section class="crop-info">
-        <div class="crop-heading">
-          <h1>작물 이름</h1>
-        </div>
-        <div class="crop-description">
-          <h2>작물 설명</h2>
-          <p>작물 설명</p>
-        </div>
-        <div class="crop-guide">
-          <h2>작물 재배 가이드</h2>
-          <p>작물 재배 가이드</p>
-        </div>
-      </section>
-      <div class="crop-image">
-        <img src="path_to_crop_photo.jpg" alt="작물 사진" width="300">
-      </div>
-      <div class="videos">
-        <div class="video" id="video1">
-          <iframe src="link_to_video1" title="영상 1"></iframe>
-        </div>
-        <div class="video" id="video2">
-          <iframe src="link_to_video2" title="영상 2"></iframe>
-        </div>
-        <div class="video" id="video3">
-          <iframe src="link_to_video3" title="영상 3"></iframe>
-        </div>
-      </div>
-   
+<div><h1>가드닝 샵 인덱스</h1></div>
+
+<div><h1>밑에 반복문 주석 처리 (4600개 한번에 출력 중, veiws.py 출력 조절 후 주석 해제)</h1></div>
 
           <!-- 반복문 시작 -->
-          {% for review in shopping_reviews %}
+          <!-- {% for review in shopping_reviews %}
           <div class="testimonial-item bg-light rounded p-3">
               <div class="bg-white border rounded p-4">
                   <a href="#" title="이동"><p>리뷰 : {{ review.shopping_review_content  }} :  리뷰 긍/부</p></a>
@@ -62,7 +23,7 @@
                   </div>
               </div>
           </div>
-          {% endfor %}
+          {% endfor %} -->
           <!-- 반복문 끝-->
 
 

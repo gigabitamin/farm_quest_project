@@ -1,10 +1,36 @@
 import './App.css';
+<<<<<<< HEAD
 import Calender from './components/Calender.js';
+=======
+import Header from './pages/Header';
+import Footer from './pages/Footer';
+import SideNav from './pages/SideNav';
+import './css/common.css';
+import './css/style_kdy.css';
+import './css/login.css';
+import './css/scheduler.css';
+import './css/style_ltj.css';
+import './css/community.css';
+
+
+>>>>>>> feather
 
 function App() {
   return (
     <div className="App">
+<<<<<<< HEAD
         <Calender></Calender>
+=======
+      <div className="header_wrap">        
+      </div>
+        <Header/>
+        <SideNav/>
+
+        <Footer/>
+        {/* <FooterJS/> */}
+      <div className="footer_wrap">
+      </div>
+>>>>>>> feather
     </div>
   );
 }
