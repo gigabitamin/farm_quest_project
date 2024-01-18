@@ -9,8 +9,17 @@
 ====================================================
 <!-- version -->
 
-### v0.2.7  - jsh  
+
+### v0.2.9 - kdy  
+- farm_quest_project 가상환경에서 django - react CRUD 테스트 완료  
+- diagnosis_app 리액트 마이그레이션 완료  
+- app.js index.js header footer SideNav 마이그레이션 완료  
+
+### v0.2.8  - jsh  
 - React Template 마이그레이션 테스트
+
+### v0.2.7 - ltj  
+- 가드닝샵, 메인페이지 레이아웃 및 css 세부 손질  
 
 ### v0.2.6  - kdy
 - 네비게이션 드롭다운 메뉴 추가, 각 메뉴 세부페이지 연결 추가    - kdy
