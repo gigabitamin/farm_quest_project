@@ -1,6 +1,23 @@
 from django.db import models
 # from farm_quest_app.models import *
 
+class diagnosis_yolo_result(models.Model):
+    boxes = models.JSONField()
+    keypoints = models.JSONField(null=True, blank=True)
+    masks = models.JSONField(null=True, blank=True)
+    names = models.JSONField(null=True, blank=True)
+    orig_shape = models.JSONField(null=True, blank=True)
+    path = models.CharField(max_length=255, null=True, blank=True)
+    probs = models.JSONField(null=True, blank=True)
+    save_dir = models.CharField(max_length=255, null=True, blank=True)
+    speed = models.JSONField(null=True, blank=True)
+    orig_img = models.BinaryField(null=True, blank=True)
+
+    class Meta:
+        managed = False
+        db_table = 'diagnosis_result'    
+    
+
 class DiagnosisQuestion(models.Model):
     diagnosis_question_no = models.AutoField(primary_key=True)
     diagnosis_question_content = models.CharField(max_length=45)

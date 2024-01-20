@@ -183,8 +183,15 @@ SECRET_KEY = db_settings.SECRET_KEY
 
 
 # users_app/sign_up2.html 이미지 업로드 기능 관련 -kdy
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# react_yolo 관련 -kdy
+# url에서 사용하는 이름
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# reactWorkspace 안에 upload 폴더 생성됨
+MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'upload')
 
 # views.py 에서 이메일 발송을 위한 static 경로 설정 -kdy
 STATICFILES_DIRS = [ 

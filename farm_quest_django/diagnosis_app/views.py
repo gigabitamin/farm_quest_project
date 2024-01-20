@@ -9,6 +9,7 @@ from .serializers import DiagnosisQuestionSerializer, DiagnosisQuestionHistorySe
 from django.core.files.storage import FileSystemStorage
 from uuid import uuid4
 from .modules.yolo_detection import detect
+import os
 
 
 @api_view(['POST'])   
@@ -16,20 +17,34 @@ def file_upload_one(request):
     if request.method == "POST":
         origin_file = request.FILES.get('imgFile')       
         fs = FileSystemStorage() # ../upload
+        print(fs)
 
         # 파일명 중복되지 않도록 uuid 사용해서 파일명 변경
         uuid = uuid4().hex
         save_file_name = uuid + '_' +  origin_file.name
+        save_file_path = os.path.join('diagnosis', 'yolo', save_file_name)
+        print('save_file_path : ', save_file_path)
         
         # save_file_name, origin_file # upload 폴더(fs)에 저장
-        fs.save(save_file_name, origin_file)
+        fs.save(save_file_path, origin_file)
         
         # 디버깅용
         print('origin_file.name : ', origin_file.name)
         print('save_file_name : ', save_file_name)
 
         # YOLO 객체 탐지 함수 호출, 서버 upload 폴더에 업로드 된 파일명만 전달하도록 수정
-        detect(save_file_name) 
+        serialized_results = detect(save_file_path)
+        # print('results : ', results)
+        print('직렬화')
+        # serialized_results = serialize_results(results)
+        # print('serialized_results : ', serialized_results)
+        
+        # context = {
+        #     'save_file_name': save_file_name, 
+        #     'serialized_results': serialized_results,                    
+        # }
+        print('완료, 전송')
+        print(save_file_name)
 
     return Response(save_file_name)
 
