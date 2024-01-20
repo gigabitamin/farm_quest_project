@@ -9,8 +9,6 @@ import './css/scheduler.css';
 import './css/style_ltj.css';
 import './css/community.css';
 
-
-
 function App() {
   return (
     <div className="App">
@@ -22,7 +20,7 @@ function App() {
         <Footer/>
         {/* <FooterJS/> */}
       <div className="footer_wrap">
-      </div>
+      </div>      
     </div>
   );
 }

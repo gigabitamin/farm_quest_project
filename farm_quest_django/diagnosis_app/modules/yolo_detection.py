@@ -22,19 +22,19 @@ def detect(img_name):
         file_name, file_extension = os.path.splitext(os.path.basename(img_name))
 
         media_path = settings.MEDIA_ROOT
-        print('media_path : ', media_path)
+        # print('media_path : ', media_path)
         
         img_path = os.path.join(media_path, img_name)
-        print('img_path : ', img_path)
+        # print('img_path : ', img_path)
         
         project_path = os.path.join(media_path, os.path.dirname(img_name), 'result_img') 
-        print('project_path : ', project_path)
+        # print('project_path : ', project_path)
         if not os.path.exists(project_path):
             os.mkdir(project_path)
                         
         serialized_results_path = os.path.join(media_path, os.path.dirname(img_name), 'result_json')
         serialized_results_file_path = os.path.join(serialized_results_path, os.path.basename(img_name) + '.json')
-        print('serialized_results_file_path : ', serialized_results_file_path)
+        # print('serialized_results_file_path : ', serialized_results_file_path)
         if not os.path.exists(serialized_results_path):
             os.mkdir(serialized_results_path)
             
@@ -58,7 +58,8 @@ def detect(img_name):
             show_boxes=True,            
             save_txt=True,
             save_json=True,
-            save_crop=True,                  
+            save_crop=True, 
+            save_dir=True,  
             ) # , show = True, name='result_img'
         
         # 예측 결과 리스트를 직렬화
@@ -90,9 +91,9 @@ def detect(img_name):
             im = Image.fromarray(im_array[..., ::-1])
             # im.show()
             result_path = os.path.join(project_path, os.path.basename(img_name))
-            print('result_path', result_path)
+            # print('result_path', result_path)
             im.save(result_path)
-            print('저장 완료')
+            # print('저장 완료')
             sr_result = serialize_results(result)
             # print('sr_result : ', sr_result)
             serialized_results_list.append(sr_result)
@@ -100,14 +101,15 @@ def detect(img_name):
         
         # save_to_json(serialized_results_list, serialized_results_file_path)
                     
-        print(serialized_results_list[0])
+        # print(serialized_results_list[0])
         
-        print('뭐야')
+        # print('뭐야')
         with open(serialized_results_file_path, 'w') as file:
             json.dump(serialized_results_list[0], file, indent=2)
-            print('json 저장완료')
+            # print('json 저장완료')
 
         save_results_to_database(serialized_results_list)
+        print('\njson db 저장완료')
                                             
     except Exception as e:
         print(f"Error: {e}")
@@ -135,30 +137,30 @@ def serialize_results(results):
             })
             # print('serialized_boxes : ', serialized_boxes)
 
-    print('키포인트')
+    # print('키포인트')
     serialized_keypoints = []
     if results and hasattr(results[0], 'keypoints') and results[0].keypoints is not None:
         for result in results:
             # 'keypoints' 속성이 있는 경우에만 처리
             keypoints_values = result.keypoints.keypoints.numpy().tolist() if hasattr(result.keypoints, 'keypoints') else None
-            print('1 : ', keypoints_values)
+            # print('1 : ', keypoints_values)
             scores_values = result.keypoints.scores.numpy().tolist() if hasattr(result.keypoints, 'scores') else None
-            print('2 : ', scores_values)
+            # print('2 : ', scores_values)
             labels_values = result.keypoints.labels.numpy().tolist() if hasattr(result.keypoints, 'labels') else None
-            print('3 : ', labels_values)
+            # print('3 : ', labels_values)
             serialized_keypoints.append({
                 'keypoints': keypoints_values,
                 'scores': scores_values,
                 'labels': labels_values,
             })
-            print('serialized_keypoints : ', serialized_keypoints)
+            # print('serialized_keypoints : ', serialized_keypoints)
 
-    print('데이타')
+    # print('데이타')
     
     # 'orig_img'를 Base64로 인코딩하여 추가
-    orig_img_base64 = None
-    if results and hasattr(results[0], 'orig_img') and results[0].orig_img is not None:
-        orig_img_base64 = base64.b64encode(results[0].orig_img.tobytes()).decode('utf-8')
+    # orig_img_base64 = None
+    # if results and hasattr(results[0], 'orig_img') and results[0].orig_img is not None:
+    #     orig_img_base64 = base64.b64encode(results[0].orig_img.tobytes()).decode('utf-8')
     
     serializable_data = {
         'boxes': serialized_boxes,
@@ -169,8 +171,8 @@ def serialize_results(results):
         'path': results[0].path if results else None,
         'probs': results[0].probs if results and hasattr(results[0], 'probs') else None,
         'save_dir': results[0].save_dir if results else None,
-        'speed': results[0].speed if results else None,        
-        'orig_img': orig_img_base64,
+        'speed': results[0].speed if results else None,
+        # 'orig_img': orig_img_base64,
         
     }
     # print('serializable_data : ', serializable_data)
@@ -185,8 +187,8 @@ def save_results_to_database(serialized_results_list):
     for serialized_result in serialized_results_list:
         try:
             # 이미지 데이터가 문자열인 경우
-            image_data_str = serialized_result.get('orig_img')
-            image_data_binary = image_data_str.encode('utf-8')            
+            # image_data_str = serialized_result.get('orig_img')
+            # image_data_binary = image_data_str.encode('utf-8')            
             # 모델 인스턴스 생성 및 데이터 저장
             result_instance = diagnosis_yolo_result.objects.create(
                 boxes=serialized_result.get('boxes'),
@@ -198,7 +200,7 @@ def save_results_to_database(serialized_results_list):
                 probs=serialized_result.get('probs'),
                 save_dir=serialized_result.get('save_dir'),
                 speed=serialized_result.get('speed'),
-                orig_img=image_data_binary
+                # orig_img=image_data_binary
             )
 
             # 저장된 결과 확인

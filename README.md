@@ -12,6 +12,7 @@
 - diagnosis_result db 생성  
 - 진단 결과 results 객체로부터 뽑아내서 json 형태로 저장
 - 파일 저장 & db 에 저장
+- 진단 결과 페이지에 diagnosis_result 의 진단 병증 클래스 출력 완료
 
 ### v0.3.0 - kdy  
 - diagnosis django backend, react front 기본적인 작물 직병 탐지 진단시스템 완료  

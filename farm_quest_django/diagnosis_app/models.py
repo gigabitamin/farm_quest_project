@@ -1,5 +1,4 @@
 from django.db import models
-# from farm_quest_app.models import *
 
 class diagnosis_yolo_result(models.Model):
     boxes = models.JSONField()
@@ -11,12 +10,11 @@ class diagnosis_yolo_result(models.Model):
     probs = models.JSONField(null=True, blank=True)
     save_dir = models.CharField(max_length=255, null=True, blank=True)
     speed = models.JSONField(null=True, blank=True)
-    orig_img = models.BinaryField(null=True, blank=True)
+    # orig_img = models.BinaryField(null=True, blank=True)
 
     class Meta:
         managed = False
-        db_table = 'diagnosis_result'    
-    
+        db_table = 'diagnosis_result'        
 
 class DiagnosisQuestion(models.Model):
     diagnosis_question_no = models.AutoField(primary_key=True)
@@ -81,8 +79,6 @@ class SolutionTb(models.Model):
 
     class Meta:
         managed = False
-
-
 
 class UserPlantTb(models.Model):
     user_plant_no = models.AutoField(primary_key=True)
