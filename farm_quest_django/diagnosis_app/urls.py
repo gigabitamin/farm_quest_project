@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import DiagnosisQuestionsAPIMixins, DiagnosisQuestionHistoryAPIMixins, PlantAPIMixins, SolutionAPIMixins
+from .views import file_upload_one, DiagnosisQuestionsAPIMixins, DiagnosisQuestionHistoryAPIMixins, PlantAPIMixins, SolutionAPIMixins
 
 urlpatterns = [
     path( 'diagnosis_index/', views.diagnosis_index, name='diagnosis_index'),
@@ -12,4 +12,5 @@ urlpatterns = [
     path("diagnosis_questions_history_api/", DiagnosisQuestionHistoryAPIMixins.as_view()),
     path("plant_api/", PlantAPIMixins.as_view()),
     path("solution_api/", SolutionAPIMixins.as_view()),
+    path("upload/", views.file_upload_one, name='file_upload_one'),
 ]

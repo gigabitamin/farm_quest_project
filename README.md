@@ -3,12 +3,13 @@
 <!-- notice -->
 ### 공지
 
-메뉴 호출 문제 수정 확인 후 피드백  
 
 
 ====================================================
 <!-- version -->
 
+### v0.3.0 - kdy  
+- diagnosis django backend, react front 기본적인 작물 직병 탐지 진단시스템 완료  
 
 ### v0.2.9 - kdy  
 - farm_quest_project 가상환경에서 django - react CRUD 테스트 완료  

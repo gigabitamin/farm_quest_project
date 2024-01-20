@@ -4,6 +4,8 @@ import DiagnosisIndex from "./diagnosis/DiagnosisIndex"
 import DiagnosisAnswer from "./diagnosis/DiagnosisAnswer"
 import DiagnosisResult from "./diagnosis/DiagnosisResult"
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
+import Upload from './diagnosis/Upload';
+import UploadResult from './diagnosis/UploadResult';
 
 const Header = () => {
     const portal_search = () => {
@@ -73,7 +75,7 @@ const Header = () => {
             </div>
 
             <nav className="navbar_hd">
-                <ul> 
+                <ul>                     
                     {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}
                     <div className="btn_hd"><Link to="http://127.0.0.1:8000">장고로 이동</Link></div>
                     <div className="nav-item_hd">                        
@@ -105,8 +107,9 @@ const Header = () => {
                     <div className="nav-item_hd">                        
                         <div className="nav-link_hd"><Link to="/diagnosis_index">작물 진단</Link></div>
                         <div className="dropdown-menu_hd">
+                            <div className="btn_hd"><Link to="/upload">진단 이미지 업로드</Link></div>
                             <div className="btn_hd"><Link to="/diagnosis_answer">진단 문진표 작성</Link></div>
-                            <div className="btn_hd"><Link to="/diagnosis_result">진단 결과</Link></div>
+                            <div className="btn_hd"><Link to="/diagnosis_result">진단 결과</Link></div>                            
                         </div>
                     </div>
                     {/* diagnosis Link end */}
@@ -138,10 +141,12 @@ const Header = () => {
                     </div>
                 </ul>
             </nav>
-            <Routes>
+            <Routes>                
                 <Route path="/diagnosis_index" element={<DiagnosisIndex solutionContent={solutionContent} setSolutionContent={setSolutionContent} />} />
                 <Route path="/diagnosis_answer" element={<DiagnosisAnswer diagnosisQuestions={diagnosisQuestions} setDiagnosisQuestions={setDiagnosisQuestions} />} />
                 <Route path="/diagnosis_result" element={<DiagnosisResult />} />
+                <Route path="/upload" element={<Upload />} />
+                <Route path="/uploadResult" element={<UploadResult />} />
             </Routes>
         </header>
     );
