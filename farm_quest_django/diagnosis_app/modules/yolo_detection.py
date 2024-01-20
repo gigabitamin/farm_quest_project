@@ -1,4 +1,4 @@
-from ..models import diagnosis_yolo_result
+from ..models import DiagnosisResult
 
 import base64
 import numpy as np
@@ -190,7 +190,7 @@ def save_results_to_database(serialized_results_list):
             # image_data_str = serialized_result.get('orig_img')
             # image_data_binary = image_data_str.encode('utf-8')            
             # 모델 인스턴스 생성 및 데이터 저장
-            result_instance = diagnosis_yolo_result.objects.create(
+            result_instance = DiagnosisResult.objects.create(
                 boxes=serialized_result.get('boxes'),
                 keypoints=serialized_result.get('keypoints'),
                 masks=serialized_result.get('masks'),

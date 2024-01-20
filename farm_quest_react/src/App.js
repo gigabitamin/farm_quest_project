@@ -12,15 +12,13 @@ import './css/community.css';
 function App() {
   return (
     <div className="App">
-      <div className="header_wrap">        
-      </div>
+      {/* <div className="header_wrap"></div> */}
         <Header/>
         <SideNav/>
 
         <Footer/>
         {/* <FooterJS/> */}
-      <div className="footer_wrap">
-      </div>      
+      {/* <div className="footer_wrap"></div>       */}
     </div>
   );
 }

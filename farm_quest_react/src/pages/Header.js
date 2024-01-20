@@ -6,6 +6,7 @@ import DiagnosisResult from "./diagnosis/DiagnosisResult"
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
 import Upload from './diagnosis/Upload';
 import UploadResult from './diagnosis/UploadResult';
+import DiagnosisChoice from './diagnosis/DiagnosisChoice';
 
 const Header = () => {
     const portal_search = () => {
@@ -107,6 +108,7 @@ const Header = () => {
                     <div className="nav-item_hd">                        
                         <div className="nav-link_hd"><Link to="/diagnosis_index">작물 진단</Link></div>
                         <div className="dropdown-menu_hd">
+                            <div className="btn_hd"><Link to="/diagnosis_choice">진단 작물 선택</Link></div>
                             <div className="btn_hd"><Link to="/upload">진단 이미지 업로드</Link></div>
                             <div className="btn_hd"><Link to="/diagnosis_answer">진단 문진표 작성</Link></div>
                             <div className="btn_hd"><Link to="/diagnosis_result">진단 결과</Link></div>                            
@@ -145,6 +147,7 @@ const Header = () => {
                 <Route path="/diagnosis_index" element={<DiagnosisIndex solutionContent={solutionContent} setSolutionContent={setSolutionContent} />} />
                 <Route path="/diagnosis_answer" element={<DiagnosisAnswer diagnosisQuestions={diagnosisQuestions} setDiagnosisQuestions={setDiagnosisQuestions} />} />
                 <Route path="/diagnosis_result" element={<DiagnosisResult />} />
+                <Route path="/diagnosis_choice" element={<DiagnosisChoice />} />
                 <Route path="/upload" element={<Upload />} />
                 <Route path="/uploadResult" element={<UploadResult />} />
             </Routes>

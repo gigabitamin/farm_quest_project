@@ -1,20 +1,22 @@
 from django.db import models
 
-class diagnosis_yolo_result(models.Model):
-    boxes = models.JSONField()
-    keypoints = models.JSONField(null=True, blank=True)
-    masks = models.JSONField(null=True, blank=True)
-    names = models.JSONField(null=True, blank=True)
-    orig_shape = models.JSONField(null=True, blank=True)
-    path = models.CharField(max_length=255, null=True, blank=True)
-    probs = models.JSONField(null=True, blank=True)
-    save_dir = models.CharField(max_length=255, null=True, blank=True)
-    speed = models.JSONField(null=True, blank=True)
-    # orig_img = models.BinaryField(null=True, blank=True)
+class DiagnosisResult(models.Model):
+    user_select_plant = models.ForeignKey('PlantTb', models.DO_NOTHING, db_column='user_select_plant', blank=True, null=True)
+    boxes = models.JSONField(blank=True, null=True)
+    keypoints = models.JSONField(blank=True, null=True)
+    masks = models.JSONField(blank=True, null=True)
+    names = models.JSONField(blank=True, null=True)
+    orig_shape = models.JSONField(blank=True, null=True)
+    path = models.CharField(max_length=255, blank=True, null=True)
+    probs = models.JSONField(blank=True, null=True)
+    save_dir = models.CharField(max_length=255, blank=True, null=True)
+    speed = models.JSONField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'diagnosis_result'        
+        db_table = 'diagnosis_result'
+
+    
 
 class DiagnosisQuestion(models.Model):
     diagnosis_question_no = models.AutoField(primary_key=True)

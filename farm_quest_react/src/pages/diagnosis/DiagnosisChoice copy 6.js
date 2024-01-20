@@ -25,19 +25,21 @@ const DiagnosisChoice = () => {
     };
 
 
+
+
+
     const handleChoiceSubmit = (e) => {
 
-        e.preventDefault();        
 
-        const selectedPlant = plantSpecies.find(plant => plant.plant_no === parseInt(selectedPlantIndex['user_select_plant'], 10));
-  
+
+        e.preventDefault();        
         let frmData = new FormData(document.diagnosisChoiceForm); 
         frmData.append(`user_select_plant`, selectedPlantIndex[`user_select_plant`])
     
         axios.post('http://localhost:8000/save_diagnosis_result_api/', frmData)
             .then(response => {                
                 
-                alert("선택한 작물 : " + selectedPlant.plant_name);
+                alert("선택한 작물 : " );
                 history('/upload');
             })
             .then(data => {

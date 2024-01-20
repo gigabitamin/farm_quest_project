@@ -3,8 +3,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from rest_framework.response import Response
 from rest_framework.decorators import api_view   
 from rest_framework import mixins, generics
-from .models import DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
-from .serializers import DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionSerializer
+from .models import DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
+from .serializers import DiagnosisResultSerializer, DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionSerializer
 
 # yolov8 관련
 from django.core.files.storage import FileSystemStorage
@@ -50,6 +50,18 @@ def file_upload_one(request):
 
     return JsonResponse(context, status=200)
 
+
+class DiagnosisResultAPIMixins(
+    mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
+):    
+    queryset = DiagnosisResult.objects.all()
+    serializer_class = DiagnosisResultSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 class DiagnosisQuestionsAPIMixins(
     mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
