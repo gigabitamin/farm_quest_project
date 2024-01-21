@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 const DiagnosisChoice = () => {
     let history = useNavigate();
   
@@ -32,13 +33,13 @@ const DiagnosisChoice = () => {
         const selectedPlant = plantSpecies.find(plant => plant.plant_no === parseInt(selectedPlantIndex['user_select_plant'], 10));
   
         let frmData = new FormData(document.diagnosisChoiceForm); 
-        frmData.append(`user_select_plant`, selectedPlantIndex[`user_select_plant`])
+        frmData.append(`user_select_plant`, selectedPlantIndex[`user_select_plant`])        
     
         axios.post('http://localhost:8000/save_diagnosis_result_api/', frmData)
-            .then(response => {                
+            .then(response => {                      
                 
-                alert("선택한 작물 : " + selectedPlant.plant_name);
-                history('/upload');
+                alert("선택한 작물 : " + selectedPlant.plant_name);                
+                history('/upload', {state : {newDiagnosisResultId : response.data}});
             })
             .then(data => {
                 console.log('Success:', data);

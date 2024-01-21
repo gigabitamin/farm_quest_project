@@ -2,36 +2,30 @@ from rest_framework import serializers
 from .models import DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
 
 
-
 class DiagnosisResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = DiagnosisResult
         fields = '__all__'
-
+        
     def create(self, validated_data):
-        # user_select_plant 값 추출
-        user_select_plant_data = validated_data.pop('user_select_plant', None)
+        # id 값을 validated_data에서 제거
+        # id_value = validated_data.pop('id', None)
 
-        # user_select_plant에 해당하는 객체 가져오기
-        user_select_plant_instance = user_select_plant_data
+        # DiagnosisResult 모델의 모든 필드에 대해 반복
+        diagnosis_results = {}
+        for field in DiagnosisResult._meta.fields:
+            if field.name != 'id':  # primary key 필드인 id는 제외
+                key = field.name
+                if key in validated_data:
+                    diagnosis_results[key] = validated_data.pop(key)
+                else:
+                    # 특정 키가 없을 경우 기본값으로 null 또는 원하는 값을 설정
+                    diagnosis_results[key] = None
 
-        # 나머지 필드에 대한 기본값 또는 원하는 값 지정
-        defaults = {
-            'boxes': None,
-            'keypoints': None,
-            'masks': None,
-            'names': None,
-            'orig_shape': None,
-            'path': None,
-            'probs': None,
-            'save_dir': None,
-            'speed': None,
-        }
-
-        # user_select_plant에 객체 할당하고 나머지 필드는 디폴트값으로 생성
-        instance = DiagnosisResult.objects.create(user_select_plant=user_select_plant_instance, **defaults)
-
+        # 나머지 부분은 원래의 create 메서드 수행
+        instance = DiagnosisResult.objects.create(**validated_data, **diagnosis_results)
         return instance
+
 
 
 class DiagnosisQuestionHistorySerializer(serializers.ModelSerializer):
