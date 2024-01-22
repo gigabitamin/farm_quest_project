@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import {Link, Routes, Route} from 'react-router-dom';
-import DiagnosisIndex from "./diagnosis/DiagnosisIndex"
-import DiagnosisAnswer from "./diagnosis/DiagnosisAnswer"
-import DiagnosisResult from "./diagnosis/DiagnosisResult"
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
-import Upload from './diagnosis/Upload';
-import UploadResult from './diagnosis/UploadResult';
-import DiagnosisChoice from './diagnosis/DiagnosisChoice';
+import GardeningShopIndex from "./gardeningshop/GardeningShopIndex";
 
 const Header = () => {
     const portal_search = () => {
@@ -143,14 +138,6 @@ const Header = () => {
                     </div>
                 </ul>
             </nav>
-            <Routes>                
-                <Route path="/diagnosis_index" element={<DiagnosisIndex solutionContent={solutionContent} setSolutionContent={setSolutionContent} />} />
-                <Route path="/diagnosis_answer" element={<DiagnosisAnswer diagnosisQuestions={diagnosisQuestions} setDiagnosisQuestions={setDiagnosisQuestions} />} />
-                <Route path="/diagnosis_result" element={<DiagnosisResult />} />
-                <Route path="/diagnosis_choice" element={<DiagnosisChoice />} />
-                <Route path="/upload" element={<Upload />} />
-                <Route path="/uploadResult" element={<UploadResult />} />
-            </Routes>
         </header>
     );
 };
