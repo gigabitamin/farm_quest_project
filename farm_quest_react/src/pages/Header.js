@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import {Link, Routes, Route} from 'react-router-dom';
-import DiagnosisIndex from "./diagnosis/DiagnosisIndex"
-import DiagnosisAnswer from "./diagnosis/DiagnosisAnswer"
-import DiagnosisResult from "./diagnosis/DiagnosisResult"
+import React from 'react';
+import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
 
 const Header = () => {
@@ -25,11 +22,6 @@ const Header = () => {
     //         });
     //     });
     // });
-    
-    const [solutionContent, setSolutionContent] = useState([]);
-    const [diagnosisQuestions, setDiagnosisQuestions] = useState([]);
-
-    
     
     return (
         <header>
@@ -94,7 +86,7 @@ const Header = () => {
                     </div>            
 
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'gardening_shop_index' %}" className="nav-link_hd">가드닝 샵</a></div>
+                        <div className="nav-link_hd"><Link to="/gardening_shop_index">가드닝 샵</Link></div>
                         <div className="dropdown-menu_hd">
                             <div><a href="{% url 'gardening_shop_index' %}" className="btn_hd">상품 리스트</a></div>
                             <div><a href="{% url 'gardening_shop_review_anlystics' %}" className="btn_hd">상품 리뷰 분석</a></div>                    
@@ -138,11 +130,6 @@ const Header = () => {
                     </div>
                 </ul>
             </nav>
-            <Routes>
-                <Route path="/diagnosis_index" element={<DiagnosisIndex solutionContent={solutionContent} setSolutionContent={setSolutionContent} />} />
-                <Route path="/diagnosis_answer" element={<DiagnosisAnswer diagnosisQuestions={diagnosisQuestions} setDiagnosisQuestions={setDiagnosisQuestions} />} />
-                <Route path="/diagnosis_result" element={<DiagnosisResult />} />
-            </Routes>
         </header>
     );
 };

@@ -1,5 +1,6 @@
 
 from django.shortcuts import get_object_or_404, render, redirect
+from django.http import JsonResponse
 from .models import ShoppingReview, ShopingTb
 from django.db.models import Q
 
@@ -35,3 +36,7 @@ def gardening_shop_search(request, keyword):
     }    
     
     return render(request, 'gardening_shop_app/gardening_shop_index.html', context)
+
+def products_api(request):
+    products = ShopingTb.objects.all().values()  # 모든 상품을 가져옴
+    return JsonResponse(list(products), safe=False)  # JSON 형태로 변환
