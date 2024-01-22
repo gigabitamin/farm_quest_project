@@ -1,0 +1,9 @@
+django
+djangorestframework
+django-cors-headers
+mysqlclient
+pandas
+matplotlib
+plotly
+seaborn
+tensorflow
