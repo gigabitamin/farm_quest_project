@@ -9,6 +9,8 @@
 ====================================================
 <!-- version -->
 
+### v0.2.10 - jsh  
+- react-redux 초기 설정 완료
 
 ### v0.2.9 - kdy  
 - farm_quest_project 가상환경에서 django - react CRUD 테스트 완료  
