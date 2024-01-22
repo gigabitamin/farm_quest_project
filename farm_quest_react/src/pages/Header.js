@@ -97,10 +97,10 @@ const Header = () => {
                     </div>            
 
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'gardening_shop_index' %}" className="nav-link_hd">가드닝 샵</a></div>
+                        <div className="nav-link_hd"><Link to="/gardening_shop_index">가드닝 샵</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'gardening_shop_index' %}" className="btn_hd">상품 리스트</a></div>
-                            <div><a href="{% url 'gardening_shop_review_anlystics' %}" className="btn_hd">상품 리뷰 분석</a></div>                    
+                            <div className="btn_hd"><Link to="/">상품 리스트</Link></div>
+                            <div className="btn_hd"><Link to="/">상품 리뷰 분석</Link></div>                    
                         </div>
                     </div>
 
