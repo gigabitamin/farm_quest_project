@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+    a {
+        text-decoration: none;
+    }
+        
+    .customer_center_wrap {
+        display: flex;
+        flex: 0 0 100%;
+        flex-direction: column;             
+        flex-wrap: nowrap;
+        border: 1px solid black;
+        width:100%;
+        margin: 0 auto;        
+    }
+
+    .customer_center_ad_box { 
+        display:flex;
+        flex: 1 0 30px;
+        border: 1px solid black;
+        margin:10px;
+        align-items:center;
+        justify-content: center;
+    }
+
+    .customer_center_ad_content{        
+        border: 1px solid black;        
+    }
+
+
+    .customer_center_index_box { 
+        flex-direction: row;             
+        flex-wrap: nowrap;
+        display:flex;
+        flex: 0 0 100%;
+        border: 1px solid black;
+        margin: 0 auto;
+        align-items:center;
+        justify-content: center;       
+    }    
+
+    .customer_center_choice_box {
+        display: flex; 
+        flex-direction: column;
+        flex: 0 0 100px;       
+        justify-content: center;
+        align-items: center;        
+        text-align: center;                
+        border: 1px solid black;
+        margin: 10px;
+    }
+
+    .customer_center_choice_result_box {
+        display: flex;                
+        flex-direction: column;
+        flex-wrap: nowrap;                
+        text-align: center;
+        justify-content: center;
+        border: 1px solid black;
+        height:100%;
+        width:100vh;
+        margin: 10px;
+    }
+
+
+    .customer_center_answer_box {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
+        border: 1px solid black;
+        width:70vh;
+        height:100%;
+    }
+
+
+    .customer_center_answer_tab {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
+        border: 1px solid black;
+        width:70vh;
+        height:100%;
+    }
+    
+    .customer_center_image_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;        
+        text-align: center;
+        border: 1px solid black;
+        width:100%;
+        height:100%;
+    }        
+
+
+    .customer_center_image_img {        
+        height: 1px;
+        opacity: 0.1;
+        z-index: -1; 
+      }
+      
+    .customer_center_answer_tab > a:nth-child(1){
+        background-color:red;
+    }
+
+    .customer_center_answer_tab > a:nth-child(2){
+        background-color:yellow;
+    }
+
+    .customer_center_answer_tab > a:nth-child(3){
+        background-color:green;
+    }    
+
+    .customer_center_answer_tab {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }    
+
+    .customer_center_answer_tab > div {
+        align-items:center;
+    }
+
+</style>
+
+
+    <div class="customer_center_wrap">
+        <div class="customer_center_ad_box">
+            <div class="customer_center_ad_content">고객 센터</div>
+        </div>
+        <div class="customer_center_index_box">
+            <div class="customer_center_choice_box">
+                <div class="customer_center_choice_main customer_center_main">
+                    <section class="customer_center_choice_section">        
+                        <article class="customer_center_choice_article">
+                            <div class="customer_center_choice_wrap">
+                                <div>고객센터</div>
+                                <hr>
+                                <a href="{% url 'customer_service_notice' %}"><div>공지사항</div></a>
+                                <a href="{% url 'customer_service_faq' %}"><div>FAQ</div></a>
+                                <a href="{% url 'customer_service_1vs1' %}"><div>1:1 문의</div></a>
+                            </div>                        
+                        </article>        
+                    </section>
+                </div>
+            </div>
+                                
+            <div class="customer_center_choice_result_box">
+                <div class="customer_center_answer_box">
+                    <div class="customer_center_answer_main customer_center_main">
+                        <section class="customer_center_answer_section">
+                          <article class="customer_center_answer_article">
+                            <div class="customer_center_answer_wrap">
+                              <div class="customer_center_answer_tab">
+                                <div><h2>공지사항</h2></div>
+                              </div>
+                            </div>
+                          </article>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="customer_center_image_box">
+                    <div class="customer_center_chart_main customer_center_main">
+                        <section class="customer_center_image_section">
+                            <article class="customer_center_image_article">  
+                                <div class="customer_center_image_img">
+                                    <img src="../static/image/logo/farm_quest_site.png" alt="업로드 이미지"> 
+                                </div>
+                                <div class="customer_center_image_text">
+                                    <div>
+                                        <ol>
+                                            <li>
+                                                제목 : 어쩌고 (날짜) <br>
+                                                본문 :
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                            </li>
+                                            <li>
+                                                제목 : 어쩌고 (날짜) <br>
+                                                본문 :
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                            </li>
+                                            <li>
+                                                제목 : 어쩌고 (날짜) <br>
+                                                본문 :
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                            </li>                                        
+                                        </ol>
+                                    </div>                                    
+                                </div>
+                            </article>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}

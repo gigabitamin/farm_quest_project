@@ -1,0 +1,64 @@
+{% load static %}
+
+{% block content %}  
+
+
+<style>
+
+</style>
+
+<footer>
+    <ul>
+        <li><a href="#">이용약관</a></li>
+        &nbsp;
+        <li><a href="#">개인정보처리방침</a></li>
+        &nbsp;
+        <li><a href="#">청소년보호정책</a></li>
+    </ul>
+    <div class="d-flex">
+        <a class="btn_ltj btn-social" href="#"><i class="fab fa-twitter"></i></a>
+        <a class="btn_ltj btn-social" href="#"><i class="fab fa-facebook-f"></i></a>
+        <a class="btn_ltj btn-social" href="#"><i class="fab fa-youtube"></i></a>
+        <a class="btn_ltj btn-social" href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+</footer>
+
+
+    <!-- Back to Top 버튼 -->  
+    <!-- 카카오톡 상당하기 버튼 시작 -->
+    <a
+        id="kakao-talk-channel-chat-button"
+        data-channel-public-id="_webTG"
+        data-title="consult"
+        data-size="small"
+        data-color="yellow"
+        data-shape="pc"
+        data-support-multiple-densities="true"
+
+        class="btn-lg btn-lg-square back-to-top"
+    ></a>
+    <!-- 카카오톡 상당하기 버튼 끝 -->
+
+    <!-- 카카오톡 상담하기 버튼 추가를 위한 script 시작 - kdy -->
+    <script>
+        window.kakaoAsyncInit = function() {
+          Kakao.Channel.createChatButton({
+            container: '#kakao-talk-channel-chat-button',          
+          });
+        };
+      
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.channel.min.js'; // 경로 수정 -kdy
+          <!-- js.integrity = '#' -->
+          js.crossOrigin = 'anonymous';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'kakao-js-sdk');
+    </script>
+      <!-- 카카오톡 상담하기 버튼 추가를 위한 script 끝, github 보안문제로 js key 삭제 비활성화 - kdy -->
+
+    {% endblock content %}  
+
+    

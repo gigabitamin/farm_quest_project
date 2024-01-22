@@ -1,0 +1,75 @@
+<!-- {% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div className="App">
+
+  {% comment %} {/* 헤더 컴포넌트 시작 */} {% endcomment %}
+  <header className="App-header">
+    <div class="site_logo"><img src={logo} className="App-logo" alt="logo" /></div>
+    <a href="/"><div class="site_home">팜 퀘스트</div></a>
+    
+    <div class="header_menu">
+      <Router>            
+        <Link to = "/">홈 </Link>
+        <Link to = "/CsBoard">고객센터 </Link> 
+        <Link to = "/signup">회원가입 </Link> 
+        <Link to = "/login">로그인 </Link> 
+        <Link to = "/logout">로그아웃 </Link>
+        
+        <Routes>
+          <Route exact path="/" element={<Home/>}/>              
+          <Route path="/CsBoard" element={<CsBoard/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/login" element={<Login/>}/>                
+          <Route path="/logout" element={<Logout/>}/>
+            
+        </Routes>
+      </Router>        
+    </div>
+
+    {% comment %} {/* 네비게이션 컴포넌트 시작 */} {% endcomment %}
+    <nav class="root_nav">          
+      <div>nav_content</div>
+    
+    </nav>
+    {% comment %} {/* 네비게이션 컴포넌트 끝 */} {% endcomment %}
+  
+  </header>
+  {% comment %} {/* 헤더 컴포넌트 끝 */} {% endcomment %}
+
+  {% comment %} {/* 카테고리 상세 컨텐트 박스 시작 */}       {% endcomment %}
+  <div className={`ctg_content ${selectedComponent ? 'cs_layout' : ''}`}>
+    
+    {% comment %} {/* 고객센터 게시판 컴포넌트 시작 */} {% endcomment %}
+    <section class="cs_layout">
+      <div class="cs_sidebar">
+        <div class="cs_menu">
+          <div onClick={() => showComponent("cs_notice")} className="cs_notice">
+            공지사항
+          </div>
+          <div onClick={() => showComponent("cs_faq")} className="cs_faq">
+            FAQ
+          </div>
+          <div onClick={() => showComponent("cs_1vs1")} className="cs_1vs1">
+            1:1 문의
+          </div>
+        </div>
+      </div>
+      <div class="cs_content_area">cs_content_area
+        {selectedComponent === "cs_notice" && <CSNotice />}
+        {selectedComponent === "cs_faq" && <CSFAQ />}
+        {selectedComponent === "cs_1vs1" && <CS1vs1 />}
+      </div>
+    </section>
+    {% comment %} {/* 고객센터 컴포넌트 끝 */} {% endcomment %}
+
+  </div>
+  {% comment %} {/* 카테고리 상세 컨텐츠 박스 끝 */} {% endcomment %}
+
+</div>
+{% comment %} // App 컴포넌트 끝 {% endcomment %}
+
+
+
+{% endblock content %} -->

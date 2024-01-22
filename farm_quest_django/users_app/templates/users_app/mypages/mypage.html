@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <link rel="stylesheet" href="../../../static/css/style_ltj.css">    
+    <link rel="stylesheet" href="../../../static/css/mypage.css">
+    <link rel="stylesheet" href="../../../static/css/common.css">
+
+    <main class="mypage_main">
+
+        <section class="mp_sidemenu_section">
+            <div id="mypage_sidebar">
+                <li id='mypage_title'>마이페이지</li>
+                <ul>
+                    <li><a class="menu-link sidemenus" href="/user_plant"
+                        id='user_plant'>나의 작물</a></li>
+                    <li><a class="menu-link sidemenus" href="/user_farmlog"
+                        id='user_farmlog'>나의 팜로그</a></li>
+                    <li><a class="menu-link sidemenus" href="/user_QnA"
+                        id='user_QnA'>나의 QnA</a></li>
+                    <li><a class="menu-link sidemenus" href="/user_bookmark"
+                        id='user_bookmark'>즐겨찾기</a></li>
+                </ul>
+            </div>
+        </section>
+        <br>
+        <section class="mp_contents_section">
+            <div id="mypage_contents">
+                contents
+            </div>
+        </section>
+        <section>팜퀘스트
+            
+        </section>
+
+    </main>
+
+
+
+{% endblock content %}

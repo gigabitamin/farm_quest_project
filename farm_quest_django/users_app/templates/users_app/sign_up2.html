@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="sign_up_box">
+    <form action="" method="post">
+    <br><div><h1>회원 가입</h1></div><br>
+        {% csrf_token %}
+        <table class="sign_up2">
+            {% comment %} <tr>
+                <th class='lbl'>프로필 이미지</th>
+                <td><button type="submit" name ='sign_up_upload_image'></td>
+            </tr> {% endcomment %}
+            <tr>
+                <th class='lbl'>아이디</th>
+                <td><input type="text" name='username'></td>
+            </tr>
+            <tr>
+                <th class='lbl'>이메일</th>
+                <td><input type="text" name ='email'></td>
+            </tr><tr>
+                <th class='lbl'>비밀번호</th>
+                <td><input type="password" name ='password'></td>
+            </tr>
+            
+            {% comment %} <tr>                
+                <th class='lbl'>성명</th>
+                <td><input type="text" name='user_name'></td>
+            </tr><tr>
+                <th class='lbl'>전화</th>
+                <td><input type="text" name='user_phone'></td>
+            </tr><tr>
+                <th class='lbl'>주소</th>
+                <td><textarea type="text" id=lbl_address name='user_address'></textarea></td>
+            </tr> {% endcomment %}
+            
+        </table><br>
+        <button type="submit" class="btn-primary signUpBtn">가입 완료</button>
+    </form>
+</div>
+
+
+{% endblock content %}
+
+

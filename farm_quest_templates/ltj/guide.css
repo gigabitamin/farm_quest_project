@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: column; /* headerMenu와 navbar를 세로로 배치 */
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+.headerMenu {
+    display: flex;
+    align-items: center;
+}
+
+.headerMenu a.highlight {
+    margin-left: 10px;
+    color: #ffcc00;
+}
+
+
+
+.navbar {
+    width: 100%;
+    background-color: #333;
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: #ddd;
+}
+
+#logo {
+    height: 60px;
+}
+
+
+main {
+    padding: 50px 20px;
+}
+
+.content {
+    width: 100%;
+    padding: 10px 0;
+}
+.row {
+    text-align: center;
+}
+.product {
+    display: inline-block;
+    width: 300px;
+    margin: 1.66%;
+    vertical-align: top;
+}
+.product img {
+    width: 100%;
+    height: auto;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+footer ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+}

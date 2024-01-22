@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    <div><h1>팜로그</h1></div>
+
+    <div class="community_wrap">
+    <article id="comm">
+        <aside id="comm_left_menu">
+            <div class="comm_left_box">즐겨찾기</div>
+            <div class="comm_left_box">북마크</div>
+            <div class="comm_left_box">자유게시판</div>
+            <div class="comm_left_box">QnA</div>
+        </aside>
+        <aside id="comm_right_menu">
+            <div class="comm_right_box">실시간</div>
+            <div class="comm_right_box">인기 주제</div>
+            <div class="comm_right_box">???</div>
+        </aside>
+
+        <!-- 스크롤시 자동 생성되는 게시물 박스들 -->
+        <section>
+            <div class="comm_content_box">
+                <div class="content_box_top">
+                    <div class="content_box_user">유저 프로필</div>
+                    <div class="content_box_type">타입</div>
+                </div>
+                <div class="content_box_main">
+                    <div class="content_box_title">제목</div>
+                    <div class="content_box_content">내용 뭐 그런거 없다</div>
+                </div>
+                <div class="content_box_bottom">
+                    <ul class="content_box_list">
+                        <li>뭐</li>
+                        <li>조회수</li>
+                        <li>댓글</li>
+                        <li>좋아요</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 게시물 클릭시 나오는 해당 게시물의 상세 내용 -->
+        <div class="comm_content_box_detail">
+            <div class="content_box_detail_top">
+                <div class="content_box_detail_user">유저 프로필</div>
+                <div class="content_box_detail_type">타입</div>
+            </div>
+            <div class="content_box_detail_main">
+                <div class="content_box_detail_title">제목</div>
+                <div class="content_box_detail_content">내용 뭐 그런거 없다</div>
+            </div>
+        </div>
+    </article>
+    </div>
+    {% endblock content %}  

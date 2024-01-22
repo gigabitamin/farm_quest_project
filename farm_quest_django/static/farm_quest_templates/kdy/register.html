@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="kdy.css">
+
+<style>
+        
+        
+    .diagnosis_wrap {
+        display: flex;
+        flex-direction: row;             
+        flex-wrap: nowrap;
+        border: 1px solid black;
+        width:60vh;        
+        margin: 0 auto;
+    }
+
+    .diagnosis_ad_box { 
+        display:flex;
+        flex: 1 0 20%;
+        border: 1px solid black;
+        margin: 0 auto;
+        align-items:center;
+        justify-content: center;
+    }
+
+    .diagnosis_ad_content{        
+        border: 1px solid black;        
+    }
+
+    .diagnosis_index_box { 
+        flex-direction: column;             
+        flex-wrap: nowrap;
+        display:flex;
+        flex: 0 0 80%;
+        border: 1px solid black;
+        margin: 0 auto;
+        align-items:center;
+        justify-content: center;       
+    }    
+
+    .diagnosis_choice_box {
+        display: flex;        
+        justify-content: center;
+        align-items: center;        
+        text-align: center;                
+        border: 1px solid black;
+    }
+
+    .diagnosis_choice_result_box {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;                
+        text-align: center;                   
+        justify-content: center;
+        border: 1px solid black;   
+    }
+
+
+    .diagnosis_answer_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
+        border: 1px solid black;
+        width:35vh;
+    }
+    
+    .diagnosis_image_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;        
+        text-align: center;
+        border: 1px solid black;
+    }        
+
+</style>
+
+</head>
+<body>
+    <div class="diagnosis_wrap">
+        <div class="diagnosis_ad_box">
+            <div class="diagnosis_ad_content">임시</div>
+        </div>
+        <div class="diagnosis_index_box">
+            <div class="diagnosis_choice_box">
+                <div class="diagnosis_choice_main diagnosis_main">
+                    <section class="diagnosis_choice_section">        
+                        <article class="diagnosis_choice_article">
+                            <div class="diagnosis_choice_wrap">
+                                <div><strong>프로필 이미지 업로드</strong></div>
+                                <form method='post' enctype='multipart/form-data' action="{% url 'file_upload_one' %}"  id="diagnosis_choice_form">
+                                    {% csrf_token %}
+                                    <input type='file' name='imgFile' id='imgFile' onchange="setThumbnailOne(event)">
+                                    <input type='submit' value='완료'>
+                                </form><br>                                                                 
+                            </div>                        
+                        </article>        
+                    </section>
+                </div>
+            </div>
+
+            <div class="diagnosis_image_box">
+                <div class="diagnosis_chart_main diagnosis_main">
+                    <section class="diagnosis_image_section">
+                        <article class="diagnosis_image_article">  
+                            <div id="imgPreviewOne"></div>
+                            <div class="diagnosis_image_img">
+                                <img src="../static/image/logo/farm_quest_site.png" alt="프로필 이미지">
+                            </div>
+                            <div class="diagnosis_image_text">
+                                <p>프로필 이미지</p>
+                            </div>
+                        </article>
+                    </section>
+                </div>
+            </div>            
+                                
+            <div class="diagnosis_choice_result_box">
+                <div class="diagnosis_answer_box">
+                    <div class="diagnosis_answer_main diagnosis_main">
+                        <section class="diagnosis_answer_section">
+                          <article class="diagnosis_answer_article">
+                            <div class="diagnosis_answer_wrap">
+                              <form id="diagnosis_answer_form">
+                                <h2>회원가입 폼</h2>
+                                
+                                  <div>
+                                    
+                                    <label>
+                                      <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="예" required>예
+                                      <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="아니오" required>아니오
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="예" required>예
+                                        <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="아니오" required>아니오
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="예" required>예
+                                        <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="아니오" required>아니오
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="예" required>예
+                                        <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="아니오" required>아니오
+                                    </label>
+                                    <br>
+                                    <label>
+                                          <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="예" required>예
+                                          <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="아니오" required>아니오
+                                    </label>
+                                    <br>
+                                    <label>
+                                          <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="예" required>예
+                                          <input type="radio" name="question_{{ question.diagnosis_question_no }}" value="아니오" required>아니오
+                                    </label>
+                                    <br>                                      
+                                </div>
+              
+                                <button type="button" id="submit_button">회원가입</button>
+                              </form>
+                            </div>
+                          </article>
+                        </section>
+                    </div>
+                </div>                                
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

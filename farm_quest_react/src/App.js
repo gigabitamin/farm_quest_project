@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './pages/Header';
+import Footer from './pages/Footer';
+import SideNav from './pages/SideNav';
+import './css/common.css';
+import './css/style_kdy.css';
+import './css/login.css';
+import './css/scheduler.css';
+import './css/style_ltj.css';
+import './css/community.css';
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="header_wrap">        
+      </div>
+        <Header/>
+        <SideNav/>
+
+        <Footer/>
+        {/* <FooterJS/> */}
+      <div className="footer_wrap">
+      </div>
     </div>
   );
 }

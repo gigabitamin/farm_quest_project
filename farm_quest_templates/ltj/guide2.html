@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Web</title>
+    <link rel="stylesheet" href="guide2.css">
+</head>
+
+<body>
+    <header>
+        <div class="headerMenu">
+            <img src="logo.png" alt="Logo" id="logo">
+            <form action="/search" method="get">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            <a href="login.html" class="highlight">로그인</a>
+            <a href="register.html" class="highlight">회원가입</a>
+        </div>
+        <div class="navbar">
+            <ul>
+                <li><a href="#">메뉴1</a></li>
+                <li><a href="#">메뉴2</a></li>
+                <li><a href="#">메뉴3</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="container">
+      <aside class="sidebar">
+        <nav class="menu">
+          <ul>
+            <li><a href="#strawberry">딸기</a></li>
+            <li><a href="#grape">포도</a></li>
+            <li><a href="#cucumber">오이</a></li>
+            <li><a href="#bellpepper">피망</a></li>
+            <li><a href="#tomato">토마토</a></li>
+            <li><a href="#chili">고추</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="content">
+        <section class="crop-info">
+          <div class="crop-heading">
+            <h1>작물 이름</h1>
+          </div>
+          <div class="crop-description">
+            <h2>작물 설명</h2>
+            <p>작물 설명</p>
+          </div>
+          <div class="crop-guide">
+            <h2>작물 재배 가이드</h2>
+            <p>작물 재배 가이드</p>
+          </div>
+        </section>
+        <div class="crop-image">
+          <img src="path_to_crop_photo.jpg" alt="작물 사진" width="300">
+        </div>
+        <div class="videos">
+          <div class="video" id="video1">
+            <iframe src="link_to_video1" title="영상 1"></iframe>
+          </div>
+          <div class="video" id="video2">
+            <iframe src="link_to_video2" title="영상 2"></iframe>
+          </div>
+          <div class="video" id="video3">
+            <iframe src="link_to_video3" title="영상 3"></iframe>
+          </div>
+        </div>
+      </main>
+    </div>
+    <footer>
+        <ul>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#">개인정보처리방침</a></li>
+            <li><a href="#">청소년보호정책</a></li>
+        </ul>
+    </footer>
+</body>
+
+</html>

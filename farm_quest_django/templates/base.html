@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>팜 퀘스트</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'image/logo/farm_quest_site.ico' %}" rel="icon">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- kakao js -->
+    <script src="{% static 'js/kakao.channel.min.js' %}"></script>
+    <script src="{% static 'js/kakao.min.js' %}"></script> <!-- channel.min.js 와 min.js 순서 바꾸지 말 것 -kdy -->
+
+    <!-- ----------------- user costum ------------------- -->
+
+    <!-- user css -->
+    <link rel="stylesheet" href="{% static 'css/common.css' %}"> <!-- 팀 공통 -->  
+    <link rel="stylesheet" href="{% static 'css/style_kdy.css' %}"> <!-- kdy -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}"> <!-- kdy -->
+    <link rel="stylesheet" href="{% static 'css/scheduler.css' %}"> <!-- psh -->
+    <link rel="stylesheet" href="{% static 'css/style_ltj.css' %}">  <!-- ltj -->    
+    <link rel="stylesheet" href="{% static 'css/commumnity.css' %}"> <!-- jsh -->
+
+</head>
+<body>
+    
+    <div class="header_wrap">        
+    </div>
+
+        {% include "header.html" %}
+        {% include "side_nav.html" %}
+
+        {% block content %}      
+        {% endblock content %}
+
+        {% include "footer.html" %}
+        {% include "footer_js.html" %}
+        
+    <div class="footer_wrap">
+    </div>
+
+</body>
+</html>
+
+

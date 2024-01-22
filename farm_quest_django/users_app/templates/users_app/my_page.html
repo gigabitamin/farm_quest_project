@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %} 
+
+<div class="sign_up_box">
+    <form action="#" method="post">
+    <br><div><h1>{{ user_info.username }} 님의 마이 페이지</h1></div><br>
+        {% csrf_token %}
+        <table class="my_page_table">
+            <tr><th class='lbl'>회원 번호</th><td>{{user_info.id}}</td></tr>
+            {% comment %} <tr><th class='lbl'>아이디</th><td>{{ user_info.username }}</td></tr> {% endcomment %}
+            {% comment %} <tr><th class='lbl'>패스워드</th><td><input type="password" name ='password'></td></tr> {% endcomment %}
+            {% comment %} <tr><th class='lbl'>프로필 이미지</th><td><button type="submit" name ='sign_up_upload_image'></td></tr> {% endcomment %}
+            
+            <tr><th class='lbl'>가입 날짜</th><td>{{ user_info.date_joined }}</td></tr>
+            <tr><th class='lbl'>마지막 접속 날짜</th><td>{{ user_info.last_login }}</td></tr>            
+            <tr><th class='lbl'>이메일</th><td>{{ user_info.email }}</td></tr>
+            
+            {% comment %} <tr><th class='lbl'>성명</th><td>{{ user_info.user_name }}</td></tr>
+            <tr><th class='lbl'>전화번호</th><td>{{ user_info.user_phone }}</td></tr>
+            <tr><th class='lbl'>주소</th><td>{{ user_info.user_address }}</textarea></td></tr> {% endcomment %}            
+            
+        </table>
+    </form>  
+</div>
+<div class="sign_up_box" class="btn-primary">
+    <a href="{% url 'my_page_update' user_info.id %}">
+        <button class='myPageUpdateBtn' type="submit" class="btn-primary">회원 정보 수정</button></a>
+    <a href="{% url 'my_page_delete_move' user_info.id %}">
+        <button class='myPageUpdateBtn' type="submit">회원 탈퇴</button></a> 
+</div>
+<div class="sign_up_box">
+</div>
+
+{% endblock content %}
+
+
+
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static '/css/mypage_table.css' %}">
+
+{% endblock %}
+
+ 
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div id='mypage'>
+    {% csrf_token %}
+<br>
+    <div id="sidebar">
+        <li id='mypage_title'>마이페이지</li>
+        <ul>
+            <li><a class="menu-link sidemenus" href="{% url 'user_plant' %}" data-page="1"
+                id='user_plant'>나의 작물</a></li>
+            <li><a class="menu-link sidemenus" href="{% url 'user_favorite_list' %}" data-page="2"
+                id='user_favorite_list'>나의 팜로그</a></li>
+            <li><a class="menu-link sidemenus" href="{% url 'user_review_list' %}" data-page="3"
+                id='user_review_list'>나의 QnA</a></li>
+            <li><a class="menu-link sidemenus" href="{% url 'user_inquiry_list' %}" data-page="4"
+                id='user_inquire'>북마크</a></li>
+        </ul>
+    </div>
+    <div id="mycontent">
+
+            <div>
+                <span class='mypage_title'>등록내역</span><br><br>
+                {% if reg_requests %}
+                    <table class='mypage_table' id="reg_request_list">
+                        <tr>
+                            <th>등록번호</th>
+                            <th>캠핑장 이름</th>
+                            <th>주소</th>
+                            <th>전화번호</th>
+                            <th>승인여부</th>
+                            <th>등록신청 취소</th>
+                        </tr>
+                        {% for reg_request in reg_requests %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ reg_request.camp_name }}</td>
+                                <td>{{ reg_request.camp_address }}</td>
+                                <td>{{ reg_request.camp_call }}</td>
+                                <td>
+                                    {% if reg_request.approve is not null %}
+                                        {{ reg_request.approve }}
+                                    {% else %}
+                                        검토대기
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'camp_register_delete' reg_request.camp_no %}" 
+                                    onclick="if (confirm('신청을 취소하시겠습니까?')) { showCancellationMessage(); return true; } else { return false; }">
+                                    <button class='btn btn-cancel'>취소</button></a></td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                {% else %}
+                    <p>등록 내역이 없습니다.</p>
+                {% endif %}
+        </li>
+        <br>
+    </div>
+    
+</div>
