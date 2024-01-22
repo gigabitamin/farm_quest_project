@@ -36,14 +36,12 @@ def file_upload_one(request):
     if request.method == "POST":
         origin_file = request.FILES.get('imgFile')       
         fs = FileSystemStorage() # ../upload
-        
-        
-
-        diagnosis_result_id = request.POST.get('diagnosis_result_id')        
+            
+        # diagnosis_result_id = request.POST.get('diagnosis_result_id')
+        # print('diagnosis_result_id', diagnosis_result_id)
         plant_name = request.POST.get('plant_name')
         plant_no = request.POST.get('plant_no')
-        print('user_select_plant_name: ', plant_name)
-        print('user_select_plant_no: ', plant_no)
+
         
         uuid = uuid4().hex
         save_file_name = uuid + '_' +  origin_file.name
@@ -56,13 +54,23 @@ def file_upload_one(request):
         # 디버깅용
         # print('origin_file.name : ', origin_file.name)
         # print('save_file_name : ', save_file_name)
-
+        # print('diagnosis_result_id', diagnosis_result_id)
         # YOLO 객체 탐지 함수 호출, 서버 upload 폴더에 업로드 된 파일명만 전달하도록 수정
-        serialized_results = detect(save_file_path, diagnosis_result_id, plant_name,plant_no)
+        serialized_results, diagnosis_result_id, tf_pred_prob, tf_predict_desease_list, crops_path_list = detect(save_file_path, plant_name,plant_no)
         # print('results : ', results)
         # print('직렬화')
         # serialized_results = serialize_results(results)
         # print('serialized_results : ', serialized_results[0])
+        ('tf_predict_desease_list : ', tf_predict_desease_list,)
+        print('diagnosis_result_id', diagnosis_result_id)
+        print('tf_pred_prob', tf_pred_prob[0])
+        print('tf_pred_prob', str(tf_pred_prob[0]))
+        
+        tf_pred_prob = str(tf_pred_prob[0]).strip('[]').split()
+        tf_pred_prob = [float(number.replace(',', '')) for number in tf_pred_prob]
+        tf_pred_prob = sorted(tf_pred_prob, reverse=True)
+        
+        print('tf_pred_prob', type(tf_pred_prob))
         
         context = {
             'save_file_name': save_file_name,
@@ -70,12 +78,21 @@ def file_upload_one(request):
             'diagnosis_result_id': diagnosis_result_id,
             'plant_name': plant_name,
             'plant_no' : plant_no,
+            'tf_pred_prob' : tf_pred_prob,
+            'tf_predict_desease_list' : tf_predict_desease_list,
+            'crops_path_list': crops_path_list,
         }
         
-        print('plant_name : ', plant_name)
         
-        # print('완료, 전송')
+        
+        # print('plant_name : ', plant_name)
+        print('crops_path_list', crops_path_list)
+        print('완료, 전송')
         # print('save_file_name : ', save_file_name)
+        print('tf_pred_prob', tf_pred_prob)
+        ('tf_predict_desease_list : ', tf_predict_desease_list,)
+        # print('user_select_plant_name: ', plant_name)
+        # print('user_select_plant_no: ', plant_no)
 
     return JsonResponse(context, status=200)
 
