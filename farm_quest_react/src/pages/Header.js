@@ -23,7 +23,6 @@ const Header = () => {
     //     });
     // });
     
-    
     return (
         <header>
             <div className="headerMenu">
