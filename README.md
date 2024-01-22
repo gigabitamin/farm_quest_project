@@ -3,14 +3,30 @@
 <!-- notice -->
 ### 공지
 
-메뉴 호출 문제 수정 확인 후 피드백  
-
+v0.3.4 - jsh  
 
 ====================================================
 <!-- version -->
+### v0.3.4 - jsh  
+- react-redux 초기설정 완료
 
-### v0.2.10 - jsh  
-- react-redux 초기 설정 완료
+### v0.3.3 - ltj  
+- 가드닝샵 react-django 페이지 레이아웃, CRUD 기본 완료 (github merge 오류로 롤백)
+
+### v0.3.2 - kdy  
+- 진단 페이지 yolo -> 이미지 분류 모델 연동 완료  
+- 두 모델의 결과 모두 보여주고 사용자에게 판단 맡기기
+- 이미지 분류 모델의 경우 잘라진 객체를 사용하기에 해당 crops 이미지 페이지에 출력
+- 이미지 분류 모델의 경우 1개의 레이블과 확률만 출력
+
+### v0.3.1 - kdy  
+- diagnosis_result db 생성  
+- 진단 결과 results 객체로부터 뽑아내서 json 형태로 저장
+- 파일 저장 & db 에 저장
+- 진단 결과 페이지에 diagnosis_result 의 진단 병증 클래스 출력 완료
+
+### v0.3.0 - kdy  
+- diagnosis django backend, react front 기본적인 작물 직병 탐지 진단시스템 완료  
 
 ### v0.2.9 - kdy  
 - farm_quest_project 가상환경에서 django - react CRUD 테스트 완료  

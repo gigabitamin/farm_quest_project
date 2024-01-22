@@ -17,7 +17,7 @@ const Top = () => {
     return (
         <div>
             <Routes>
-                <Route path="/gardening_shop_index" element={<GardeningShopIndex currentCategory={currentCategory} currentPage={currentPage} />} />
+                <Route path="/gardening_shop_index" element={<GardeningShopIndex currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} currentPage={currentPage} setCurrentPage={setCurrentPage} />} />
                 <Route path="/diagnosis_index" element={<DiagnosisIndex solutionContent={solutionContent} setSolutionContent={setSolutionContent} />} />
                 <Route path="/diagnosis_answer" element={<DiagnosisAnswer diagnosisQuestions={diagnosisQuestions} setDiagnosisQuestions={setDiagnosisQuestions} />} />
                 <Route path="/diagnosis_result" element={<DiagnosisResult />} />

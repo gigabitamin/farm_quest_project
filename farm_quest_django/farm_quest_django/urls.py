@@ -15,6 +15,7 @@ urlpatterns = [
     path('', include("customer_service_app.urls")),
     path('', include("community_app.urls")),
     path('', include("guide_app.urls")),
+    # path('', include("webcam_app.urls")),
             
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
