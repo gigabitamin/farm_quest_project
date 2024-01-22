@@ -1,4 +1,4 @@
-import './App.css';
+
 import Header from './pages/Header';
 import Footer from './pages/Footer';
 import SideNav from './pages/SideNav';
@@ -9,6 +9,7 @@ import './css/login.css';
 import './css/scheduler.css';
 import './css/style_ltj.css';
 import './css/community.css';
+import './App.css';
 
 function App() {
   return (

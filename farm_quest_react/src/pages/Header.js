@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import {Link, Routes, Route} from 'react-router-dom';
+import React from 'react';
+import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
-import GardeningShopIndex from "./gardeningshop/GardeningShopIndex";
 
 const Header = () => {
     const portal_search = () => {
@@ -23,10 +22,6 @@ const Header = () => {
     //         });
     //     });
     // });
-    
-    const [solutionContent, setSolutionContent] = useState([]);
-    const [diagnosisQuestions, setDiagnosisQuestions] = useState([]);
-
     
     
     return (
@@ -136,6 +131,7 @@ const Header = () => {
                             <div><a href="{% url 'user_bookmark' %}" className="btn_hd">즐겨찾기</a></div>                    
                         </div>
                     </div>
+
                 </ul>
             </nav>
         </header>
