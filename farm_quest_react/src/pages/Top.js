@@ -8,6 +8,7 @@ import DiagnosisAnswer from "./diagnosis/DiagnosisAnswer";
 import DiagnosisResult from "./diagnosis/DiagnosisResult";
 import Upload from "./diagnosis/Upload";
 import UploadResult from "./diagnosis/UploadResult";
+import Community from "./community/Community"
 
 
 const Top = () => {
@@ -26,7 +27,8 @@ const Top = () => {
                 <Route path="/diagnosis_result" element={<DiagnosisResult />} />
                 <Route path="/diagnosis_choice" element={<DiagnosisChoice/>} />
                 <Route path="/upload" element={<Upload/>} />
-                <Route path="/upload_result" element={<UploadResult/>} />                
+                <Route path="/upload_result" element={<UploadResult/>} />
+                <Route path="/community/:mainType" element={<Community />} />
             </Routes>
         </div>
     );

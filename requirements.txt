@@ -1,3 +1,4 @@
+# django
 django
 djangorestframework
 django-cors-headers
@@ -7,3 +8,7 @@ matplotlib
 plotly
 seaborn
 tensorflow
+
+# react
+react-redux
+@reduxjs/toolkit
