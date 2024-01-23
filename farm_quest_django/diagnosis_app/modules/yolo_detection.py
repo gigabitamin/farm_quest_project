@@ -443,8 +443,8 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant):
     # model.summary()
     print('test 1')
     # 테스트 샘플 이미지 전처리 
-    image_size_x = 256
-    image_size_y = 256
+    image_size_x = 512
+    image_size_y = 512
 
     X_t = []
     Y_t = []
