@@ -2,7 +2,7 @@
 ## ff
 allowed_host.py
 db_settings.py
-
+upload/
 
 ### Django ###
 *.log

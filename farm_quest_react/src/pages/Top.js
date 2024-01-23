@@ -9,11 +9,17 @@ import DiagnosisResult from "./diagnosis/DiagnosisResult";
 import Upload from "./diagnosis/Upload";
 import UploadResult from "./diagnosis/UploadResult";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Community from "./community/Community"
 =======
 import DiagnosisRecommend from "./diagnosis/DiagnosisRecommend";
 
 >>>>>>> feather
+=======
+import Community from "./community/Community"
+import DiagnosisRecommend from "./diagnosis/DiagnosisRecommend";
+
+>>>>>>> a3ac7b8498e223b920e3f02e264242a98ef30f80
 
 
 const Top = () => {
@@ -34,13 +40,20 @@ const Top = () => {
                 <Route path="/upload" element={<Upload/>} />
                 <Route path="/upload_result" element={<UploadResult/>} />
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Route path="/community/:mainType" element={<Community />} />
 =======
+=======
+                <Route path="/community/:mainType" element={<Community />} />
+>>>>>>> a3ac7b8498e223b920e3f02e264242a98ef30f80
                 <Route
                     path="/diagnosis_recommend/:solutionWord"
                     element={<DiagnosisRecommend />}
                 />
+<<<<<<< HEAD
 >>>>>>> feather
+=======
+>>>>>>> a3ac7b8498e223b920e3f02e264242a98ef30f80
             </Routes>
         </div>
     );
