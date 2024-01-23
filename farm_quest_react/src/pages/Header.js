@@ -2,6 +2,10 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
 
+// 진단 페이지 링크 따로 뺐습니다 / css 작업 끝난 후 다시 통합
+import DiagnosisLink from "./diagnosis/DiagnosisLink";
+
+
 const Header = () => {
     const portal_search = () => {
         let keyword = document.getElementById("search_keyword").value;
@@ -93,17 +97,20 @@ const Header = () => {
                         </div>
                     </div>
 
-                    {/* diagnosis Link start */}
-                    <div className="nav-item_hd">                        
-                        <div className="nav-link_hd"><Link to="/diagnosis_index">작물 진단</Link></div>
+                    <DiagnosisLink />
+                    {/* 진단 페이지 링크 컴포넌트 /src/pages/diagnosis/DiagnosisLink.js */}
+
+                    {/* <div className="nav-item_hd">
+                        <div className="btn_hd"><Link to="/diagnosis_choice">진단 작물 선택</Link></div>                        
                         <div className="dropdown-menu_hd">
-                            <div className="btn_hd"><Link to="/diagnosis_choice">진단 작물 선택</Link></div>
-                            <div className="btn_hd"><Link to="/upload">진단 이미지 업로드</Link></div>
+                            <div className="nav-link_hd"><Link to="/diagnosis_index">작물 진단</Link></div>    
                             <div className="btn_hd"><Link to="/diagnosis_answer">진단 문진표 작성</Link></div>
-                            <div className="btn_hd"><Link to="/diagnosis_result">진단 결과</Link></div>                            
+                            <div className="btn_hd"><Link to="/diagnosis_result">진단 결과 독립페이지</Link></div>
+                            <div className="btn_hd"><Link to="/diagnosis_recommend">진단 결과 추천 상품</Link></div>
                         </div>
-                    </div>
-                    {/* diagnosis Link end */}
+                    </div> */}
+                    
+                    {/* 진단 페이지 링크 끝 / 헤더 css 수정시 주석 해제 후 진행바람 */}
 
                     <div className="nav-item_hd">
                         <div className="nav-link_hd"><Link to="/community/main">커뮤니티</Link></div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const UploadResult = () => {
+const DiagnosisUploadResult = () => {
 
     const location = useLocation();
 
@@ -135,4 +135,4 @@ const UploadResult = () => {
     );
 };
 
-export default UploadResult;
+export default DiagnosisUploadResult;

@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom';
 const DiagnosisChoice = () => {
     let history = useNavigate();
   
-    const [plantSpecies, setPlantSpecies] = useState([]);    
-    const planLoadData = async () => {
-        const response = await axios.get('http://localhost:8000/plant_api/');        
+    const [plantSpecies, setPlantSpecies] = useState([]); 
+    const plantLoadData = async () => {
+        const response = await axios.get('http://localhost:8000/plant_api/');
         setPlantSpecies(response.data);
     };
 
     useEffect(() => {
-        planLoadData();
+        plantLoadData();
     }, []);
 
     const [selectedPlantIndex, setSelectedPlantIndex] = useState(null);
@@ -25,9 +25,7 @@ const DiagnosisChoice = () => {
         }));
     };
 
-
     const handleChoiceSubmit = (e) => {
-
         e.preventDefault();        
 
         const selectedPlant = plantSpecies.find(plant => plant.plant_no === parseInt(selectedPlantIndex['user_select_plant'], 10));
@@ -36,10 +34,9 @@ const DiagnosisChoice = () => {
         frmData.append(`user_select_plant`, selectedPlantIndex[`user_select_plant`])        
     
         axios.post('http://localhost:8000/save_diagnosis_result_api/', frmData)
-            .then(response => {                      
-                
+            .then(response => {                                      
                 alert("선택한 작물 : " + selectedPlant.plant_name);                
-                history('/upload', {state : {newDiagnosisResultId : response.data}});
+                history('/diagnosis_upload', {state : {newDiagnosisResultId : response.data}});
             })
             .then(data => {
                 console.log('Success:', data);
@@ -49,8 +46,6 @@ const DiagnosisChoice = () => {
             });
     };
     
-
-
     return (        
         <div className="diagnosis_choice_main diagnosis_main">
             <section className="diagnosis_choice_section">
