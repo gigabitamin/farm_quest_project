@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-
-import GardeningShopIndex from './gardeningshop/GardeningShopIndex';
 import DiagnosisLink from "./diagnosis/DiagnosisLink";
 import DiagnosisIndex from "./diagnosis/DiagnosisIndex";
 import DiagnosisChoice from "./diagnosis/DiagnosisChoice";
@@ -10,7 +8,9 @@ import DiagnosisResult from "./diagnosis/DiagnosisResult";
 import DiagnosisUpload from "./diagnosis/DiagnosisUpload";
 import DiagnosisUploadResult from "./diagnosis/DiagnosisUploadResult";
 import DiagnosisRecommend from "./diagnosis/DiagnosisRecommend";
+import GardeningShopIndex from './gardeningshop/GardeningShopIndex';
 import Community from "./community/Community";
+
 
 
 const Top = () => {    

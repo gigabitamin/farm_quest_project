@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
-
 // 진단 페이지 링크 따로 뺐습니다 / css 작업 끝난 후 다시 통합
 import DiagnosisLink from "./diagnosis/DiagnosisLink";
 
