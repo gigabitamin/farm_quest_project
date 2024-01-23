@@ -6,11 +6,9 @@ import Top from './pages/Top';
 import './css/common.css';
 import './css/style_kdy.css';
 import './css/login.css';
-import './css/scheduler.css';
 import './css/style_ltj.css';
 import './css/community.css';
 import './App.css';
-import Scheduler from './components/Scheduler';
 
 function App() {
   return (
