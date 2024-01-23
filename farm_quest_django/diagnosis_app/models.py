@@ -81,6 +81,7 @@ class SolutionTb(models.Model):
 
     class Meta:
         managed = False
+        db_table = 'solution_tb' 
 
 class UserPlantTb(models.Model):
     user_plant_no = models.AutoField(primary_key=True)

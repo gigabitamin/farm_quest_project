@@ -1,11 +1,18 @@
 from rest_framework import serializers
 from .models import DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
+from gardening_shop_app.models import ShopingTb
 
 
 class PlantTbSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlantTb
         fields = '__all__'
+        
+
+class ShopingTbSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShopingTb
+        fields = '__all__' 
 
 
 class DiagnosisResultSerializer(serializers.ModelSerializer):
@@ -75,12 +82,12 @@ class PlantSerializer(serializers.ModelSerializer):
             'plant_content',
         ]
         
-class SolutionSerializer(serializers.ModelSerializer):
+class SolutionTbSerializer(serializers.ModelSerializer):
     class Meta:
         model = SolutionTb
-        fields = [
-            'diagnosis_history_no',
-            'diagnosis_history_content',
-            'user_plant_no',
-            'solution_id',
-        ]            
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)        
+        data = {key: value[1] if isinstance(value, tuple) else value for key, value in data.items()}
+        return data

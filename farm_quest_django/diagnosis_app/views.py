@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view   
 from rest_framework import mixins, generics
 from .models import DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
-from .serializers import PlantTbSerializer, DiagnosisResultSerializer, DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionSerializer
+from .serializers import ShopingTbSerializer, PlantTbSerializer, DiagnosisResultSerializer, DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionTbSerializer
 
 # yolov8 관련
 from django.core.files.storage import FileSystemStorage
@@ -13,18 +13,89 @@ from uuid import uuid4
 from .modules.yolo_detection import detect
 import os
 
+# 추천 상품 관련
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.views import APIView
+from gardening_shop_app.models import ShopingTb
+from django.db.models import Q
+from rest_framework.pagination import PageNumberPagination
+
+
+
+# class DiagnosisRecommendList(APIView):
+#     pagination_class = PageNumberPagination
+#     page_size = 10  # 한 페이지당 보여줄 아이템 수
+
+#     def get(self, request, solution_word, format=None):
+#         try:
+#             recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))
+            
+#             # 페이지네이션 적용
+#             page = self.paginate_queryset(recommendations)
+            
+#             if page is not None:
+#                 serializer = ShopingTbSerializer(page, many=True)
+#                 return self.get_paginated_response(serializer.data)
+
+#             serializer = ShopingTbSerializer(recommendations, many=True)
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response({"에러": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        
+class DiagnosisRecommendList(APIView):
+    def get(self, request, solution_word, format=None):
+        # solution_word = solution_word
+        solution_word = '화분'
+        try:
+            print('solution_word = ', solution_word)
+            recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))
+            print('recommendations = ', recommendations)
+            serializer = ShopingTbSerializer(recommendations, many=True)
+            print('serializer = ', serializer)
+            return Response(serializer.data)
+        except Exception as e:
+            return Response({"에러": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# class DiagnosisRecommendList(APIView):
+#     pagination_class = StandardResultsSetPagination
+
+#     def get(self, request, recommend_keyword, format=None):        
+#         products = ShopingTb.objects.filter(Q(disease_code__contains=recommend_keyword))
+#         category = request.query_params.get('category')
+#         if category and category != 'all':
+#             products = products.filter(category=category)
+
+#         paginator = StandardResultsSetPagination()
+#         result_page = paginator.paginate_queryset(products, request)
+#         serializer = ShopingTbSerializer(result_page, many=True)
+#         return paginator.get_paginated_response(serializer.data)
+
+
+class SolutionTbAPIMixins(
+    mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
+):
+    queryset = SolutionTb.objects.all()    
+    serializer_class = SolutionTbSerializer
+    
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+
 
 
 # @api_view(['POST'])   
 # def select_plant(request):
-#     if request.method == "POST":     
-        
-        
+#     if request.method == "POST":                     
 #         context = {
 #             'select_plant_name': select_plant_name, 
 #             'diagnosis_result_id': diagnosis_result_id,
-#         }
-                
+#         }                
 
 #     return JsonResponse(context, status=200)
 
@@ -58,46 +129,38 @@ def file_upload_one(request):
         # print('diagnosis_result_id', diagnosis_result_id)
         # YOLO 객체 탐지 함수 호출, 서버 upload 폴더에 업로드 된 파일명만 전달하도록 수정
         
-        
-        tf_predict_desease_list = []
-        serialized_results, diagnosis_result_id, tf_pred_prob, tf_predict_desease_list, crops_path_list = detect(save_file_path, plant_name,plant_no)
+                
+        detect_result = detect(save_file_path, plant_name,plant_no)
+        # print('detect_result = ', detect_result)
         # print('results : ', results)
         # print('직렬화')
         # serialized_results = serialize_results(results)
         # print('serialized_results : ', serialized_results[0])
-        print('tf_predict_desease_list 222 : ', tf_predict_desease_list)
         # print('diagnosis_result_id', diagnosis_result_id)
         # print('tf_pred_prob', tf_pred_prob[0])
         # print('tf_pred_prob', str(tf_pred_prob[0]))
-        
-        print('tf_pred_prob', type(tf_pred_prob))
-        print('tf_predict_desease_list', type(tf_predict_desease_list))
-        
-        tf_pred_prob = str(tf_pred_prob[0]).strip('[]').split()
-        tf_pred_prob = [float(number.replace(',', '')) for number in tf_pred_prob]
-        tf_pred_prob = sorted(tf_pred_prob, reverse=True)                        
-                
-        print('tf_predict_desease_list', type(tf_predict_desease_list))
-        
+        # solution_row_list_serialized = []
+        # print('solution_row_list_serialized3 = ', solution_row_list_serialized)
+                                                                    
         context = {
+            'detect_result': detect_result,
             'save_file_name': save_file_name,
-            'serialized_results': serialized_results[0] if serialized_results else None,
-            'diagnosis_result_id': diagnosis_result_id,
+            # 'serialized_results': serialized_results[0] if serialized_results else None,
+            # 'diagnosis_result_id': diagnosis_result_id,
             'plant_name': plant_name,
             'plant_no' : plant_no,
-            'tf_pred_prob' : tf_pred_prob,
-            'tf_predict_desease_list' : tf_predict_desease_list,
-            'crops_path_list': crops_path_list,
+            # 'tf_predict_desease_list_sorted' : tf_predict_desease_list_sorted,            
+            # 'crops_path_list': crops_path_list,
+            # 'solution_row_list_serialized' : solution_row_list_serialized,
         }
         
         
         
         # print('plant_name : ', plant_name)
-        print('crops_path_list', crops_path_list)
+        # print('crops_path_list', crops_path_list)
         print('완료, 전송')
         # print('save_file_name : ', save_file_name)
-        print('tf_pred_prob', tf_pred_prob)
-        print('tf_predict_desease_list : ', tf_predict_desease_list)
+        # print('tf_pred_prob', tf_pred_prob)        
         # print('user_select_plant_name: ', plant_name)
         # print('user_select_plant_no: ', plant_no)
 
@@ -193,19 +256,7 @@ class PlantAPIMixins(
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
-    
-class SolutionAPIMixins(
-    mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
-):    
-    queryset = SolutionTb.objects.all()        
-    serializer_class = SolutionSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-    
     
 def diagnosis_index(request):
     diagnosisQuestions = DiagnosisQuestion.objects.all()    
