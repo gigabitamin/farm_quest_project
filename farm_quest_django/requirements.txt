@@ -1,0 +1,12 @@
+django
+djangorestframework
+django-cors-headers
+djangorestframework-simplejwt
+mysqlclient
+pandas
+matplotlib
+plotly
+seaborn
+tensorflow
+opencv-python
+ultralytics

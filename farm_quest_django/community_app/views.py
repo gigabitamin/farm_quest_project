@@ -1,20 +1,43 @@
+from django.shortcuts import get_object_or_404, render
+from rest_framework.response import Response
+from rest_framework.decorators import APIView
+from rest_framework import status, mixins, generics
+from . import models, serializers, pagination
 
-from django.shortcuts import get_object_or_404, render, redirect
-from .forms import CommunityCmtForm, CommunityForm
+# Create your views here.
+class CommunityList(generics.ListAPIView):
+    serializer_class = serializers.CommunityListSerializer
+    pagination_class = pagination.CommunityPagination
 
-def community_index(request):    
-    community_content = CommunityForm.objects.all()
-    community_comment = CommunityCmtForm.objects.all()
+    def get_queryset(self):
+        queryset = models.CommunityTb.objects.all()
+        if self.kwargs['ctg'] == 'farmlog':
+            ctg = 0
+        elif self.kwargs['ctg'] == 'qna':
+            ctg = 1
+        else:
+            return queryset.order_by('-thread_no')
+        return queryset.filter(thread_type=ctg).order_by('-thread_no')
     
-    community_context = {
-        'community_content':community_content,
-        'community_comment':community_comment,       
-    }
-    
-    return render(request, 'community_app/community_index.html', community_context)
 
-def farm_log_index(request):
-    return render(request, 'community_app/farm_log_index.html')
+# class CommunitySublist(CommunityList):
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         if self.kwargs['ctg'] == 'farmlog':
+#             ctg = 0
+#         elif self.kwargs['ctg'] == 'qna':
+#             ctg = 1
+#         else:
+#             return queryset
+#         return queryset.filter(thread_type=ctg)
     
-def qna_index(request):    
-    return render(request, 'community_app/qna_index.html')
+
+class CommunityCreate(generics.CreateAPIView):
+    queryset = models.CommunityTb.objects.all()
+    serializer_class = serializers.CommunityDetailSerializer
+
+
+class CommunityDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.CommunityTb.objects.all()
+    serializer_class = serializers.CommunityDetailSerializer
+    lookup_field = 'thread_no'

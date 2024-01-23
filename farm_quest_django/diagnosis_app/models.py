@@ -1,5 +1,22 @@
 from django.db import models
-from farm_quest_app.models import *
+
+class DiagnosisResult(models.Model):
+    diagnosis_result_id = models.AutoField(primary_key=True)
+    user_select_plant = models.ForeignKey('PlantTb', models.DO_NOTHING, db_column='user_select_plant', blank=True, null=True)
+    boxes = models.JSONField(blank=True, null=True)
+    keypoints = models.JSONField(blank=True, null=True)
+    masks = models.JSONField(blank=True, null=True)
+    names = models.JSONField(blank=True, null=True)
+    orig_shape = models.JSONField(blank=True, null=True)
+    path = models.CharField(max_length=255, blank=True, null=True)
+    probs = models.JSONField(blank=True, null=True)
+    save_dir = models.CharField(max_length=255, blank=True, null=True)
+    speed = models.JSONField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'diagnosis_result'
+    
 
 class DiagnosisQuestion(models.Model):
     diagnosis_question_no = models.AutoField(primary_key=True)
@@ -8,6 +25,23 @@ class DiagnosisQuestion(models.Model):
     class Meta:
         managed = False
         db_table = 'diagnosis_question'
+        
+class DiagnosisQuestionHistory(models.Model):
+    diagnosis_question_history_id = models.AutoField(primary_key=True)
+    diagnosis_question_1 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_2 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_3 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_4 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_5 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_6 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_7 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_8 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_9 = models.CharField(max_length=45, blank=True, null=True)
+    diagnosis_question_10 = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'diagnosis_question_history'                    
         
 class PlantTb(models.Model):
     plant_no = models.AutoField(primary_key=True)
@@ -29,10 +63,9 @@ class DiagnosisHistory(models.Model):
         managed = False
         db_table = 'diagnosis_history'                    
         
-        
-
+       
 class SolutionTb(models.Model):
-    solution_id = models.IntegerField(blank=True, null=True)
+    solution_id = models.AutoField(primary_key=True)
     disease_code = models.TextField(blank=True, null=True)
     plant_no = models.IntegerField(blank=True, null=True)
     plant_name = models.TextField(blank=True, null=True)
@@ -48,9 +81,6 @@ class SolutionTb(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'solution_tb'
-
-
 
 class UserPlantTb(models.Model):
     user_plant_no = models.AutoField(primary_key=True)
