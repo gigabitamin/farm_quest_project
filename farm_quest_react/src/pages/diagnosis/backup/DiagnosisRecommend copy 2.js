@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import './gardeningShopIndex.css';
+// DiagnosisRecommend 컴포넌트
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-const GardeningShopIndex = () => {
+const DiagnosisRecommend = () => {
+
     const [products, setProducts] = useState([]);
     const [currentCategory, setCurrentCategory] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
@@ -86,8 +88,31 @@ const GardeningShopIndex = () => {
         return <ul className="pagination justify-content-center">{pages}</ul>;
     };
 
+
+    const { solutionWord } = useParams();
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://127.0.0.1/diagnosis_recommend/${solutionWord}`);
+                setData(response.data);
+            } catch (error) {
+                console.error('에러', error);
+            }
+        };
+
+        fetchData();
+    }, [solutionWord]);
+
+    if (!data) {
+        return <p>추천 상품 페이지</p>;
+    }
+
     return (
         <div>
+            <h2>Solution Word: {solutionWord}</h2>
+            <div>
             <h1>가드닝 샵</h1>
             <div>
                 {categories.map((category, index) => (
@@ -101,7 +126,7 @@ const GardeningShopIndex = () => {
                     <div key={index} className="product-item">
                         <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
                         <h3>{product.shoping_tb_rss_channel_item_title}</h3>
-                        <p>${product.shoping_tb_rss_channel_item_lprice}</p> 
+                        <p>${product.shoping_tb_rss_channel_item_lprice}</p>                        
                         {/* <p>{product.shoping_tb_rss_channel_item_lprice} 원</p> */}
                     </div>
                 ))}
@@ -110,7 +135,8 @@ const GardeningShopIndex = () => {
                 {renderPagination()}
             </div>
         </div>
+        </div>
     );
 };
 
-export default GardeningShopIndex;
+export default DiagnosisRecommend;
