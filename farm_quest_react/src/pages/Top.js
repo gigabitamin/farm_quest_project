@@ -9,6 +9,8 @@ import DiagnosisResult from "./diagnosis/DiagnosisResult";
 import Upload from "./diagnosis/Upload";
 import UploadResult from "./diagnosis/UploadResult";
 import Community from "./community/Community"
+import DiagnosisRecommend from "./diagnosis/DiagnosisRecommend";
+
 
 
 const Top = () => {
@@ -29,6 +31,10 @@ const Top = () => {
                 <Route path="/upload" element={<Upload/>} />
                 <Route path="/upload_result" element={<UploadResult/>} />
                 <Route path="/community/:mainType" element={<Community />} />
+                <Route
+                    path="/diagnosis_recommend/:solutionWord"
+                    element={<DiagnosisRecommend />}
+                />
             </Routes>
         </div>
     );
