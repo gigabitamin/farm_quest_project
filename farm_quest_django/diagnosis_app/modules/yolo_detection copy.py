@@ -25,67 +25,67 @@ import tensorflow as tf
 from ..models import SolutionTb
 from django.db.models import Q
 from ..serializers import SolutionTbSerializer
-
+from rest_framework.views import APIView
 from rest_framework import mixins, generics
 from rest_framework import status
 
     
-# class SolutionAPIMixins(
-#     mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
-# ):    
-#     queryset = SolutionTb.objects.all()
-#     serializer_class = SolutionTbSerializer
+class SolutionAPIMixins(
+    mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
+):    
+    queryset = SolutionTb.objects.all()
+    serializer_class = SolutionTbSerializer
+    disease_code = request.query_params.get('disease_code')
+    if disease_code and disease_code != 'all':
+        solution = solution.filter(disease_code=disease_code)
     
-#     def get(self, request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
+    serializer = SolutionTbSerializer(solution, many=True)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
 
-# class SolutionListAPI(APIView):
-#     queryset = SolutionTb.objects.objects.filter(Q(disease_code__contains=disease_code))
-#     serializer_class = SolutionTbSerializer
 
-#     def get(self, request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
+class SolutionListApi(APIView):    
+    solution = SolutionTb.objects.all()
+
+    def get(self, request, format=None):        
+        disease_code = request.query_params.get('disease_code')
+        if disease_code and disease_code != 'all':
+            solution = solution.filter(disease_code=disease_code)
+        
+        serializer = SolutionTbSerializer(solution, many=True)
+        return JsonResponse(serializer.data, status=200)
 
         
-def solution_service(tf_predict_disease_list):  
+def solution_service(tf_predict_desease_list_sorted):  
     solution_row_list = []
-    # solution_row_list_serialized = []
-    # print('len = ', len(tf_predict_desease_list_sorted))
+    solution_row_list_serialized = []
+    print('len = ', len(tf_predict_desease_list_sorted))
     
-    for i in range(len(tf_predict_disease_list)):        
-        plant_no = tf_predict_disease_list[i][0]
-        disease_code = tf_predict_disease_list[i][2]
-        # print('disease_code = ', disease_code)
+    for i in range(len(tf_predict_desease_list_sorted)):
+        disease_code = tf_predict_desease_list_sorted[i][0]
+        print('disease_code = ', disease_code)
         if disease_code != '0':
-            # solution_row = SolutionTb.objects.filter(Q(disease_code__contains=disease_code))            
-            solution_row = SolutionTb.objects.filter(Q(disease_code__contains=disease_code) & Q(plant_no__contains=plant_no))
-            serializer = SolutionTbSerializer(solution_row, many=True)
-            serialized_data = serializer.data
-            solution_row_list.append(serialized_data)
-            # print('solution_row_list = ', solution_row_list)
-            
-    tf_predict_result_list = [[dl, sl[0]] for dl, sl in zip(tf_predict_disease_list, solution_row_list)]
-    print('tf_predict_result_list = ', tf_predict_result_list)
-    tf_predict_result_list_sorted = sorted(tf_predict_result_list, key=lambda x: x[0][4], reverse=True)
-    print('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
-    
-    # for solution_row in solution_row_list:
-    #     # serializer = SolutionTbSerializer(solution_row, many=True)
-    #     serializer = SolutionTbSerializer(solution_row, many=True)
-    #     solution_row_list_serialized.append(serializer.data)
+            solution_row = SolutionTb.objects.filter(Q(disease_code__contains=disease_code))
+            print('solution_row = ', solution_row)
+        solution_row_list.append(solution_row)
+        print('solution_row_list = ', solution_row_list)
         
-    # print('solution_row_list_serialized', solution_row_list_serialized)        
+    for solution_row in solution_row_list:
+        serializer = SolutionTbSerializer(solution_row, many=True)
+        solution_row_list_serialized.append(serializer.data)
+        
     # return solution_row_list_serialized    
         
     # solution_row_list_serialized2의 각 OrderedDict를 딕셔너리로 변환
-    # solution_row_list_serialized_dict = [dict(item) for item in solution_row_list_serialized]
+    solution_row_list_serialized_dict = [dict(item) for item in solution_row_list_serialized]
 
     # 딕셔너리를 JSON으로 직렬화
-    # json_data = json.dumps(solution_row_list_serialized_dict)
+    json_data = json.dumps(solution_row_list_serialized_dict)
 
     # JSON 데이터를 클라이언트에게 전송
-    return tf_predict_result_list_sorted
+    return JsonResponse({'solution_row_list_serialized': json_data}, status=200)
 
 
 
@@ -206,7 +206,7 @@ def detect(save_file_path, plant_name, user_select_plant):
         
         # print('serialized_results_list : ', serialized_results_list)
         
-   
+        tf_predict_desease_list_sorted, crops_path_list = tf_detect(serialized_results_list, plant_name)
         
         print('test ex')
         
@@ -215,19 +215,11 @@ def detect(save_file_path, plant_name, user_select_plant):
         
         # tf_result = {'tf_pred_prob : ', tf_pred_prob,
         #       'predict_desease_list', tf_predict_desease_list}
-        # print('tf_predict_desease_list_sorted = ', tf_predict_desease_list_sorted)
+        print('tf_predict_desease_list_sorted = ', tf_predict_desease_list_sorted)
         
-        tf_predict_disease_list, crops_path_list = tf_detect(serialized_results_list, plant_name, user_select_plant)
+        solution_row_list_serialized = solution_service(tf_predict_desease_list_sorted)
         
-        tf_predict_result_list_sorted = solution_service(tf_predict_disease_list)
-        print('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
-        
-        
-        
-        
-        
-        
-        # print('solution_row_list_serialized2 = ', solution_row_list_serialized)
+        print('solution_row_list_serialized2 = ', solution_row_list_serialized)
                                                             
     except Exception as e:
         print(f"Error: {e}")
@@ -235,14 +227,13 @@ def detect(save_file_path, plant_name, user_select_plant):
     detect_result = {'diagnosis_result_id_list': diagnosis_result_id_list,                
                'crops_path_list': crops_path_list, 
                'serialized_results_list': serialized_results_list,                
-               'tf_predict_result_list_sorted': tf_predict_result_list_sorted,
-            #    'tf_predict_result_list': tf_predict_result_list,
+               'tf_predict_desease_list_sorted': tf_predict_desease_list_sorted,                
+               'solution_row_list_serialized': solution_row_list_serialized,
     }
     print ('전송')
-        
 
     # return serialized_results_list, diagnosis_result_id_list, tf_predict_desease_list_sorted, crops_path_list, solution_row_list_serialized
-    return detect_result
+    return JsonResponse(detect_result, status=200)
     # return serialized_results_list, diagnosis_result_id_list
 
 
@@ -366,7 +357,7 @@ def save_results_to_database(serialized_results_list):
 
 
 
-def tf_detect(serialized_results_list, plant_name, user_select_plant):
+def tf_detect(serialized_results_list, plant_name):
     # print('1', serialized_results_list)
     path_origin = serialized_results_list[0]['path']
     # print('2', serialized_results_list[0])
@@ -498,18 +489,14 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant):
     # disease_items = list(disease.items())
     # print('disease_items = ', disease_items)
     
-    disease_predict_probability = pred_prob[0]
-    disease_predict_probability = str(disease_predict_probability).strip('[]').split()
-    disease_predict_probability = [float(number.replace(',', '')) for number in disease_predict_probability]
+    desease_predict_probability = pred_prob[0]
+    desease_predict_probability = str(desease_predict_probability).strip('[]').split()
+    desease_predict_probability = [float(number.replace(',', '')) for number in desease_predict_probability]
     
-    # tf_desease_predict_list = [[dc, dn, dp] for dc, dn, dp in zip(disease_codes, disease_names, desease_predict_probability)]
-    
-    tf_disease_predict_list = [[user_select_plant, plant_name, dc, dn, dp] for dc, dn, dp in zip(disease_codes, disease_names, disease_predict_probability)]
-
-
-    # print('tf_desease_predict_list = ', tf_desease_predict_list)
-    # tf_desease_predict_list_sorted = sorted(tf_disease_predict_list, key=lambda x: x[4], reverse=True)
-    # print('tf_desease_predict_list_sorted = ', tf_desease_predict_list_sorted)
+    tf_desease_predict_list = [[dc, dn, dp] for dc, dn, dp in zip(disease_codes, disease_names, desease_predict_probability)]
+    print('tf_desease_predict_list = ', tf_desease_predict_list)
+    tf_desease_predict_list_sorted = sorted(tf_desease_predict_list, key=lambda x: x[2], reverse=True)
+    print('tf_desease_predict_list_sorted = ', tf_desease_predict_list_sorted)
                             
 
     for idx, pred in enumerate(pred_prob):        
@@ -538,11 +525,11 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant):
         else:
             print('--> False')
             
-    print(len(tf_disease_predict_list))
-    for result in tf_disease_predict_list:
+    print(len(tf_desease_predict_list))
+    for result in tf_desease_predict_list:
         print(len(result), end=', ')
         print()
                 
         
-    return tf_disease_predict_list, crops_path_list
+    return tf_desease_predict_list_sorted, crops_path_list
         
