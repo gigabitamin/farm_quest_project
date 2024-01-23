@@ -106,10 +106,10 @@ const Header = () => {
                     {/* diagnosis Link end */}
 
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'community_index' %}" className="nav-link_hd">커뮤니티</a></div>
+                        <div className="nav-link_hd"><Link to="/community/main">커뮤니티</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'farm_log_index' %}" className="btn_hd">팜로그</a></div>
-                            <div><a href="{% url 'qna_index' %}" className="btn_hd">질문/답변</a></div>                    
+                            <div className="btn_hd"><Link to="/community/farmlog">팜로그</Link></div>
+                            <div className="btn_hd"><Link to="/community/qna">질문/답변</Link></div>                    
                         </div>
                     </div>
                     
