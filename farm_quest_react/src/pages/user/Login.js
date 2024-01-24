@@ -25,7 +25,8 @@ const Login = () => {
         console.log("[Login.js] handleSubmit");
         axios
         .post("http://127.0.0.1:8000/login/", formData)
-        .then((response => {            
+        .then((response => {       
+            console.log(formData)     
             if (response.status < 300) {
                 console.log("[Login.js] Call props.doLogin");          
                 localStorage.setItem("token", response.data["token"]);                
