@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './GardeningShopDetail.css';
+import { Link } from 'react-router-dom';
 
 const GardeningShopDetail = () => {
     const { id } = useParams();
@@ -38,7 +39,7 @@ const GardeningShopDetail = () => {
             />
             <h2 className="product-title">{product.shoping_tb_rss_channel_item_title}</h2>
             <p className="product-price">가격: ${product.shoping_tb_rss_channel_item_lprice}</p>
-            <a href="#" className="add-to-cart">장바구니</a>
+            <Link to="#" className="add-to-cart">장바구니</Link>
             <div className="reviews-section">
                 <h3 className="reviews-title">리뷰</h3>
                 {reviews.map((review, index) => (
