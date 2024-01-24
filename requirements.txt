@@ -16,3 +16,4 @@ ultralytics
 # react
 react-redux
 @reduxjs/toolkit
+react-cookie

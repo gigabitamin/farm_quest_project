@@ -5,11 +5,11 @@ import Login from './Login';
 import { Routes, Route } from 'react-router-dom';
 import LoginValid from './LoginValid';
 import UserInfo from './UserInfo';
+import TestLink from './TestLink'
+import LoginCookie from './LoginCookie'
 
 const UserRouter = () => {
-    
-
-    return (
+        return (
        
         <Routes>                  
             <Route path="/logout" element={<Logout />} />
@@ -17,8 +17,10 @@ const UserRouter = () => {
             <Route path="/resister" element={<Resister />} />
             <Route path="/login" element={<Login />} />
             <Route path="/user_info" element={<UserInfo />} />
-        </Routes>            
+            <Route path="/test_link" element={<TestLink />} />
+            <Route path="/login_cookie" element={<LoginCookie />} />
 
+        </Routes>
     );
 };
 

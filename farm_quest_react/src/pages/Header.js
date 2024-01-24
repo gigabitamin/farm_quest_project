@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
 import DiagnosisLink from "./diagnosis/DiagnosisLink";
 import LoginLink from './user/LoginLink'
-
+import TestLink from './user/TestLink'
 
 const Header = () => {
     const user = { is_authenticated: false, username: 'exampleUser' };
@@ -29,7 +29,7 @@ const Header = () => {
     // });
     
     return (
-        <header>
+        <header>            
             <div className="headerMenu">
                 <a href="/"><img src={FarmQuestSiteLogo} alt="Logo" id="logo"/></a>
                 {/* 주석처리 - kdy
@@ -61,7 +61,7 @@ const Header = () => {
 
             <nav className="navbar_hd">
                 <ul>                     
-                    {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}
+                    {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}                                        
                     <div className="btn_hd"><Link to="http://127.0.0.1:8000">장고로 이동</Link></div>
                     <div className="nav-item_hd">                        
                         <div><a href="{% url 'customer_service_index' %}" className="nav-link_hd">고객센터</a></div>
@@ -87,7 +87,7 @@ const Header = () => {
                             <div className="btn_hd"><Link to="/">상품 리뷰 분석</Link></div>                    
                         </div>
                     </div>
-
+                    <TestLink />
                     <DiagnosisLink />                    
                     {/* 진단 페이지 링크 끝 / 헤더 css 수정시 주석 해제 후 진행바람 */}
 
@@ -116,6 +116,7 @@ const Header = () => {
                             <div><a href="{% url 'user_bookmark' %}" className="btn_hd">즐겨찾기</a></div>                    
                         </div>
                     </div>
+                    
 
                 </ul>
             </nav>
