@@ -20,20 +20,20 @@ const LoginLink = ({ user }) => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
-      localStorage.clear();
+      console.log(localStorage);
+      // localStorage.clear();
       window.location.replace('http://localhost:3000/login');
     });
   };
-
+  console.log(username)
+  console.log(user)
 
   return (
     <div className="loginBox_hd">
       {isLoggedIn ? (
         <>
           <div className="login">{username}</div>
-          <div className="logout">
-            {/* <Link to="/logout">Logout</Link> */}
+          <div className="logout">            
             <button key="logout" onClick={handleLogout}>
               로그아웃
             </button>            
@@ -47,9 +47,7 @@ const LoginLink = ({ user }) => {
           <div> / </div>
           <div className="login">
             <Link to="/login">로그인</Link>
-          </div>
-          {/* <Link to="/logout">Logout</Link> */}
-
+          </div>          
         </>
       )}
     </div>
