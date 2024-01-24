@@ -5,23 +5,21 @@ import DiagnosisChoice from './DiagnosisChoice';
 import DiagnosisAnswer from './DiagnosisAnswer';
 import DiagnosisImage from './DiagnosisImage';
 
+
+
+
 const DiagnosisIndex = ({ solutionContent }) => {
   return (
     <div>
-      <style>
-        {/* 내용은 그대로 유지 */}
-      </style>
-
       {solutionContent && solutionContent.length > 0 && (
         solutionContent.map((solution) => (
           <div key={solution.solution_id} className="testimonial-item bg-light rounded p-3">
             <div className="bg-white border rounded p-4">
               <Link to="/" title="#">
-                <p>환경: {solution.symptom}</p>
+                <p>환경: </p>
               </Link>
               <div className="d-flex align-items-center">
-                <Link to="/" title="#">
-                  {/* Your image or iframe */}
+                <Link to="/" title="#">                  
                 </Link>
                 <Link to="/" title="#">
                   <div className="ps-3">
@@ -56,5 +54,6 @@ const DiagnosisIndex = ({ solutionContent }) => {
     </div>
   );
 };
+
 
 export default DiagnosisIndex;

@@ -1,5 +1,46 @@
 from rest_framework import serializers
-from .models import DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
+from .models import DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
+from gardening_shop_app.models import ShopingTb
+
+
+class PlantTbSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlantTb
+        fields = '__all__'
+        
+
+class ShopingTbSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShopingTb
+        fields = '__all__' 
+
+
+class DiagnosisResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DiagnosisResult
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            # 여기에서는 객체를 생성만 하고 저장하지 않음
+            instance = DiagnosisResult(**validated_data)
+            return instance 
+
+    # def create(self, validated_data):
+    #     return DiagnosisResult.objects.create(**validated_data)
+
+        
+    # def create(self, validated_data):
+    #     diagnosis_results = {}
+    #     for field in DiagnosisResult._meta.fields:
+    #         if field.name != 'id':
+    #             key = field.name
+    #             if key in validated_data:
+    #                 diagnosis_results[key] = validated_data.pop(key)
+    #             else:                    
+    #                 diagnosis_results[key] = None        
+    #     instance = DiagnosisResult.objects.create(**validated_data, **diagnosis_results)
+    #     return instance
+
 
 
 class DiagnosisQuestionHistorySerializer(serializers.ModelSerializer):
@@ -41,12 +82,12 @@ class PlantSerializer(serializers.ModelSerializer):
             'plant_content',
         ]
         
-class SolutionSerializer(serializers.ModelSerializer):
+class SolutionTbSerializer(serializers.ModelSerializer):
     class Meta:
         model = SolutionTb
-        fields = [
-            'diagnosis_history_no',
-            'diagnosis_history_content',
-            'user_plant_no',
-            'solution_id',
-        ]            
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)        
+        data = {key: value[1] if isinstance(value, tuple) else value for key, value in data.items()}
+        return data

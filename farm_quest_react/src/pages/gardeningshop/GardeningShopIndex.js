@@ -128,12 +128,10 @@ const GardeningShopIndex = () => {
             <div className="product-list">
                 {products.map((product, index) => (
                     <div key={index} className="product-item">
-                        {/* 상품 이미지와 제목을 Link 컴포넌트로 감싸서 상세 페이지로 연결 */}
-                        <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productId}`}>
-                            <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
-                            <h3>{product.shoping_tb_rss_channel_item_title}</h3>
-                        </Link>
-                        <p>${product.shoping_tb_rss_channel_item_lprice}</p>
+                        <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
+                        <h3>{product.shoping_tb_rss_channel_item_title}</h3>
+                        <p>${product.shoping_tb_rss_channel_item_lprice}</p> 
+                        {/* <p>{product.shoping_tb_rss_channel_item_lprice} 원</p> */}
                     </div>
                 ))}
             </div>

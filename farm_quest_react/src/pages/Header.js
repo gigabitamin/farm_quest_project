@@ -1,8 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
+// 작업 때문에 링크 따로 뺐습니다 / 필요하면 나중에 다시 통합
+import DiagnosisLink from "./diagnosis/DiagnosisLink";
+import LoginLink from './user/LoginLink'
+
 
 const Header = () => {
+    const user = { is_authenticated: false, username: 'exampleUser' };
+
     const portal_search = () => {
         let keyword = document.getElementById("search_keyword").value;
         console.log(keyword)
@@ -49,23 +55,13 @@ const Header = () => {
                 </div>
                 {/* 통합 검색창 끝 */}
 
-                        
-                {/* 회원가입 로그인 박스 시작 login.css - kdy */}
-                {/* <div className="loginBox_hd">
-                    {% if user.is_authenticated %}
-                        <div className="login_sign_in">{{ user.username }}</div>
-                        <div className="login_sign_out"><a href="{% url 'sign_out' %}">Logout</a></div>
-                    {% else %}
-                        <div className="login_sign_up"><a href="{% url 'sign_up2' %}">회원가입</a></div>
-                        <div> / </div>
-                        <div className="login_sign_in"><a href="{% url 'sign_in' %}">로그인</a></div>
-                    {% endif %}    
-                </div> */}
-                {/* 회원가입 로그인 박스 끝 - kdy */}
+                {/* 회원가입 로그인 박스 컴포넌트 - kdy */}                                
+                <LoginLink user={user} />
+            
             </div>
 
             <nav className="navbar_hd">
-                <ul> 
+                <ul>                     
                     {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}
                     <div className="btn_hd"><Link to="http://127.0.0.1:8000">장고로 이동</Link></div>
                     <div className="nav-item_hd">                        
@@ -88,26 +84,31 @@ const Header = () => {
                     <div className="nav-item_hd">
                         <div className="nav-link_hd"><Link to="/gardening_shop_index">가드닝 샵</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'gardening_shop_index' %}" className="btn_hd">상품 리스트</a></div>
-                            <div><a href="{% url 'gardening_shop_review_anlystics' %}" className="btn_hd">상품 리뷰 분석</a></div>                    
+                            <div className="btn_hd"><Link to="/">상품 리스트</Link></div>
+                            <div className="btn_hd"><Link to="/">상품 리뷰 분석</Link></div>                    
                         </div>
                     </div>
 
-                    {/* diagnosis Link start */}
-                    <div className="nav-item_hd">                        
-                        <div className="nav-link_hd"><Link to="/diagnosis_index">작물 진단</Link></div>
+                    <DiagnosisLink />
+                    {/* 진단 페이지 링크 컴포넌트 /src/pages/diagnosis/DiagnosisLink.js */}
+
+                    {/* <div className="nav-item_hd">
+                        <div className="btn_hd"><Link to="/diagnosis_choice">진단 작물 선택</Link></div>                        
                         <div className="dropdown-menu_hd">
+                            <div className="nav-link_hd"><Link to="/diagnosis_index">작물 진단</Link></div>    
                             <div className="btn_hd"><Link to="/diagnosis_answer">진단 문진표 작성</Link></div>
-                            <div className="btn_hd"><Link to="/diagnosis_result">진단 결과</Link></div>
+                            <div className="btn_hd"><Link to="/diagnosis_result">진단 결과 독립페이지</Link></div>
+                            <div className="btn_hd"><Link to="/diagnosis_recommend">진단 결과 추천 상품</Link></div>
                         </div>
-                    </div>
-                    {/* diagnosis Link end */}
+                    </div> */}
+                    
+                    {/* 진단 페이지 링크 끝 / 헤더 css 수정시 주석 해제 후 진행바람 */}
 
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'community_index' %}" className="nav-link_hd">커뮤니티</a></div>
+                        <div className="nav-link_hd"><Link to="/community/main">커뮤니티</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'farm_log_index' %}" className="btn_hd">팜로그</a></div>
-                            <div><a href="{% url 'qna_index' %}" className="btn_hd">질문/답변</a></div>                    
+                            <div className="btn_hd"><Link to="/community/farmlog">팜로그</Link></div>
+                            <div className="btn_hd"><Link to="/community/qna">질문/답변</Link></div>                    
                         </div>
                     </div>
                     
@@ -128,6 +129,7 @@ const Header = () => {
                             <div><a href="{% url 'user_bookmark' %}" className="btn_hd">즐겨찾기</a></div>                    
                         </div>
                     </div>
+
                 </ul>
             </nav>
         </header>

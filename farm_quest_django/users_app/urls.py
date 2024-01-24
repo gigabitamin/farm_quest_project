@@ -1,7 +1,8 @@
 from django.urls import path
+# from django.contrib.auth import views as auth_views
 from . import views
-from .views import RegisterView, LoginView, ProfileView
-
+from .views import RegisterView, LoginView, ProfileView, UserInfoView
+from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
@@ -14,7 +15,10 @@ urlpatterns = [
     # DRF
     path('register/', RegisterView.as_view()),
     path('login/', LoginView.as_view()),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('profile/', ProfileView.as_view()),
+    path('user_info/', UserInfoView.as_view(), name='user_info'),
+    
         
     # 리액트 연동
     path('sign_in2/', views.sign_in2, name='sign_in2'),        

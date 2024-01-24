@@ -3,81 +3,20 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const DiagnosisAnswer = () => {
+    
+  let history = useNavigate();
 
-    // 화면 이동하기 위한 hostory 생성
-    let history = useNavigate();
-
-
-
-    // const onChange = (e) => {
-    //     const { value, name } = e.target; // e.target에서 name과 value 추출
-    //     setDiagnosisQuestionHistory({
-    //         ...diagnosisQuestionHistory, // 기존의 prd 객체 복제한 후
-    //         [name]: value // name 키를 가진 값을 value로 설정
-    //     });
-    // };
-
-    // 취소 버튼 눌렀을 때
-    // const onReset = () => {
-    //     setDiagnosisQuestionHistory({
-    //       diagnosis_question_history_id:'',
-    //       diagnosis_question_1:'',
-    //       diagnosis_question_2:'',
-    //       diagnosis_question_3:'',
-    //       diagnosis_question_4:'',
-    //       diagnosis_question_5:'',
-    //       diagnosis_question_6:'',
-    //       diagnosis_question_7:'',
-    //       diagnosis_question_8:'',
-    //       diagnosis_question_9:'',
-    //       diagnosis_question_10:'',
-    //     })
-    // };
-
-
-    // // submit 버튼 클릭 시
-    // const onSubmit = (e) => {
-    //     e.preventDefault();
-
-    //     var frmData = new FormData(document.frmInsert);
-    //     axios.post('http://localhost:8000/diagnosis_question_history/', frmData)
-    //         .then(
-    //             response => {
-    //                 alert("문진표 작성 완료");
-    //                 history('/diagnosis_result');
-    //             }
-    //         )
-    // };
-
-
-
-   const [diagnosisQuestions, setDiagnosisQuestions] = useState([]);
-   const diagnosisQuestionsLoadData = async () => {
-       const response = await axios.get('http://localhost:8000/diagnosis_questions_api/');
-       console.log(response.data);   
+  const [diagnosisQuestions, setDiagnosisQuestions] = useState([]);
+  const diagnosisQuestionsLoadData = async () => {
+       const response = await axios.get('http://localhost:8000/diagnosis_questions_api/');       
        setDiagnosisQuestions(response.data);
-   };
+  };
 
-   useEffect(() => {
+  useEffect(() => {
     diagnosisQuestionsLoadData();
-   }, []);
+  }, []);
 
-
-
-   const [diagnosisQuestionHistory, setDiagnosisQuestionHistory] = useState({
-    diagnosis_question_history_id: '',
-    diagnosis_question_1: '',
-    diagnosis_question_2: '',
-    diagnosis_question_3: '',
-    diagnosis_question_4: '',
-    diagnosis_question_5: '',
-    diagnosis_question_6: '',
-    diagnosis_question_7: '',
-    diagnosis_question_8: '',
-    diagnosis_question_9: '',
-    diagnosis_question_10: '',    
-  });
-  
+  const [diagnosisQuestionHistory, setDiagnosisQuestionHistory] = useState(null);
 
   const answerOnChange = (questionNo, value) => {
     setDiagnosisQuestionHistory({
@@ -86,31 +25,11 @@ const DiagnosisAnswer = () => {
     });
 };
 
-  
-
-
-
-    // submit 버튼 클릭 시
-  //   const onSubmit = (e) => {
-  //     e.preventDefault();
-
-  //     var frmData = new FormData(document.frmInsert);
-  //     axios.post('http://localhost:8000/diagnosis_question_history/', frmData)
-  //         .then(
-  //             response => {
-  //                 alert("문진표 작성 완료");
-  //                 // async 처리한 뒤 await로 진단 시퀀스(yolo, 이미지분류) 함수 실행, 진단 끝난 후 result 페이지 출력
-  //                 history('/diagnosis_result');
-  //             }
-  //         )
-  // };
-
   const sendPostRequest = (e) => {
     e.preventDefault();
 
     let frmData = new FormData(document.diagnosisAnswerComplete);
-
-    // 각각의 질문에 대한 답변 추가
+    
     diagnosisQuestions.forEach((question, index) => {
         frmData.append(`diagnosis_question_${index + 1}`, diagnosisQuestionHistory[`diagnosis_question_${index + 1}`]);
     });
@@ -128,51 +47,6 @@ const DiagnosisAnswer = () => {
         });
 };
 
-
-
-
-  // const sendPostRequest = (e) => {
-  //   e.preventDefault();
-
-    
-  //     let frmData = new FormData(document.diagnosisAnswerComplete);      
-  //     axios.post('http://localhost:8000/diagnosis_questions_history_api/', frmData)
-  //         .then(response => {
-  //                 alert("문진표 작성 완료");
-  //                 history('/diagnosis_result');
-  //         })
-  //         .then(data => {            
-  //           console.log('Success:', data);
-  //         })
-  //         .catch(error => {
-  //           console.error('Error:', error);
-  //         })
-  //   };
-
-    //   // POST 요청 보내기
-    //   fetch('http://localhost:8000/diagnosis_questions_history_api/', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(selectedOptions),
-    //   })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       // 서버로부터의 응답 처리
-    //       console.log('Success:', data);
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error:', error);
-    //     });
-    //     alert('문진표 작성 완료')
-    //     // async 처리한 뒤 await로 진단 시퀀스(yolo, 이미지분류) 함수 실행, 진단 끝난 후 result 페이지 출력
-    //     history('/diagnosis_result');
-    // } else {
-    //   alert('모든 항목에 대해 선택하세요');
-    // }
-  
-
   return (
     <div className="diagnosis_answer_main diagnosis_main">
       <section className="diagnosis_answer_section">
@@ -188,7 +62,7 @@ const DiagnosisAnswer = () => {
                       type="radio"
                       name={`question_${question.diagnosis_question_no}`}
                       value="예"                      
-                      onChange={() => answerOnChange(question.diagnosis_question_no, '예')}
+                      onChange={() => answerOnChange(question.diagnosis_question_no, 1)}
                       required
                     />
                     예
@@ -196,14 +70,13 @@ const DiagnosisAnswer = () => {
                       type="radio"
                       name={`question_${question.diagnosis_question_no}`}
                       value="아니오"                      
-                      onChange={() => answerOnChange(question.diagnosis_question_no, '아니오')}
+                      onChange={() => answerOnChange(question.diagnosis_question_no, 0)}
                       required
                     />
                     아니오
                   </label>
                 </div>
-              ))}
-              {/* <button type="button" id="submit_button" onClick={sendPostRequest}>작성완료</button> */}
+              ))}              
               <input type="submit" value="작성완료" />
             </form>
           </div>
