@@ -11,7 +11,7 @@ import DiagnosisUpload from "./diagnosis/DiagnosisUpload";
 import DiagnosisUploadResult from "./diagnosis/DiagnosisUploadResult";
 import DiagnosisRecommend from "./diagnosis/DiagnosisRecommend";
 import Community from "./community/Community";
-
+import Scheduler from './Scheduler/Scheduler';
 
 const Top = () => {    
     // const [currentPath, setCurrentPath] = useState('/');
@@ -37,6 +37,8 @@ const Top = () => {
                 <Route path="/diagnosis_upload_result" element={<DiagnosisUploadResult/>} />
                 <Route path="/diagnosis_recommend/:solutionWord" element={<DiagnosisRecommend />}/>
                 {/* 진단 페이지 끝 -kdy */}
+
+                <Route path="/Scheduler" element={<Scheduler />}/>
 
             </Routes>
         </div>

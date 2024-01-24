@@ -121,10 +121,10 @@ const Header = () => {
                     </div>
                     
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'scheduler_general' %}" className="nav-link_hd">스케쥴러</a></div>
+                        <div><a href="{% url 'scheduler' %}" className="nav-link_hd">스케쥴러</a></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'scheduler_general' %}" className="btn_hd">일반 스케쥴러</a></div>
-                            <div><a href="{% url 'scheduler_personal' %}" className="btn_hd">개인 스케쥴러</a></div>                    
+                            <div><a href="{% url 'scheduler' %}" className="btn_hd">스케쥴러</a></div>
+                            {/* <div><a href="{% url 'scheduler_personal' %}" className="btn_hd">개인 스케쥴러</a></div>                     */}
                         </div>
                     </div>                    
 
@@ -132,7 +132,7 @@ const Header = () => {
                         <div><a href="{% url 'mypage' %}" className="nav-link_hd">마이페이지</a></div>
                         <div className="dropdown-menu_hd">                 
                             <div><a href="{% url 'user_plant' %}" className="btn_hd">나의 작물</a></div>
-                            <div><a href="{% url 'user_farmlog' %}" className="btn_hd">남의 팜로그</a></div>
+                            <div><a href="{% url 'user_farmlog' %}" className="btn_hd">나의 팜로그</a></div>
                             <div><a href="{% url 'user_QnA' %}" className="btn_hd">나의 QnA</a></div>
                             <div><a href="{% url 'user_bookmark' %}" className="btn_hd">즐겨찾기</a></div>                    
                         </div>
