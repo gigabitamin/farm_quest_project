@@ -25,10 +25,12 @@ const Community = () => {
         <article id="community">
             <CommunityLeft setMainType={setMainType} />
             <CommunityRight />
-            { (show === 'main') && <CommunityMain mainType={mainType} /> }
-            { (show === 'detail') && <CommunityMainDetail /> }
-            { (show === 'create') && <CommunityMainCreate /> }
-            { (show === 'update') && <CommunityMainUpdate /> }
+            <div className='community_main_box'>
+                { (show === 'main') && <CommunityMain mainType={mainType} /> }
+                { (show === 'detail') && <CommunityMainDetail /> }
+                { (show === 'create') && <CommunityMainCreate /> }
+                { (show === 'update') && <CommunityMainUpdate /> }
+            </div>
         </article>
     );
 };

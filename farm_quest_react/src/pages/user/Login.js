@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "../../shared/App.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Login = () => {
-
+    const dispatch = useDispatch();
     let history = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -32,6 +33,11 @@ const Login = () => {
                 localStorage.setItem("respons_data", response.data);                
                 localStorage.setItem("username", formData.username);
                 localStorage.setItem("password", formData.password);
+                dispatch({
+                  part: 'loginUser',
+                  type: 'login',
+                  username: formData.username
+                });
                 console.log(response.data);
                 history("/");}})
         );

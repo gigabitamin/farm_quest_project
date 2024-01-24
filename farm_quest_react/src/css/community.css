@@ -5,6 +5,14 @@ article#community {
     height: 0;
 }
 
+div.community_main_box {
+    margin: 0 auto;
+    width: 70%;
+    height: 80vh;
+    overflow-y: scroll;
+    border: solid 2px black;
+}
+
 aside#community_left_menu, aside#community_right_menu {
     position: absolute;
     top: 0;
@@ -35,7 +43,7 @@ div.community_left_box, div.community_right_box {
 div.community_content_box {
     padding: 1% 0;
     margin: 1% auto;
-    width: 68%;
+    width: 95%;
     background: #2de0b6;
 }
 
@@ -112,7 +120,7 @@ ul.content_box_list li {
 div.community_content_box_detail {
     padding: 1% 0;
     margin: 1% auto;
-    width: 68%;
+    width: 95%;
     background: #2de0b6;
 }
 
