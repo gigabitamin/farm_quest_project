@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const CommunityMainUpdate = () => {
     const dispatch = useDispatch();
-    const item = useSelector(state => state.item);
+    const item = useSelector(state => state.community.item);
 
     const [form, setForm] = useState({
         thread_title: item.thread_title,
@@ -27,8 +27,10 @@ const CommunityMainUpdate = () => {
 
     const submitForm = (event) => {
         if (window.confirm('수정하시겠습니까?')) {
-            var formData = new FormData(document.formData);
-            axios.put(`http://localhost:8000/community/detail/${item.thread_no}`, formData).then(
+            // var formData = new FormData(document.formData);
+            axios.put(`http://localhost:8000/community/detail/${item.thread_no}`, form, {
+                headers: { Authorization: `Token  ${localStorage.getItem('token')}` }
+            }).then(
                 response => {
                     alert("수정 완료");
                     dispatch({type: 'back'});
