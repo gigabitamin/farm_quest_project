@@ -17,10 +17,11 @@ const Top = () => {
         <div>            
             <Routes>
                 <Route path="/gardening_shop_index" element={<GardeningShopIndex currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} currentPage={currentPage} setCurrentPage={setCurrentPage} />} />
+                <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} />
+
                 <Route path="/community/:mainType" element={<Community />} />
 
             </Routes>
-
             <UserRouter />
             <DiagnosisRouter />
             
