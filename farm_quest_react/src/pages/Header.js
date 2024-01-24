@@ -1,12 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
-
-// 진단 페이지 링크 따로 뺐습니다 / css 작업 끝난 후 다시 통합
+// 작업 때문에 링크 따로 뺐습니다 / 필요하면 나중에 다시 통합
 import DiagnosisLink from "./diagnosis/DiagnosisLink";
+import LoginLink from './user/LoginLink'
 
 
 const Header = () => {
+    const user = { is_authenticated: false, username: 'exampleUser' };
+
     const portal_search = () => {
         let keyword = document.getElementById("search_keyword").value;
         console.log(keyword)
@@ -53,19 +55,9 @@ const Header = () => {
                 </div>
                 {/* 통합 검색창 끝 */}
 
-                        
-                {/* 회원가입 로그인 박스 시작 login.css - kdy */}
-                {/* <div className="loginBox_hd">
-                    {% if user.is_authenticated %}
-                        <div className="login_sign_in">{{ user.username }}</div>
-                        <div className="login_sign_out"><a href="{% url 'sign_out' %}">Logout</a></div>
-                    {% else %}
-                        <div className="login_sign_up"><a href="{% url 'sign_up2' %}">회원가입</a></div>
-                        <div> / </div>
-                        <div className="login_sign_in"><a href="{% url 'sign_in' %}">로그인</a></div>
-                    {% endif %}    
-                </div> */}
-                {/* 회원가입 로그인 박스 끝 - kdy */}
+                {/* 회원가입 로그인 박스 컴포넌트 - kdy */}                                
+                <LoginLink user={user} />
+            
             </div>
 
             <nav className="navbar_hd">

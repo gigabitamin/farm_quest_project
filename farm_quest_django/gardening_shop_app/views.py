@@ -7,6 +7,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import ShopingTbSerializer  # 시리얼라이저를 불러옵니다
+import random
 
 # def gardening_shop_index(request):    
 #     return render(request, 'gardening_shop_app/gardening_shop_index.html')
@@ -60,3 +61,33 @@ class ShopingTbList(APIView):
         result_page = paginator.paginate_queryset(products, request)
         serializer = ShopingTbSerializer(result_page, many=True)  # 시리얼라이저를 사용합니다
         return paginator.get_paginated_response(serializer.data)  # 시리얼라이즈된 데이터를 반환합니다
+    
+def recommended_products(request):
+    all_products = list(ShopingTb.objects.all())
+    recommended = random.sample(all_products, min(len(all_products), 10))  # 최대 10개의 상품을 무작위로 선택
+    data = [{'shoping_tb_rss_channel_item_productId': p.shoping_tb_rss_channel_item_productId,
+             'shoping_tb_rss_channel_item_image': p.shoping_tb_rss_channel_item_image, 
+             'shoping_tb_rss_channel_item_title': p.shoping_tb_rss_channel_item_title, 
+             'shoping_tb_rss_channel_item_lprice': p.shoping_tb_rss_channel_item_lprice} for p in recommended]
+    return JsonResponse(data, safe=False)
+
+def product_detail(request, id):
+    try:
+        product = ShopingTb.objects.get(shoping_tb_rss_channel_item_productId=id)
+        data = {
+            "shoping_tb_rss_channel_item_image": product.shoping_tb_rss_channel_item_image,
+            "shoping_tb_rss_channel_item_title": product.shoping_tb_rss_channel_item_title,
+            "shoping_tb_rss_channel_item_lprice": product.shoping_tb_rss_channel_item_lprice
+        }
+        return JsonResponse(data)
+    except ShopingTb.DoesNotExist:
+        return JsonResponse({"error": "Product not found"}, status=404)
+
+def shopping_reviews(request):
+    reviews = ShoppingReview.objects.all()
+    # Randomly pick between 5 and 10 reviews
+    num_reviews_to_select = random.randint(5, min(len(reviews), 10))
+    selected_reviews = random.sample(list(reviews), num_reviews_to_select)
+    
+    data = [{"shopping_review_no": review.shopping_review_no, "shopping_review_content": review.shopping_review_content} for review in selected_reviews]
+    return JsonResponse(data, safe=False)

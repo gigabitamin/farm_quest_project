@@ -1,0 +1,66 @@
+.product-top2{
+    margin-bottom: 20px;
+}
+
+.gardening-shop-detail {
+    max-width: 800px;
+    margin: 50px auto 100px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.product-title {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    color: #888;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.add-to-cart {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #88AB8E;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.reviews-section {
+    margin-top: 30px;
+}
+
+.reviews-title {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.review-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.review-number {
+    font-weight: bold;
+}
+
+.review-content {
+    margin-top: 5px;
+}

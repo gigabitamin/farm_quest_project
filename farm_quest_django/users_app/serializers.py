@@ -7,6 +7,11 @@ from rest_framework.authtoken.models import Token
 from .models import Profile
 from .models import User
 
+class CustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
