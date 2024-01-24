@@ -1,4 +1,7 @@
 from django.shortcuts import get_object_or_404, render
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from rest_framework.decorators import APIView
 from rest_framework import status, mixins, generics
@@ -39,5 +42,22 @@ class CommunityCreate(generics.CreateAPIView):
 
 class CommunityDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.CommunityTb.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = serializers.CommunityDetailSerializer
     lookup_field = 'thread_no'
+
+    def get(self, request, *args, **kwargs): 
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        thread = self.queryset.get(thread_no=self.kwargs['thread_no'])
+        if request.user.id != thread.user_id:
+            raise PermissionDenied("You have no permission to modifying this thread.")
+        return self.update(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)

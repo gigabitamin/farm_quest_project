@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.auth import authenticate 
 from . import models
 
 class CommunityListSerializer(serializers.ModelSerializer):
@@ -15,12 +16,4 @@ class CommunityListSerializer(serializers.ModelSerializer):
 class CommunityDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CommunityTb
-        fields = [
-            "thread_no",
-            "thread_title",
-            "thread_content",
-            "thread_img",
-            "thread_date",
-            "thread_type",
-            "user_id"
-        ]
+        fields = "__all__"
