@@ -113,9 +113,10 @@ const Header = () => {
                     </div>
                     
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'scheduler' %}" className="nav-link_hd">스케쥴러</a></div>
+                        <div className="nav-link_hd"><Link to="/Scheduler">스케쥴러</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'scheduler' %}" className="btn_hd">스케쥴러</a></div>
+                            <div className="btn_hd"><Link to="/scheduler">진입</Link></div>
+
                             {/* <div><a href="{% url 'scheduler_personal' %}" className="btn_hd">개인 스케쥴러</a></div>                     */}
                         </div>
                     </div>                    

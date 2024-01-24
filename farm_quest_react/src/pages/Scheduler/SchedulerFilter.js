@@ -1,4 +1,6 @@
 import React from 'react';
+// import SchedulerCalendar from './SchedulerCalendar';
+
 
 class SchedulerFilter extends React.Component {
     constructor(props) {
@@ -7,7 +9,7 @@ class SchedulerFilter extends React.Component {
         checkedItems: {},
       };
     }
-  
+  // 체크박스 변경
     handleCheckboxChange = (itemName) => {
       this.setState((prevState) => ({
         checkedItems: {
@@ -16,7 +18,8 @@ class SchedulerFilter extends React.Component {
         },
       }));
     };
-  
+
+  // 렌더링
     render() {
       const filterOptions = ['딸기', '토마토', '파프리카', '오이', '고추', '포도'];
   
@@ -37,13 +40,16 @@ class SchedulerFilter extends React.Component {
   
           <div>
             <h3>선택된 옵션:</h3>
+            {/* 예시 */}
             <ul>
               {filterOptions
                 .filter((option) => this.state.checkedItems[option])
                 .map((selectedOption) => (
                   <li key={selectedOption}>{selectedOption}</li>
                 ))}
-            </ul>
+            </ul> 
+            {/* 캘린더-우측 구현 */}
+                  {/* <SchedulerCalendar /> */}
           </div>
         </div>
       );

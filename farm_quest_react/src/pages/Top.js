@@ -4,6 +4,7 @@ import GardeningShopIndex from './gardeningshop/GardeningShopIndex';
 import Community from "./community/Community";
 import UserRouter from "./user/UserRouter"
 import DiagnosisRouter from "./diagnosis/DiagnosisRoute"
+import Scheduler from './Scheduler/Scheduler';
 
 
 const Top = () => {    
@@ -18,6 +19,7 @@ const Top = () => {
             <Routes>
                 <Route path="/gardening_shop_index" element={<GardeningShopIndex currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} currentPage={currentPage} setCurrentPage={setCurrentPage} />} />
                 <Route path="/community/:mainType" element={<Community />} />
+                <Route path="Scheduler" element={<Scheduler />} />
 
             </Routes>
 

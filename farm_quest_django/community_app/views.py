@@ -41,3 +41,8 @@ class CommunityDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.CommunityTb.objects.all()
     serializer_class = serializers.CommunityDetailSerializer
     lookup_field = 'thread_no'
+
+
+#에러 추가
+def community_index(request):
+    return render(request, 'your_template_name.html')

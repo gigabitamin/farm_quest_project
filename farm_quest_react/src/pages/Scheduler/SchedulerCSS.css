@@ -1,0 +1,29 @@
+.filter-container,
+.calendar-container {
+    display: inline-block;
+    vertical-align: top; /* 위쪽 시작점 정렬을 위한 추가 스타일 */
+
+    margin-right: 20px;
+}
+
+#thisMonth {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #thisMonth td {
+    border: 1px solid #ccc;
+    width: 10px;
+    height: 10px;
+    text-align: center;
+  }
+
+  #calendarTitle {
+    background-color: beige;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-bottom: 10px;
+  }
+  
+  /* 다른 스타일을 추가하거나 필요에 따라 수정할 수 있습니다. */
+  
