@@ -1,11 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
-// 진단 페이지 링크 따로 뺐습니다 / css 작업 끝난 후 다시 통합
 import DiagnosisLink from "./diagnosis/DiagnosisLink";
+import LoginLink from './user/LoginLink'
 
 
 const Header = () => {
+    const user = { is_authenticated: false, username: 'exampleUser' };
+
     const portal_search = () => {
         let keyword = document.getElementById("search_keyword").value;
         console.log(keyword)
@@ -52,19 +54,9 @@ const Header = () => {
                 </div>
                 {/* 통합 검색창 끝 */}
 
-                        
-                {/* 회원가입 로그인 박스 시작 login.css - kdy */}
-                {/* <div className="loginBox_hd">
-                    {% if user.is_authenticated %}
-                        <div className="login_sign_in">{{ user.username }}</div>
-                        <div className="login_sign_out"><a href="{% url 'sign_out' %}">Logout</a></div>
-                    {% else %}
-                        <div className="login_sign_up"><a href="{% url 'sign_up2' %}">회원가입</a></div>
-                        <div> / </div>
-                        <div className="login_sign_in"><a href="{% url 'sign_in' %}">로그인</a></div>
-                    {% endif %}    
-                </div> */}
-                {/* 회원가입 로그인 박스 끝 - kdy */}
+                {/* 회원가입 로그인 박스 컴포넌트 - kdy */}                                
+                <LoginLink user={user} />
+            
             </div>
 
             <nav className="navbar_hd">
@@ -96,19 +88,7 @@ const Header = () => {
                         </div>
                     </div>
 
-                    <DiagnosisLink />
-                    {/* 진단 페이지 링크 컴포넌트 /src/pages/diagnosis/DiagnosisLink.js */}
-
-                    {/* <div className="nav-item_hd">
-                        <div className="btn_hd"><Link to="/diagnosis_choice">진단 작물 선택</Link></div>                        
-                        <div className="dropdown-menu_hd">
-                            <div className="nav-link_hd"><Link to="/diagnosis_index">작물 진단</Link></div>    
-                            <div className="btn_hd"><Link to="/diagnosis_answer">진단 문진표 작성</Link></div>
-                            <div className="btn_hd"><Link to="/diagnosis_result">진단 결과 독립페이지</Link></div>
-                            <div className="btn_hd"><Link to="/diagnosis_recommend">진단 결과 추천 상품</Link></div>
-                        </div>
-                    </div> */}
-                    
+                    <DiagnosisLink />                    
                     {/* 진단 페이지 링크 끝 / 헤더 css 수정시 주석 해제 후 진행바람 */}
 
                     <div className="nav-item_hd">
