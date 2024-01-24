@@ -33,13 +33,13 @@ class DiagnosisRecommendList(APIView):
         
         try:
             # print('1')
-            solution_word = '화분'
+            # solution_word = '화분'
             page = int(request.GET.get('page', 1))
             page_size = 10
 
             start_index = (page - 1) * page_size
             end_index = start_index + page_size
-            # print('2')
+
             recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
             # print('가냐?', recommendations)
             # print('3')

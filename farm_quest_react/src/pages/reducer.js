@@ -1,6 +1,7 @@
 const initialState = {
     loginUser: {
-
+        isLoggedIn: false,
+        username: null
     },
     community: {
         show: 'main', // 표시 상태
@@ -25,8 +26,18 @@ export default function reducer(state=initialState, action) {
     const newState = { ...state };
 
     // 실행할 action에 맞는 코드 작성
-    // 커뮤니티 관련 실행 코드
-    if (action.part === 'community') {
+    if (action.part === 'loginUser') {
+        // 로그인 관련 실행코드
+        let loginState = { ...state.loginUser };
+        if (action.type === 'login') {
+            loginState.isLoggedIn = true;
+            loginState.username = action.username;
+        } else if (action.type === 'logout') {
+            loginState = { ...initialState.loginUser };
+        };
+        newState.loginUser = loginState;
+    } else if (action.part === 'community') {
+        // 커뮤니티 관련 실행 코드
         let communityState = { ...state.community };
         if (action.type === 'detail') {
             communityState.show = 'detail';
