@@ -29,10 +29,22 @@ from .models import Profile
 from .models import User
 
 
+# 리액트 로그인 관련
+from django.contrib.auth import authenticate
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
+from .serializers import RegisterSerializer, LoginSerializer, ProfileSerializer
+from .models import Profile
+from .models import User
+from .serializers import CustomUserSerializer
 
 
+class UserInfoView(generics.RetrieveAPIView):
+    serializer_class = CustomUserSerializer
+    permission_classes = [IsAuthenticated]
 
-
+    def get_object(self):
+        return self.request.user
 
 
 

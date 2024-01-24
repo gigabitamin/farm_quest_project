@@ -13,13 +13,16 @@ const LoginLink = ({ user }) => {
         </>
       ) : (
         <>
-          <div className="Resister">
+          <div className="resister">
             <Link to="/resister">회원가입</Link>
           </div>
           <div> / </div>
           <div className="login">
             <Link to="/login">로그인</Link>
           </div>
+          <Link to="/logout">Logout</Link>
+          <Link to="/login_valid">Login_valid</Link>
+          <Link to="/user_info">User_info</Link>
         </>
       )}
     </div>
