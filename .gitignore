@@ -2,7 +2,9 @@
 ## ff
 allowed_host.py
 db_settings.py
-upload/
+upload
+yolo_model
+tf_model
 
 ### Django ###
 *.log

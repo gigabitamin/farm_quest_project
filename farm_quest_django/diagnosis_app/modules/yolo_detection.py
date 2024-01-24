@@ -53,7 +53,7 @@ def solution_service(tf_predict_disease_list):
     # solution_row_list_serialized = []
     # print('len = ', len(tf_predict_desease_list_sorted))
     
-    for i in range(len(tf_predict_disease_list)):        
+    for i in range(len(tf_predict_disease_list)):
         plant_no = tf_predict_disease_list[i][0]
         disease_code = tf_predict_disease_list[i][2]
         # print('disease_code = ', disease_code)
@@ -71,7 +71,7 @@ def solution_service(tf_predict_disease_list):
     print('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
     
     # for solution_row in solution_row_list:
-    #     # serializer = SolutionTbSerializer(solution_row, many=True)
+    #     # serializer = SolutionT bSerializer(solution_row, many=True)
     #     serializer = SolutionTbSerializer(solution_row, many=True)
     #     solution_row_list_serialized.append(serializer.data)
         
@@ -443,8 +443,8 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant):
     # model.summary()
     print('test 1')
     # 테스트 샘플 이미지 전처리 
-    image_size_x = 256
-    image_size_y = 256
+    image_size_x = 512
+    image_size_y = 512
 
     X_t = []
     Y_t = []
