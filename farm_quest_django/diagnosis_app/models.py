@@ -1,5 +1,22 @@
 from django.db import models
-# from farm_quest_app.models import *
+
+class DiagnosisResult(models.Model):
+    diagnosis_result_id = models.AutoField(primary_key=True)
+    user_select_plant = models.ForeignKey('PlantTb', models.DO_NOTHING, db_column='user_select_plant', blank=True, null=True)
+    boxes = models.JSONField(blank=True, null=True)
+    keypoints = models.JSONField(blank=True, null=True)
+    masks = models.JSONField(blank=True, null=True)
+    names = models.JSONField(blank=True, null=True)
+    orig_shape = models.JSONField(blank=True, null=True)
+    path = models.CharField(max_length=255, blank=True, null=True)
+    probs = models.JSONField(blank=True, null=True)
+    save_dir = models.CharField(max_length=255, blank=True, null=True)
+    speed = models.JSONField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'diagnosis_result'
+    
 
 class DiagnosisQuestion(models.Model):
     diagnosis_question_no = models.AutoField(primary_key=True)
@@ -64,8 +81,7 @@ class SolutionTb(models.Model):
 
     class Meta:
         managed = False
-
-
+        db_table = 'solution_tb' 
 
 class UserPlantTb(models.Model):
     user_plant_no = models.AutoField(primary_key=True)

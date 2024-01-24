@@ -1,0 +1,14 @@
+# django
+django
+djangorestframework
+django-cors-headers
+mysqlclient
+pandas
+matplotlib
+plotly
+seaborn
+tensorflow
+
+# react
+react-redux
+@reduxjs/toolkit
