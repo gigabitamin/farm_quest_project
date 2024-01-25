@@ -3,11 +3,16 @@
 <!-- notice -->
 ### 공지
 
-
+### 쿠키 정보 삭제 오류 -> 수정 진행
 ### test 후 커뮤니티 로그인 쿠키 정상 구동
+### psh 스케쥴러 정상 작동
 
 ====================================================
 <!-- version -->
+
+### v0.4.7 psh
+- 스케줄러 초기 구성
+- package.jso devDependencies "@babel/plugin-proposal-private-property-in-object": "^1.0.7" 추가
 
 ### v0.4.6 kdy  
 - 로그아웃 시 쿠키 토큰 id 삭제 추가  

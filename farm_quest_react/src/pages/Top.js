@@ -5,6 +5,7 @@ import UserRouter from "./user/UserRouter"
 import DiagnosisRouter from "./diagnosis/DiagnosisRoute"
 import GardeningShopIndex from './gardeningshop/GardeningShopIndex';
 import GardeningShopDetail from './gardeningshop/GardeningShopDetail';
+import Scheduler from './Scheduler/Scheduler';
 
 
 const Top = () => {    
@@ -20,6 +21,7 @@ const Top = () => {
                 <Route path="/gardening_shop_index" element={<GardeningShopIndex />} />
                 <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} />
                 <Route path="/community/:mainType" element={<Community />} />
+                <Route path="Scheduler" element={<Scheduler />} />
             </Routes>
             <UserRouter />
             <DiagnosisRouter />
