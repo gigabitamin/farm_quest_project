@@ -5,20 +5,24 @@ import Login from './Login';
 import { Routes, Route } from 'react-router-dom';
 import LoginValid from './LoginValid';
 import UserInfo from './UserInfo';
+import TestLink from './TestLink'
+import LoginCookie from './LoginCookie'
+import LoginCheck from './LoginCheck'
 
 const UserRouter = () => {
-    
+        return (
 
-    return (
-       
         <Routes>                  
             <Route path="/logout" element={<Logout />} />
             <Route path="/login_valid" element={<LoginValid />} />
             <Route path="/resister" element={<Resister />} />
             <Route path="/login" element={<Login />} />
             <Route path="/user_info" element={<UserInfo />} />
-        </Routes>            
-
+            <Route path="/test_link" element={<TestLink />} />
+            <Route path="/login_cookie" element={<LoginCookie />} />
+            <Route path="/login_check" element={<LoginCheck />} />
+        </Routes>
+        
     );
 };
 

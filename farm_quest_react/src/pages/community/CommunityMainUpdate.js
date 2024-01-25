@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 const CommunityMainUpdate = () => {
     const dispatch = useDispatch();
-    const item = useSelector(state => state.item);
+    const item = useSelector(state => state.community.item);
+    const [cookies] = useCookies(['id']);
 
     const [form, setForm] = useState({
         thread_title: item.thread_title,
@@ -27,11 +29,13 @@ const CommunityMainUpdate = () => {
 
     const submitForm = (event) => {
         if (window.confirm('수정하시겠습니까?')) {
-            var formData = new FormData(document.formData);
-            axios.put(`http://localhost:8000/community/detail/${item.thread_no}`, formData).then(
+            // var formData = new FormData(document.formData);
+            axios.put(`http://localhost:8000/community/detail/modify/${item.thread_no}`, form, {
+                headers: { Authorization: `Token  ${cookies.id}` }
+            }).then(
                 response => {
-                    alert("수정 완료");
-                    dispatch({type: 'back'});
+                    alert("성공적으로 수정되었습니다.");
+                    // dispatch({type: 'back'});
                 }
             );
         } else {

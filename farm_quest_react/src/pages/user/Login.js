@@ -1,41 +1,72 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../shared/App.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
-
-    let history = useNavigate();
+    const [cookies, setCookie] = useCookies(['id']);
+    const dispatch = useDispatch();
+    const history = useNavigate();
 
     const [formData, setFormData] = useState({
-        username: "",        
+        username: "",
         password: "",
-    });    
+    });
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
+            ...prevData,
+            [name]: value,
         }));
     }
-    
-    const handleSubmit = (event) => {
+
+    const loginSubmit = (event) => {
         event.preventDefault();
-        console.log("[Login.js] handleSubmit");
         axios
-        .post("http://127.0.0.1:8000/login/", formData)
-        .then((response => {            
-            if (response.status < 300) {
-                console.log("[Login.js] Call props.doLogin");          
-                localStorage.setItem("token", response.data["token"]);                
-                localStorage.setItem("respons_data", response.data);                
-                localStorage.setItem("username", formData.username);
-                localStorage.setItem("password", formData.password);
-                console.log(response.data);
-                history("/");}})
-        );
+            .post("http://127.0.0.1:8000/login/", formData)
+            .then((response) => {
+                console.log('reponse = ', response)
+                if (response.status < 300) {
+                    setCookie('id', response.data.token);
+                    dispatch({
+                        part: 'loginUser',
+                        type: 'login',
+                        username: formData.username
+                    });
+                    history("/");
+                }
+            });
     }
+
+    useEffect(() => {
+        checkLoginStatus();
+    }, []);
+
+    const checkLoginStatus = () => {
+        const token = cookies.id;
+        if (token) {            
+            axios.post("http://127.0.0.1:8000/login_check/", { token: token })
+                .then((response) => {
+                    if (response.status < 300) {                    
+                        dispatch({
+                            part: 'loginUser',
+                            type: 'login',
+                            username: response.data.username
+                        });
+                        history("/");
+                    }
+                })
+                .catch(() => {                    
+                    dispatch({
+                        part: 'loginUser',
+                        type: 'logout',
+                    });
+                });
+        }
+    };
 
     return (
       <section className="hero is-warning is-large">
@@ -43,7 +74,7 @@ const Login = () => {
           <div className="container">
             <div className="columns is-centered">
               <div className="column is-6-tablet is-5-desktop is-4-widescreen">
-                <form onSubmit={handleSubmit} className="box">
+                <form onSubmit={loginSubmit} className="box">
                   <div className="field">
                     <label className="label">아이디</label>
                     <div className="control has-icons-left">
@@ -113,6 +144,6 @@ const Login = () => {
         </div>
       </section>
     );
-  }
+}
 
 export default Login;

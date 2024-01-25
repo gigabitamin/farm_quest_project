@@ -26,8 +26,6 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from .serializers import RegisterSerializer, LoginSerializer, ProfileSerializer
 from .models import Profile
-from .models import User
-
 
 # 리액트 로그인 관련
 from django.contrib.auth import authenticate
@@ -35,8 +33,39 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from .serializers import RegisterSerializer, LoginSerializer, ProfileSerializer
 from .models import Profile
-from .models import User
 from .serializers import CustomUserSerializer
+
+
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework import status, permissions
+from rest_framework.authtoken.models import Token
+# from django.contrib.auth.models import User
+
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def login_check(request):    
+    token = request.data.get('token', None)
+    print('token = ', token)
+
+    if token:        
+        try:
+            token_obj = Token.objects.get(key=token)
+            print('token_obj = ', token_obj)
+        except Token.DoesNotExist:
+            return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        user = token_obj.user
+        print('user = ', user)
+        user_context = {'id': user.id, 'username':user.username}
+        print('user_context = ', user_context)
+        return Response(user_context, status=status.HTTP_200_OK)
+
+    return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class UserInfoView(generics.RetrieveAPIView):
@@ -45,10 +74,6 @@ class UserInfoView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
-
-
-
-
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -62,6 +87,7 @@ class LoginView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         token = serializer.validated_data
+        print('token = ', token)        
         return Response({"token": token.key}, status=status.HTTP_200_OK)
 
 

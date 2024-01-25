@@ -5,7 +5,7 @@ const CommunityMainList = ({item}) => {
         <div className="community_content_box">
             {/* 스크롤시 자동 생성되는 게시물 박스들 */}
             <div className="content_box_top">
-                <div className="content_box_user">유저 프로필({item.thread_no})</div>
+                <div className="content_box_user">{item.user.username}</div>
                 <div className="content_box_type">타입{item.thread_type}</div>
             </div>
             <div className="content_box_main">

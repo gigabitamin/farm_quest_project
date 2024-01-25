@@ -329,7 +329,7 @@ def save_results_to_database(serialized_results_list):
 
 
 def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
-    plant = ['고추', '딸기', '시설포도', '오이', '토마토', '파프리카']
+    plant = ['고추', '딸기', '포도', '오이', '토마토', '파프리카']
     
     # print('1', serialized_results_list)
     path_origin = serialized_results_list[0]['path']    
@@ -405,7 +405,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
         image_size_y = 256
     elif plant_name == '딸기':
         model = load_model('tf_model/strawberry.keras')
-    elif plant_name == '시설포도':
+    elif plant_name == '포도':
         model = load_model('tf_model/grape.keras')
     elif plant_name == '오이':
         model = load_model('tf_model/cucumber.keras')
@@ -452,7 +452,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
         disease = disease_dict['5']
     elif plant_name == '딸기':
         disease = disease_dict['1']
-    elif plant_name == '시설포도':
+    elif plant_name == '포도':
         disease = disease_dict['6']
     elif plant_name == '오이':
         disease = disease_dict['4']

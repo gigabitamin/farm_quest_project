@@ -9,6 +9,11 @@ plotly
 seaborn
 tensorflow
 
+#240124
+opencv-python
+ultralytics
+
 # react
 react-redux
 @reduxjs/toolkit
+react-cookie
