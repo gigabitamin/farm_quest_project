@@ -7,10 +7,11 @@ import LoginValid from './LoginValid';
 import UserInfo from './UserInfo';
 import TestLink from './TestLink'
 import LoginCookie from './LoginCookie'
+import LoginCheck from './LoginCheck'
 
 const UserRouter = () => {
         return (
-       
+
         <Routes>                  
             <Route path="/logout" element={<Logout />} />
             <Route path="/login_valid" element={<LoginValid />} />
@@ -19,8 +20,9 @@ const UserRouter = () => {
             <Route path="/user_info" element={<UserInfo />} />
             <Route path="/test_link" element={<TestLink />} />
             <Route path="/login_cookie" element={<LoginCookie />} />
-
+            <Route path="/login_check" element={<LoginCheck />} />
         </Routes>
+        
     );
 };
 

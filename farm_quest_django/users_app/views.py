@@ -26,8 +26,6 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from .serializers import RegisterSerializer, LoginSerializer, ProfileSerializer
 from .models import Profile
-from .models import User
-
 
 # 리액트 로그인 관련
 from django.contrib.auth import authenticate
@@ -35,8 +33,36 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from .serializers import RegisterSerializer, LoginSerializer, ProfileSerializer
 from .models import Profile
-from .models import User
 from .serializers import CustomUserSerializer
+
+
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework import status, permissions
+from rest_framework.authtoken.models import Token
+# from django.contrib.auth.models import User
+
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def login_check(request):    
+    token = request.data.get('token', None)
+
+    if token:        
+        try:
+            token_obj = Token.objects.get(key=token)
+            print('token_obj = ', token_obj)
+        except Token.DoesNotExist:
+            return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        user = token_obj.user
+        print('user = ', user)
+        return Response({'id': user.id, 'username':user.username}, status=status.HTTP_200_OK)
+
+    return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class UserInfoView(generics.RetrieveAPIView):
@@ -45,10 +71,6 @@ class UserInfoView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
-
-
-
-
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()

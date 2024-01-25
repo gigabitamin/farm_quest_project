@@ -8,7 +8,9 @@ const CommunityMainDetail = () => {
     const [item, setItem] = useState({});
 
     const loadContent = async () => {
-        const response = await axios.get(`http://localhost:8000/community/detail/${threadNo}`);
+        const response = await axios.get(`http://localhost:8000/community/detail/${threadNo}`, {
+            headers: { Authorization: `Token  ${localStorage.getItem('token')}` }
+        });
         // 테스트 출력 
         // console.log(response.data);
         setItem(response.data);
@@ -16,8 +18,9 @@ const CommunityMainDetail = () => {
 
     const onDelete = () => {
         if (window.confirm('해당 게시물을 삭제하시겠습니까?')){
-            axios.delete(`http://localhost:8000/community/detail/${threadNo}`)
-                .then(() => {
+            axios.delete(`http://localhost:8000/community/detail/${threadNo}`, {
+                    headers: { Authorization: `Token  ${localStorage.getItem('token')}` }
+                }).then(() => {
                     alert('성공적으로 삭제되었습니다');
                     backToMain();
                 });
