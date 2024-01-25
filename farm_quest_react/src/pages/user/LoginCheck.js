@@ -16,17 +16,17 @@ const LoginCheck = () => {
 
     const checkLoginStatus = () => {
         const token = cookies.id;
+        
         if (token) {            
             axios.post("http://127.0.0.1:8000/login_check/", { token: token })
-                .then((response) => {
-                    console.log(response)
+                .then((response) => {                    
                     if (response.status < 300) {                    
                         dispatch({
                             part: 'loginUser',
                             type: 'login',
                             username: response.data.username
                         });
-                        // history("/");
+                        // history("/");                        
                     }
                 })
                 .catch(() => {                    
@@ -37,8 +37,10 @@ const LoginCheck = () => {
                 });
         }
     };
-    
-    console.log(cookies)
+
+    console.log('cookies.id = ', cookies.id)
+    console.log('cookies = ', cookies)
+    console.log('cookie.username = ', cookies.username)
 
     return null;
     // return <div></div>;

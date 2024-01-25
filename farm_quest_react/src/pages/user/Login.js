@@ -28,10 +28,9 @@ const Login = () => {
         axios
             .post("http://127.0.0.1:8000/login/", formData)
             .then((response) => {
+                console.log('reponse = ', response)
                 if (response.status < 300) {
                     setCookie('id', response.data.token);
-                    localStorage.setItem("token", response.data.token);
-                    localStorage.setItem("username", formData.username);
                     dispatch({
                         part: 'loginUser',
                         type: 'login',
