@@ -16,9 +16,9 @@ const LoginLink = ({ user }) => {
       type: 'logout'
     });
     // 'id' 키를 가진 쿠키를 삭제
-    removeCookie('id', 'username');
-
+    removeCookie('id');
   };
+  
 
   return (
     <div className="loginBox_hd">
