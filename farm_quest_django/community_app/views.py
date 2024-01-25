@@ -22,19 +22,7 @@ class CommunityList(generics.ListAPIView):
         else:
             return queryset.order_by('-thread_no')
         return queryset.filter(thread_type=ctg).order_by('-thread_no')
-    
-
-# class CommunitySublist(CommunityList):
-#     def get_queryset(self):
-#         queryset = super().get_queryset()
-#         if self.kwargs['ctg'] == 'farmlog':
-#             ctg = 0
-#         elif self.kwargs['ctg'] == 'qna':
-#             ctg = 1
-#         else:
-#             return queryset
-#         return queryset.filter(thread_type=ctg)
-    
+  
 
 class CommunityCreate(generics.CreateAPIView):
     queryset = models.CommunityTb.objects.all()
@@ -53,15 +41,18 @@ class CommunityCreate(generics.CreateAPIView):
         raise PermissionError('You have no token information.')
 
 
-class CommunityDetail(generics.RetrieveUpdateDestroyAPIView):
+class CommunityDetailShow(generics.RetrieveAPIView):
+    queryset = models.CommunityTb.objects.all()
+    serializer_class = serializers.CommunityDetailSerializer
+    lookup_field = 'thread_no'
+
+
+class CommunityDetailModify(generics.UpdateAPIView, generics.DestroyAPIView):
     queryset = models.CommunityTb.objects.all()
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.CommunityDetailSerializer
     lookup_field = 'thread_no'
-
-    def get(self, request, *args, **kwargs): 
-        return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
         self.is_right_user(request)

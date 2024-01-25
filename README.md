@@ -10,6 +10,9 @@
 ====================================================
 <!-- version -->
 
+### v0.4.8 jsh
+- DB연동 관련 마이너 수정
+
 ### v0.4.7 psh
 - 스케줄러 초기 구성
 - package.jso devDependencies "@babel/plugin-proposal-private-property-in-object": "^1.0.7" 추가

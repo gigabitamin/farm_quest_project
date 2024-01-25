@@ -7,5 +7,6 @@ urlpatterns = [
     # path('qna_index/', views.qna_index, name='qna_index'),
     path('community/main/<str:ctg>', views.CommunityList.as_view()),
     path('community/create/', views.CommunityCreate.as_view()),
-    path('community/detail/<int:thread_no>', views.CommunityDetail.as_view()),
+    path('community/detail/show/<int:thread_no>', views.CommunityDetailShow.as_view()),
+    path('community/detail/modify/<int:thread_no>', views.CommunityDetailModify.as_view()),
 ]
