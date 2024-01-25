@@ -18,6 +18,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('profile/', ProfileView.as_view()),
     path('user_info/', UserInfoView.as_view(), name='user_info'),
+    path('login_check/', views.login_check, name='login_check'),
     
         
     # 리액트 연동
