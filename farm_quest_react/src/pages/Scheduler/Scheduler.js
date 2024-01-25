@@ -5,6 +5,8 @@ import SchedulerFilter from './SchedulerFilter';
 import SchedulerCalendar from './SchedulerCalendar';
 import './SchedulerCSS.css'
 
+
+
 const Scheduler = () => {
     return (
         <div className="Scheduler">
