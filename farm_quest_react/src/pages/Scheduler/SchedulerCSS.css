@@ -1,0 +1,113 @@
+/* 캘린더 필터 */
+
+#schedularFilter {
+  margin-top: 20px;
+  padding-right: 20px;
+}
+
+#schedularFilter h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#schedularFilterUi {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+#schedularFilterUi input {
+  margin-right: 8px; /* 체크박스와 라벨 사이 여백 조절 */
+}
+
+#schedularFilterUi label {
+  font-size: 17px;
+}
+
+/* 캘린더 바디 */
+
+.filter-container,
+.calendar-container {
+    display: inline-block;
+    vertical-align: top; /* 위쪽 시작점 정렬 */
+    margin-top:20px;
+    margin-right: 20px;
+}
+
+#thisMonth {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #thisMonth td {
+    border: 1px solid #ccc;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+  }
+
+  #calendarTitle {
+    background-color: beige;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+  }
+
+  .calendarTitle {
+    display:inline-block;
+    align-items: center;
+    margin-right: 20px;
+    
+  }
+  
+  .MonthBtn {
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+
+  }
+
+  .calendarBodyDateCell {
+    line-height:30px;
+    vertical-align: top;
+    text-align: left;
+    /* border-style: double; */
+
+  }
+
+  .dayNameCell {
+    font-weight: bolder;
+    font-size:large;
+    
+  }
+
+  .sundayStyle,
+  .prevMonthCell:first-child,
+  .calendarBodyDateCell:first-child,
+  .nextMonthCell:first-child {
+    color: red; 
+  }
+
+  .saturdayStyle,
+  .prevMonthCell:last-child,
+  .calendarBodyDateCell:last-child,
+  .nextMonthCell:last-child {
+    color: blue; 
+  }
+  
+  .prevMonthCell,
+  .nextMonthCell {
+    background-color: rgba(247, 247, 247, 0.842);
+  }
+
+  #thisMonthBody {
+    margin-bottom: 150px;
+  }
+
+
