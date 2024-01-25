@@ -9,7 +9,7 @@ const DiagnosisRecommend = () => {
     const [loading, setLoading] = useState(false);
     const containerRef = useRef();
     const [count, setCount] = useState(0);
-    const count_ten = ((count+1)*10)
+    // const count_ten = ((count+1)*10)
 
     const fetchRecommendations = useCallback(async () => {
         try {
@@ -28,8 +28,8 @@ const DiagnosisRecommend = () => {
     
     useEffect(() => {
         fetchRecommendations();
-        containerRef.current.focus();
-    },[count,]);
+        // containerRef.current.focus();
+    },[]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -55,11 +55,11 @@ const DiagnosisRecommend = () => {
     return (
         <div>
             <div>
-                <p>출력 상품 갯수 {count_ten}</p>
-                <button onClick={() => setCount(count + 1)}>출력 상품 10 개씩 추가</button>
+                {/* <p>출력 상품 갯수 {count_ten}</p> */}
+                {/* <button onClick={() => setCount(count + 1)}>출력 상품 10 개씩 추가</button> */}
             </div>
 
-            <div ref={containerRef} style={{ overflowY: 'scroll', height: '200px' }}>
+            <div ref={containerRef} style={{ overflowY: 'scroll', height: '300px' }}>
                 <h2>Solution Word: {solutionWord}</h2>
                 <h2>recommendations: </h2>                
                 {recommendations.map((recommend, index) => (

@@ -49,6 +49,7 @@ from rest_framework.authtoken.models import Token
 @permission_classes([permissions.AllowAny])
 def login_check(request):    
     token = request.data.get('token', None)
+    print('token = ', token)
 
     if token:        
         try:
@@ -59,7 +60,9 @@ def login_check(request):
         
         user = token_obj.user
         print('user = ', user)
-        return Response({'id': user.id, 'username':user.username}, status=status.HTTP_200_OK)
+        user_context = {'id': user.id, 'username':user.username}
+        print('user_context = ', user_context)
+        return Response(user_context, status=status.HTTP_200_OK)
 
     return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -84,6 +87,7 @@ class LoginView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         token = serializer.validated_data
+        print('token = ', token)        
         return Response({"token": token.key}, status=status.HTTP_200_OK)
 
 

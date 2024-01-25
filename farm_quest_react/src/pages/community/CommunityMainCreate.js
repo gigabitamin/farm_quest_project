@@ -6,8 +6,7 @@ const CommunityMainCreate = () => {
     const initialForm = {
         thread_title: '',
         thread_content: '',
-        thread_type: '',
-        user_id: ''
+        thread_type: ''
     };
 
     const [form, setForm] = useState(initialForm);
@@ -33,10 +32,12 @@ const CommunityMainCreate = () => {
     const submitForm = (event) => {
         if (window.confirm('등록하시겠습니까?')) {
             // var formData = new FormData(document.formData);
-            axios.post('http://localhost:8000/community/create/', form).then(
+            axios.post('http://localhost:8000/community/create/', form, {
+                headers: { Authorization: `Token  ${localStorage.getItem('token')}` }
+            }).then(
                 response => {
                     alert("등록 완료");
-                    dispatch({type: 'back'});
+                    // dispatch({type: 'back'});
                 }
             );
         } else {
@@ -74,10 +75,6 @@ const CommunityMainCreate = () => {
                     <tr>
                         <th>내용</th>
                         <td><input type='text' name='thread_content' onChange={changeForm} /></td>
-                    </tr>
-                    <tr>
-                        <th>너의 아이디는</th>
-                        <td><input type='text' name='user_id' onChange={changeForm} /></td>
                     </tr>
                     </tbody>
                 </table>

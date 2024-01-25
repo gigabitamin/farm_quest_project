@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DiagnosisDetail = () => {
-  const plantSpecies = ['고추', '딸기', '시설포도', '오이', '토마토', '파프리카']; // 작물 종류 데이터는 실제 데이터로 대체해야 합니다.
+  const plantSpecies = ['고추', '딸기', '시설포도', '오이', '토마토', '파프리카'];
 
   const handleChoiceSubmit = () => {
     // 작물 선택 완료 시 처리 로직
@@ -13,11 +13,6 @@ const DiagnosisDetail = () => {
 
   return (
     <>
-      <style>
-        {`
-          /* 스타일 내용은 직접 적용해주세요. */
-        `}
-      </style>
 
       <div className="diagnosis_wrap_box">
         <div className="diagnosis_ad_box">
@@ -53,10 +48,8 @@ const DiagnosisDetail = () => {
                   <article className="diagnosis_answer_article">
                     <div className="diagnosis_answer_wrap">
                       <form id="diagnosis_answer_form">
-                        <h2>문진표</h2>
-                        {/* 문진표 데이터 및 루프 처리는 동적으로 구성해야 합니다. */}
-                        <div>
-                          <div>{/* question.diagnosis_question_content */}</div>
+                        <h2>문진표</h2>                        
+                        <div>                          
                           <label>
                             <input type="radio" name="question" value="예" required />예
                             <input type="radio" name="question" value="아니오" required />아니오
