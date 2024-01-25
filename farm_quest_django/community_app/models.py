@@ -24,6 +24,3 @@ class CommunityTb(models.Model):
     class Meta:
         managed = False
         db_table = 'community_tb'
-        
-        
-
