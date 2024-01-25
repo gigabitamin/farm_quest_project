@@ -4,7 +4,7 @@ import GardeningShopIndex from './gardeningshop/GardeningShopIndex';
 import Community from "./community/Community";
 import UserRouter from "./user/UserRouter"
 import DiagnosisRouter from "./diagnosis/DiagnosisRoute"
-
+import GardeningShopDetail from './gardeningshop/GardeningShopDetail';
 
 const Top = () => {    
 
