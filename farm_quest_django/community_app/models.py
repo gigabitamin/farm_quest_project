@@ -19,7 +19,7 @@ class CommunityTb(models.Model):
     thread_img = models.TextField(blank=True, null=True)
     thread_date = models.DateTimeField(blank=True, null=True)
     thread_type = models.IntegerField(blank=True, null=True)
-    user = models.ForeignKey('UsersAppUser', models.DO_NOTHING, blank=True, null=True)
+    user_id = models.ForeignKey('UsersAppUser', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False

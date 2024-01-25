@@ -10,6 +10,7 @@ const DiagnosisChoice = () => {
     const plantLoadData = async () => {
         const response = await axios.get('http://localhost:8000/plant_api/');
         setPlantSpecies(response.data);
+        console.log(response.data)
     };
 
     useEffect(() => {
@@ -54,15 +55,19 @@ const DiagnosisChoice = () => {
                         <form  id="diagnosis_choice_form" name="diagnosisChoiceForm" onSubmit={handleChoiceSubmit}>
                             <h2>작물 선택</h2>              
                             {plantSpecies.map((plant) => (
-                                <label key={plant.plant_no}>
-                                    <input
-                                        type="radio"
-                                        name="choice_plant"
-                                        value={plant.plant_no}
-                                        onChange={handlePlantChange}
-                                    />
-                                    {plant.plant_name}
-                                </label>
+                                <div key={plant.plant_no}>
+                                    <label>
+                                        <div>
+                                        <div><img src={plant.plant_main_img }
+                                            alt={plant.plant_no}
+                                            style={{ width: '100px', height: 'auto' }}></img>
+                                        </div>
+                                        <div>{plant.plant_name}</div>
+                                        <div>{plant.plant_content}</div>
+                                        </div>                                        
+                                        <input type="radio" name="choice_plant" value={plant.plant_no} onChange={handlePlantChange}/>
+                                    </label>
+                                </div>
                             ))}
                             <input type="submit" value="선택완료" />
                         </form>
