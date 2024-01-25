@@ -44,6 +44,8 @@ class CommunityCreate(generics.CreateAPIView):
     
     def post(self, request, *args, **kwargs):       
         if request.auth:
+            print('request = ', request)
+            print('request.auth = ', request.auth)
             user_id = request.user.id
             request.data['user'] = user_id
             print(request.data)
