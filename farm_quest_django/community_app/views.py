@@ -47,12 +47,6 @@ class CommunityDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.CommunityDetailSerializer
     lookup_field = 'thread_no'
 
-<<<<<<< HEAD
-
-#에러 추가
-def community_index(request):
-    return render(request, 'your_template_name.html')
-=======
     def get(self, request, *args, **kwargs): 
         return self.retrieve(request, *args, **kwargs)
 
@@ -67,4 +61,3 @@ def community_index(request):
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
->>>>>>> develop

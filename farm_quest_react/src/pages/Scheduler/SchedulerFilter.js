@@ -24,10 +24,10 @@ class SchedulerFilter extends React.Component {
       const filterOptions = ['딸기', '토마토', '파프리카', '오이', '고추', '포도'];
   
       return (
-        <div>
-          <h2>Scheduler 필터</h2>
+        <div id="schedularFilter">
+          <h2>선택 작목</h2>
           {filterOptions.map((option) => (
-            <div key={option}>
+            <div id="schedularFilterUi" key={option}>
               <input
                 type="checkbox"
                 id={option}

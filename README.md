@@ -8,6 +8,10 @@
 ====================================================
 <!-- version -->
 
+### v0.4.5 psh
+- 스케줄러 초기 구성
+- package.jso devDependencies "@babel/plugin-proposal-private-property-in-object": "^1.0.7" 추가
+
 ### v0.4.4 kdy  
 - 로그인 유저의 정보를 LocaStorage 에 token을 저장하는 방식에서 cookie에 저장하여 로그인하는 방식으로 변경  
 - 페이지 리로딩시 로그인 풀리는 문제 해결
