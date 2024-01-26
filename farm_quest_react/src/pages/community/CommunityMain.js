@@ -13,9 +13,9 @@ const CommunityMain = ({ mainType }) => {
     const [data, setData] = useState({results: []});
 
     const loadData = async () => {
-        // 테스트 출력 
-        // console.log(page);
         const response = await axios.get(page);
+        // 테스트 출력
+        console.log(response.data)
         setData(response.data);
     };
 

@@ -10,7 +10,7 @@ from . import models, serializers, pagination
 
 # Create your views here.
 class CommunityList(generics.ListAPIView):
-    serializer_class = serializers.CommunityListSerializer
+    serializer_class = serializers.CommunityListShowSerializer
     pagination_class = pagination.CommunityPagination
 
     def get_queryset(self):
@@ -22,53 +22,42 @@ class CommunityList(generics.ListAPIView):
         else:
             return queryset.order_by('-thread_no')
         return queryset.filter(thread_type=ctg).order_by('-thread_no')
-    
-
-# class CommunitySublist(CommunityList):
-#     def get_queryset(self):
-#         queryset = super().get_queryset()
-#         if self.kwargs['ctg'] == 'farmlog':
-#             ctg = 0
-#         elif self.kwargs['ctg'] == 'qna':
-#             ctg = 1
-#         else:
-#             return queryset
-#         return queryset.filter(thread_type=ctg)
-    
+  
 
 class CommunityCreate(generics.CreateAPIView):
     queryset = models.CommunityTb.objects.all()
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    serializer_class = serializers.CommunityDetailSerializer
+    serializer_class = serializers.CommunityModifySerializer
     
     def post(self, request, *args, **kwargs):       
         if request.auth:
-            print('request = ', request)
-            print('request.auth = ', request.auth)
             user_id = request.user.id
             request.data['user'] = user_id
-            print(request.data)
+            print('post : ', request.data)
             return self.create(request, *args, **kwargs)
         raise PermissionError('You have no token information.')
 
 
-class CommunityDetail(generics.RetrieveUpdateDestroyAPIView):
+class CommunityDetailShow(generics.RetrieveAPIView):
+    queryset = models.CommunityTb.objects.all()
+    serializer_class = serializers.CommunityDetailShowSerializer
+    lookup_field = 'thread_no'
+
+
+class CommunityDetailModify(generics.UpdateAPIView, generics.DestroyAPIView):
     queryset = models.CommunityTb.objects.all()
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    serializer_class = serializers.CommunityDetailSerializer
+    serializer_class = serializers.CommunityModifySerializer
     lookup_field = 'thread_no'
-
-    def get(self, request, *args, **kwargs): 
-        return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
         self.is_right_user(request)
         return self.update(request, *args, **kwargs)
 
-    def patch(self, request, *args, **kwargs):
-        return self.partial_update(request, *args, **kwargs)
+    # def patch(self, request, *args, **kwargs):
+    #     return self.partial_update(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         self.is_right_user(request)
