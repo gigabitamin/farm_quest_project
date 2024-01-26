@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.conf import settings
 
+import io
+from rest_framework.parsers import JSONParser
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -135,6 +137,7 @@ def get_nx_ny_from_location(location_1, location_2, location_3):
         return '0', '0'
     
 def get_location_options(request, level, parent_location=None):
+    print(request.POST)
     query_field = f'location_{level}'
 
     if level == 1:
@@ -149,19 +152,24 @@ def get_location_options(request, level, parent_location=None):
 
     return JsonResponse({'options': options})
 
-
-@require_POST
+# @require_POST
+@api_view(['POST'])
 def submit_selected_locations(request):
     try:
         # 요청에서 JSON 데이터 가져오기
-        data = json.loads(request.body)
+        # data = json.loads(request.body)
+        print('request : ', request)
+        print('method : ', request.method)
+        print('body : ', request.body)
+
+        stream = io.BytesIO(request.body)
+        data = JSONParser().parse(stream)
+        print(data)
         
         # 여기에서 data의 내용에 따라 선택된 위치 정보 처리
-        location1 = data.get('location1')
-        location2 = data.get('location2')
-        location3 = data.get('location3')
-        
-        print(data)
+        # location1 = data.get('location1')
+        # location2 = data.get('location2')
+        # location3 = data.get('location3')
         
         # 처리 로직 추가
         
