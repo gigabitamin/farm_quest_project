@@ -11,7 +11,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
             "username"
         ]
 
-class CommunityListSerializer(serializers.ModelSerializer):
+class CommunityListShowSerializer(serializers.ModelSerializer):
     user = UserInfoSerializer(read_only=True)
     class Meta:
         model = CommunityTb
@@ -23,8 +23,21 @@ class CommunityListSerializer(serializers.ModelSerializer):
             "user"
         ]
 
-class CommunityDetailSerializer(serializers.ModelSerializer):
+class CommunityDetailShowSerializer(serializers.ModelSerializer):
     user = UserInfoSerializer(read_only=True)
+    class Meta:
+        model = CommunityTb
+        fields = [
+            "thread_no",
+            "thread_title",
+            "thread_content",
+            "thread_img",
+            "thread_date",
+            "thread_type",
+            "user"
+        ]
+
+class CommunityModifySerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityTb
         fields = [

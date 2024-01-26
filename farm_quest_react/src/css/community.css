@@ -117,51 +117,51 @@ ul.content_box_list li {
 
 
 /****** 게시물 상세정보 관련 양식 ******/
-div.community_content_box_detail {
+div.community_detail_box {
     padding: 1% 0;
     margin: 1% auto;
     width: 95%;
     background: #2de0b6;
 }
 
-div.content_box_detail_top, div.content_box_detail_main, div.content_box_detail_bottom {
+div.content_detail_content_box_top, div.content_detail_content_box_main, div.content_detail_content_box_bottom {
     margin: 0 auto;
     width: 96%;
 }
 
-div.content_box_detail_top {
+div.content_detail_content_box_top {
     border: solid 1px black;
     position: relative;
     height: 50px;
     line-height: 50px;
 }
 
-div.content_box_detail_user {
+div.content_detail_content_box_user {
     position: absolute;
     background: #88AB8E;
     left: 0;
     width: 25%
 }
 
-div.content_box_detail_type {
+div.content_detail_content_box_type {
     position: absolute;
     background: #88AB8E;
     right: 0;
     width: 15%
 }
 
-div.content_box_detail_main {
+div.content_detail_content_box_main {
     margin-top: 1%;
     margin-bottom: 1%;
     border: solid 1px black;
 }
 
-div.content_box_detail_title {
+div.content_detail_content_box_title {
     padding: 1%;
     background: #88AB8E;
 }
 
-div.content_box_detail_content {
+div.content_detail_content_box_content {
     margin: 1% auto;
     width: 96%;
     min-height: 250px;

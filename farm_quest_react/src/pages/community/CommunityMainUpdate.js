@@ -11,7 +11,8 @@ const CommunityMainUpdate = () => {
     const [form, setForm] = useState({
         thread_title: item.thread_title,
         thread_type: item.thread_type,
-        thread_content: item.thread_content
+        thread_content: item.thread_content,
+        user_id: cookies.user_id
     });
 
     const changeForm = (e) => {

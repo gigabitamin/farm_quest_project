@@ -50,20 +50,26 @@ const CommunityMainDetail = () => {
     }, []);
 
     return (
-        <div className="community_content_box_detail">
-            {/* 게시물 클릭시 나오는 해당 게시물의 상세 내용 */}
-            <button onClick={backToMain}>뒤로가기</button>
-            <div className="content_box_detail_top">
-                <div className="content_box_detail_user">{item.user.username}</div>
-                <div className="content_box_detail_type">타입{item.thread_type}</div>
+        <div className="community_detail_box">
+            <div className="community_detail_content_box">
+                {/* 게시물 클릭시 나오는 해당 게시물의 상세 내용 */}
+                <button onClick={backToMain}>뒤로가기</button>
+                <div className="content_detail_content_box_top">
+                    <div className="content_detail_content_box_user">{item.user.username}</div>
+                    <div className="content_detail_content_box_type">타입{item.thread_type}</div>
+                </div>
+                <div className="content_detail_content_box_main">
+                    <div className="content_detail_content_box_title">{item.thread_title}</div>
+                    <div className="content_detail_content_box_content">{item.thread_content}</div>
+                </div>
+                <button onClick={toUpdate}>수정</button>
+                <button onClick={onDelete}>삭제</button>
             </div>
-            <div className="content_box_detail_main">
-                <div className="content_box_detail_title">{item.thread_title}</div>
-                <div className="content_box_detail_content">{item.thread_content}</div>
+            <div className="community_detail_comment_box">
+                
             </div>
-            <button onClick={toUpdate}>수정</button>
-            <button onClick={onDelete}>삭제</button>
         </div>
+        
     );
 };
 
