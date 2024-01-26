@@ -16,9 +16,12 @@ const GardeningShopDetail = () => {
             try {
                 const productResponse = await axios.get(`http://localhost:8000/api/products/${id}`);
                 setProduct(productResponse.data);
-
-                const reviewResponse = await axios.get(`http://localhost:8000/api/shopping_reviews/`);
-                // 리뷰 데이터를 필터링하거나 조작할 로직이 필요할 수 있습니다.
+        
+                // 상품 응답에서 shoping_tb_no를 추출합니다.
+                const shoping_tb_no = productResponse.data.shoping_tb_no;
+        
+                // shoping_tb_no를 사용하여 리뷰를 가져옵니다.
+                const reviewResponse = await axios.get(`http://localhost:8000/api/shopping_reviews/${shoping_tb_no}`);
                 setReviews(reviewResponse.data);
             } catch (error) {
                 console.error("Error fetching data: ", error);
