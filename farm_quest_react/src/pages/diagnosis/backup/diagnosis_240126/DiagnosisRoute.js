@@ -8,7 +8,6 @@ import DiagnosisResult from "./DiagnosisResult";
 import DiagnosisUpload from "./DiagnosisUpload";
 import DiagnosisUploadResult from "./DiagnosisUploadResult";
 import DiagnosisRecommend from "./DiagnosisRecommend";
-import DiagnosisDetail from './DiagnosisDetail';
 
 const DiagnosisRoute = () => {
     // const [currentPath, setCurrentPath] = useState('/');
@@ -25,7 +24,6 @@ const DiagnosisRoute = () => {
                 <Route path="/diagnosis_upload" element={<DiagnosisUpload plantSpecies={plantSpecies} setPlantSpecies={setPlantSpecies} />} />
                 <Route path="/diagnosis_upload_result" element={<DiagnosisUploadResult/>} />
                 <Route path="/diagnosis_recommend/:solutionWord" element={<DiagnosisRecommend />}/>                
-                <Route path="/diagnosis_detail" element={<DiagnosisDetail/>} />
             </Routes>
         </div>
     );
