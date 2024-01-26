@@ -12,7 +12,7 @@ import allowed_host
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# API관련
+# API관련 -psh
 env_file_path = Path(__file__).resolve().parent.parent / '.env'
 environ.Env.read_env(env_file=env_file_path)
 env = environ.Env()
@@ -71,6 +71,8 @@ INSTALLED_APPS = [
 ]
 
 
+# 리액트 로그인 관련 시작 -kdy
+
 REST_FRAMEWORK = {    
     'DEFAULT_AUTHENTICATION_CLASSES': (     
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -108,8 +110,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=240),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
-
-
+# 리액트 로그인 관련 끝 -kdy
 
 
 MIDDLEWARE = [
@@ -131,13 +132,13 @@ MIDDLEWARE = [
 # 리액트 연동
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [    
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:8000",
-    "http://localhost:3000",
-    "http://localhost:8000"
-]
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# CORS_ALLOWED_ORIGINS = [    
+#     "http://127.0.0.1:3000",
+#     "http://127.0.0.1:8000",
+#     "http://localhost:3000",
+#     "http://localhost:8000"
+# ]
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 

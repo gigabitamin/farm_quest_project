@@ -337,6 +337,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
     
     box = []
     tf_disease_predict_list = []
+    crops_path_list = []
     
     if serialized_results_list[0]['boxes']:
         box = serialized_results_list[0]['boxes']        
@@ -408,6 +409,8 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
     elif plant_name == '포도':
         model = load_model('tf_model/grape.keras')
     elif plant_name == '오이':
+        # image_size_x = 256
+        # image_size_y = 256
         model = load_model('tf_model/cucumber.keras')
     elif plant_name == '토마토':
         model = load_model('tf_model/tomato.keras')
@@ -434,11 +437,13 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
     
     X_t = np.array(X_t)
     
-    # print('X_t', X_t)
+    print('X_t', X_t)
     print('Y_t', Y_t)
     
+    pred_prob = []
     # 예측 실행 
-    pred_prob = model.predict(X_t)  
+    if len(X_t) > 0:
+        pred_prob = model.predict(X_t)  
             
     disease_dict = {'1':{'a1':'딸기잿빛곰팡이병','a2':'딸기흰가루병','b1':'냉해피해','b6':'다량원소결핍 (N)','b7':'다량원소결핍 (P)','b8':'다량원소결핍 (K)','c1':'딸기잿빛곰팡이병반응', 'c2':'딸기흰가루병반응'},
            '2':{'a5':'토마토흰가루병','a6':'토마토잿빛곰팡이병','b2':'열과','b3':'칼슘결핍','b6':'다량원소결핍 (N)','b7':'다량원소결핍 (P)','b8':'다량원소결핍 (K)','c5':'토마토흰가루병반응','c6':'토마토잿빛곰팡이병반응',},
@@ -474,9 +479,10 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
     # disease_items = list(disease.items())
     # print('disease_items = ', disease_items)
     
-    disease_predict_probability = pred_prob[0]
-    disease_predict_probability = str(disease_predict_probability).strip('[]').split()
-    disease_predict_probability = [float(number.replace(',', '')) for number in disease_predict_probability]
+    if len(pred_prob) > 0:
+        disease_predict_probability = pred_prob[0]
+        disease_predict_probability = str(disease_predict_probability).strip('[]').split()
+        disease_predict_probability = [float(number.replace(',', '')) for number in disease_predict_probability]
     
     # tf_desease_predict_list = [[dc, dn, dp] for dc, dn, dp in zip(disease_codes, disease_names, desease_predict_probability)]
     
