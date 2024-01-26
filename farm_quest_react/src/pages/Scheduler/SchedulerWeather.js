@@ -9,9 +9,12 @@ const LocationDropdown = () => {
   const [selectedLocation2, setSelectedLocation2] = useState('');
   const [selectedLocation3, setSelectedLocation3] = useState('');
 
+  const [weatherData, setWeatherData] = useState(null);
+
   const handleLocationChange = async () => {
     try {
       // 각 드롭다운의 위치 정보를 서버에 전송
+      
       const response1 = await axios.get('http://localhost:8000/get_location_options/1/');
       setLocationOptions1(response1.data.options);
 
@@ -41,17 +44,24 @@ const LocationDropdown = () => {
   
       // 선택된 세 위치 정보를 서버에 전송
       const response4 = await axios.post('http://localhost:8000/submit_selected_locations/', {
-        location1: selectedLocation1,
-        location2: selectedLocation2,
-        location3: selectedLocation3,
+        location_1: selectedLocation1,
+        location_2: selectedLocation2,
+        location_3: selectedLocation3,
       });
+
+      const weatherResponse = await axios.get('http://localhost:8000/weather', {
+        params: {
+          location_1: selectedLocation1,
+          location_2: selectedLocation2,
+          location_3: selectedLocation3,
+        },
+      });
+    setWeatherData(weatherResponse.data);
+  } catch (error) {
+    console.error('Error submitting selected locations:', error);
+  }
+};
   
-      console.log('Selected locations submitted successfully!');
-      console.log(response4.data)
-    } catch (error) {
-      console.error('Error submitting selected locations:', error);
-    }
-  };
   
 
   useEffect(() => {
@@ -141,6 +151,18 @@ const LocationDropdown = () => {
 
       {selectedLocation3 && (
         <button onClick={handleSubmit}>위치 조회</button>
+      )}
+      
+      {/* 날씨 데이터 출력 */}
+      {weatherData && (
+        <div>
+          <h2>날씨 정보</h2>
+          <p>TMP: {weatherData.TMP}</p>
+          <p>NX: {weatherData.nx}</p>
+          <p>NX: {weatherData.nx}</p>
+          <p>NY: {weatherData.ny}</p>
+          {/* 추가적인 날씨 정보 표시 가능 */}
+        </div>
       )}
     </div>
   );

@@ -99,43 +99,8 @@ def schedular(request):
 
 # 날씨
 
-@api_view(['GET'])
-def weather(request):
-    if request.method == 'GET':
-        location_1 = request.GET.get('location_1', '')
-        location_2 = request.GET.get('location_2', '')
-        location_3 = request.GET.get('location_3', '')
-        nx, ny = get_nx_ny_from_location(location_1, location_2, location_3)
+#옵션선택
 
-    url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
-    base_date = datetime.now().strftime("%Y%m%d")
-    # base_time = datetime.now().strftime("%H00")
-    params={
-        'serviceKey':settings.API_KEY,
-        'numOfRows' :'12',
-        'pageNo' : '1',
-        'dataType' : 'json',
-    
-        'base_date' : base_date,
-        'base_time' : '0500',
-        'nx' : nx,
-        'ny' : ny
-    }
-
-    response = requests.get(url, params=params, verify=False)
-    response.raise_for_status()
-    res = json.loads(response.text)
-    return Response({'message': 'Weather data fetched successfully', 'data': res})
-
-# 위치 고정값 넣을시 반환되는것 확인, 프론트 페이지 작업 => 전송 확인 필요
-
-def get_nx_ny_from_location(location_1, location_2, location_3):
-    try:
-        grid_data = GridData.objects.get(Q(location_1=location_1) & Q(location_2=location_2) & Q(location_3=location_3))
-        return str(grid_data.nx), str(grid_data.ny)
-    except GridData.DoesNotExist:
-        return '0', '0'
-    
 def get_location_options(request, level, parent_location=None):
     print(request.POST)
     query_field = f'location_{level}'
@@ -152,29 +117,75 @@ def get_location_options(request, level, parent_location=None):
 
     return JsonResponse({'options': options})
 
+
+# 옵션변환
 # @require_POST
 @api_view(['POST'])
 def submit_selected_locations(request):
     try:
-        # 요청에서 JSON 데이터 가져오기
-        # data = json.loads(request.body)
-        print('request : ', request)
-        print('method : ', request.method)
-        print('body : ', request.body)
-
         stream = io.BytesIO(request.body)
         data = JSONParser().parse(stream)
         print(data)
-        
-        # 여기에서 data의 내용에 따라 선택된 위치 정보 처리
-        # location1 = data.get('location1')
-        # location2 = data.get('location2')
-        # location3 = data.get('location3')
-        
-        # 처리 로직 추가
-        
-        return JsonResponse({"message": "Selected locations submitted successfully!"})
+        nx, ny = get_nx_ny_from_location(data['location_1'], data['location_2'], data['location_3'])
+
+        return JsonResponse({"nx":nx, "ny":ny})
     except json.JSONDecodeError:
         return JsonResponse({"error": "Invalid JSON format in the request"}, status=400)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+    
+    
+# 격자변환
+def get_nx_ny_from_location(location_1, location_2, location_3):
+    try:
+        grid_data = GridData.objects.get(Q(location_1=location_1) & Q(location_2=location_2) & Q(location_3=location_3))
+        nx, ny = str(grid_data.nx), str(grid_data.ny)
+        print(f'Converted nx: {nx}, ny: {ny}')
+        return nx, ny
+    except GridData.DoesNotExist:
+        return JsonResponse({"error": "Invalid JSON format in the request"}, status=400)
+
+
+
+@api_view(['GET'])
+def weather(request):
+    if request.method == 'GET':
+        location_1 = request.GET.get('location_1', '')
+        location_2 = request.GET.get('location_2', '')
+        location_3 = request.GET.get('location_3', '')
+        nx, ny = get_nx_ny_from_location(location_1, location_2, location_3)
+
+        url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
+        base_date = datetime.now().strftime("%Y%m%d")
+        # base_time = datetime.now().strftime("%H00")
+        params={
+            'serviceKey':settings.API_KEY,
+            'numOfRows' :'12',
+            'pageNo' : '1',
+            'dataType' : 'json',
+            'base_date' : base_date,
+            'base_time' : '0500',
+            'nx' : nx,
+            'ny' : ny
+        }
+        print(params)
+
+        response = requests.get(url, params=params, verify=False)
+        response.raise_for_status()
+        res = json.loads(response.text)
+
+        # 필요한 정보를 딕셔너리 형태로 가공
+        informations = {}
+        for item in res['response']['body']['items']['item']:
+            fcstTime = item['fcstTime']
+            category = item['category']
+            fcstValue = item['fcstValue']
+
+            if fcstTime not in informations:
+                informations[fcstTime] = {}
+
+            informations[fcstTime][category] = fcstValue
+
+        return JsonResponse({'message': 'Weather data fetched successfully', 'data': informations})
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
