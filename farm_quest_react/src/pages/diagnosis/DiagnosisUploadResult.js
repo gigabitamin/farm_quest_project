@@ -79,60 +79,79 @@ const DiagnosisUploadResult = () => {
 
     return (
         <div>
-            <h3>이미지 파일 업로드 완료</h3>
-            <p>진단 결과 파일명: {save_file_name}</p>
-            <p>진단 결과 ID: {diagnosis_result_id}</p>
-
-            <img src={url} alt="UploadResult" />
-
+            <div>
+                <h3>전체 진단 결과</h3>
+                <div>유저 파일명: {save_file_name}</div>
+                <div>진단 ID: {diagnosis_result_id}</div>
+            </div>
+            <div><img src={url} alt="UploadResult" /></div>
+            
             {Object.keys(serialized_results.boxes).map((boxKey, index) => {
                 const label = serialized_results.boxes[boxKey]['label'];
                 const labelName = serialized_results.names[label];
                 const confidence = serialized_results.boxes[boxKey]['confidence'];
-                const isDisease = label >= 6;
-                
+                const isDisease = label >= 6;                
                 const url_crops = save_file_name
                     ? `http://127.0.0.1:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg`
                     : null;
-
                 return (
-                    <div key={index}>
-                        {isDisease ? (
+                    <div key={index}><hr />
+                        {isDisease ? (                            
                             <h3>탐지된 질병</h3>
                         ) : (
                             <h3>탐지된 작물</h3>
                         )}
-                        <p>Box {index + 1}의 레이블: {label}</p>
-                        <p>Box {index + 1}의 결과: {labelName}</p>
-                        <p>Box {index + 1}의 확률: {confidence}</p>
+                        
+                        <div>                            
+                            <div>BOX{index + 1}의 예측 대상 : {labelName}</div>
+                            <div>BOX{index + 1}의 예측 확률: {confidence * 100} %</div>
+                        </div>
                         {url_crops && (
                             <img src={url_crops} alt={`Crops_${index + 1}`} />
                         )}
                     </div>
                 );                
             })}
+            <br />
+            <hr /> 
+            <br />
+            <br />
+            <br />
+            <hr />
 
             <div>
-                <h3>이미지 분류 모델 최종 진단 질병</h3>
-                {tf_predict_result_list_sorted[0][0][1]} ({tf_predict_result_list_sorted[0][0][3]}) : {tf_predict_result_list_sorted[0][0][4]}
+                <h3>부위별 최종 진단 결과</h3>
+                <div>진단 작물 : {tf_predict_result_list_sorted[0][0][1]}</div>
+                <div>예측 질병 : ({tf_predict_result_list_sorted[0][0][3]})</div>
+                <div>예측 확률 : {tf_predict_result_list_sorted[0][0][4] * 100} %</div>
             </div>
-
-
             <div>
-                <h3>확률순 예측 질병</h3>
-                {tf_predict_result_list_sorted.map((predict, index) => (
-                    <div key={index}>{index + 1}. {predict[0][1]} ({predict[0][3]}) : {predict[0][4]} - solution_keyword : 
-                    <Link
-                        to={{
-                        pathname: `/diagnosis_recommend/${predict[1]['solution_word']}`,
-                        state: { solutionWord: predict[1]['solution_word'] }
-                        }}
-                    >
-                        {predict[1]['solution_word']}
-                    </Link>                    
-                    
-                    </div>
-                ))}
+                <br />
+                <br />
+                <hr />
+                <h3>부위별 세부 진단 결과 예측되는 질병 리스트(확률순)</h3>
+                <hr /> 
+                <br />
+                <div>
+                    {tf_predict_result_list_sorted.map((predict, index) => (
+                        <div key={index}>{index + 1}. {predict[0][1]}
+                            
+                            ({predict[0][3]}) : {predict[0][4]}
+                            <Link to={{pathname: `/diagnosis_recommend/${predict[1]['solution_word']}`,
+                                state: { solutionWord: predict[1]['solution_word'] }}}>
+                                <div>솔루션 워드 : {predict[1]['solution_word']}</div>
+                                <div></div>
+                                
+                                
+                            </Link>
+                            <div>증상 : {predict[1]['symptom']}</div>
+                            <div>발생환경 : {predict[1]['occurence_environment']}</div>                            
+                            <div>대처법 : {predict[1]['solution_content']}</div>
+                            <hr />
+                        </div>
+                        
+                    ))}
+                </div>
 
             </div> 
 

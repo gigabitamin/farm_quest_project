@@ -31,14 +31,17 @@ const Login = () => {
                 console.log('reponse = ', response)
                 if (response.status < 300) {
                     setCookie('id', response.data.token);
+                    setCookie('user', response.data.user);                    
                     dispatch({
                         part: 'loginUser',
                         type: 'login',
                         username: formData.username
                     });
+                    console.log(response.data.header)
                     history("/");
                 }
             });
+        console.log('cookies = ', cookies)
     }
 
     useEffect(() => {
@@ -135,7 +138,7 @@ const Login = () => {
                   </button>
                   <button className="button is-info">
 
-                    <span>Facebook</span>
+                    <span>Google</span>
                   </button>
                 </div>
               </div>

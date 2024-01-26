@@ -8,6 +8,8 @@ import UserInfo from './UserInfo';
 import TestLink from './TestLink'
 import LoginCookie from './LoginCookie'
 import LoginCheck from './LoginCheck'
+import Profile from './Profile'
+import DeleteProfile from './DeleteProfile'
 
 const UserRouter = () => {
         return (
@@ -21,6 +23,8 @@ const UserRouter = () => {
             <Route path="/test_link" element={<TestLink />} />
             <Route path="/login_cookie" element={<LoginCookie />} />
             <Route path="/login_check" element={<LoginCheck />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/delete_profile" element={<DeleteProfile />} />
         </Routes>
         
     );

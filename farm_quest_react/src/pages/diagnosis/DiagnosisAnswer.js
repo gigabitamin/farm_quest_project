@@ -37,7 +37,7 @@ const DiagnosisAnswer = () => {
     axios.post('http://localhost:8000/diagnosis_questions_history_api/', frmData)
         .then(response => {
             alert("문진표 작성 완료");
-            history('/diagnosis_result');
+            history('/diagnosis_choice');
         })
         .then(data => {
             console.log('Success:', data);

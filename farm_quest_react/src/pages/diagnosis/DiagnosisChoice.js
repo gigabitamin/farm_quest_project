@@ -53,7 +53,8 @@ const DiagnosisChoice = () => {
                 <article className="diagnosis_choice_article">
                     <div className="diagnosis_choice_wrap">
                         <form  id="diagnosis_choice_form" name="diagnosisChoiceForm" onSubmit={handleChoiceSubmit}>
-                            <h2>작물 선택</h2>              
+                            <h2>작물 선택</h2>
+                            <input type="submit" value="선택완료" />              
                             {plantSpecies.map((plant) => (
                                 <div key={plant.plant_no}>
                                     <label>
@@ -69,7 +70,7 @@ const DiagnosisChoice = () => {
                                     </label>
                                 </div>
                             ))}
-                            <input type="submit" value="선택완료" />
+                            
                         </form>
                     </div>
                 </article>

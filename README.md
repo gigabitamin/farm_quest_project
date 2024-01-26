@@ -15,7 +15,8 @@
 - package.jso devDependencies "@babel/plugin-proposal-private-property-in-object": "^1.0.7" 추가
 
 ### v0.4.6 kdy  
-- 로그아웃 시 쿠키 토큰 id 삭제 추가  
+- 로그아웃 시 쿠키 토큰 id 삭제 추가 
+- local 
 
 ### v0.4.5 - jsh  (develop)
 - 커뮤니티 DB관련 문제 해결

@@ -7,7 +7,7 @@ const LoginLink = ({ user }) => {
   const { isLoggedIn, username } = useSelector(state => state.loginUser);
   const [cookies, setCookie, removeCookie] = useCookies(['id']); 
   // 구조 분해 할당 하느라 앞에 변수 3개 필요해서 넣은 것이니 오류 떠있어도 수정하지 말 것
-
+  
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch({
@@ -15,28 +15,9 @@ const LoginLink = ({ user }) => {
       type: 'logout'
     });
     removeCookie('id');
-    localStorage.clear();
-    fetch('http://127.0.0.1:8000/logout/', {
-       method: 'POST',
-       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Token ${localStorage.getItem('token')}`
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log('localStorage = ', localStorage);
-      // localStorage.clear();
-      window.location.replace('http://localhost:3000/login');
-    });
+    // localStorage.clear();
   };
-  console.log('localStorage = ', localStorage);
-  console.log(username)
-  console.log(user)
 
-
-
-  
 
   return (
     <div className="loginBox_hd">
