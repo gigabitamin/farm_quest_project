@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),     
     path('', include("users_app.urls")), 
     path('', include("farm_quest_app.urls")),
-    path('', include("scheduler_app.urls")),
+    path('', include("schedular_app.urls")),
     # path('', include('posts.urls')),        
     path('', include("diagnosis_app.urls")),
     path('', include("gardening_shop_app.urls")),
