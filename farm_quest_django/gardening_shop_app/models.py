@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class ShopingTb(models.Model):
     shoping_tb_no = models.IntegerField(primary_key=True)
     shoping_tb_s = models.TextField(blank=True, null=True)

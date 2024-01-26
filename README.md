@@ -4,7 +4,8 @@
 ### 공지
 
 ### ltj 가드닝샵 오늘의 추천상품 출력문제
-- db 수정 후 업데이트 요망
+- db 수정 후 업데이트 요망 -> 해결
+- 가드닝 샵 views.py 68라인 Id->id (models.py 19라인 id 참조, inspectdb에서 id로 출력 확인)
 
 ### v0.5.0 psh (psh -> develop) 
 - grid_data 출력 문제 수정 후 통합 요망

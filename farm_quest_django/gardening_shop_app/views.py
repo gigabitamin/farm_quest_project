@@ -65,7 +65,8 @@ class ShopingTbList(APIView):
 def recommended_products(request):
     all_products = list(ShopingTb.objects.all())
     recommended = random.sample(all_products, min(len(all_products), 10))  # 최대 10개의 상품을 무작위로 선택
-    data = [{'shoping_tb_rss_channel_item_productId': p.shoping_tb_rss_channel_item_productId,
+    # data = [{'shoping_tb_rss_channel_item_productId': p.shoping_tb_rss_channel_item_productId, # Id->id 변경 후 추천 정상 출력 원본 주석처리
+    data = [{'shoping_tb_rss_channel_item_productId': p.shoping_tb_rss_channel_item_productid,
              'shoping_tb_rss_channel_item_image': p.shoping_tb_rss_channel_item_image, 
              'shoping_tb_rss_channel_item_title': p.shoping_tb_rss_channel_item_title, 
              'shoping_tb_rss_channel_item_lprice': p.shoping_tb_rss_channel_item_lprice} for p in recommended]
