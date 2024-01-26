@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<!-- <link rel="stylesheet" href="index2.css"> -->
+
+
+<style>
+      
+        
+    .diagnosis_wrap_box {
+        display: flex;
+        flex-direction: row;             
+        flex-wrap: nowrap;
+        border: 1px solid black;
+        width:100%;        
+        margin: 0 auto;
+    }
+
+    .diagnosis_ad_box { 
+        display:flex;
+        flex: 1 0 20%;
+        border: 1px solid black;
+        margin: 0 auto;
+        align-items:center;
+        justify-content: center;
+    }
+
+    .diagnosis_ad_content{        
+        border: 1px solid black;        
+    }
+
+    .diagnosis_index_box { 
+        flex-direction: column;             
+        flex-wrap: nowrap;
+        display:flex;
+        flex: 0 0 80%;
+        border: 1px solid black;
+        margin: 0 auto;
+        align-items:center;
+        justify-content: center;       
+    }    
+
+    .diagnosis_choice_box {
+        display: flex;        
+        justify-content: center;
+        align-items: center;        
+        text-align: center;                
+        border: 1px solid black;
+    }
+
+    .diagnosis_choice_result_box {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;                
+        text-align: center;                   
+        justify-content: center;
+        border: 1px solid black;   
+    }
+
+
+    .diagnosis_answer_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
+        border: 1px solid black;
+        width:35vh;
+    }
+    
+    .diagnosis_image_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;        
+        text-align: center;
+        border: 1px solid black;
+    }        
+
+</style>
+
+
+
+{% for solution in solution_content.solution_id %}         
+
+    환경 : {{ solution.symptom }}
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 반복문 시작 -->
+{% for solution in diagnosis_context.solution_content %}         
+<div class="testimonial-item bg-light rounded p-3">
+    <div class="bg-white border rounded p-4">
+        <a href="#" title="#"><p>환경 : {{ solution.symptom }}</p></a>
+        <div class="d-flex align-items-center">
+            <iframe src="#"></iframe>
+            <a href="#" title="#"><img class="img-fluid flex-shrink-0 rounded"></a>
+            <a href="#" title="#"><div class="ps-3">
+                <h6 class="fw-bold mb-1"></h6>
+                <small></small>
+            </div></a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- 반복문 끝-->
+
+
+
+
+
+<div class="diagnosis_wrap_box">
+    <div class="diagnosis_ad_box">광고</div>
+    <div class="diagnosis_index_box">
+        <div class="diagnosis_choice_box">{% include "./diagnosis_choice.html" %}</div>
+        <div class="diagnosis_choice_result_box">
+            <div class="diagnosis_answer_box">{% include "./diagnosis_answer.html" %}</div>
+            <div class="diagnosis_image_box">{% include "./diagnosis_image.html" %}</div>
+        </div>
+    </div>    
+</div>
+
+
+
+
+
+<script>
+</script>
+
+{% endblock content %}

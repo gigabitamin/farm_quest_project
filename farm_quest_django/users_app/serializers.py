@@ -20,7 +20,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
                   'address'
                   )
 
-
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         required=True,
@@ -47,8 +46,7 @@ class RegisterSerializer(serializers.ModelSerializer):
                   'nickname', 
                   'user_name', 
                   'phone_number', 
-                  'address'
-                  )
+                  'address')
                 
     def validate(self, data):        
         if data['password'] != data['password2']:
@@ -71,8 +69,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         token = Token.objects.create(user=user)
         return user
 
-
-
 class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -82,8 +78,7 @@ class UserSerializers(serializers.ModelSerializer):
                   'nickname', 
                   'user_name', 
                   'phone_number', 
-                  'address'
-                  ]
+                  'address']
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
@@ -97,7 +92,6 @@ class LoginSerializer(serializers.Serializer):
             return token, serialized_user
         raise serializers.ValidationError(
             {"error": "Unable to log in with provided credentials."})
-
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

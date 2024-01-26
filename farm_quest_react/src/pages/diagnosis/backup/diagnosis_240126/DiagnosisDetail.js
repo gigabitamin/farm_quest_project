@@ -1,6 +1,4 @@
 import React from 'react';
-import './DiagnosisDetail.css'
-// import DiagnosisChoice from './DiagnosisChoice'
 
 const DiagnosisDetail = () => {
   const plantSpecies = ['고추', '딸기', '시설포도', '오이', '토마토', '파프리카'];
@@ -26,7 +24,6 @@ const DiagnosisDetail = () => {
               <section className="diagnosis_choice_section">
                 <article className="diagnosis_choice_article">
                   <div className="diagnosis_choice_wrap">
-                    {/* <DiagnosisChoice /> */}
                     <form id="diagnosis_choice_form">
                       <h2>작물 선택</h2>
                       {plantSpecies.map((plant) => (

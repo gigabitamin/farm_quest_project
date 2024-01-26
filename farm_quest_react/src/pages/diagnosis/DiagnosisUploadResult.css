@@ -1,0 +1,63 @@
+/* DiagnosisUploadResult.css */
+
+.diagnosis_result_wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.diagnosis_result_info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.diagnosis_result_upload_image {
+  flex: 1;
+}
+
+.diagnosis_result_detect_item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.diagnosis_result_detect_item h3 {
+  margin-bottom: 10px;
+}
+
+.diagnosis_predict_item {
+  margin-top: 10px;
+}
+
+.diagnosis_predict_image img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.diagnosis_result_partial_predict,
+.diagnosis_result_partial_predict_disease {
+  margin-top: 20px;
+}
+
+.solution_word {
+  margin-top: 10px;
+}
+
+.disgnosis_symptom,
+.diagnosis_occurence_environment,
+.diagnosis_action_guide {
+  margin-top: 10px;
+}
+
+.diagnosis_result_none {
+  margin-top: 20px;
+}
+
+.diagnosis_result_none_info img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
