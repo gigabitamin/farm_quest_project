@@ -15,13 +15,11 @@
 ### v0.4.9 jsh
 - DB연동 관련 마이너 수정
 
-### v0.4.8 jsh
-- DB연동 관련 마이너 수정
-
-### v0.5.1 kdy  
+### v0.5.1a kdy  
 - 진단 시스템 예외처리 완료
 - 기존:YOLO에서 감지 못할 경우 serialized_result 빈 리스트 상태로 전송 -> boxes 찾을 수 없어서 에러
 - 수정 후 : yolo_detections.py 빈 리스트 출력시 예외처리, DiagnosisUploadResult.js 에서 boxes 존재 여부 체크 후 출력으로 변경
+- 가드닝 샵 views.py 68라인 Id->id (models.py 19라인 id 참조, inspectdb에서 id로 출력 확인)
 
 ### v0.5.1 psh  
 - 스케쥴러 업데이트 사항 통합  
