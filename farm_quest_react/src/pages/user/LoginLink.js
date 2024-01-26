@@ -15,6 +15,7 @@ const LoginLink = ({ user }) => {
       type: 'logout'
     });
     removeCookie('id');
+    localStorage.clear();
     fetch('http://127.0.0.1:8000/logout/', {
        method: 'POST',
        headers: {
@@ -24,11 +25,12 @@ const LoginLink = ({ user }) => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(localStorage);
+      console.log('localStorage = ', localStorage);
       // localStorage.clear();
       window.location.replace('http://localhost:3000/login');
     });
   };
+  console.log('localStorage = ', localStorage);
   console.log(username)
   console.log(user)
 

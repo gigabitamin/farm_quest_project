@@ -103,13 +103,13 @@ def detect(save_file_path, plant_name, user_select_plant):
             imgsz=640, 
             conf=0.4,
             max_det=1000,
-            show_labels=True,
-            show_conf=True,
-            show_boxes=True,            
+            # show_labels=True,
+            # show_conf=True,
+            show_boxes=True,
             save_txt=True,
             save_json=True,
             save_crop=True, 
-            save_dir=True,            
+            save_dir=True,
             ) # , show = True, name='result_img'
         
         # 예측 결과 리스트를 직렬화
