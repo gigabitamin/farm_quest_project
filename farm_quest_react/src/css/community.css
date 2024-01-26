@@ -124,44 +124,44 @@ div.community_detail_box {
     background: #2de0b6;
 }
 
-div.content_detail_content_box_top, div.content_detail_content_box_main, div.content_detail_content_box_bottom {
+div.detail_content_box_top, div.detail_content_box_main, div.detail_content_box_bottom {
     margin: 0 auto;
     width: 96%;
 }
 
-div.content_detail_content_box_top {
+div.detail_content_box_top {
     border: solid 1px black;
     position: relative;
     height: 50px;
     line-height: 50px;
 }
 
-div.content_detail_content_box_user {
+div.detail_content_box_user {
     position: absolute;
     background: #88AB8E;
     left: 0;
     width: 25%
 }
 
-div.content_detail_content_box_type {
+div.detail_content_box_type {
     position: absolute;
     background: #88AB8E;
     right: 0;
     width: 15%
 }
 
-div.content_detail_content_box_main {
+div.detail_content_box_main {
     margin-top: 1%;
     margin-bottom: 1%;
     border: solid 1px black;
 }
 
-div.content_detail_content_box_title {
+div.detail_content_box_title {
     padding: 1%;
     background: #88AB8E;
 }
 
-div.content_detail_content_box_content {
+div.detail_content_box_content {
     margin: 1% auto;
     width: 96%;
     min-height: 250px;
@@ -171,6 +171,33 @@ div.content_detail_content_box_content {
     최소 크기를 250px로 지정해두었다
     */
     background: #88AB8E;
+}
+
+/****** 게시물 댓글 관련 양식 ******/
+div.community_detail_comment_boxes {
+    position: relative;
+}
+
+div.community_detail_comment_box {
+    border: solid 1px black;
+    min-height: 40px;
+}
+
+div.community_detail_comment_box_user {
+    margin-top: 9px;
+    text-align: left;
+    display: inline-block;
+    border: solid 1px black;
+    width: 21%;
+}
+
+div.community_detail_comment_box_content {
+    line-height: 100%;
+    text-align: left;
+    display: inline-block;
+    border: solid 1px black;
+    right: 0;
+    width: 79%;
 }
 
 /****** 게시물 작성 관련 양식 ******/
