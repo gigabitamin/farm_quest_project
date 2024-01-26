@@ -12,16 +12,16 @@ const LocationDropdown = () => {
   const handleLocationChange = async () => {
     try {
       // 각 드롭다운의 위치 정보를 서버에 전송
-      const response1 = await axios.get('/get_location_options/1/');
+      const response1 = await axios.get('http://localhost:8000/get_location_options/1/');
       setLocationOptions1(response1.data.options);
 
       if (selectedLocation1) {
-        const response2 = await axios.get(`/get_location_options/2/?parent_location=${selectedLocation1}`);
+        const response2 = await axios.get(`http://localhost:8000/get_location_options/2/?parent_location=${selectedLocation1}`);
         setLocationOptions2(response2.data.options);
       }
 
       if (selectedLocation2) {
-        const response3 = await axios.get(`/get_location_options/3/?parent_location=${selectedLocation2}`);
+        const response3 = await axios.get(`http://localhost:8000/get_location_options/3/?parent_location=${selectedLocation2}`);
         setLocationOptions3(response3.data.options);
       }
     } catch (error) {
@@ -40,13 +40,14 @@ const LocationDropdown = () => {
       
   
       // 선택된 세 위치 정보를 서버에 전송
-      await axios.post('http://localhost:8000/submit_selected_locations/', {
+      const response4 = await axios.post('http://localhost:8000/submit_selected_locations/', {
         location1: selectedLocation1,
         location2: selectedLocation2,
         location3: selectedLocation3,
       });
   
       console.log('Selected locations submitted successfully!');
+      console.log(response4.data)
     } catch (error) {
       console.error('Error submitting selected locations:', error);
     }
@@ -55,7 +56,7 @@ const LocationDropdown = () => {
 
   useEffect(() => {
     // level 1 options 가져오기
-    axios.get('/get_location_options/1/')
+    axios.get('http://localhost:8000/get_location_options/1/')
       .then(response => {
         setLocationOptions1(response.data.options);
       })
@@ -67,7 +68,7 @@ const LocationDropdown = () => {
   useEffect(() => {
     // level 2 options 가져오기
     if (selectedLocation1) {
-      axios.get(`/get_location_options/2/?parent_location=${selectedLocation1}`)
+      axios.get(`http://localhost:8000/get_location_options/2/?parent_location=${selectedLocation1}`)
         .then(response => {
           setLocationOptions2(response.data.options);
         })
@@ -80,7 +81,7 @@ const LocationDropdown = () => {
   useEffect(() => {
     // level 3 options 가져오기
     if (selectedLocation2) {
-      axios.get(`/get_location_options/3/?parent_location=${selectedLocation2}`)
+      axios.get(`http://localhost:8000/get_location_options/3/?parent_location=${selectedLocation2}`)
         .then(response => {
           setLocationOptions3(response.data.options);
         })
