@@ -8,9 +8,24 @@ article#community {
 div.community_main_box {
     margin: 0 auto;
     width: 70%;
-    height: 80vh;
+    border: solid 1px black;
+}
+
+div.community_main_top_box {
+    margin: 0 auto;
+    background: yellow;
+}
+
+div.community_main_center_box {
+    margin: 0 auto;
+    height: 65vh;
     overflow-y: scroll;
-    border: solid 2px black;
+    border: solid 1px black;
+}
+
+div.community_main_bottom_box {
+    margin: 0 auto;
+    background: yellow;
 }
 
 aside#community_left_menu, aside#community_right_menu {

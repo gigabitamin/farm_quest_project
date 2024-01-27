@@ -5,7 +5,10 @@ const initialState = {
     },
     community: {
         show: 'main', // 표시 상태
-        mainPage: null, // 메인 화면 페이지 정보
+        mainPage: {
+            link: null,
+            num: null
+        }, // 메인 화면 페이지 정보
         threadNo: null, // 디테일 화면 쓰레드 번호
         item: {}
     },
