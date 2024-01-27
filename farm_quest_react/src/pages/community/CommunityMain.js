@@ -7,15 +7,52 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const CommunityMain = ({ mainType }) => {
     const dispatch = useDispatch();
-    const mainPagePreset = {link: `http://localhost:8000/community/main/${mainType}`, num: 0};
+    const mainPagePreset = {link: `http://localhost:8000/community/main/${mainType}`, num: 1};
     const mainPage_ = useSelector(state => state.community.mainPage);
     const [mainPage, setMainPage] = useState(mainPage_.link ? mainPage_ : mainPagePreset);
     const [data, setData] = useState({results: []});
+    const [pagination, setPagination] = useState([]);
+
+    const linkPreset = mainPagePreset.link + "?page=";
+
+    const title = () => {
+        if (mainType === 'main') {
+            return '전체';
+        } else if (mainType === 'farmlog') {
+            return '팜로그게시판'
+        } else if (mainType === 'qna') {
+            return 'QnA'
+        }
+    }
+
+    // 없어서 수작업 했다;;;
+    const paginator = (currentPageNum, lastPageNum, range=2) => {
+        const cond1 = 1 < currentPageNum - range;
+        const cond2 = lastPageNum > currentPageNum + range;
+        let arr = [];
+        if (2*range + 1 >= lastPageNum){
+            return [...Array(lastPageNum)].map((_, i) => {return i + 1});
+        };
+        if (cond1 && cond2) {
+            arr = arr.concat([-1]);
+            arr = arr.concat([...Array(2*range + 1)].map((_, i) => {return currentPageNum - range + i}));
+            return arr.concat([-1]);
+        };
+        if (cond1 && !cond2) {
+            arr = arr.concat([-1]);
+            return arr.concat([...Array(lastPageNum + range + 1 - currentPageNum)].map((_, i) => {return currentPageNum - range + i}));
+        };
+        if (!cond1 && cond2) {
+            arr = arr.concat([...Array(currentPageNum + range)].map((_, i) => {return i + 1}));
+            return arr.concat([-1]);
+        };
+    };
 
     const loadData = async () => {
         const response = await axios.get(mainPage.link);
         // 테스트 출력
-        console.log(response.data)
+        console.log(response.data);
+        setPagination(paginator(mainPage.num, response.data.page_count));
         setData(response.data);
     };
 
@@ -31,7 +68,16 @@ const CommunityMain = ({ mainType }) => {
         };
     };
 
-    const toDetail = (item, mainPage) => {
+    const toPage = (idx) => {
+        if (idx === -1){
+            return
+        };
+        console.log(String(idx))
+        const link = linkPreset + String(idx);
+        setMainPage({link: link, num: idx});
+    };
+
+    const toDetail = (item) => {
         dispatch({
             part: 'community',
             type: 'detail',
@@ -56,25 +102,42 @@ const CommunityMain = ({ mainType }) => {
         setMainPage(mainPagePreset);
     }, [mainType]);
 
+    console.log(mainPage)
+    console.log(pagination);
+
     return (
         <section>
             <div className='community_main_top_box'>
-                <button onClick={toPrevious}>이전</button>
-                <button onClick={toNext}>다음</button>
+                <p>{title()}</p>
                 <button onClick={toCreate}>작성</button>
             </div>
             <div className='community_main_center_box'>
                 {   
                     data.results.map(item => {
                         return (
-                            <a onClick={() => toDetail(item, mainPage)}><CommunityMainList item={item} /></a>
+                            <a onClick={() => toDetail(item)}><CommunityMainList item={item} /></a>
                         );
                     })
                 }
             </div>
             <div className='community_main_bottom_box'>
-                <button onClick={toPrevious}>이전</button>
-                <button onClick={toNext}>다음</button>
+                {mainPage.num > 1 && (<button onClick={toPrevious}>이전</button>)}
+                {
+                    pagination.map(idx => {
+                        return (
+                            <a
+                            style={{
+                                padding: '2px',
+                                color: idx===mainPage.num ? 'blue' : 'black',
+                                textDecorationLine: idx===mainPage.num ? 'underline' : 'none',
+                            }}
+                            onClick={() => toPage(idx)}>
+                            {idx===-1 ? '...' : idx}
+                            </a>
+                        )
+                    })
+                }
+                {mainPage.num < data.page_count && (<button onClick={toNext}>다음</button>)}
             </div>
         </section>
     );

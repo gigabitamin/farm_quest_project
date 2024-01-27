@@ -5,6 +5,7 @@ article#community {
     height: 0;
 }
 
+/****** 중앙 게시물 관련 양식 ******/
 div.community_main_box {
     margin: 0 auto;
     width: 70%;
@@ -12,13 +13,27 @@ div.community_main_box {
 }
 
 div.community_main_top_box {
+    position: relative;
     margin: 0 auto;
+    height: 40px;
     background: yellow;
+}
+
+div.community_main_top_box p {
+    position: absolute;
+    left: 20px;
+    font-size: 30px;
+}
+
+div.community_main_top_box button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 div.community_main_center_box {
     margin: 0 auto;
-    height: 65vh;
+    height: 63vh;
     overflow-y: scroll;
     border: solid 1px black;
 }
@@ -28,6 +43,7 @@ div.community_main_bottom_box {
     background: yellow;
 }
 
+/****** 좌우 게시물 관련 양식 ******/
 aside#community_left_menu, aside#community_right_menu {
     position: absolute;
     top: 0;
@@ -54,7 +70,7 @@ div.community_left_box, div.community_right_box {
 }
 
 
-/****** 게시물 박스 관련 양식 ******/
+/****** 중앙 게시물 내부 관련 양식 ******/
 div.community_content_box {
     padding: 1% 0;
     margin: 1% auto;
