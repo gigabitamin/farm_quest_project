@@ -1,40 +1,193 @@
-/* 스타일을 추가할 때, 프로젝트의 디자인과 일관성을 유지하기 위해 클래스와 스타일을 조정해주세요. */
+.diagnosis_ready_wrap {
+  border: 3px solid green;
+  padding:3px;
+  background-color: #e0e0e0;  
+  margin:0 auto;  
+  max-width: 720px;
+}
 
-form {
-    max-width: 400px;
-    margin: 0 auto;
-  }
+.diagnosis_ready_section_wrap {
+  border: 3px solid green;
+  padding:3px;
+  display:flex;
+  flex-direction: column;  
+  margin : 0 auto;  
+}
+
+.diagnosis_ready_title {
+  border: 3px solid green;
+  padding:3px;  
+}
+
+.diagnosis_ready_notice {
+  border: 3px solid green;
+  padding:3px;  
+}
+
+.diagnosis_ready_content_warp {
+  border: 3px solid green;
+  padding:3px;  
+}
+
+.diagnosis_ready_process_wrap {
+  border: 3px solid green;
+  padding:3px;  
+}
+
+.diagnosis_ready_process_upload_image {
+  border: 3px solid green;
+  padding:3px;
+  display: flex; 
+  flex-direction: column;
+}
+.diagnosis_ready_submit_setThumbnailOne {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;  
+  margin:0 auto;
+}
+.diagnosis_ready_submit_setThumbnailOne[type="submit"]:hover {
+  background-color: #45a049;
+}
+.diagnosis_ready_submit_setThumbnailOne[type="file"] {
+  margin-top: 10px;
+}
+.diagnosis_ready_submit_handleUploadSubmit {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #de5c5c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;  
+  /* margin:0 auto; */
+}
+.diagnosis_ready_submit_handleUploadSubmit[type="submit"]:hover {
+  background-color: #e37777;
+}
+.diagnosis_ready_submit_handleUploadSubmit[type="file"] {
+  margin-top: 10px;
+}
+
+.diagnosis_ready_process_select_plant_wrap {
+  border: 3px solid green;
+  padding:3px;  
+  margin:0 auto;  
+}
+
+.diagnosis_ready_process_select_plant_div {
+  border: 3px solid green;
+  padding:3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.diagnosis_upload_image_content_box {
+  border: 3px solid green;
+  padding:3px;
+  display: flex;
+  flex-direction: row;
   
-  #imgPreviewOne {
-    margin-top: 20px;
-  }
-  
-  #imgPreviewOne img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-    border: 15px solid green;
-    border-radius: 5px;
-  }
-  
-  input[type="file"] {
-    margin-top: 10px;
-  }
-  
-  input[type="submit"] {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #45a049;
-  }
-  
-  /* .diagnosis_upload_image_box{
-    border:5px solid green;
-  } */
+}
+
+.diagnosis_upload_image_content_img_box {
+  border: 3px solid green;
+  padding:3px;
+  flex-grow: 1;    
+  max-width:28em;
+}
+
+.diagnosis_upload_image_content_img {
+  border: 3px solid green;
+  padding:3px;
+  max-height: 21em;
+  max-width:100%;
+}
+
+.diagnosis_upload_image_content_plant {
+  border: 3px solid green;
+  padding:3px;
+  flex-grow: 1;
+
+}
+
+.diagnosis_upload_image_content_select_plant {
+  border: 3px solid green;
+  padding:3px;
+}
+
+.diagnosis_upload_image_select_plant_box {
+  border: 3px solid green;
+  padding: 3px;
+  display: flex;
+  flex-direction: row;    
+  align-items: center;
+  margin:0 auto;
+  width:100%; 
+}
+
+
+
+/*  */
+
+
+
+
+
+.diagnosis_choice_map_box{
+  border:3px solid green;
+  padding:3px;
+  display:flex;
+  flex-direction: column;      
+}
+
+.diagnosis_choice_map_one{
+  border:3px solid green;
+  padding:3px;     
+}
+
+
+.diagnosis_choice_plant_image_box { 
+  border: 3px solid green;
+  padding: 3px;  
+  width:130px;
+}
+
+/*  */
+
+.diagnosis_choice_select_box > div:nth-child(1){
+  border: 3px solid green;
+  padding: 3px;  
+}
+.diagnosis_choice_select_box > div:nth-child(1) > div:nth-child(1) {
+  border: 3px solid green;
+  padding: 3px;
+}
+.diagnosis_choice_select_box > div:nth-child(1) > div:nth-child(2) {
+  border: 3px solid green;
+  padding: 3px;
+}
+
+.diagnosis_choice_select_box > div:nth-child(2){
+  border: 3px solid green;
+  padding: 3px;
+  flex-grow:1;
+}
+.diagnosis_choice_select_box > div:nth-child(2) > div:nth-child(1) {
+  border: 3px solid green;
+  padding: 3px;
+}
+.diagnosis_choice_select_box > div:nth-child(2) > div:nth-child(2) {
+  border: 3px solid green;
+  padding: 3px;
+}
+
+
+
+
+
+

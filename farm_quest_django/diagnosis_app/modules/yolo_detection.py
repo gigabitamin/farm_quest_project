@@ -81,7 +81,7 @@ def detect(save_file_path, plant_name, user_select_plant):
             model = YOLO('yolo_model/pepper.pt')
         elif plant_name == '딸기':
             model = YOLO('yolo_model/strawberry.pt')
-        elif plant_name == '시설포도':
+        elif plant_name == '포도':
             model = YOLO('yolo_model/grape.pt')            
         elif plant_name == '오이':
             model = YOLO('yolo_model/cucumber.pt')
