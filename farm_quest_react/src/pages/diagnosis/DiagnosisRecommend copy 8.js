@@ -11,7 +11,7 @@ const DiagnosisRecommend = () => {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const containerRef = useRef();
-    // const [cookies, setCookie, removeCookie] = useCookies(['selectedItems']);
+    const [cookies, setCookie, removeCookie] = useCookies(['selectedItems']);
     // const cartList = localStorage['selectedItems']
     const dataString = JSON.stringify(selectedItems)
     const diagnosisItemCartList = selectedItems.map(item => item.shoping_tb_no);
@@ -51,12 +51,12 @@ const DiagnosisRecommend = () => {
     };
     
 
-    // useEffect(() => {
-    //     const savedItems = cookies.selectedItems;
-    //     if (savedItems) {
-    //         setSelectedItems(savedItems);
-    //     }
-    // }, [cookies.selectedItems]);
+    useEffect(() => {
+        const savedItems = cookies.selectedItems;
+        if (savedItems) {
+            setSelectedItems(savedItems);
+        }
+    }, [cookies.selectedItems]);
 
     useEffect(() => {        
         const savedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
@@ -115,7 +115,7 @@ const DiagnosisRecommend = () => {
                 ? prevItems.filter(item => item !== recommendations[index])
                 : [...prevItems, recommendations[index]];
 
-            // setCookie('selectedItems', updatedItems, { path: '/' });
+            setCookie('selectedItems', updatedItems, { path: '/' });
             updateLocalStorage(updatedItems);
 
             return updatedItems;
@@ -127,7 +127,7 @@ const DiagnosisRecommend = () => {
             const selectedItem = selectedItems[index];
             const updatedItems = prevItems.filter(item => item !== selectedItem);
 
-            // setCookie('selectedItems', updatedItems, { path: '/' });
+            setCookie('selectedItems', updatedItems, { path: '/' });
             updateLocalStorage(updatedItems);
     
             return updatedItems;

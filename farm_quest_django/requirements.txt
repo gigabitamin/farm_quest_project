@@ -10,4 +10,4 @@ seaborn
 tensorflow
 opencv-python
 ultralytics
-environ
+django-environ

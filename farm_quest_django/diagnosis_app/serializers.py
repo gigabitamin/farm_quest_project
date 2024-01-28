@@ -1,7 +1,14 @@
+from requests import Response
 from rest_framework import serializers
-from .models import DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
+from .models import DiagnosisItemCart, DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
 from gardening_shop_app.models import ShopingTb
 
+
+class DiagnosisItemCartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DiagnosisItemCart
+        fields = '__all__'
+        
 
 class PlantTbSerializer(serializers.ModelSerializer):
     class Meta:

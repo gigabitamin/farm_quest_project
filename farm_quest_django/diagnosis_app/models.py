@@ -115,3 +115,12 @@ class UsersAppUser(models.Model):
     class Meta:
         managed = False
         db_table = 'users_app_user'        
+        
+        
+class DiagnosisItemCart(models.Model):
+    diagnosis_item_cart_id = models.AutoField(primary_key=True)
+    diagnosis_item_cart_list = models.JSONField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'diagnosis_item_cart'

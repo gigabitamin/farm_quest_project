@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import DiagnosisRecommendList, DiagnosisResultAPIMixins, DiagnosisQuestionsAPIMixins, DiagnosisQuestionHistoryAPIMixins, PlantAPIMixins, SolutionTbAPIMixins
+from .views import DiagnosisItemCartAPIMixins, DiagnosisRecommendList, DiagnosisResultAPIMixins, DiagnosisQuestionsAPIMixins, DiagnosisQuestionHistoryAPIMixins, PlantAPIMixins, SolutionTbAPIMixins
 
 urlpatterns = [
     # 장고
@@ -18,4 +18,6 @@ urlpatterns = [
     path("diagnosis_upload/", views.diagnosis_upload, name='diagnosis_upload'),
     path("save_diagnosis_result_api/", DiagnosisResultAPIMixins.as_view()),
     path("diagnosis_recommend/<str:solution_word>/", DiagnosisRecommendList.as_view(), name="diagnosis_recommend"),
+    path("diagnosis_save_cart/", DiagnosisItemCartAPIMixins.as_view()),    
+
 ]

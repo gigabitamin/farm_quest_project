@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view   
 from rest_framework import mixins, generics
-from .models import DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
-from .serializers import ShopingTbSerializer, PlantTbSerializer, DiagnosisResultSerializer, DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionTbSerializer
+from .models import DiagnosisItemCart, DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
+from .serializers import DiagnosisItemCartSerializer, ShopingTbSerializer, PlantTbSerializer, DiagnosisResultSerializer, DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionTbSerializer
 
 # yolov8 관련
 from django.core.files.storage import FileSystemStorage
@@ -20,6 +20,20 @@ from gardening_shop_app.models import ShopingTb
 from django.db.models import Q
 
 
+class DiagnosisItemCartAPIMixins(
+    mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
+):
+    queryset = DiagnosisItemCart.objects.all()    
+    serializer_class = DiagnosisItemCartSerializer
+    
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        print('Received POST data:', request.data)
+        return self.create(request, *args, **kwargs)
+
+
 
 # from rest_framework.views import APIView
 # from rest_framework.response import Response
@@ -29,16 +43,19 @@ from django.db.models import Q
 # from .serializers import ShopingTbSerializer
 
 class DiagnosisRecommendList(APIView):
-    def get(self, request, solution_word, format=None):
-        
+    def get(self, request, solution_word, format=None):        
         try:
+            print('solution word ', solution_word)
             # print('1')
             # solution_word = '화분'
             page = int(request.GET.get('page', 1))
             page_size = 10
+            print('page', page)
 
             start_index = (page - 1) * page_size
+            print('start_index', start_index)
             end_index = start_index + page_size
+            print('end_index', end_index)
 
             recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
             # print('가냐?', recommendations)
