@@ -17,7 +17,7 @@ const GardeningShopDetail = () => {
                 const productResponse = await axios.get(`http://localhost:8000/api/products/${id}`);
                 setProduct(productResponse.data);
         
-                // 상품 응답에서 shoping_tb_no를 추출합니다.
+                // 상품 응답에서 shoping_tb_no를 추출합니다 d.
                 const shoping_tb_no = productResponse.data.shoping_tb_no;
         
                 // shoping_tb_no를 사용하여 리뷰를 가져옵니다.
