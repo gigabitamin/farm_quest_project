@@ -2,6 +2,7 @@
 
 from datetime import timedelta
 import os
+import environ
 from pathlib import Path
 from urllib import request
 import db_settings as db_settings
@@ -10,6 +11,12 @@ import allowed_host
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# API관련 -psh
+env_file_path = Path(__file__).resolve().parent.parent / '.env'
+environ.Env.read_env(env_file=env_file_path)
+env = environ.Env()
+API_KEY = env('serviceKey')
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,7 +46,7 @@ INSTALLED_APPS = [
     'farm_quest_app',
     'users_app',
     'diagnosis_app',
-    'scheduler_app',
+    'schedular_app',
     'gardening_shop_app',
     'customer_service_app',
     'guide_app',
@@ -60,8 +67,11 @@ INSTALLED_APPS = [
     
     # 'webcam_app',
 
+
 ]
 
+
+# 리액트 로그인 관련 시작 -kdy
 
 REST_FRAMEWORK = {    
     'DEFAULT_AUTHENTICATION_CLASSES': (     
@@ -70,7 +80,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=240),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
@@ -97,11 +107,10 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=240),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
-
-
+# 리액트 로그인 관련 끝 -kdy
 
 
 MIDDLEWARE = [
@@ -124,8 +133,10 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 # CORS_ALLOWED_ORIGINS = [    
-#     "http://127.0.0.1:3000"
+#     "http://127.0.0.1:3000",
 #     "http://127.0.0.1:8000",
+#     "http://localhost:3000",
+#     "http://localhost:8000"
 # ]
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -227,6 +238,8 @@ SECRET_KEY = db_settings.SECRET_KEY
 
 
 # users_app/sign_up2.html 이미지 업로드 기능 관련 -kdy
+
+
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

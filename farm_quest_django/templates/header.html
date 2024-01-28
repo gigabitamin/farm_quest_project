@@ -41,7 +41,7 @@
                 <div class="login_sign_in">{{ user.username }}</div>
                 <div class="login_sign_out"><a href="{% url 'sign_out' %}">Logout</a></div>
             {% else %}
-                <div class="login_sign_up"><a href="{% url 'sign_up2' %}">회원가입</a></div>
+                <div class="login_sign_up"><a href="{% url 'sign_up' %}">회원가입</a></div>
                 <div> / </div>
                 <div class="login_sign_in"><a href="{% url 'sign_in' %}">로그인</a></div>
             {% endif %}    
@@ -98,10 +98,9 @@
             </div>
             
             <div class="nav-item_hd">
-                <div><a href="{% url 'scheduler_general' %}" class="nav-link_hd">스케쥴러</a></div>
+                <div><a href="{% url 'schedular' %}" class="nav-link_hd">스케쥴러</a></div>
                 <div class="dropdown-menu_hd">
-                    <div><a href="{% url 'scheduler_general' %}" class="btn_hd">일반 스케쥴러</a></div>
-                    <div><a href="{% url 'scheduler_personal' %}" class="btn_hd">개인 스케쥴러</a></div>                    
+                    <div><a href="{% url 'schedular' %}" class="btn_hd">일반 스케쥴러</a></div>
                 </div>
             </div>                    
 

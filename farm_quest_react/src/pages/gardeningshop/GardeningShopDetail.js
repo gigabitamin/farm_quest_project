@@ -13,10 +13,9 @@ const GardeningShopDetail = () => {
     const [newReviewContent, setNewReviewContent] = useState('');
     const [newReviewRank, setNewReviewRank] = useState(0);
     const [cookies] = useCookies(['id', 'username']);
-    console.log(cookies);
     // Redux 스토어에서 로그인 상태 가져오기
     const isLoggedIn = useSelector(state => state.loginUser.isLoggedIn);
-   
+
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
@@ -45,11 +44,11 @@ const GardeningShopDetail = () => {
         return stars;
     }
     const submitReview = async () => {
-        // const user_id = userContext.id; // 쿠키에서 사용자 ID 사용
+        const user_id = cookies.user.id; // 쿠키에서 사용자 ID 사용
 
         try {
             const response = await axios.post('http://localhost:8000/api/reviews/', {
-                // user: user_id,
+                user: user_id,
                 shoping_tb_no: product.shoping_tb_no,
                 shopping_review_content: newReviewContent,
                 shopping_review_rank: newReviewRank

@@ -9,4 +9,6 @@ urlpatterns = [
     path('community/create/', views.CommunityCreate.as_view()),
     path('community/detail/show/<int:thread_no>', views.CommunityDetailShow.as_view()),
     path('community/detail/modify/<int:thread_no>', views.CommunityDetailModify.as_view()),
+    path('community/detail/comment/add/', views.CommunityCommentAdd.as_view()),
+    path('community/detail/comment/delete/<int:cmt_no>', views.CommunityCommentDelete.as_view()),
 ]
