@@ -10,18 +10,54 @@
   margin-bottom: 20px;
 }
 
-#schedularFilterUi {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
+/* 필터 스타일 */
+
+#schedulerFilterUi {
+  display: flex; /* Flexbox 사용 */
+  align-items: center; /* 수직 정렬을 가운데로 조절 */
+  flex-direction: row; /* Flexbox의 방향을 가로로 설정 */
 }
 
-#schedularFilterUi input {
-  margin-right: 8px; /* 체크박스와 라벨 사이 여백 조절 */
+#schedulerFilterUi label.schedulerFilterUi {
+  display: block; /* 블록 레벨로 설정 */
 }
 
-#schedularFilterUi label {
-  font-size: 17px;
+#schedulerFilterUi label.schedulerFilterUi {
+  font-size: 18px;
+
+}
+
+#schedulerFilterUi input:checked + label.schedulerFilterUi {
+  color: chocolate;
+  
+}
+
+#schedulerFilterUi label.schedulerFilterUi:hover {
+  text-decoration: wavy;
+  text-decoration-color: green;
+
+}
+
+#schedulerFilterUi input[type="radio"] {
+  display: none;
+
+}
+
+#schedulerFilterUi input[type="radio"] + label.schedulerFilterUi::before {
+  content: '';
+  display: inline-block;
+  width: 14px; 
+  height: 14px;
+  border-radius: 20%;
+  border: 2px solid rgb(102, 51, 8);
+  background-color: #fff;
+  margin-right: 6px;
+
+}
+
+#schedulerFilterUi input[type="radio"]:checked + label.schedulerFilterUi::before {
+  background-color: #007e26;
+
 }
 
 /* 캘린더 바디 */
@@ -115,4 +151,39 @@
 #weatherDropDown {
   text-align: left;
 
+}
+
+/* 모달용 임시css 충돌시 삭제 */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.modal {
+  display:block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.modal h5 {
+  margin-bottom: 10px;
+}
+
+.close {
+  cursor: pointer;
+}
+
+/* 스케줄러 질병경고 */
+.disease-1 {
+  background-color: #ff0000; /* 빨강 */
+}
+
+.plant-1 {
+  border: 2px solid #ff0000; /* 빨강 */
 }

@@ -1,59 +1,62 @@
-import React from 'react';
-// import SchedulerCalendar from './SchedulerCalendar';
+import React, { useState, useEffect } from 'react';
+
+const SchedulerFilter = () => {
+  const [selectedPlant, setSelectedPlant] = useState(null);
+
+  const plantNameToNoMapping = {
+    '딸기': 1,
+    '토마토': 2,
+    '파프리카': 3,
+    '오이': 4,
+    '고추': 5,
+    '포도': 6,
+  };
+
+  const handleRadioChange = (plantName) => {
+    setSelectedPlant(plantName);
+  };
+
+  useEffect(() => {
+    if (selectedPlant !== null) {
+      const plantNo = plantNameToNoMapping[selectedPlant];
+      fetch(`/api/scheduler/${plantNo}`)
+        .then((response) => response.json())
+        .then((data) => {
+          // 데이터 처리 로직 추가
 
 
-class SchedulerFilter extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        checkedItems: {},
-      };
+
+          console.log('Scheduler data for plant:', selectedPlant, data);
+        })
+        .catch((error) => {
+          console.error('Error fetching scheduler data:', error);
+        });
     }
-  // 체크박스 변경
-    handleCheckboxChange = (itemName) => {
-      this.setState((prevState) => ({
-        checkedItems: {
-          ...prevState.checkedItems,
-          [itemName]: !prevState.checkedItems[itemName],
-        },
-      }));
-    };
+  }, [selectedPlant]);
 
-  // 렌더링
-    render() {
-      const filterOptions = ['딸기', '토마토', '파프리카', '오이', '고추', '포도'];
-  
-      return (
-        <div id="schedularFilter">
-          <h2>선택 작목</h2>
-          {filterOptions.map((option) => (
-            <div id="schedularFilterUi" key={option}>
-              <input
-                type="checkbox"
-                id={option}
-                checked={this.state.checkedItems[option] || false}
-                onChange={() => this.handleCheckboxChange(option)}
-              />
-              <label htmlFor={option}>{option}</label>
-            </div>
-          ))}
-  
-          <div>
-            <h3>선택된 옵션:</h3>
-            {/* 예시 */}
-            <ul>
-              {filterOptions
-                .filter((option) => this.state.checkedItems[option])
-                .map((selectedOption) => (
-                  <li key={selectedOption}>{selectedOption}</li>
-                ))}
-            </ul> 
-            {/* 캘린더-우측 구현 */}
-                  {/* <SchedulerCalendar /> */}
-          </div>
+  return (
+    <div id="schedulerFilter">
+      <h2>선택 작목</h2>
+      {Object.entries(plantNameToNoMapping).map(([plantName, plantNo]) => (
+        <div id="schedulerFilterUi" key={plantName}>
+          <input
+            type="radio"
+            id={plantName}
+            name="plantRadio"
+            checked={selectedPlant === plantName}
+            onChange={() => handleRadioChange(plantName)}
+          />
+          <label className='schedulerFilterUi' htmlFor={plantName}>{plantName}</label>
         </div>
-      );
-    }
-  }
+      ))}
+
+      <div>
+        <h3>선택된 작목:</h3>
+        <p>{selectedPlant}</p>
+        {/* 캘린더-우측 구현 */}
+      </div>
+    </div>
+  );
+};
 
 export default SchedulerFilter;
