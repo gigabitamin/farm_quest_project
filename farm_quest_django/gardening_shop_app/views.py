@@ -7,7 +7,10 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import ShopingTbSerializer  # 시리얼라이저를 불러옵니다
+from django.core.exceptions import ObjectDoesNotExist
 import random
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # def gardening_shop_index(request):    
 #     return render(request, 'gardening_shop_app/gardening_shop_index.html')
@@ -65,7 +68,8 @@ class ShopingTbList(APIView):
 def recommended_products(request):
     all_products = list(ShopingTb.objects.all())
     recommended = random.sample(all_products, min(len(all_products), 10))  # 최대 10개의 상품을 무작위로 선택
-    data = [{'shoping_tb_rss_channel_item_productId': p.shoping_tb_rss_channel_item_productId,
+    data = [{"shoping_tb_no": p.shoping_tb_no,
+             'shoping_tb_rss_channel_item_productId': p.shoping_tb_rss_channel_item_productId,
              'shoping_tb_rss_channel_item_image': p.shoping_tb_rss_channel_item_image, 
              'shoping_tb_rss_channel_item_title': p.shoping_tb_rss_channel_item_title, 
              'shoping_tb_rss_channel_item_lprice': p.shoping_tb_rss_channel_item_lprice} for p in recommended]
@@ -75,6 +79,7 @@ def product_detail(request, id):
     try:
         product = ShopingTb.objects.get(shoping_tb_rss_channel_item_productId=id)
         data = {
+            "shoping_tb_no": product.shoping_tb_no,
             "shoping_tb_rss_channel_item_image": product.shoping_tb_rss_channel_item_image,
             "shoping_tb_rss_channel_item_title": product.shoping_tb_rss_channel_item_title,
             "shoping_tb_rss_channel_item_lprice": product.shoping_tb_rss_channel_item_lprice
@@ -83,11 +88,39 @@ def product_detail(request, id):
     except ShopingTb.DoesNotExist:
         return JsonResponse({"error": "Product not found"}, status=404)
 
-def shopping_reviews(request):
-    reviews = ShoppingReview.objects.all()
-    # Randomly pick between 5 and 10 reviews
-    num_reviews_to_select = random.randint(5, min(len(reviews), 10))
-    selected_reviews = random.sample(list(reviews), num_reviews_to_select)
+def shopping_reviews(request, shoping_tb_no):
+    try:
+        # shoping_tb_no를 기반으로 해당 상품과 관련된 리뷰만 필터링
+        reviews = ShoppingReview.objects.filter(shoping_tb_no=shoping_tb_no)
+
+        # 필터링된 리뷰 중 최대 10개 선택
+        num_reviews_to_select = min(len(reviews), 10)
+        selected_reviews = reviews[:num_reviews_to_select]
+
+        data = [{
+                 "shopping_review_no": review.shopping_review_no, 
+                 "shopping_review_content": review.shopping_review_content,
+                 "shopping_review_rank": review.shopping_review_rank
+                 } 
+                 for review in selected_reviews
+        ]
+        return JsonResponse(data, safe=False)
+    except ObjectDoesNotExist:
+        return JsonResponse({'error': 'No reviews found for the specified product.'}, status=404)
     
-    data = [{"shopping_review_no": review.shopping_review_no, "shopping_review_content": review.shopping_review_content} for review in selected_reviews]
-    return JsonResponse(data, safe=False)
+@csrf_exempt
+def post_review(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        try:
+            new_review = ShoppingReview.objects.create(
+                user_id=data['user'],
+                shoping_tb_no_id=data['shoping_tb_no'],
+                shopping_review_content=data['shopping_review_content'],
+                shopping_review_rank=data['shopping_review_rank']
+            )
+            return JsonResponse({'message': 'Review added successfully'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
