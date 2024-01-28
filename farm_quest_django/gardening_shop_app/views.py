@@ -11,7 +11,8 @@ from django.core.exceptions import ObjectDoesNotExist
 import random
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+import time
+import subprocess
 # def gardening_shop_index(request):    
 #     return render(request, 'gardening_shop_app/gardening_shop_index.html')
 
@@ -65,15 +66,27 @@ class ShopingTbList(APIView):
         serializer = ShopingTbSerializer(result_page, many=True)  # 시리얼라이저를 사용합니다
         return paginator.get_paginated_response(serializer.data)  # 시리얼라이즈된 데이터를 반환합니다
     
+import random
+
 def recommended_products(request):
-    all_products = list(ShopingTb.objects.all())
-    recommended = random.sample(all_products, min(len(all_products), 10))  # 최대 10개의 상품을 무작위로 선택
-    # data = [{'shoping_tb_rss_channel_item_productId': p.shoping_tb_rss_channel_item_productId, # Id->id 변경 후 추천 정상 출력 원본 주석처리
-    data = [{'shoping_tb_rss_channel_item_productId': p.shoping_tb_rss_channel_item_productid,
-             'shoping_tb_rss_channel_item_image': p.shoping_tb_rss_channel_item_image, 
-             'shoping_tb_rss_channel_item_title': p.shoping_tb_rss_channel_item_title, 
-             'shoping_tb_rss_channel_item_lprice': p.shoping_tb_rss_channel_item_lprice} for p in recommended]
+    # shopping_review_scores에 따라 상위 50개의 상품을 추출
+    top_50_products = ShopingTb.objects.order_by('-shopping_review_scores')[:50]
+
+    # 상위 50개 중에서 무작위로 10개를 선택
+    recommended = random.sample(list(top_50_products), 10)
+
+    data = [
+        {
+            'shoping_tb_rss_channel_item_productId': p.shoping_tb_rss_channel_item_productid,
+            'shoping_tb_rss_channel_item_image': p.shoping_tb_rss_channel_item_image,
+            'shoping_tb_rss_channel_item_title': p.shoping_tb_rss_channel_item_title,
+            'shoping_tb_rss_channel_item_lprice': p.shoping_tb_rss_channel_item_lprice,
+            'shopping_review_scores': p.shopping_review_scores  # 평점도 포함
+        } for p in recommended
+    ]
+
     return JsonResponse(data, safe=False)
+
 
 def product_detail(request, id):
     try:
@@ -113,12 +126,24 @@ def post_review(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         try:
+            # Determine the value of shopping_review_rank_positive_negative
+            if int(data['shopping_review_rank']) >= 4:
+                shopping_review_rank_positive_negative = 1
+            else:
+                shopping_review_rank_positive_negative = 0
+
             new_review = ShoppingReview.objects.create(
                 user_id=data['user'],
                 shoping_tb_no_id=data['shoping_tb_no'],
                 shopping_review_content=data['shopping_review_content'],
-                shopping_review_rank=data['shopping_review_rank']
+                shopping_review_rank=data['shopping_review_rank'],
+                shopping_review_rank_positive_negative=shopping_review_rank_positive_negative  # Add this field to your model if it's not already there
             )
+
+            # Execute the update_review_recent.py script using manage.py
+            subprocess.run(["python", "manage.py", "update_review_recent"])
+            subprocess.run(["python", "manage.py", "initialize_scores"])
+
             return JsonResponse({'message': 'Review added successfully'})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
