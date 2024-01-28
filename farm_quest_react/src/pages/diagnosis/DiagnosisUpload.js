@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import './DiagnosisUpload.css'
 
 const DiagnosisUpload = () => {
     const location = useLocation();
@@ -51,7 +51,7 @@ const DiagnosisUpload = () => {
     };
 
     return (
-        <div>            
+        <div ClassName="diagnosis_upload_image_box">            
             <form name="frmUpload" method='post' onSubmit={onSubmit}>                
                 진단할 이미지 : {user_select_plant.plant_name} <br />
                 이미지 : <input type='file' name='imgFile' id='imgFile' onChange={setThumbnailOne} />

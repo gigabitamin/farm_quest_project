@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+from my_tokenizer import tokenize_korean_text  # 변경된 임포트
 
 def main():
     """Run administrative tasks."""
@@ -20,3 +20,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

@@ -10,7 +10,7 @@ from . import models, serializers, pagination
 
 # Create your views here.
 class CommunityList(generics.ListAPIView):
-    serializer_class = serializers.CommunityListSerializer
+    serializer_class = serializers.CommunityListShowSerializer
     pagination_class = pagination.CommunityPagination
 
     def get_queryset(self):
@@ -28,22 +28,19 @@ class CommunityCreate(generics.CreateAPIView):
     queryset = models.CommunityTb.objects.all()
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    serializer_class = serializers.CommunityDetailSerializer
+    serializer_class = serializers.CommunityModifySerializer
     
     def post(self, request, *args, **kwargs):       
         if request.auth:
-            print('request = ', request)
-            print('request.auth = ', request.auth)
             user_id = request.user.id
             request.data['user'] = user_id
-            print(request.data)
             return self.create(request, *args, **kwargs)
         raise PermissionError('You have no token information.')
 
 
 class CommunityDetailShow(generics.RetrieveAPIView):
     queryset = models.CommunityTb.objects.all()
-    serializer_class = serializers.CommunityDetailSerializer
+    serializer_class = serializers.CommunityDetailShowSerializer
     lookup_field = 'thread_no'
 
 
@@ -51,15 +48,15 @@ class CommunityDetailModify(generics.UpdateAPIView, generics.DestroyAPIView):
     queryset = models.CommunityTb.objects.all()
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    serializer_class = serializers.CommunityDetailSerializer
+    serializer_class = serializers.CommunityModifySerializer
     lookup_field = 'thread_no'
 
     def put(self, request, *args, **kwargs):
         self.is_right_user(request)
         return self.update(request, *args, **kwargs)
 
-    def patch(self, request, *args, **kwargs):
-        return self.partial_update(request, *args, **kwargs)
+    # def patch(self, request, *args, **kwargs):
+    #     return self.partial_update(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         self.is_right_user(request)
@@ -70,3 +67,32 @@ class CommunityDetailModify(generics.UpdateAPIView, generics.DestroyAPIView):
         thread = self.queryset.get(thread_no=thread_no)
         if request.user.id != thread.user_id:
             raise PermissionDenied("You have no permission to control this thread.")
+
+class CommunityCommentAdd(generics.CreateAPIView):
+    queryset = models.CommunityCmtTb.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = serializers.CommunityCommentModifySerializer
+
+    def post(self, request, *args, **kwargs):       
+        if request.auth:
+            user_id = request.user.id
+            request.data['user'] = user_id
+            print('post : ', request.data)
+            return self.create(request, *args, **kwargs)
+        raise PermissionError('You have no token information.')
+    
+
+class CommunityCommentDelete(generics.DestroyAPIView):
+    queryset = models.CommunityCmtTb.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = serializers.CommunityCommentModifySerializer
+    lookup_field = 'cmt_no'
+
+    def delete(self, request, *args, **kwargs):
+        cmt_no = self.kwargs['cmt_no']
+        comment = self.queryset.get(cmt_no=cmt_no)
+        if request.user.id != comment.user_id:
+            raise PermissionDenied("You have no permission to control this comment.")
+        return self.destroy(request, *args, **kwargs)

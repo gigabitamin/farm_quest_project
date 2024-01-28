@@ -3,22 +3,51 @@
 <!-- notice -->
 ### 공지
 
-### 쿠키 정보 삭제 오류 -> 수정 진행
-### test 후 커뮤니티 로그인 쿠키 정상 구동
-### psh 스케쥴러 정상 작동
+
+### v0.5.4 jsh (develop)
 
 ====================================================
 <!-- version -->
+### v0.5.4 jsh 
+- 커뮤니티 댓글 기능 구현
 
-### v0.4.8 jsh
+### v0.5.3 kdy 
+- 진단 시스템 css 적용 중
+
+### v0.5.2 jsh
+- 스케쥴러 관련 서버 문제 해결
+- views.py 102라인 -> api_view() 사용, SchedulerWeather.js localhost:8000 풀주소 기입후 정상 작동
+
+### v0.5.1a kdy  
+- 진단 시스템 예외처리 완료
+- 기존:YOLO에서 감지 못할 경우 serialized_result 빈 리스트 상태로 전송 -> boxes 찾을 수 없어서 에러
+- 수정 후 : yolo_detections.py 빈 리스트 출력시 예외처리, DiagnosisUploadResult.js 에서 boxes 존재 여부 체크 후 출력으로 변경
+- 가드닝 샵 views.py 68라인 Id->id (models.py 19라인 id 참조, inspectdb에서 id로 출력 확인)
+
+### v0.5.1 psh  
+- 스케쥴러 업데이트 사항 통합  
+- grid_data 출력 로직 추가 
+- 다른 팀원 환경에서 출력이 안되는 이슈로 수정중
+
+### v0.5.0 jsh
 - DB연동 관련 마이너 수정
+
+### v0.4.9 kdy  
+- abstract 방식으로 User 커스텀 모델 커스텀 회원가입 기능 구현
+- 회원탈퇴 기능 구현
+- 로그인 사용자의 프로필 정보 확인 / 수정 기능 추가
+- users_app_user 테이블 구조 변경  
+
+### v0.4.8 psh
+- 스케쥴러 db 구조 변경, 모델 변경 반영, 기능 업데이트, api 기능 키 등록  
 
 ### v0.4.7 psh
 - 스케줄러 초기 구성
 - package.jso devDependencies "@babel/plugin-proposal-private-property-in-object": "^1.0.7" 추가
 
 ### v0.4.6 kdy  
-- 로그아웃 시 쿠키 토큰 id 삭제 추가  
+- 로그아웃 시 쿠키 토큰 id 삭제 추가 
+- local 
 
 ### v0.4.5 - jsh  (develop)
 - 커뮤니티 DB관련 문제 해결

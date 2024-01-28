@@ -103,13 +103,13 @@ def detect(save_file_path, plant_name, user_select_plant):
             imgsz=640, 
             conf=0.4,
             max_det=1000,
-            show_labels=True,
-            show_conf=True,
-            show_boxes=True,            
+            # show_labels=True,
+            # show_conf=True,
+            show_boxes=True,
             save_txt=True,
             save_json=True,
             save_crop=True, 
-            save_dir=True,            
+            save_dir=True,
             ) # , show = True, name='result_img'
         
         # 예측 결과 리스트를 직렬화
@@ -176,6 +176,7 @@ def detect(save_file_path, plant_name, user_select_plant):
         # print('tf_predict_desease_list_sorted = ', tf_predict_desease_list_sorted)
         
         tf_predict_disease_list = []
+        tf_predict_result_list_sorted = []
         crops_path_list = []
         if len(serialized_boxes) >= 0:
             tf_predict_disease_list, crops_path_list = tf_detect(serialized_results_list, plant_name, user_select_plant, img_path)
@@ -183,12 +184,6 @@ def detect(save_file_path, plant_name, user_select_plant):
         
         tf_predict_result_list_sorted = solution_service(tf_predict_disease_list)
         print('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
-        
-        
-        
-        
-        
-        
         # print('solution_row_list_serialized2 = ', solution_row_list_serialized)
                                                             
     except Exception as e:
@@ -337,6 +332,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
     
     box = []
     tf_disease_predict_list = []
+    crops_path_list = []
     
     if serialized_results_list[0]['boxes']:
         box = serialized_results_list[0]['boxes']        
@@ -396,20 +392,22 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
     
     print('plant_name', plant_name)
 
-    image_size_x = 512
-    image_size_y = 512
+    image_size_x = 256
+    image_size_y = 256
 
     if plant_name == '고추':
-        model = load_model('tf_model/pepper.keras')
-        image_size_x = 256
-        image_size_y = 256
-    elif plant_name == '딸기':
+        model = load_model('tf_model/pepper.keras')        
+    elif plant_name == '딸기':        
         model = load_model('tf_model/strawberry.keras')
     elif plant_name == '포도':
+        image_size_x = 512
+        image_size_y = 512
         model = load_model('tf_model/grape.keras')
     elif plant_name == '오이':
         model = load_model('tf_model/cucumber.keras')
     elif plant_name == '토마토':
+        image_size_x = 512
+        image_size_y = 512
         model = load_model('tf_model/tomato.keras')
     elif plant_name == '파프리카':
         model = load_model('tf_model/paprika.keras')
@@ -434,11 +432,13 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
     
     X_t = np.array(X_t)
     
-    # print('X_t', X_t)
+    print('X_t', X_t)
     print('Y_t', Y_t)
     
+    pred_prob = []
     # 예측 실행 
-    pred_prob = model.predict(X_t)  
+    if len(X_t) > 0:
+        pred_prob = model.predict(X_t)  
             
     disease_dict = {'1':{'a1':'딸기잿빛곰팡이병','a2':'딸기흰가루병','b1':'냉해피해','b6':'다량원소결핍 (N)','b7':'다량원소결핍 (P)','b8':'다량원소결핍 (K)','c1':'딸기잿빛곰팡이병반응', 'c2':'딸기흰가루병반응'},
            '2':{'a5':'토마토흰가루병','a6':'토마토잿빛곰팡이병','b2':'열과','b3':'칼슘결핍','b6':'다량원소결핍 (N)','b7':'다량원소결핍 (P)','b8':'다량원소결핍 (K)','c5':'토마토흰가루병반응','c6':'토마토잿빛곰팡이병반응',},
@@ -474,12 +474,13 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
     # disease_items = list(disease.items())
     # print('disease_items = ', disease_items)
     
-    disease_predict_probability = pred_prob[0]
-    disease_predict_probability = str(disease_predict_probability).strip('[]').split()
-    disease_predict_probability = [float(number.replace(',', '')) for number in disease_predict_probability]
+    if len(pred_prob[0]) > 0:
+        disease_predict_probability = pred_prob[0]
+        disease_predict_probability = str(disease_predict_probability).strip('[]').split()
+        disease_predict_probability = [float(number.replace(',', '')) for number in disease_predict_probability]
     
     # tf_desease_predict_list = [[dc, dn, dp] for dc, dn, dp in zip(disease_codes, disease_names, desease_predict_probability)]
-    
+
     tf_disease_predict_list = [[user_select_plant, plant_name, dc, dn, dp] for dc, dn, dp in zip(disease_codes, disease_names, disease_predict_probability)]
 
 

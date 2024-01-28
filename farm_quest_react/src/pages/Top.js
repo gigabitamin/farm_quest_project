@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Community from "./community/Community";
 import UserRouter from "./user/UserRouter"
@@ -7,13 +7,13 @@ import GardeningShopIndex from './gardeningshop/GardeningShopIndex';
 import GardeningShopDetail from './gardeningshop/GardeningShopDetail';
 import Scheduler from './Scheduler/Scheduler';
 
-
 const Top = () => {    
 
 
     // 추가: 상품 필터링 및 페이지네이션을 위한 상태
     return (
-        <div>            
+        <div>
+  
             <Routes>
                 <Route path="/gardening_shop_index" element={<GardeningShopIndex />} />
                 <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} />
