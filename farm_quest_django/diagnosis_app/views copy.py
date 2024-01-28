@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework import mixins, generics
 from .models import DiagnosisItemCart, DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
 from .serializers import DiagnosisItemCartSerializer, ShopingTbSerializer, PlantTbSerializer, DiagnosisResultSerializer, DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionTbSerializer
-from users_app.models import User, UsersAppUser
+from users_app.models import User
 
 # yolov8 관련
 from django.core.files.storage import FileSystemStorage
@@ -25,57 +25,58 @@ from rest_framework.authentication import TokenAuthentication
 import json
 
 
-class DiagnosisItemLoadCartAPIMixins(APIView):
+
+class DiagnosisItemLoadCartAPIMixins(
+    mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = DiagnosisItemCart.objects.all()
+    serializer_class = DiagnosisItemCartSerializer
+    
     def get(self, request, *args, **kwargs):
-        diagnosis_item_cart_id = request.query_params.get('diagnosis_item_cart_id', None)
-        print('diagnosis_item_cart_id = ', diagnosis_item_cart_id)
-        
-        if diagnosis_item_cart_id:
-            try:
-                diagnosis_item_cart = DiagnosisItemCart.objects.get(pk=diagnosis_item_cart_id)
-                print('diagnosis_item_cart', diagnosis_item_cart)
-                diagnosis_item_cart_list = diagnosis_item_cart.diagnosis_item_cart_list
-                print('diagnosis_item_cart_list = ', diagnosis_item_cart_list)
-                                
-                products = ShopingTb.objects.filter(Q(shoping_tb_no__in=diagnosis_item_cart_list))
-                print('products = ', products)
-                serializer = ShopingTbSerializer(products, many=True)
-                print('serializer =', serializer)
-                return Response(serializer.data, status=200)
-            except DiagnosisItemCart.DoesNotExist:
-                return Response({'error': '없는데?'}, status=404)
-        else:
-            return Response({'error': '진짜없는데??'}, status=400)
+        print('request', request)
+        recommendations = ShopingTb.objects.filter(Q(shoping_tb_no__contains=request.data))
+        serializer = ShopingTbSerializer(recommendations, many=True)
+        return Response(serializer.data, status=200)
+        # return self.list(request, *args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+        print('Received POST data:', request.data)
+        return self.create(request, *args, **kwargs)
 
-
+    # queryset = models.CommunityTb.objects.all()
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+    # serializer_class = serializers.CommunityModifySerializer
+    
+    # def post(self, request, *args, **kwargs):       
+    #     if request.auth:
+    #         user_id = request.user.id
+    #         request.data['user'] = user_id
+    #         print('post : ', request.data)
+    #         return self.create(request, *args, **kwargs)
+    #     raise PermissionError('You have no token information.')
+    
 class DiagnosisItemSaveCartAPIMixins(generics.CreateAPIView):
     queryset = DiagnosisItemCart.objects.all()
     serializer_class = DiagnosisItemCartSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    
+
     def post(self, request, *args, **kwargs):
         print('Received POST data:', request.data)
-        if request.auth:
-            user_id = request.user.id
-            user_instance = get_object_or_404(UsersAppUser, id=user_id)            
+        user = request.user
+
+        if user.is_authenticated:
+            user_id = user.id
+            user_instance = User.objects.get(id=user_id)
+
             diagnosis_item_cart_list_str = request.data.get('diagnosis_item_cart_list', '[]')
             diagnosis_item_cart_list = json.loads(diagnosis_item_cart_list_str)
 
             request.data['user'] = user_instance.id
-            print('user_instance.id = ', user_instance.id)            
-            
             request.data['diagnosis_item_cart_list'] = diagnosis_item_cart_list
-            print('request.data = ', request.data)
-                        
-            serializer = self.get_serializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-            self.perform_create(serializer)
-            
-            headers = self.get_success_headers(serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-            
+
+            print('post = ', request.data)
+            return self.create(request, *args, **kwargs)
         raise PermissionError('토큰가져와')
 
 
@@ -258,7 +259,8 @@ class DiagnosisResultAPIMixins(
         diagnosis_result_id = serializer.instance.diagnosis_result_id
         user_select_plant = PlantTbSerializer(serializer.instance.user_select_plant).data
         print(user_select_plant)
-        
+
+        # 생성된 객체의 ID를 응답에 포함
         response_data = {
             'diagnosis_result_id': diagnosis_result_id, 
             'user_select_plant': user_select_plant,

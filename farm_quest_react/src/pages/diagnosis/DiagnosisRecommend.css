@@ -46,6 +46,17 @@
 
 .diagnosis_recommend_section_1_title_cart > div:nth-child(1) {
   border: 3px solid green;
+  padding: 5px;    
+  /* background-color: rgb(153, 157, 36);
+  color: rgb(255, 255, 255);   */
+  border-radius: 5px;
+  /* cursor: pointer;   */
+  margin:0 auto;
+}
+
+
+.diagnosis_recommend_section_1_title_cart > div:nth-child(2) {
+  border: 3px solid green;
   padding: 3px;
   /* margin-top: 10px; */  
   background-color: red;
@@ -55,11 +66,24 @@
   cursor: pointer;  
   margin:0 auto;
 }
-.diagnosis_recommend_section_1_title_cart > div:nth-child(1):hover {
-  background-color: #c22741;
+.diagnosis_recommend_section_1_title_cart > div:nth-child(2):hover {
+  background-color: #b52841;
   cursor: pointer; 
 }
+
+
 .diagnosis_recommend_section_1_title_cart > div:nth-child(3) {
+  border: 3px solid green;
+  padding: 5px;    
+  background-color: rgb(153, 157, 36);
+  color: rgb(255, 255, 255);  
+  border-radius: 5px;
+  /* cursor: pointer;   */
+  margin:0 auto;
+}
+
+
+.diagnosis_recommend_section_1_title_cart > div:nth-child(4) {
   border: 3px solid green;
   padding: 3px;
   /* margin-top: 10px; */  
@@ -70,10 +94,28 @@
   cursor: pointer;  
   margin:0 auto;
 }
-.diagnosis_recommend_section_1_title_cart > div:nth-child(3):hover {
-  background-color: #26b9a5;
+.diagnosis_recommend_section_1_title_cart > div:nth-child(5):hover {
+  background-color: rgb(120, 219, 129);
   cursor: pointer; 
 }
+.diagnosis_recommend_section_1_title_cart > div:nth-child(5) {
+  border: 3px solid green;
+  padding: 3px;
+  /* margin-top: 10px; */  
+  background-color: #efe13f;
+  color: white;
+  /* border: none; */
+  border-radius: 5px;
+  cursor: pointer;  
+  margin:0 auto;
+}
+.diagnosis_recommend_section_1_title_cart > div:nth-child(5):hover {
+  background-color: #efe13f;
+  cursor: pointer; 
+}
+
+
+
 
 .diagnosis_recommend_section_1_content_wrap {
   border: 3px solid green;
@@ -272,17 +314,18 @@
   padding: 10px;
 }
 
-.diagnosis_recommend_section_1_title_cart > div:nth-child(2) {
+.diagnosis_recommend_section_1_title_cart > div:nth-child(1) {
   border: 3px solid green;
   padding: 5px;    
-  background-color: rgb(153, 157, 36);
-  color: rgb(255, 255, 255);  
+  /* background-color: rgb(153, 157, 36);
+  color: rgb(255, 255, 255);   */
   border-radius: 5px;
   /* cursor: pointer;   */
   margin:0 auto;
 }
 
-.diagnosis_recommend_section_1_title_cart > div:nth-child(1) {
+
+.diagnosis_recommend_section_1_title_cart > div:nth-child(2) {
   border: 3px solid green;
   padding: 3px;
   /* margin-top: 10px; */  
@@ -293,11 +336,24 @@
   cursor: pointer;  
   margin:0 auto;
 }
-.diagnosis_recommend_section_1_title_cart > div:nth-child(1):hover {
+.diagnosis_recommend_section_1_title_cart > div:nth-child(2):hover {
   background-color: #b52841;
   cursor: pointer; 
 }
+
+
 .diagnosis_recommend_section_1_title_cart > div:nth-child(3) {
+  border: 3px solid green;
+  padding: 5px;    
+  background-color: rgb(153, 157, 36);
+  color: rgb(255, 255, 255);  
+  border-radius: 5px;
+  /* cursor: pointer;   */
+  margin:0 auto;
+}
+
+
+.diagnosis_recommend_section_1_title_cart > div:nth-child(4) {
   border: 3px solid green;
   padding: 3px;
   /* margin-top: 10px; */  
@@ -308,10 +364,27 @@
   cursor: pointer;  
   margin:0 auto;
 }
-.diagnosis_recommend_section_1_title_cart > div:nth-child(3):hover {
+.diagnosis_recommend_section_1_title_cart > div:nth-child(5):hover {
   background-color: rgb(120, 219, 129);
   cursor: pointer; 
 }
+.diagnosis_recommend_section_1_title_cart > div:nth-child(5) {
+  border: 3px solid green;
+  padding: 3px;
+  /* margin-top: 10px; */  
+  background-color: #efe13f;
+  color: white;
+  /* border: none; */
+  border-radius: 5px;
+  cursor: pointer;  
+  margin:0 auto;
+}
+.diagnosis_recommend_section_1_title_cart > div:nth-child(5):hover {
+  background-color: #efe13f;
+  cursor: pointer; 
+}
+
+
 
 /*  */
 

@@ -11,8 +11,7 @@ from PIL import Image
 
 
 
-class Profile(models.Model):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Profile(models.Model):    
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     id = models.BigAutoField(primary_key=True)
     password = models.CharField(max_length=128)
@@ -25,12 +24,13 @@ class Profile(models.Model):
     is_staff = models.IntegerField(blank=True, null=True)
     is_active = models.IntegerField(blank=True, null=True)
     date_joined = models.DateTimeField(blank=True, null=True)
-    profile_image = models.BinaryField(blank=True, null=True)
-    # profile_image = models.TextField(blank=True, null=True)
+    # profile_image = models.BinaryField(blank=True, null=True)
+    profile_image = models.TextField(blank=True, null=True)
     nickname = models.CharField(max_length=150)
     user_name = models.CharField(max_length=45)
     phone_number = models.CharField(max_length=11)
     address = models.CharField(max_length=255)
+    diagnosis_cart = models.CharField(max_length=45, blank=True, null=True)
     
         
     @receiver(post_save, sender=User)
@@ -138,6 +138,7 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=11, unique=True)
     address = models.CharField(max_length=255, unique=True)
     profile_image = models.CharField(max_length=255, unique=True)
+    diagnosis_cart = models.CharField(max_length=45, blank=True, null=True)
 
     # 리액트 
     # email = models.EmailField(unique=True)
@@ -159,12 +160,13 @@ class UsersAppUser(models.Model):
     is_staff = models.IntegerField(blank=True, null=True)
     is_active = models.IntegerField(blank=True, null=True)
     date_joined = models.DateTimeField(blank=True, null=True)
-    profile_image = models.BinaryField(blank=True, null=True)
-    # profile_image = models.TextField(blank=True, null=True)
+    # profile_image = models.BinaryField(blank=True, null=True)
+    profile_image = models.TextField(blank=True, null=True)
     nickname = models.CharField(max_length=150, blank=True, null=True)
     user_name = models.CharField(max_length=45, blank=True, null=True) 
     phone_number = models.CharField(max_length=11, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
+    diagnosis_cart = models.CharField(max_length=45, blank=True, null=True)
     
     class Meta:
         managed = False

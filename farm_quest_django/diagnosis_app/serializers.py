@@ -1,13 +1,27 @@
 from requests import Response
 from rest_framework import serializers
+from community_app.serializers import UserInfoSerializer
 from .models import DiagnosisItemCart, DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
 from gardening_shop_app.models import ShopingTb
+from users_app.models import UsersAppUser 
 
+class UserInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UsersAppUser
+        fields = [
+            "id",
+            "username"
+        ]
 
 class DiagnosisItemCartSerializer(serializers.ModelSerializer):
+    user = UserInfoSerializer(read_only=True)
     class Meta:
         model = DiagnosisItemCart
-        fields = '__all__'
+        fields = [
+            "diagnosis_item_cart_id",
+            "diagnosis_item_cart_list",
+            "user"
+        ]
         
 
 class PlantTbSerializer(serializers.ModelSerializer):
