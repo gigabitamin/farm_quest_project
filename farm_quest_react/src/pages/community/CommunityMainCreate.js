@@ -38,7 +38,7 @@ const CommunityMainCreate = () => {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(
                 response => {
-                    alert("성공적으로 등록되었습니다.");
+                    alert("등록되었습니다.");
                     // dispatch({type: 'back'});
                 }
             );
@@ -56,18 +56,18 @@ const CommunityMainCreate = () => {
 
     return (
         <div className='community_form_box'>
-            <button onClick={backToMain}>뒤로가기</button>
+            <button className='back_button' onClick={backToMain}>뒤로가기</button>
             <form name='formData' onReset={resetForm} onSubmit={submitForm}>
                 <table>
                     <tbody>
                     <tr>
                         <th>제목</th>
-                        <td><input type='text' name='thread_title' onChange={changeForm} /></td>
+                        <td><input className='title' type='text' name='thread_title' onChange={changeForm} /></td>
                     </tr>
                     <tr>
                         <th>분류</th>
                         <td>
-                            <select name='thread_type' onChange={changeForm}>
+                            <select className='type' name='thread_type' onChange={changeForm}>
                                 <option>분류 선택</option>
                                 <option value='0'>일반</option>
                                 <option value='1'>질문</option>
@@ -76,7 +76,7 @@ const CommunityMainCreate = () => {
                     </tr>
                     <tr>
                         <th>내용</th>
-                        <td><input type='text' name='thread_content' onChange={changeForm} /></td>
+                        <td><textarea className='content' name='thread_content' onChange={changeForm} /></td>
                     </tr>
                     </tbody>
                 </table>

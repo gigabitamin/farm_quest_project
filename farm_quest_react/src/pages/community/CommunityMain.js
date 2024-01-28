@@ -25,7 +25,7 @@ const CommunityMain = ({ mainType }) => {
         }
     }
 
-    // 없어서 수작업 했다;;;
+    // 없어서 수작업 했다 ㅠㅠㅠ
     const paginator = (currentPageNum, lastPageNum, range=2) => {
         const cond1 = 1 < currentPageNum - range;
         const cond2 = lastPageNum > currentPageNum + range;
@@ -126,12 +126,14 @@ const CommunityMain = ({ mainType }) => {
                     pagination.map(idx => {
                         return (
                             <a
-                            style={{
-                                padding: '2px',
-                                color: idx===mainPage.num ? 'blue' : 'black',
-                                textDecorationLine: idx===mainPage.num ? 'underline' : 'none',
-                            }}
-                            onClick={() => toPage(idx)}>
+                                style={{
+                                    padding: '4px',
+                                    cursor: idx===mainPage.num || idx===-1 ? 'default' : 'pointer',
+                                    color: idx===mainPage.num ? 'blue' : 'black',
+                                    textDecorationLine: idx===mainPage.num ? 'underline' : 'none',
+                                }}
+                                onClick={() => toPage(idx)}
+                            >
                             {idx===-1 ? '...' : idx}
                             </a>
                         )
