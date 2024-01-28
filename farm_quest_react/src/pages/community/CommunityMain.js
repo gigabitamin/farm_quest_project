@@ -19,7 +19,7 @@ const CommunityMain = ({ mainType }) => {
         if (mainType === 'main') {
             return '전체';
         } else if (mainType === 'farmlog') {
-            return '팜로그게시판'
+            return '팜로그'
         } else if (mainType === 'qna') {
             return 'QnA'
         }
@@ -51,7 +51,7 @@ const CommunityMain = ({ mainType }) => {
     const loadData = async () => {
         const response = await axios.get(mainPage.link);
         // 테스트 출력
-        console.log(response.data);
+        // console.log(response.data);
         setPagination(paginator(mainPage.num, response.data.page_count));
         setData(response.data);
     };
@@ -102,14 +102,20 @@ const CommunityMain = ({ mainType }) => {
         setMainPage(mainPagePreset);
     }, [mainType]);
 
-    console.log(mainPage)
-    console.log(pagination);
-
     return (
         <section>
             <div className='community_main_top_box'>
                 <p>{title()}</p>
                 <button onClick={toCreate}>작성</button>
+            </div>
+            <div className='community_main_column_box'>
+                <div className="community_list_item_display">
+                    <div className="thread_no">번호</div>
+                    <div className="thread_type">분류</div>
+                    <div className="thread_title" style={{textAlign: 'center'}}>제목</div>
+                    <div className="nickname">닉네임</div>
+                    <div className="nums">조회수</div>
+                </div>
             </div>
             <div className='community_main_center_box'>
                 {   

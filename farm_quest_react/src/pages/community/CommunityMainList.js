@@ -2,9 +2,8 @@ import React from 'react';
 
 const CommunityMainList = ({item}) => {
     return (
-        <div className="community_content_box">
-            {/* 스크롤시 자동 생성되는 게시물 박스들 */}
-            <div className="content_box_top">
+        <div className="community_content_box_list_item">
+            {/* <div className="content_box_top">
                 <div className="content_box_user">{item.user.nickname}</div>
                 <div className="content_box_type">타입{item.thread_type}</div>
             </div>
@@ -18,6 +17,13 @@ const CommunityMainList = ({item}) => {
                     <li>댓글</li>
                     <li>좋아요</li>
                 </ul>
+            </div> */}
+            <div className="community_list_item_display">
+                <div className="thread_no">{item.thread_no}</div>
+                <div className="thread_type">{item.thread_type===0 ? '팜로그' : '질문'}</div>
+                <div className="thread_title">{item.thread_title}</div>
+                <div className="nickname">{item.user.nickname}</div>
+                <div className="nums">조회수없</div>
             </div>
         </div>
     );
