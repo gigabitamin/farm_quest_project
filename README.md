@@ -1,18 +1,19 @@
 # Final Project Farm Quest with Team Final Farmtasy
 
-psh
-React : scheduler pages updated
-django : scheduler module, views, urls updated
-DB : scheduler table added (with plant_tb FK)
-
 
 <!-- notice -->
 ### 공지
 
-### v0.5.7 kdy
+
+- psh 스케쥻러 api 문제결론 -> 포탈 문제  
 
 ====================================================
 <!-- version -->
+
+### v0.5.8 psh  
+- React : scheduler pages updated
+- django : scheduler module, views, urls updated
+- DB : scheduler table added (with plant_tb FK)
 
 ### v0.5.7 kdy  
 - 로그인 체크 오류 수정 
