@@ -52,21 +52,26 @@ class StandardResultsSetPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 100
 
+from django.core.exceptions import FieldError
+
 class ShopingTbList(APIView):
     pagination_class = StandardResultsSetPagination
 
     def get(self, request, format=None):
         products = ShopingTb.objects.all()
         category = request.query_params.get('category')
-        if category and category != 'all':
-            products = products.filter(category=category)
+        try:
+            if category and category != 'all':
+                products = products.filter(shoping_tb_rss_channel_item_category1=category)
 
-        paginator = StandardResultsSetPagination()
-        result_page = paginator.paginate_queryset(products, request)
-        serializer = ShopingTbSerializer(result_page, many=True)  # 시리얼라이저를 사용합니다
-        return paginator.get_paginated_response(serializer.data)  # 시리얼라이즈된 데이터를 반환합니다
-    
-import random
+            paginator = StandardResultsSetPagination()
+            result_page = paginator.paginate_queryset(products, request)
+            serializer = ShopingTbSerializer(result_page, many=True)
+            return paginator.get_paginated_response(serializer.data)
+        except FieldError:
+            # 적절한 예외 처리 또는 로깅
+            return Response({"error": "Invalid category field"}, status=status.HTTP_400_BAD_REQUEST)
+
 
 def recommended_products(request):
     # shopping_review_scores에 따라 상위 50개의 상품을 추출
@@ -77,7 +82,7 @@ def recommended_products(request):
 
     data = [
         {
-            'shoping_tb_rss_channel_item_productId': p.shoping_tb_rss_channel_item_productid,
+            'shoping_tb_rss_channel_item_productid': p.shoping_tb_rss_channel_item_productid,
             'shoping_tb_rss_channel_item_image': p.shoping_tb_rss_channel_item_image,
             'shoping_tb_rss_channel_item_title': p.shoping_tb_rss_channel_item_title,
             'shoping_tb_rss_channel_item_lprice': p.shoping_tb_rss_channel_item_lprice,
