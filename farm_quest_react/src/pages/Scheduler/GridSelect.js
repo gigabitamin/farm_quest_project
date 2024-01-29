@@ -70,19 +70,59 @@ const GridSelect = ({ setStoredNx, setStoredNy }) => {
     const handleLocation3Change = (event) => {
         setSelectedLocation3(event.target.value);
     };
+//// /////////////////////
+const onFetchWeatherData = async () => {
+    const formattedDate = 20240129
+    const baseTime = 1100
+    const storedNx = 92
+    const storedNy = 132
+    
+    const response = await fetch(
+    `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst` +
+    `?serviceKey=${process.env.REACT_APP_API_KEY}` +
+    `&pageNo=1` +
+    `&numOfRows=20` +
+    `&dataType=json` +
+    `&base_date=${formattedDate}` +
+    `&base_time=${baseTime}` +
+    `&nx=${storedNx}` +
+    `&ny=${storedNy}`
+    );
 
+
+    if (!response.ok) {
+    throw new Error('Failed to fetch weather data');
+    }
+
+    const data = await response.json();
+
+    console.log('data:', data)
+
+};
+
+// useEffect(() => {
+//     onFetchWeatherData ();
+// }, []);
+
+// /////////////////////
     const handleSaveAndFetch = () => {
-        sessionStorage.setItem('selectedLocation1', selectedLocation1);
-        sessionStorage.setItem('selectedLocation2', selectedLocation2);
-        sessionStorage.setItem('selectedLocation3', selectedLocation3);
+        // sessionStorage.setItem('selectedLocation1', selectedLocation1);
+        // sessionStorage.setItem('selectedLocation2', selectedLocation2);
+        // sessionStorage.setItem('selectedLocation3', selectedLocation3);
+        onFetchWeatherData ();
+
 
         // 세션 정보를 SchedulerWeatherLocation 모듈에 전송
-        onFetchLocationData(
-            sessionStorage.getItem('selectedLocation1'),
-            sessionStorage.getItem('selectedLocation2'),
-            sessionStorage.getItem('selectedLocation3'),
+        onFetchLocationData(selectedLocation1, selectedLocation2, selectedLocation3,
+            // sessionStorage.getItem('selectedLocation1'),
+            // sessionStorage.getItem('selectedLocation2'),
+            // sessionStorage.getItem('selectedLocation3'),
             setStoredNx, // setStoredNx 함수 전달
             setStoredNy  // setStoredNy 함수 전달
+
+
+
+
         );
     };
     const onFetchLocationData = (location1, location2, location3) => {

@@ -16,103 +16,112 @@ const SchedulerWeatherLocation = () => {
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
-  useEffect(() => {
-    const storedNx = sessionStorage.getItem('nx');
-    const storedNy = sessionStorage.getItem('ny');
+  // useEffect(() => {
+  //   const storedNx = sessionStorage.getItem('nx');
+  //   const storedNy = sessionStorage.getItem('ny');
 
-    const onFetchWeatherData = async () => {
-      try {
-        if (!storedNx || !storedNy) {
-          console.error('nx or ny not available');
-          return;
-        }
+  //   const onFetchWeatherData = async () => {
+  //     try {
+  //       if (!storedNx || !storedNy) {
+  //         console.error('nx or ny not available');
+  //         return;
+  //       }
         
-        console.log('Location Info:', selectedLocation1, selectedLocation2, selectedLocation3);
+  //       console.log('Location Info:', selectedLocation1, selectedLocation2, selectedLocation3);
 
-        const currentDate = new Date();
-        const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}`;
-        const currentHour = currentDate.getHours();
-        console.log('Base Date:', formattedDate);
+  //       const currentDate = new Date();
+  //       const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}`;
+  //       const currentHour = currentDate.getHours();
+  //       console.log('Base Date:', formattedDate);
 
-        let baseTime;
+  //       let baseTime;
 
-        if (currentHour < 2 ) {
-          console.error('Not service time');
-          handleOpenModal(); 
-          return;
-        } else if (currentHour < 5) {
-          baseTime = '0200';
-        } else if (currentHour < 8) {
-          baseTime = '0500';
-        } else if (currentHour < 11) {
-          baseTime = '0800';
-        } else if (currentHour < 14) {
-          baseTime = '1100';
-        } else if (currentHour < 17) {
-          baseTime = '1400';
-        } else if (currentHour < 20) {
-          baseTime = '1700';
-        } else if (currentHour < 23) {
-          baseTime = '2000';
-        } else {
-          console.error('Not service time');
-          handleOpenModal();
-          return;
-        }
+  //       if (currentHour < 2 ) {
+  //         console.error('Not service time');
+  //         handleOpenModal(); 
+  //         return;
+  //       } else if (currentHour < 5) {
+  //         baseTime = '0200';
+  //       } else if (currentHour < 8) {
+  //         baseTime = '0500';
+  //       } else if (currentHour < 11) {
+  //         baseTime = '0800';
+  //       } else if (currentHour < 14) {
+  //         baseTime = '1100';
+  //       } else if (currentHour < 17) {
+  //         baseTime = '1400';
+  //       } else if (currentHour < 20) {
+  //         baseTime = '1700';
+  //       } else if (currentHour < 23) {
+  //         baseTime = '2000';
+  //       } else {
+  //         console.error('Not service time');
+  //         handleOpenModal();
+  //         return;
+  //       }
 
-        console.log('Base Time:', baseTime);
+        
+  //       console.log('Base Time:', baseTime);
+  //       console.log('nx:', storedNx);
+  //       console.log('ny:', storedNy);
 
-        const response = await fetch(
-          `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst` +
-          `?serviceKey=${process.env.REACT_APP_API_KEY}` +
-          `&pageNo=1` +
-          `&numOfRows=50` +
-          `&dataType=json` +
-          `&base_date=${formattedDate}` +
-          `&base_time=${baseTime}` +
-          `&nx=${storedNx}` +
-          `&ny=${storedNy}`
-        );
+  //       const response = await fetch(
+  //         `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst` +
+  //         `?serviceKey=${process.env.REACT_APP_API_KEY}` +
+  //         `&pageNo=1` +
+  //         `&numOfRows=50` +
+  //         `&dataType=json` +
+  //         `&base_date=${formattedDate}` +
+  //         `&base_time=${baseTime}` +
+  //         `&nx=${storedNx}` +
+  //         `&ny=${storedNy}`
+  //       );
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch weather data');
-        }
+  //       if (!response.ok) {
+  //         throw new Error('Failed to fetch weather data');
+  //       }
+  //       // console.log('response:', response)
 
-        const data = await response.json();
 
-        const fcstTimes = Object.keys(data.response.body.items.item);
-        const formattedWeatherData = {};
-        console.log('Data structure:', data.response.body.items.item);
-        console.log('Weather data fetched successfully:', data);
 
-        fcstTimes.forEach(fcstTime => {
-          const weatherInfo = data.response.body.items.item[fcstTime];
-          formattedWeatherData[fcstTime] = {
-            TMP: weatherInfo.TMP,
-            UUU: weatherInfo.UUU,
-            VVV: weatherInfo.VVV,
-            VEC: weatherInfo.VEC,
-            WSD: weatherInfo.WSD, 
-            SKY: weatherInfo.SKY,
-            PTY: weatherInfo.PTY,
-            POP: weatherInfo.POP,
-            WAV: weatherInfo.WAV,
-            PCP: weatherInfo.PCP,
-            REH: weatherInfo.REH,
-            SNO: weatherInfo.SNO,
-          };
-        });
+  //       const data = await response.json();
 
-        console.log('Weather Data:', formattedWeatherData);
-        setWeatherData(formattedWeatherData);
 
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
-      }
-    };
+  //       console.log('data:', data)
 
-    onFetchWeatherData();
-  }, [storedNx, storedNy, selectedLocation1, selectedLocation2, selectedLocation3]);
+  //       const fcstTimes = Object.keys(data.response.body.items.item);
+  //       const formattedWeatherData = {};
+  //       console.log('Data structure:', data.response.body.items.item);
+  //       console.log('Weather data fetched successfully:', data);
+
+  //       fcstTimes.forEach(fcstTime => {
+  //         const weatherInfo = data.response.body.items.item[fcstTime];
+  //         formattedWeatherData[fcstTime] = {
+  //           TMP: weatherInfo.TMP,
+  //           UUU: weatherInfo.UUU,
+  //           VVV: weatherInfo.VVV,
+  //           VEC: weatherInfo.VEC,
+  //           WSD: weatherInfo.WSD, 
+  //           SKY: weatherInfo.SKY,
+  //           PTY: weatherInfo.PTY,
+  //           POP: weatherInfo.POP,
+  //           WAV: weatherInfo.WAV,
+  //           PCP: weatherInfo.PCP,
+  //           REH: weatherInfo.REH,
+  //           SNO: weatherInfo.SNO,
+  //         };
+  //       });
+
+  //       console.log('Weather Data:', formattedWeatherData);
+  //       setWeatherData(formattedWeatherData);
+
+  //     } catch (error) {
+  //       console.error('Error fetching weather data:', error);
+  //     }
+  //   };
+
+  //   onFetchWeatherData();
+  // }, [storedNx, storedNy, selectedLocation1, selectedLocation2, selectedLocation3]);
 
   return (
     <div>
