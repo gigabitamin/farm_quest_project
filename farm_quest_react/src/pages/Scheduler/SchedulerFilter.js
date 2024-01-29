@@ -17,15 +17,18 @@ const SchedulerFilter = () => {
     setSelectedPlant(plantName);
   };
 
+  const handleClearSelection = () => {
+    setSelectedPlant(null);
+    setFetchedData(null);
+  };
+
   useEffect(() => {
     if (selectedPlant !== null) {
       const plantNo = plantNameToNoMapping[selectedPlant];
       fetch(`/api/scheduler/${plantNo}`)
         .then((response) => response.json())
         .then((data) => {
-
-          console.log('Received data:', data); 
-
+          console.log('Received data:', data);
           setFetchedData(data);
         })
         .catch((error) => {
@@ -53,10 +56,11 @@ const SchedulerFilter = () => {
       <div>
         <h3>선택된 작목:</h3>
         <p>{selectedPlant}</p>
+        <button onClick={handleClearSelection}>Clear</button>
         <h3>불러온 데이터:</h3>
         {/* 불러온 데이터를 그대로 렌더링 */}
-        <pre>{JSON.stringify(fetchedData, null, 2)}</pre>      </div>
-        
+        <pre>{JSON.stringify(fetchedData, null, 2)}</pre>
+      </div>
     </div>
   );
 };

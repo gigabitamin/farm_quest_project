@@ -33,8 +33,8 @@ class ShopingTb(models.Model):
 
 class ShoppingReview(models.Model):
     shopping_review_no = models.AutoField(primary_key=True)
-    shopping_review_content = models.TextField(blank=True, null=True)  
-    shopping_review_rank = models.IntegerField(blank=True, null=True)  
+    shopping_review_content = models.TextField(blank=True, null=True)
+    shopping_review_rank = models.IntegerField(blank=True, null=True)
     shopping_review_rank_positive_negative = models.IntegerField(blank=True, null=True)
     shopping_review_predict = models.IntegerField(blank=True, null=True)
     shopping_review_predict_rate = models.TextField(blank=True, null=True)
