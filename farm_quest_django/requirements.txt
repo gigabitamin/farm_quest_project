@@ -12,3 +12,7 @@ opencv-python
 ultralytics
 django-environ
 konlpy
+joblib
+scikit-learn
+imbalanced-learn
+JPype1

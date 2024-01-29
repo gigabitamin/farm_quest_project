@@ -124,34 +124,26 @@ def shopping_reviews(request, shoping_tb_no):
 @csrf_exempt
 def post_review(request):
     if request.method == 'POST':
-        print('request = ', request)
-        print('request.body = ', request.body)
         data = json.loads(request.body)
-        print('data = ', data)
         try:
-            
             # Determine the value of shopping_review_rank_positive_negative
             if int(data['shopping_review_rank']) >= 4:
-                
                 shopping_review_rank_positive_negative = 1
             else:
                 shopping_review_rank_positive_negative = 0
-            print('hi1')
+
             new_review = ShoppingReview.objects.create(
                 user_id=data['user'],
-                shoping_tb_no=data['shoping_tb_no'],
+                shoping_tb_no_id=data['shoping_tb_no'],
                 shopping_review_content=data['shopping_review_content'],
                 shopping_review_rank=data['shopping_review_rank'],
                 shopping_review_rank_positive_negative=shopping_review_rank_positive_negative  # Add this field to your model if it's not already there
             )
-            
-            print('hi2')
-            
-            print('hi3')
+
             # Execute the update_review_recent.py script using manage.py
             subprocess.run(["python", "manage.py", "update_review_recent"])
             subprocess.run(["python", "manage.py", "initialize_scores"])
-            print('hi4')
+
             return JsonResponse({'message': 'Review added successfully'})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
