@@ -4,6 +4,7 @@ import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
 import DiagnosisLink from "./diagnosis/DiagnosisLink";
 import LoginLink from './user/LoginLink'
 import TestLink from './user/TestLink'
+import CsLink from './customerCenter/CsLink'
 
 const Header = () => {
     const user = { is_authenticated: false, username: 'exampleUser' };
@@ -62,16 +63,8 @@ const Header = () => {
             <nav className="navbar_hd">
                 <ul>                     
                     {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}                                        
-                    <div className="btn_hd"><Link to="http://127.0.0.1:8000">장고로 이동</Link></div>
-                    <div className="nav-item_hd">                        
-                        <div><a href="{% url 'customer_service_index' %}" className="nav-link_hd">고객센터</a></div>
-                        <div className="dropdown-menu_hd">                 
-                            <div><a href="{% url 'customer_service_notice' %}" className="btn_hd">공지사항</a></div>
-                            <div><a href="{% url 'customer_service_faq' %}" className="btn_hd">FAQ</a></div>
-                            <div><a href="{% url 'customer_service_1vs1' %}" className="btn_hd">1대1 문의</a></div>
-                        </div>
-                    </div>           
-
+                    <div className="nav-item_hd"><Link to="http://127.0.0.1:8000">장고로 이동</Link></div>
+                    <CsLink />
                     <div className="nav-item_hd">
                         <div><a href="{% url 'guide_index' %}" className="nav-link_hd">가이드</a></div>
                         <div className="dropdown-menu_hd">

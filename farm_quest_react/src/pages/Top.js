@@ -3,10 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 import Community from "./community/Community";
 import UserRouter from "./user/UserRouter"
 import DiagnosisRouter from "./diagnosis/DiagnosisRoute"
-// import GardeningShopIndex from './gardeningshop/GardeningShopIndex';
-// import GardeningShopDetail from './gardeningshop/GardeningShopDetail';
+import GardeningShopIndex from './gardeningshop/GardeningShopIndex';
+import GardeningShopDetail from './gardeningshop/GardeningShopDetail';
 import Scheduler from './Scheduler/Scheduler';
-import GardeningShopRouter from './gardeningshop/GardeningShopRouter';
+// import GardeningShopRouter from './gardeningshop/GardeningShopRouter';
+import CsRouter from './customerCenter/CsRouter';
 
 const Top = () => {    
 
@@ -19,14 +20,15 @@ const Top = () => {
         <div>
   
             <Routes>
-                {/* <Route path="/gardening_shop_index" element={<GardeningShopIndex />} /> */}
-                {/* <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} /> */}
+                <Route path="/gardening_shop_index" element={<GardeningShopIndex />} />
+                <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} />
                 <Route path="/community/:mainType" element={<Community />} />
                 <Route path="/Scheduler" element={<Scheduler />} />
             </Routes>
-            <GardeningShopRouter />
+            {/* <GardeningShopRouter /> */}
             <UserRouter />
             <DiagnosisRouter />
+            <CsRouter />
             
         </div>
     );
