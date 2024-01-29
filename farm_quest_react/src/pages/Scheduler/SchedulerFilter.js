@@ -25,7 +25,7 @@ const SchedulerFilter = () => {
   useEffect(() => {
     if (selectedPlant !== null) {
       const plantNo = plantNameToNoMapping[selectedPlant];
-      fetch(`/api/scheduler/${plantNo}`)
+      fetch(`http://localhost:8000/api/scheduler/${plantNo}`)
         .then((response) => response.json())
         .then((data) => {
           console.log('Received data:', data);
