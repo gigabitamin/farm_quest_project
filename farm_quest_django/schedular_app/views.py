@@ -22,6 +22,84 @@ from django.views.decorators.http import require_POST
 def schedular(request):    
     return render(request, 'scheduler_app/schedular.html')
 
+
+from django.shortcuts import render
+from django.http import JsonResponse
+from .models import GridData
+
+def get_grid_data(request):
+    location1_data = GridData.objects.values_list('location_1', flat=True).distinct()
+    location2_data = GridData.objects.values_list('location_2', flat=True).distinct()
+    location3_data = GridData.objects.values_list('location_3', flat=True).distinct()
+
+    locations1 = set(location1_data)
+    locations2 = set(location2_data)
+    locations3 = set(location3_data)
+
+    return JsonResponse({'location1': list(locations1), 'location2': list(locations2), 'location3': list(locations3)})
+
+def get_location2_data(request):
+    location1 = request.GET.get('location1', '')
+
+    # location_1이 선택되지 않았을 경우 빈 배열 반환
+    if not location1:
+        return JsonResponse({'location2': []})
+
+    # location_1에 해당하는 location_2 데이터를 필터링하여 가져옴
+    location2_data = GridData.objects.filter(location_1=location1).values_list('location_2', flat=True).distinct()
+
+    return JsonResponse({'location2': list(location2_data)})
+    
+def get_location3_data(request):
+    location2 = request.GET.get('location2', '')
+
+    # location_1이 선택되지 않았을 경우 빈 배열 반환
+    if not location2:
+        return JsonResponse({'location3': []})
+
+    # location_1에 해당하는 location_2 데이터를 필터링하여 가져옴
+    location3_data = GridData.objects.filter(location_2=location2).values_list('location_3', flat=True).distinct()
+
+    return JsonResponse({'location3': list(location3_data)})
+
+
+
+# 위치 호출
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def get_nx_ny_from_locations(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        location_1 = data.get('location1')
+        location_2 = data.get('location2')
+        location_3 = data.get('location3')
+
+        try:
+            grid_data = GridData.objects.get(
+                location_1=location_1,
+                location_2=location_2,
+                location_3=location_3
+            )
+            nx = grid_data.nx
+            ny = grid_data.ny
+            return JsonResponse({'nx': nx, 'ny': ny})
+        except GridData.DoesNotExist:
+            return JsonResponse({'error': '해당 위치에 대한 데이터가 없습니다.'}, status=404)
+
+    return JsonResponse({'error': '잘못된 요청입니다.'}, status=400)
+
+
+# 스케줄러DB 불러오기
+from .models import Scheduler
+
+def get_scheduler_info(request, plant_no):
+    scheduler_info = Scheduler.objects.filter(plant_no=plant_no).values()
+
+    # JsonResponse로 반환
+    return JsonResponse(list(scheduler_info), safe=False)
+    
 # 기상청 격자 위경도 변환-사용X
 # import math
 # NX = 149            ## X축 격자점 수
@@ -99,43 +177,8 @@ def schedular(request):
 
 # 날씨
 
-@api_view(['GET'])
-def weather(request):
-    if request.method == 'GET':
-        location_1 = request.GET.get('location_1', '')
-        location_2 = request.GET.get('location_2', '')
-        location_3 = request.GET.get('location_3', '')
-        nx, ny = get_nx_ny_from_location(location_1, location_2, location_3)
+#옵션선택
 
-    url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
-    base_date = datetime.now().strftime("%Y%m%d")
-    # base_time = datetime.now().strftime("%H00")
-    params={
-        'serviceKey':settings.API_KEY,
-        'numOfRows' :'12',
-        'pageNo' : '1',
-        'dataType' : 'json',
-    
-        'base_date' : base_date,
-        'base_time' : '0500',
-        'nx' : nx,
-        'ny' : ny
-    }
-
-    response = requests.get(url, params=params, verify=False)
-    response.raise_for_status()
-    res = json.loads(response.text)
-    return Response({'message': 'Weather data fetched successfully', 'data': res})
-
-# 위치 고정값 넣을시 반환되는것 확인, 프론트 페이지 작업 => 전송 확인 필요
-
-def get_nx_ny_from_location(location_1, location_2, location_3):
-    try:
-        grid_data = GridData.objects.get(Q(location_1=location_1) & Q(location_2=location_2) & Q(location_3=location_3))
-        return str(grid_data.nx), str(grid_data.ny)
-    except GridData.DoesNotExist:
-        return '0', '0'
-    
 def get_location_options(request, level, parent_location=None):
     print(request.POST)
     query_field = f'location_{level}'
@@ -152,29 +195,169 @@ def get_location_options(request, level, parent_location=None):
 
     return JsonResponse({'options': options})
 
+
+# 옵션변환
 # @require_POST
 @api_view(['POST'])
 def submit_selected_locations(request):
     try:
-        # 요청에서 JSON 데이터 가져오기
-        # data = json.loads(request.body)
-        print('request : ', request)
-        print('method : ', request.method)
-        print('body : ', request.body)
-
         stream = io.BytesIO(request.body)
         data = JSONParser().parse(stream)
         print(data)
-        
-        # 여기에서 data의 내용에 따라 선택된 위치 정보 처리
-        # location1 = data.get('location1')
-        # location2 = data.get('location2')
-        # location3 = data.get('location3')
-        
-        # 처리 로직 추가
-        
-        return JsonResponse({"message": "Selected locations submitted successfully!"})
+        nx, ny = get_nx_ny_from_location(data['location_1'], data['location_2'], data['location_3'])
+
+        return JsonResponse({"nx":nx, "ny":ny})
     except json.JSONDecodeError:
         return JsonResponse({"error": "Invalid JSON format in the request"}, status=400)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+    
+    
+# 격자변환
+def get_nx_ny_from_location(location_1, location_2, location_3):
+    try:
+        grid_data = GridData.objects.get(Q(location_1=location_1) & Q(location_2=location_2) & Q(location_3=location_3))
+        nx, ny = str(grid_data.nx), str(grid_data.ny)
+        print(f'Converted nx: {nx}, ny: {ny}')
+        return nx, ny
+    except GridData.DoesNotExist:
+        return "0","0"
+
+@api_view(['GET'])
+def weather(request):
+    if request.method == 'GET':
+        location_1 = request.GET.get('location_1', '')
+        location_2 = request.GET.get('location_2', '')
+        location_3 = request.GET.get('location_3', '')
+        nx, ny = get_nx_ny_from_location(location_1, location_2, location_3)
+        print(f'Converted nx: {nx}, ny: {ny}')
+
+        # 현재 시간 기준으로 API 제공 시간에 따라 base_time 설정
+        current_time = datetime.now()
+        if current_time.hour == 2 and current_time.minute < 10:
+            # 현재 시간이 00:00 ~ 02:10 사이인 경우 0200의 정보를 제공하지 않음
+            return JsonResponse({'error': 'Not service time'})
+        elif current_time.hour < 5:
+            base_time = '0200'
+        elif current_time.hour < 8:
+            base_time = '0500'
+        elif current_time.hour < 11:
+            base_time = '0800'
+        elif current_time.hour < 14:
+            base_time = '1100'
+        elif current_time.hour < 17:
+            base_time = '1400'
+        elif current_time.hour < 20:
+            base_time = '1700'
+        elif current_time.hour < 23:
+            base_time = '2000'
+        else:
+            # 현재 시간이 23:10 이후인 경우 0200의 정보를 제공하지 않음
+            return JsonResponse({'error': 'Not service time'})
+
+        url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
+        base_date = datetime.now().strftime("%Y%m%d")
+        # base_time = datetime.now().strftime("%H00")
+        params={
+            'serviceKey': settings.API_KEY,
+            'numOfRows' :'50',
+            'pageNo' : '1',
+            'dataType' : 'json',
+            'base_date' : base_date,
+            'base_time' : '0200',
+            'nx' : '60',
+            'ny' : '123'
+        }
+
+        try:
+            response = requests.get(url, params=params)
+            response.raise_for_status()
+            data = response.json()
+
+            if 'response' in data and 'body' in data['response']:
+                # 날씨 정보 출력 함수 호출
+                template = weather_response(data, location_1, location_2, location_3, base_date)
+                return JsonResponse({'data': template}, status=200)
+            else:
+                return JsonResponse({'error': 'Invalid response from the weather API'}, status=500)
+        except RequestException as e:
+            return JsonResponse({'error': f'RequestException: {e}'}, status=500)
+        except JSONDecodeError as e:
+            return JsonResponse({'error': f'JSONDecodeError: {e}'}, status=500)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+def weather_response(res, location_1, location_2, location_3, base_date):
+    # 필요한 정보를 딕셔너리 형태로 가공
+    informations = dict()
+    for items in res['response']['body']['items']['item']:
+        cate = items['category']
+        fcstTime = items['fcstTime']
+        fcstValue = items['fcstValue']
+        temp = dict()
+        temp[cate] = fcstValue
+
+        if fcstTime not in informations.keys():
+            informations[fcstTime] = dict()
+
+        informations[fcstTime][cate] = fcstValue
+
+    # 기상 정보 출력
+    pyt_code = {0: '강수 없음', 1: '비', 2: '비/눈', 3: '눈', 5: '빗방울', 6: '진눈깨비', 7: '눈날림'}
+    sky_code = {1: '맑음', 2: '맑음', 3: '맑음', 4: '맑음', 5: '맑음', 6: '구름많음', 7: '구름많음', 8: '구름많음', 9: '흐림', 10: '흐림'}
+
+    location_str = " ".join(str(info) for info in [location_1, location_2, location_3] if info)
+
+    def deg_to_dir(deg):
+        deg_code = {0: 'N', 360: 'N', 180: 'S', 270: 'W', 90: 'E', 22.5: 'NNE', 45: 'NE', 67.5: 'ENE',
+                    112.5: 'ESE', 135: 'SE', 157.5: 'SSE', 202.5: 'SSW', 225: 'SW', 247.5: 'WSW', 292.5: 'WNW',
+                    315: 'NW', 337.5: 'NNW'}
+
+        close_dir = ''
+        min_abs = 360
+        if deg not in deg_code.keys():
+            for key in deg_code.keys():
+                if abs(key - deg) < min_abs:
+                    min_abs = abs(key - deg)
+                    close_dir = deg_code[key]
+        else:
+            close_dir = deg_code[deg]
+        return close_dir
+
+    template = ""
+    for key, val in zip(informations.keys(), informations.values()):
+        template += f"{base_date[:4]}년 {base_date[4:6]}월 {base_date[-2:]}일 {key[:2]}시 {key[2:]}분 {location_str} 지역의 날씨는 "
+
+        if val.get('SKY'):
+            template += sky_code[int(val['SKY'])] + " "
+
+        if val.get('PTY'):
+            template += pyt_code[int(val['PTY'])]
+            if val.get('PCP') and val['PCP'] != '강수없음':
+                template += f"시간당 {val['PCP']}mm "
+
+        if val.get('TMP'):
+            template += f"평균기온 {float(val['TMP'])}℃ "
+
+        if val.get('REH'):
+            template += f"습도 {float(val['REH'])}% "
+
+        if val.get('VEC') and val.get('WSD'):
+            vec_temp = deg_to_dir(float(val['VEC']))
+            wsd_temp = float(val['WSD'])
+
+            # 풍속 강도 표기
+            if wsd_temp < 4:
+                wind_strength = '약한 바람'
+            elif 4 <= wsd_temp < 9:
+                wind_strength = '약간 강한 바람'
+            elif 9 <= wsd_temp < 14:
+                wind_strength = '강한 바람'
+            else:
+                wind_strength = '매우 강한 바람'
+
+            template += f"방향 {vec_temp} 풍속 {wsd_temp}m/s ({wind_strength})"
+
+        template += "\n"
+
+    return template
