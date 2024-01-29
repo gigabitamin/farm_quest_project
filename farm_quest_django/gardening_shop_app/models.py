@@ -39,7 +39,7 @@ class ShoppingReview(models.Model):
     shopping_review_rank_positive_negative = models.IntegerField(blank=True, null=True)
     shopping_review_predict = models.IntegerField(blank=True, null=True)
     shopping_review_predict_rate = models.TextField(blank=True, null=True)
-    shoping_tb_no = models.IntegerField(blank=True, null=True)
+    shoping_tb_no = models.ForeignKey(ShopingTb, models.DO_NOTHING, db_column='shoping_tb_no', blank=True, null=True)
     user = models.ForeignKey('users_app.UsersAppUser', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
