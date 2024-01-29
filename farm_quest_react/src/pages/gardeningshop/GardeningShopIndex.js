@@ -8,20 +8,23 @@ const GardeningShopIndex = () => {
     const [recommendedProducts, setRecommendedProducts] = useState([]);
     const [currentCategory, setCurrentCategory] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
-    const categories = ["all", "비료", "흙", "영양제", "씨앗(모종)", "자재"];
-    const itemsPerPage = 5;
+    const categories = ["all", "비료", "흙", "영양제", "씨앗(묘목)", "자재"];
 
     const fetchProducts = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/api/products/?category=${currentCategory}&page=${currentPage}`);
-            setProducts(response.data.results); // Django REST framework는 페이징된 결과를 'results' 키에 담습니다.
+            console.log("fetchProducts Response: ", response.data);
+            setProducts(response.data.results);
         } catch (error) {
             console.error("Error fetching data: ", error);
+            
         }
     };
+    
 
     useEffect(() => {
         fetchProducts();
+        fetchRecommendedProducts();
     }, [currentCategory, currentPage]);
 
     const handleCategoryChange = (category) => {
@@ -31,17 +34,18 @@ const GardeningShopIndex = () => {
 
     const fetchRecommendedProducts = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/recommended_products`); // 추천 상품 엔드포인트
-            setRecommendedProducts(response.data); // 추천 상품 상태 업데이트
+            const response = await axios.get(`http://localhost:8000/api/recommended_products`);
+            setRecommendedProducts(response.data);
         } catch (error) {
             console.error("Error fetching recommended products: ", error);
         }
     };
 
-    useEffect(() => {
-        fetchProducts();
-        fetchRecommendedProducts();
-    }, [currentCategory, currentPage]);
+    // 필터링된 상품 목록
+    const filteredProducts = currentCategory === "all"
+        ? products
+        : products.filter(product => product.shoping_tb_rss_channel_item_category1 === currentCategory);
+
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
@@ -130,7 +134,7 @@ const GardeningShopIndex = () => {
                 {recommendedProducts.slice(0, 10).map((product, index) => (
                     <div key={index} className="product-item" onClick={(e) => handleProductClick(e, product.shoping_tb_no)}>
                         {/* 상품 이미지와 이름에 Link 컴포넌트 적용 */}
-                        <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productId}`}> {/* 상품 고유 ID를 URL 경로에 포함 */}
+                        <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productid}`}> {/* 상품 고유 ID를 URL 경로에 포함 */}
                             <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
                             <h3>{product.shoping_tb_rss_channel_item_title}</h3>
                         </Link>
@@ -147,16 +151,17 @@ const GardeningShopIndex = () => {
                 ))}
             </div>
             <div className="product-list">
-                {products.map((product, index) => (
-                    <div key={index} className="product-item" onClick={(e) => handleProductClick(e, product.shoping_tb_no)}>
-                    <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productId}`}>
+            {filteredProducts.map((product, index) => (
+                <div key={index} className="product-item" onClick={(e) => handleProductClick(e, product.shoping_tb_no)}>
+                    {/* 상품 ID 필드명을 확인하여 여기에 적용하세요 */}
+                    <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productid}`}>
                         <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
                         <h3>{product.shoping_tb_rss_channel_item_title}</h3>
                     </Link>
-                        <p>${product.shoping_tb_rss_channel_item_lprice}</p> 
-                        {/* <p>{product.shoping_tb_rss_channel_item_lprice} 원</p> */}
-                    </div>
-                ))}
+                    <p>${product.shoping_tb_rss_channel_item_lprice}</p>
+                </div>
+            ))}
+
             </div>
             <div className="pagination">
                 {renderPagination()}
