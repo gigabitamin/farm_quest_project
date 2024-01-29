@@ -5,20 +5,15 @@ import SideNav from './pages/SideNav';
 import Top from './pages/Top';
 
 import './css/common.css';
-import './css/style_kdy.css';
-import './css/login.css';
-import './css/style_ltj.css';
-import './css/community.css';
-import './App.css';
 
 function App() {
   return (
     <div className="App">
       {/* <div className="header_wrap"></div> */}
         <Header/>
-        <SideNav/>
+        {/* <SideNav/> */}
         <Top />
-        <Footer/>
+        {/* <Footer/> */}
         {/* <FooterJS/> */}
       {/* <div className="footer_wrap"></div>       */}
     </div>

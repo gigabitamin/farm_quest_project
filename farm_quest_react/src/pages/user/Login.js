@@ -44,32 +44,32 @@ const Login = () => {
         console.log('cookies = ', cookies)
     }
 
-    useEffect(() => {
-        checkLoginStatus();
-    }, []);
+    // useEffect(() => {
+    //     checkLoginStatus();
+    // }, []);
 
-    const checkLoginStatus = () => {
-        const token = cookies.id;
-        if (token) {            
-            axios.post("http://127.0.0.1:8000/login_check/", { token: token })
-                .then((response) => {
-                    if (response.status < 300) {                    
-                        dispatch({
-                            part: 'loginUser',
-                            type: 'login',
-                            username: response.data.username
-                        });
-                        history("/");
-                    }
-                })
-                .catch(() => {                    
-                    dispatch({
-                        part: 'loginUser',
-                        type: 'logout',
-                    });
-                });
-        }
-    };
+    // const checkLoginStatus = () => {
+    //     const token = cookies.id;
+    //     if (token) {            
+    //         axios.post("http://127.0.0.1:8000/login_check/", { token: token })
+    //             .then((response) => {
+    //                 if (response.status < 300) {                    
+    //                     dispatch({
+    //                         part: 'loginUser',
+    //                         type: 'login',
+    //                         username: response.data.username
+    //                     });
+    //                     history("/");
+    //                 }
+    //             })
+    //             .catch(() => {                    
+    //                 dispatch({
+    //                     part: 'loginUser',
+    //                     type: 'logout',
+    //                 });
+    //             });
+    //     }
+    // };
 
     return (
       <section className="hero is-warning is-large">

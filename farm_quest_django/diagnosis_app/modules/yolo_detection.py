@@ -81,7 +81,7 @@ def detect(save_file_path, plant_name, user_select_plant):
             model = YOLO('yolo_model/pepper.pt')
         elif plant_name == '딸기':
             model = YOLO('yolo_model/strawberry.pt')
-        elif plant_name == '시설포도':
+        elif plant_name == '포도':
             model = YOLO('yolo_model/grape.pt')            
         elif plant_name == '오이':
             model = YOLO('yolo_model/cucumber.pt')
@@ -176,6 +176,7 @@ def detect(save_file_path, plant_name, user_select_plant):
         # print('tf_predict_desease_list_sorted = ', tf_predict_desease_list_sorted)
         
         tf_predict_disease_list = []
+        tf_predict_result_list_sorted = []
         crops_path_list = []
         if len(serialized_boxes) >= 0:
             tf_predict_disease_list, crops_path_list = tf_detect(serialized_results_list, plant_name, user_select_plant, img_path)
@@ -183,12 +184,6 @@ def detect(save_file_path, plant_name, user_select_plant):
         
         tf_predict_result_list_sorted = solution_service(tf_predict_disease_list)
         print('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
-        
-        
-        
-        
-        
-        
         # print('solution_row_list_serialized2 = ', solution_row_list_serialized)
                                                             
     except Exception as e:
@@ -397,22 +392,22 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
     
     print('plant_name', plant_name)
 
-    image_size_x = 512
-    image_size_y = 512
+    image_size_x = 256
+    image_size_y = 256
 
     if plant_name == '고추':
-        model = load_model('tf_model/pepper.keras')
-        image_size_x = 256
-        image_size_y = 256
-    elif plant_name == '딸기':
+        model = load_model('tf_model/pepper.keras')        
+    elif plant_name == '딸기':        
         model = load_model('tf_model/strawberry.keras')
     elif plant_name == '포도':
+        image_size_x = 512
+        image_size_y = 512
         model = load_model('tf_model/grape.keras')
     elif plant_name == '오이':
-        # image_size_x = 256
-        # image_size_y = 256
         model = load_model('tf_model/cucumber.keras')
     elif plant_name == '토마토':
+        image_size_x = 512
+        image_size_y = 512
         model = load_model('tf_model/tomato.keras')
     elif plant_name == '파프리카':
         model = load_model('tf_model/paprika.keras')
@@ -479,13 +474,13 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path):
     # disease_items = list(disease.items())
     # print('disease_items = ', disease_items)
     
-    if len(pred_prob) > 0:
+    if len(pred_prob[0]) > 0:
         disease_predict_probability = pred_prob[0]
         disease_predict_probability = str(disease_predict_probability).strip('[]').split()
         disease_predict_probability = [float(number.replace(',', '')) for number in disease_predict_probability]
     
     # tf_desease_predict_list = [[dc, dn, dp] for dc, dn, dp in zip(disease_codes, disease_names, desease_predict_probability)]
-    
+
     tf_disease_predict_list = [[user_select_plant, plant_name, dc, dn, dp] for dc, dn, dp in zip(disease_codes, disease_names, disease_predict_probability)]
 
 

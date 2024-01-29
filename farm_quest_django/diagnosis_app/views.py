@@ -4,8 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view   
 from rest_framework import mixins, generics
-from .models import DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
-from .serializers import ShopingTbSerializer, PlantTbSerializer, DiagnosisResultSerializer, DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionTbSerializer
+from .models import DiagnosisItemCart, DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
+from .serializers import DiagnosisItemCartSerializer, ShopingTbSerializer, PlantTbSerializer, DiagnosisResultSerializer, DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionTbSerializer
+from users_app.models import User, UsersAppUser
 
 # yolov8 관련
 from django.core.files.storage import FileSystemStorage
@@ -19,6 +20,78 @@ from rest_framework.views import APIView
 from gardening_shop_app.models import ShopingTb
 from django.db.models import Q
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+import json
+
+
+class DiagnosisItemLoadCartAPIMixins(APIView):
+    def get(self, request, *args, **kwargs):
+        diagnosis_item_cart_id = request.query_params.get('diagnosis_item_cart_id', None)
+        print('diagnosis_item_cart_id = ', diagnosis_item_cart_id)
+        
+        if diagnosis_item_cart_id:
+            try:
+                diagnosis_item_cart = DiagnosisItemCart.objects.get(pk=diagnosis_item_cart_id)
+                print('diagnosis_item_cart', diagnosis_item_cart)
+                diagnosis_item_cart_list = diagnosis_item_cart.diagnosis_item_cart_list
+                print('diagnosis_item_cart_list = ', diagnosis_item_cart_list)
+                                
+                products = ShopingTb.objects.filter(Q(shoping_tb_no__in=diagnosis_item_cart_list))
+                print('products = ', products)
+                serializer = ShopingTbSerializer(products, many=True)
+                print('serializer =', serializer)
+                return Response(serializer.data, status=200)
+            except DiagnosisItemCart.DoesNotExist:
+                return Response({'error': '없는데?'}, status=404)
+        else:
+            return Response({'error': '진짜없는데??'}, status=400)
+
+
+
+class DiagnosisItemSaveCartAPIMixins(generics.CreateAPIView):
+    queryset = DiagnosisItemCart.objects.all()
+    serializer_class = DiagnosisItemCartSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request, *args, **kwargs):
+        print('Received POST data:', request.data)
+        if request.auth:
+            user_id = request.user.id
+            user_instance = get_object_or_404(UsersAppUser, id=user_id)            
+            diagnosis_item_cart_list_str = request.data.get('diagnosis_item_cart_list', '[]')
+            diagnosis_item_cart_list = json.loads(diagnosis_item_cart_list_str)
+
+            request.data['user'] = user_instance.id
+            print('user_instance.id = ', user_instance.id)            
+            
+            request.data['diagnosis_item_cart_list'] = diagnosis_item_cart_list
+            print('request.data = ', request.data)
+                        
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+            
+        raise PermissionError('토큰가져와')
+
+
+
+
+# class DiagnosisItemSaveCartAPIMixins(
+#     mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+#     queryset = DiagnosisItemCart.objects.all()
+#     serializer_class = DiagnosisItemCartSerializer
+    
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
+
+#     def post(self, request, *args, **kwargs):
+#         print('Received POST data:', request.data)
+#         return self.create(request, *args, **kwargs)
 
 
 # from rest_framework.views import APIView
@@ -29,16 +102,19 @@ from django.db.models import Q
 # from .serializers import ShopingTbSerializer
 
 class DiagnosisRecommendList(APIView):
-    def get(self, request, solution_word, format=None):
-        
+    def get(self, request, solution_word, format=None):        
         try:
+            print('solution word ', solution_word)
             # print('1')
             # solution_word = '화분'
             page = int(request.GET.get('page', 1))
             page_size = 10
+            print('page', page)
 
             start_index = (page - 1) * page_size
+            print('start_index', start_index)
             end_index = start_index + page_size
+            print('end_index', end_index)
 
             recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
             # print('가냐?', recommendations)
@@ -182,8 +258,7 @@ class DiagnosisResultAPIMixins(
         diagnosis_result_id = serializer.instance.diagnosis_result_id
         user_select_plant = PlantTbSerializer(serializer.instance.user_select_plant).data
         print(user_select_plant)
-
-        # 생성된 객체의 ID를 응답에 포함
+        
         response_data = {
             'diagnosis_result_id': diagnosis_result_id, 
             'user_select_plant': user_select_plant,

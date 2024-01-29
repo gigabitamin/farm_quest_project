@@ -1,7 +1,317 @@
-/* <link rel="stylesheet" href="../common/common.css"> */
+/* 리액트 css */
+
+/* App */
+
+.App {
+    text-align: center;
+  }
 
 
 /* 태그 전역 설정 */
 a {
     text-decoration: none;
 }
+
+
+/*  */
+/* Header Footer 시작 */
+/*  */
+
+header {
+    display: flex;
+    flex-direction: column; /* headerMenu와 navbar를 세로로 배치 */
+    align-items: center;
+    padding: 20px;
+    background-color: #88AB8E;
+    color: #F2F1EB;
+}
+
+.headerMenu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+}
+
+.headerMenu a.highlight {
+    margin-left: 10px;
+
+}
+
+#portal_select {
+    background-color: #F2F1EB; /* 헤더 색상과 조화를 이루는 배경색 */
+    color: #88AB8E; /* 텍스트 색상 */
+    border: none;
+
+    padding: 8px 12px; /* 패딩 조정 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 16px; /* 텍스트 크기 조정 */
+}
+
+/* 드롭다운 옵션 스타일링 */
+#portal_select option {
+    background-color: #F2F1EB; /* 옵션의 배경색 */
+    color: #88AB8E; /* 옵션의 텍스트 색상 */
+}
+
+#search_keyword {
+    padding: 8px 12px; /* 검색창 패딩 조정 */
+    margin-left: 10px; /* 왼쪽 마진 조정 */
+    width: 200px; /* 검색창 너비 조정 */
+    border-radius: 5px; /* 모서리 둥글게 */
+}
+
+.portal_search {
+    display: flex;
+    align-items: center;
+
+    font-size: 16px; /* 기본 글꼴 크기 설정 */
+}
+
+.portal_search button {
+    background-color: #F2F1EB; /* 버튼 배경색 */
+    border: none;
+
+    padding: 8px 16px; /* 버튼 패딩 조정 */
+    margin-left: 5px;
+    color: #88AB8E;
+    cursor: pointer;
+    border-radius: 5px; /* 모서리 둥글게 */
+    font-size: 16px; /* 텍스트 크기 조정 */
+}
+
+
+
+.loginBox_hd {
+
+    display: flex;
+    align-items: center;
+}
+
+.loginBox_hd a {
+    color: #EEE7DA; 
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+
+#logo {
+    height: 2em;
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* navbar */
+.navbar_hd {
+    background-color: #F2F1EB; 
+    font-family: Arial, sans-serif;
+}
+
+.navbar_hd ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+
+.nav-item_hd {
+    position: relative;
+    text-align: center; 
+    min-width: 150px;
+}
+
+.nav-link_hd {
+    text-decoration: none;
+    color:#88AB8E;
+    padding: 10px;
+    display: block;
+}
+
+.nav-link_hd:hover,
+.btn_hd:hover {
+    color: #F2F1EB; 
+    background-color: #88AB8E; 
+}
+
+.dropdown-menu_hd {
+    display: none;
+    position: absolute;
+    background-color: #F2F1EB;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    min-width: 100%;
+}
+
+.nav-item_hd:hover .dropdown-menu_hd {
+    display: block;
+}
+
+.btn_hd {
+    text-decoration: none;
+    color: #5a755d;
+    padding: 10px;
+    display: block;
+    white-space: nowrap;
+}
+/* end_navbar */
+
+
+
+/* index_main_btn*/
+.index_main_ind {
+    display: flex;
+    flex-wrap: wrap;
+    width: 570px; /* 레이아웃의 전체 너비 */
+    justify-content: space-between; /* 요소들 사이에 공간을 균등하게 배분 */
+    margin: 150px auto 0; /* 상단 및 하단 여백을 0으로, 좌우 여백을 자동으로 설정하여 중앙에 배치 */
+}
+  
+.btn_index_ind {
+    display: block; /* 앵커를 블록 요소처럼 만들기 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    border: 1px solid #000; /* 가시성을 위한 테두리 */
+    margin-bottom: 10px; /* 버튼 사이의 수직 간격 */
+}
+
+    /* 개별 버튼 스타일 */
+.btn_guide_ind { width: 150px; height: 100px; }
+.btn_scheduler_ind { width: 150px; height: 100px; margin-left: -50px;}
+
+.btn_search_disease_ind { width: 200px; height: 120px; margin-top: -20px;}
+
+.btn_community_ind { width: 150px; height: 100px; margin-top: -4px;}
+.btn_shop_ind { width: 150px; height: 100px; margin-left: -50px; margin-top: -4px;}
+
+.btn_search_pest_ind {width: 200px; height: 120px;  margin-bottom: 50px;}
+
+.btn_photo_ind { width: 30%; height: 160px; margin-left: -20px;}
+.btn_qna_ind { width: 30%; height: 160px; margin-left: -40px;}
+
+.btn_calendar_ind { width: 30%; height: 180px; margin-top: -10px;}
+/* end index_main_btn*/
+
+
+/* footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    background-color: #88AB8E;
+    color: #F2F1EB;
+    padding: 20px;
+}
+
+footer ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+}
+
+.btn_kdy2 {        
+    color: white;
+    padding: 0.2em;
+    text-decoration: none;
+    border-radius: 5px;        
+    transition: background-color 0.3s ease;    
+}
+
+.btn_ltj {
+    display: inline-block;
+    background-color: #F2F1EB;
+    color: #88AB8E;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+    /*** kdy Footer ***/
+.footer .btn.btn-social {
+    margin-right: 5px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 35px;
+    transition: .3s;
+}
+
+.footer .btn.btn-social:hover {
+    color: var(--primary);
+    border-color: var(--light);
+}
+
+.footer .btn.btn-link {
+    display: block;
+    margin-bottom: 5px;
+    padding: 0;
+    text-align: left;
+    font-size: 15px;
+    font-weight: normal;
+    text-transform: capitalize;
+    transition: .3s;
+}
+
+.footer .btn.btn-link::before {
+    position: relative;
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.footer .btn.btn-link:hover {
+    letter-spacing: 1px;
+    box-shadow: none;
+}
+
+.footer .form-control {
+    border-color: rgba(255,255,255,0.5);
+}
+
+.footer .copyright {
+    padding: 25px 0;
+    font-size: 15px;
+    border-top: 1px solid rgba(256, 256, 256, .1);
+}
+
+.footer .copyright a {
+    color: var(--light);
+}
+
+.footer .footer-menu a {
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255, 255, 255, .1);
+}
+
+.footer .footer-menu a:last-child {
+    margin-right: 0;
+    padding-right: 0;
+    border-right: none;
+}
+/* end footer */
+
+
+/*  */
+/* Header Foter 끝 */
+/*  */
+
+
