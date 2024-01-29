@@ -15,7 +15,7 @@ const CommunityMainDetail = () => {
     const loadContent = async () => {
         const response = await axios.get(`http://localhost:8000/community/detail/show/${threadNo}`);
         // 테스트 출력 
-        console.log(response.data);
+        // console.log(response.data);
         setItem(response.data);
     };
 
@@ -24,7 +24,7 @@ const CommunityMainDetail = () => {
             axios.delete(`http://localhost:8000/community/detail/modify/${threadNo}`, {
                     headers: { Authorization: `Token  ${cookies.id}` }
                 }).then(() => {
-                    alert('성공적으로 삭제되었습니다');
+                    alert('삭제되었습니다.');
                     backToMain();
                 });
         } else {
@@ -77,15 +77,14 @@ const CommunityMainDetail = () => {
     return (
         <div className="community_detail_box">
             <div className="community_detail_content_box">
-                {/* 게시물 클릭시 나오는 해당 게시물의 상세 내용 */}
                 <button onClick={backToMain}>뒤로가기</button>
-                <div className="detail_content_box_top">
-                    <div className="detail_content_box_user">{item.user.nickname}</div>
-                    <div className="detail_content_box_type">타입{item.thread_type}</div>
+                <div className="community_detail_content_box_top">
+                    <div className="community_detail_content_box_user">{item.user.nickname}</div>
+                    <div className="community_detail_content_box_type">타입{item.thread_type}</div>
                 </div>
-                <div className="detail_content_box_main">
-                    <div className="detail_content_box_title">{item.thread_title}</div>
-                    <div className="detail_content_box_content">{item.thread_content}</div>
+                <div className="community_detail_content_box_main">
+                    <div className="community_detail_content_box_title">{item.thread_title}</div>
+                    <div className="community_detail_content_box_content">{item.thread_content}</div>
                 </div>
                 <button onClick={toUpdate}>수정</button>
                 <button onClick={onDelete}>삭제</button>

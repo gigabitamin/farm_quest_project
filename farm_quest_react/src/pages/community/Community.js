@@ -24,13 +24,13 @@ const Community = () => {
     return (
         <article id="community">
             <CommunityLeft setMainType={setMainType} />
-            <CommunityRight />
             <div className='community_main_box'>
                 { (show === 'main') && <CommunityMain mainType={mainType} /> }
                 { (show === 'detail') && <CommunityMainDetail /> }
                 { (show === 'create') && <CommunityMainCreate /> }
                 { (show === 'update') && <CommunityMainUpdate /> }
             </div>
+            <CommunityRight />
         </article>
     );
 };

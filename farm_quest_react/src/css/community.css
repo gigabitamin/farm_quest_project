@@ -1,31 +1,36 @@
+
 article#community {
-    position: relative;
+    /* position: relative; */
+    display: flex;
+    justify-content: space-between;
     margin: 0 auto;
+    margin-bottom: 90px;
     width: 80%;
-    height: 0;
 }
 
+
+
+/****** 중앙 게시물 관련 양식 ******/
 div.community_main_box {
     margin: 0 auto;
-    width: 70%;
-    height: 80vh;
-    overflow-y: scroll;
-    border: solid 2px black;
+    width: 69%;
+    border: solid 1px black;
 }
 
+
+
+/****** 좌우 게시물 관련 양식 ******/
 aside#community_left_menu, aside#community_right_menu {
-    position: absolute;
-    top: 0;
     background: #2de0b6;
     width: 15%;
 }
 
 aside#community_left_menu {
-    left: 0;
+    height: 540px;
 }
 
 aside#community_right_menu {
-    right: 0;
+    height: 220px;
 }
 
 div.community_left_box, div.community_right_box {
@@ -33,21 +38,112 @@ div.community_left_box, div.community_right_box {
     margin: 5% auto;
     width: 90%;
     height: 100px;
-    /* 이미지로 대체될 예정 */
+    /* 이미지로 대체될 예정? */
     text-align: center;
     line-height: 100px;
+    cursor: pointer;
 }
 
 
-/****** 게시물 박스 관련 양식 ******/
-div.community_content_box {
-    padding: 1% 0;
-    margin: 1% auto;
+
+/****** 중앙 게시물 내부 관련 양식 ******/
+div.community_main_top_box {
+    position: relative;
+    margin: 0 auto;
+    height: 40px;
+    background: yellow;
+}
+
+div.community_main_top_box p {
+    position: absolute;
+    left: 20px;
+    font-size: 30px;
+}
+
+div.community_main_top_box button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+div.community_main_column_box {
+    margin-right: 15px;
+}
+
+div.community_main_column_box div.community_list_item_display {
+    margin: 0 3%;
+}
+
+div.community_main_column_box div.community_list_item_display div {
+    background-color: #2de0b6;
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+div.community_main_center_box {
+    margin: 0 auto;
+    padding: 0.5% 0;
+    max-height: 500px;
+    /* height: 62vh; */
+    overflow-y: scroll;
+    border: solid 1px black;
+}
+
+div.community_main_bottom_box {
+    margin: 0 auto;
+    background: yellow;
+}
+
+
+/****** 중앙 게시물 컨텐츠내용 관련 양식 ******/
+div.community_content_box_list_item {
+    padding: 3px;
+    margin: 0.5% auto;
     width: 95%;
     background: #2de0b6;
+    cursor: pointer;
+    /* border-bottom: solid 1px black; */
 }
 
-div.content_box_top, div.content_box_main, div.content_box_bottom {
+div.community_list_item_display {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.community_list_item_display div {
+    border-left: solid 1px black;
+}
+
+div.community_list_item_display div.thread_no {
+    width: 50px;
+    font-size: 13px;
+}
+
+div.community_list_item_display div.thread_type {
+    width: 60px;
+    font-size: 13px;
+}
+
+div.community_list_item_display div.thread_title {
+    font-size: 13px;
+    flex-grow: 1;
+    padding: 0 5px;
+    text-align: left;
+}
+
+div.community_list_item_display div.nickname {
+    width: 80px;
+    font-size: 13px;
+}
+
+div.community_list_item_display div.nums {
+    width: 60px;
+    font-size: 13px;
+}
+
+/* div.content_box_top, div.content_box_main, div.content_box_bottom {
     margin: 0 auto;
     width: 96%;
 }
@@ -89,10 +185,6 @@ div.content_box_content {
     width: 96%;
     min-height: 140px;
     padding: 1%;
-    /*
-    메인 컨텐츠 박스의 높이는 안에 들어가는 컨텐츠의 양에 따라 달라진다
-    최소 크기를 140px로 지정해두었다
-    */
     background: #88AB8E;
 }
 
@@ -113,7 +205,7 @@ ul.content_box_list li {
     height: 40px;
     line-height: 40px;
     width: 24%;
-}
+} */
 
 
 /****** 게시물 상세정보 관련 양식 ******/
@@ -124,44 +216,44 @@ div.community_detail_box {
     background: #2de0b6;
 }
 
-div.detail_content_box_top, div.detail_content_box_main, div.detail_content_box_bottom {
+div.community_detail_content_box_top, div.community_detail_content_box_main {
     margin: 0 auto;
     width: 96%;
 }
 
-div.detail_content_box_top {
+div.community_detail_content_box_top {
     border: solid 1px black;
     position: relative;
     height: 50px;
     line-height: 50px;
 }
 
-div.detail_content_box_user {
+div.community_detail_content_box_user {
     position: absolute;
     background: #88AB8E;
     left: 0;
     width: 25%
 }
 
-div.detail_content_box_type {
+div.community_detail_content_box_type {
     position: absolute;
     background: #88AB8E;
     right: 0;
     width: 15%
 }
 
-div.detail_content_box_main {
+div.community_detail_content_box_main {
     margin-top: 1%;
     margin-bottom: 1%;
     border: solid 1px black;
 }
 
-div.detail_content_box_title {
+div.community_detail_content_box_title {
     padding: 1%;
     background: #88AB8E;
 }
 
-div.detail_content_box_content {
+div.community_detail_content_box_content {
     margin: 1% auto;
     width: 96%;
     min-height: 250px;
@@ -172,6 +264,8 @@ div.detail_content_box_content {
     */
     background: #88AB8E;
 }
+
+
 
 /****** 게시물 댓글 관련 양식 ******/
 div.community_detail_comment_boxes {
@@ -200,10 +294,54 @@ div.community_detail_comment_box_content {
     width: 79%;
 }
 
+
+
 /****** 게시물 작성 관련 양식 ******/
 div.community_form_box {
     padding: 1% 0;
     margin: 1% auto;
-    width: 68%;
+    width: 80%;
     background: #2de0b6;
+}
+
+div.community_form_box > button {
+    margin-right: 30%;
+    left: 0;
+}
+
+div.community_form_box table {
+    margin: 0 auto;
+    width: 100%;
+}
+
+div.community_form_box table td {
+    /* 내부 요소 위치를 지정하기위한 설정 */
+    position: relative; 
+}
+
+div.community_form_box table th {
+    margin: 0 auto;
+    width: 15%;
+    padding: 3px;
+}
+
+div.community_form_box input.title {
+    font-size: 15px;
+    height: 25px;
+    width: 100%;   
+}
+
+div.community_form_box select {
+    font-size: 12px;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+}
+
+div.community_form_box textarea.content {
+    padding: 2px;
+    font-size: 12px;
+    width: 100%;
+    height: 250px;
+    resize: none; 
 }
