@@ -54,7 +54,7 @@ const CommunityMainUpdate = () => {
     return (
         <div className='community_form_box'>
             <button className='back_button' onClick={backToMain}>뒤로가기</button>
-            <form name='formData' onReset={() => dispatch({type: 'back'})} onSubmit={submitForm}>
+            <form name='formData' onSubmit={submitForm}>
                 <table>
                     <tbody>
                     <tr>
@@ -78,7 +78,6 @@ const CommunityMainUpdate = () => {
                     </tbody>
                 </table>
                 <button type='submit'>등록</button>
-                <button type='reset'>취소</button>
             </form>
         </div>
     );

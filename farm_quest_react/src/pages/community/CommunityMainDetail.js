@@ -48,7 +48,8 @@ const CommunityMainDetail = () => {
     };
 
     const resetForm = () => {
-        setForm(initialForm)
+        setForm(initialForm);
+        document.getElementById('cmt_input').value = '';
     };
 
     const changeForm = (e) => {
@@ -66,7 +67,8 @@ const CommunityMainDetail = () => {
             headers: { Authorization: `Token  ${cookies.id}` }
         });
         const response = await axios.get(`http://localhost:8000/community/detail/show/${threadNo}`);
-        console.log(response.data)
+        console.log(response.data);
+        resetForm();
         setItem(response.data);
     };
 
@@ -79,15 +81,20 @@ const CommunityMainDetail = () => {
             <div className="community_detail_content_box">
                 <button onClick={backToMain}>뒤로가기</button>
                 <div className="community_detail_content_box_top">
-                    <div className="community_detail_content_box_user">{item.user.nickname}</div>
-                    <div className="community_detail_content_box_type">타입{item.thread_type}</div>
+                    <div className="community_detail_content_box_title">{item.thread_title}</div>
+                    <div className="community_detail_content_box_info">
+                        <div className="community_detail_content_box_type">{item.thread_type===0 ? '팜로그' : '질문'}</div>
+                        <div className="community_detail_content_box_user">{item.user.nickname}</div>
+                        <div className="community_detail_content_box_time">작성시간</div>
+                    </div>
                 </div>
                 <div className="community_detail_content_box_main">
-                    <div className="community_detail_content_box_title">{item.thread_title}</div>
                     <div className="community_detail_content_box_content">{item.thread_content}</div>
+                    <div className="community_detail_content_box_button">
+                        <button onClick={onDelete}>삭제</button>
+                        <button onClick={toUpdate}>수정</button>
+                    </div>
                 </div>
-                <button onClick={toUpdate}>수정</button>
-                <button onClick={onDelete}>삭제</button>
             </div>
             <div className="community_detail_comment_boxes">
                 {   
@@ -97,11 +104,11 @@ const CommunityMainDetail = () => {
                         );
                     })
                 }
-                <form onReset={resetForm} onSubmit={submitForm}>
-                    <input type='text' name='cmt_content' onChange={changeForm} />
-                    <button type='submit'>등록</button>
-                </form>
             </div>
+            <form className="community_detail_comment_form" onSubmit={submitForm}>
+                <textarea id='cmt_input' type='text' name='cmt_content' onChange={changeForm} />
+                <button type='submit'>등록</button>
+            </form>
         </div>
     );
 };
