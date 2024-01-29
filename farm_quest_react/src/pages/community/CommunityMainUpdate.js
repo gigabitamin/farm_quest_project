@@ -35,7 +35,7 @@ const CommunityMainUpdate = () => {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(
                 response => {
-                    alert("성공적으로 수정되었습니다.");
+                    alert("수정되었습니다.");
                     // dispatch({type: 'back'});
                 }
             );
@@ -44,19 +44,27 @@ const CommunityMainUpdate = () => {
         };
     };
 
+    const backToMain = () => {
+        dispatch({
+            part: 'community',
+            type: 'detailBack'
+        });
+    };
+
     return (
         <div className='community_form_box'>
+            <button className='back_button' onClick={backToMain}>뒤로가기</button>
             <form name='formData' onReset={() => dispatch({type: 'back'})} onSubmit={submitForm}>
                 <table>
                     <tbody>
                     <tr>
                         <th>제목</th>
-                        <td><input type='text' name='thread_title' defaultValue={item.thread_title} onChange={changeForm} /></td>
+                        <td><input className='title' type='text' name='thread_title' defaultValue={item.thread_title} onChange={changeForm} /></td>
                     </tr>
                     <tr>
                         <th>분류</th>
                         <td>
-                            <select name='thread_type' defaultValue={item.thread_type} onChange={changeForm} >
+                            <select className='type' name='thread_type' defaultValue={item.thread_type} onChange={changeForm} >
                                 <option>분류 선택</option>
                                 <option value='0'>일반</option>
                                 <option value='1'>질문</option>
@@ -65,7 +73,7 @@ const CommunityMainUpdate = () => {
                     </tr>
                     <tr>
                         <th>내용</th>
-                        <td><input type='text' name='thread_content' defaultValue={item.thread_content} onChange={changeForm} /></td>
+                        <td><textarea className='content' type='text' name='thread_content' defaultValue={item.thread_content} onChange={changeForm} /></td>
                     </tr>
                     </tbody>
                 </table>

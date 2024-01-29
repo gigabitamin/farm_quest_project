@@ -8,7 +8,20 @@ class UserInfoSerializer(serializers.ModelSerializer):
         model = UsersAppUser
         fields = [
             "id",
-            "username"
+            "username",
+            "nickname"
+        ]
+
+class CommunityCommentSerializer(serializers.ModelSerializer):
+    user = UserInfoSerializer(read_only=True)
+    class Meta:
+        model = CommunityCmtTb
+        fields = [
+            "cmt_no",
+            "cmt_content",
+            "cmt_date",
+            "thread_no",
+            "user"
         ]
 
 class CommunityListShowSerializer(serializers.ModelSerializer):
@@ -25,6 +38,7 @@ class CommunityListShowSerializer(serializers.ModelSerializer):
 
 class CommunityDetailShowSerializer(serializers.ModelSerializer):
     user = UserInfoSerializer(read_only=True)
+    thread_comments = CommunityCommentSerializer(many=True)
     class Meta:
         model = CommunityTb
         fields = [
@@ -34,7 +48,8 @@ class CommunityDetailShowSerializer(serializers.ModelSerializer):
             "thread_img",
             "thread_date",
             "thread_type",
-            "user"
+            "user",
+            "thread_comments"
         ]
 
 class CommunityModifySerializer(serializers.ModelSerializer):
@@ -47,5 +62,16 @@ class CommunityModifySerializer(serializers.ModelSerializer):
             "thread_img",
             "thread_date",
             "thread_type",
+            "user"
+        ]
+
+class CommunityCommentModifySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommunityCmtTb
+        fields = [
+            "cmt_no",
+            "cmt_content",
+            "cmt_date",
+            "thread_no",
             "user"
         ]

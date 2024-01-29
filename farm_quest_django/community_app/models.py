@@ -5,7 +5,7 @@ class CommunityCmtTb(models.Model):
     cmt_no = models.AutoField(primary_key=True)
     cmt_content = models.TextField()
     cmt_date = models.DateTimeField(blank=True, null=True)
-    thread_no = models.ForeignKey('CommunityTb', models.DO_NOTHING, db_column='thread_no')
+    thread_no = models.ForeignKey('CommunityTb', on_delete=models.CASCADE, db_column='thread_no', related_name='thread_comments')
     user = models.ForeignKey('users_app.UsersAppUser', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
