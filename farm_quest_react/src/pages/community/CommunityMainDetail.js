@@ -98,6 +98,8 @@ const CommunityMainDetail = () => {
                     </div>
                 </div>
             </div>
+            <hr/>
+            <div className="community_detail_comment_header"><p>댓글({item.thread_comments.length})</p></div>
             <div className="community_detail_comment_boxes">
                 {   
                     item.thread_comments.map(commentItem => {
