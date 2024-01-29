@@ -95,7 +95,9 @@ def recommended_products(request):
 
 def product_detail(request, id):
     try:
-        product = ShopingTb.objects.get(shoping_tb_rss_channel_item_productid=id)
+        product = ShopingTb.objects.filter(shoping_tb_rss_channel_item_productid=id).first()
+        if product is None:
+            raise ShopingTb.DoesNotExist
         data = {
             "shoping_tb_no": product.shoping_tb_no,
             "shoping_tb_rss_channel_item_image": product.shoping_tb_rss_channel_item_image,

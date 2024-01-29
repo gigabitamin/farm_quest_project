@@ -45,3 +45,15 @@ class ShoppingReview(models.Model):
     class Meta:
         managed = False
         db_table = 'shopping_review'
+
+
+
+class UserSearchTerms(models.Model):
+    search_id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey('users_app.UsersAppUser', models.DO_NOTHING, blank=True, null=True)
+    search_term = models.CharField(max_length=255, blank=True, null=True)
+    search_date = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'user_search_terms'
