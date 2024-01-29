@@ -47,6 +47,27 @@ const GardeningShopIndex = () => {
         setCurrentPage(newPage);
     };
 
+    const fetchShoppingReviews = async (shoping_tb_no) => {
+        if (!shoping_tb_no) {
+            console.error("No shoping_tb_no provided for fetching reviews");
+            return;
+        }
+    
+        try {
+            const response = await axios.get(`http://localhost:8000/api/shopping_reviews/${shoping_tb_no}`);
+            // 응답 데이터 처리
+        } catch (error) {
+            console.error("Error fetching shopping reviews: ", error);
+        }
+    };
+    
+    // 이벤트 전파 방지
+    const handleProductClick = (e, shoping_tb_no) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fetchShoppingReviews(shoping_tb_no);
+    };
+
     const renderPagination = () => {
         let pages = [];
         const pageLimit = 3; // 앞뒤로 보여줄 페이지 수
@@ -107,7 +128,7 @@ const GardeningShopIndex = () => {
             <h1 className="product-top">오늘의 추천상품</h1>
             <div className="product-list">
                 {recommendedProducts.slice(0, 10).map((product, index) => (
-                    <div key={index} className="product-item">
+                    <div key={index} className="product-item" onClick={(e) => handleProductClick(e, product.shoping_tb_no)}>
                         {/* 상품 이미지와 이름에 Link 컴포넌트 적용 */}
                         <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productId}`}> {/* 상품 고유 ID를 URL 경로에 포함 */}
                             <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
@@ -127,9 +148,11 @@ const GardeningShopIndex = () => {
             </div>
             <div className="product-list">
                 {products.map((product, index) => (
-                    <div key={index} className="product-item">
+                    <div key={index} className="product-item" onClick={(e) => handleProductClick(e, product.shoping_tb_no)}>
+                    <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productId}`}>
                         <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
                         <h3>{product.shoping_tb_rss_channel_item_title}</h3>
+                    </Link>
                         <p>${product.shoping_tb_rss_channel_item_lprice}</p> 
                         {/* <p>{product.shoping_tb_rss_channel_item_lprice} 원</p> */}
                     </div>

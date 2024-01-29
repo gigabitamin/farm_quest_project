@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Community from "./community/Community";
 import UserRouter from "./user/UserRouter"
@@ -8,7 +8,6 @@ import DiagnosisRouter from "./diagnosis/DiagnosisRoute"
 import Scheduler from './Scheduler/Scheduler';
 import GardeningShopRouter from './gardeningshop/GardeningShopRouter';
 
-
 const Top = () => {    
 
 
@@ -17,7 +16,8 @@ const Top = () => {
     // const [currentPage, setCurrentPage] = useState(1);
 
     return (
-        <div>            
+        <div>
+  
             <Routes>
                 {/* <Route path="/gardening_shop_index" element={<GardeningShopIndex />} /> */}
                 {/* <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} /> */}
