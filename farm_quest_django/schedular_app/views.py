@@ -95,10 +95,9 @@ def get_nx_ny_from_locations(request):
 from .models import Scheduler
 
 def get_scheduler_info(request, plant_no):
-    # plant_no에 해당하는 Scheduler 정보 가져오기
     scheduler_info = Scheduler.objects.filter(plant_no=plant_no).values()
 
-    # QuerySet을 list로 변환하여 JsonResponse로 반환
+    # JsonResponse로 반환
     return JsonResponse(list(scheduler_info), safe=False)
     
 # 기상청 격자 위경도 변환-사용X

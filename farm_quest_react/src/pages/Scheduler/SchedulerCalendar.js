@@ -1,14 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import prevButtonImage from '../../images/assets/prevButton.png';
 import nextButtonImage from '../../images/assets/nextButton.png';
 
-function genRandomInt(max) {
-  return Math.floor(Math.random() * (max + 1));
-}
 
-function CalendarHeader({ currentDate, onPrevMonth, onNextMonth }) {
-  const crops = ['딸기', '고추', '포도', '파프리카', '토마토', '오이'];
-  const description = crops[genRandomInt(5)];
+const CalendarHeader = ({ currentDate, onPrevMonth, onNextMonth, filteredData }) => {
+  const [description, setDescription] = useState('');
+
+  useEffect(() => {
+    if (filteredData) {
+      const announcementMessages = filteredData
+        .filter(item => item.disease_announcement !== "")
+        .map(item => item.disease_announcement)
+        .join(', ');
+
+      setDescription(announcementMessages);
+    } else {
+      setDescription('');
+    }
+  }, [filteredData]);
+
+  const formatAnnouncement = (announcement) => {
+    return announcement;
+  };
+
+  const renderAnnouncements = () => {
+    if (description) {
+      const announcements = description.split(', ');
+      return (
+        <div>
+          {announcements.map((announcement, index) => (
+            <p key={index}>{formatAnnouncement(announcement)}</p>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
 
   const getCurrentDate = () => {
     const year = currentDate.getFullYear();
@@ -26,10 +53,12 @@ function CalendarHeader({ currentDate, onPrevMonth, onNextMonth }) {
       <button className="calendarTitle" onClick={onNextMonth}>
         <img className="MonthBtn" src={nextButtonImage} alt="다음 달" />
       </button>
-      <p>{description} 메시지 출력</p>
+      {renderAnnouncements()}
     </div>
   );
-}
+};
+
+
 function CalendarBody({ currentDate }) {
   const generateGrid = () => {
     const rows = 6;
@@ -53,7 +82,7 @@ function CalendarBody({ currentDate }) {
 
     for (let i = 0; i < rows; i++) {
       const row = [];
-      let isCurrentMonthRow = false; // 해당 행이 이번 달의 날짜를 포함하는지 여부
+      let isCurrentMonthRow = false;
 
       for (let j = 0; j < columns; j++) {
         const cellKey = `cell-${i}-${j}`;
@@ -65,7 +94,7 @@ function CalendarBody({ currentDate }) {
         } else if (currentDay <= lastDay) {
           // 이번달
           row.push(<td key={cellKey} className="calendarBodyDateCell">{`${currentDay}`}</td>);
-          isCurrentMonthRow = true; // 현재 달의 날짜가 포함되어 있음을 표시
+          isCurrentMonthRow = true; 
           currentDay++;
         } else {
           // 다음달
@@ -94,7 +123,11 @@ function CalendarBody({ currentDate }) {
 }
 
 
-const SchedulerCalendar = () => {
+const SchedulerCalendar = ({ filteredData }) => {
+
+  console.log('Received filteredData in SchedulerCalendar:', filteredData); // 로그 추가
+
+
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const handlePrevMonth = () => {
@@ -107,7 +140,7 @@ const SchedulerCalendar = () => {
 
   return (
     <div>
-      <CalendarHeader currentDate={currentDate} onPrevMonth={handlePrevMonth} onNextMonth={handleNextMonth} />
+      <CalendarHeader currentDate={currentDate} onPrevMonth={handlePrevMonth} onNextMonth={handleNextMonth} filteredData={filteredData} />
       <CalendarBody currentDate={currentDate} />
     </div>
   );

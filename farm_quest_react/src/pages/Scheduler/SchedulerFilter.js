@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const SchedulerFilter = () => {
   const [selectedPlant, setSelectedPlant] = useState(null);
+  const [fetchedData, setFetchedData] = useState(null);
 
   const plantNameToNoMapping = {
     '딸기': 1,
@@ -22,11 +23,10 @@ const SchedulerFilter = () => {
       fetch(`/api/scheduler/${plantNo}`)
         .then((response) => response.json())
         .then((data) => {
-          // 데이터 처리 로직 추가
 
+          console.log('Received data:', data); 
 
-
-          console.log('Scheduler data for plant:', selectedPlant, data);
+          setFetchedData(data);
         })
         .catch((error) => {
           console.error('Error fetching scheduler data:', error);
@@ -53,8 +53,10 @@ const SchedulerFilter = () => {
       <div>
         <h3>선택된 작목:</h3>
         <p>{selectedPlant}</p>
-        {/* 캘린더-우측 구현 */}
-      </div>
+        <h3>불러온 데이터:</h3>
+        {/* 불러온 데이터를 그대로 렌더링 */}
+        <pre>{JSON.stringify(fetchedData, null, 2)}</pre>      </div>
+        
     </div>
   );
 };
