@@ -53,7 +53,9 @@ const CommunityMainUpdate = () => {
 
     return (
         <div className='community_form_box'>
-            <button className='back_button' onClick={backToMain}>뒤로가기</button>
+            <div className="community_back_button">
+                <button onClick={backToMain}>뒤로가기</button>
+            </div>
             <form name='formData' onSubmit={submitForm}>
                 <table>
                     <tbody>

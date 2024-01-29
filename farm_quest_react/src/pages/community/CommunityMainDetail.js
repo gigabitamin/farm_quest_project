@@ -79,7 +79,9 @@ const CommunityMainDetail = () => {
     return (
         <div className="community_detail_box">
             <div className="community_detail_content_box">
-                <button onClick={backToMain}>뒤로가기</button>
+                <div className="community_back_button">
+                    <button onClick={backToMain}>뒤로가기</button>
+                </div>
                 <div className="community_detail_content_box_top">
                     <div className="community_detail_content_box_title">{item.thread_title}</div>
                     <div className="community_detail_content_box_info">

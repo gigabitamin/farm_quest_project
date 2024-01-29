@@ -66,9 +66,9 @@ div.community_main_top_box button {
     right: 10px;
 }
 
-div.community_main_column_box {
+/* div.community_main_column_box {
     margin-right: 15px;
-}
+} */
 
 div.community_main_column_box div.community_list_item_display {
     margin: 0.5%  2.5% 0 2.5%;
@@ -160,6 +160,12 @@ div.community_detail_box {
     margin: 5px auto;
     width: 96%;
     background: #2de0b6;
+}
+
+div.community_back_button {
+    margin: 5px auto;
+    display: flex;
+    width: 93%;
 }
 
 div.community_detail_content_box_top, div.community_detail_content_box_main {
@@ -297,11 +303,6 @@ div.community_form_box {
     background: #2de0b6;
 }
 
-div.community_form_box > button {
-    margin-right: 30%;
-    left: 0;
-}
-
 div.community_form_box table {
     margin: 0 auto;
     width: 100%;
@@ -327,8 +328,8 @@ div.community_form_box input.title {
 div.community_form_box select {
     font-size: 12px;
     position: absolute;
-    top: 20%;
-    left: 5%;
+    top: 15%;
+    left: 0;
 }
 
 div.community_form_box textarea.content {
