@@ -14,7 +14,7 @@ const LoginLink = ({ user }) => {
       part: 'loginUser',
       type: 'logout'
     });
-    removeCookie('id');
+    removeCookie('id');    
     // localStorage.clear();
   };
 
