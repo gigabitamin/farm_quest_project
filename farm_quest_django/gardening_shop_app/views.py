@@ -128,12 +128,11 @@ def post_review(request):
         try:
             # Determine the value of shopping_review_rank_positive_negative
             if int(data['shopping_review_rank']) >= 4:
-                
                 shopping_review_rank_positive_negative = 1
             else:
                 shopping_review_rank_positive_negative = 0
 
-            ShoppingReview.objects.create(
+            new_review = ShoppingReview.objects.create(
                 user_id=data['user'],
                 shoping_tb_no_id=data['shoping_tb_no'],
                 shopping_review_content=data['shopping_review_content'],
@@ -144,7 +143,6 @@ def post_review(request):
             # Execute the update_review_recent.py script using manage.py
             subprocess.run(["python", "manage.py", "update_review_recent"])
             subprocess.run(["python", "manage.py", "initialize_scores"])
-            
             return JsonResponse({'message': 'Review added successfully'})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
