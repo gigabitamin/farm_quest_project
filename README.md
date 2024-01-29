@@ -1,5 +1,11 @@
 # Final Project Farm Quest with Team Final Farmtasy
 
+psh
+React : scheduler pages updated
+django : scheduler module, views, urls updated
+DB : scheduler table added (with plant_tb FK)
+
+
 <!-- notice -->
 ### 공지
 
