@@ -7,7 +7,8 @@ const GridSelect = ({ setStoredNx, setStoredNy }) => {
     const [selectedLocation1, setSelectedLocation1] = useState('');
     const [selectedLocation2, setSelectedLocation2] = useState('');
     const [selectedLocation3, setSelectedLocation3] = useState('');
-    
+    const [informations, setInformations] = useState({});
+
     // 위치선택 가져오기
     useEffect(() => {
         fetch('/api/get_grid_data/')
@@ -81,7 +82,7 @@ const onFetchWeatherData = async () => {
     `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst` +
     `?serviceKey=${process.env.REACT_APP_API_KEY}` +
     `&pageNo=1` +
-    `&numOfRows=20` +
+    `&numOfRows=10` +
     `&dataType=json` +
     `&base_date=${formattedDate}` +
     `&base_time=${baseTime}` +
@@ -95,9 +96,58 @@ const onFetchWeatherData = async () => {
     }
 
     const data = await response.json();
-
     console.log('data:', data)
 
+
+    const rawData = data.response.body.items.item;
+    const informations = {};
+
+    rawData.forEach(item => {
+    const { category, fcstTime, fcstValue } = item;
+
+    if (!informations[fcstTime]) {
+        informations[fcstTime] = {};
+    }
+
+    informations[fcstTime][category] = fcstValue;
+    });
+
+    console.log(informations);
+    setInformations(informations); 
+
+};
+const renderCategories = ['TMP', 'REH', 'SKY', 'POP', 'PTY', 'PCP', 'VEC', 'WSD'];
+
+
+const getRenderName = (originalCategory) => {
+    switch (originalCategory) {
+        case 'TMP':
+            return '온도'; //
+        case 'UUU':
+            return '풍속(동서)';
+        case 'VEC':
+            return '풍향'; //
+        case 'WSD':
+            return '풍속'; //
+        case 'SKY':
+            return '구름'; //
+        case 'POP':
+            return '강수확률'; //
+        case 'WAV':
+            return '파도높이';
+        case 'PTY':
+            return '강수형태'; //         
+        case 'VVV':
+            return '풍속(남북)';
+        case 'PCP':
+            return '강수량'; //
+        case 'REH':
+            return '습도'; //
+        case 'SNO':
+            return '적설';
+        default:
+            return originalCategory; 
+    }
 };
 
 // useEffect(() => {
@@ -119,9 +169,6 @@ const onFetchWeatherData = async () => {
             // sessionStorage.getItem('selectedLocation3'),
             setStoredNx, // setStoredNx 함수 전달
             setStoredNy  // setStoredNy 함수 전달
-
-
-
 
         );
     };
@@ -187,13 +234,35 @@ const onFetchWeatherData = async () => {
                 ))}
             </select>
 
-            
             <button onClick={handleSaveAndFetch}>날씨 정보 가져오기</button>
+
+                {/* informations를 렌더링하는 코드 추가 */}
+                <h2>날씨정보</h2>
+                <ul>
+                {Object.keys(informations).map(time => (
+                    <li key={time}>
+                        <strong>{formatTime(time)}</strong>
+                        <ul>
+                        {Object.entries(informations[time]).map(([category, value]) => (
+                                // 선택한 카테고리만 렌더링
+                                renderCategories.includes(getRenderName(category)) && (
+                                    <li key={category}>
+                                        {getRenderName(category)}: {value}
+                                    </li>
+                                )
+                            ))}
+
+                        </ul>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
 
-
-
+const formatTime = (time) => {
+    // 20240129 1200 -> 2024-01-29 12:00
+    return `${time.substring(0, 4)}-${time.substring(4, 6)}-${time.substring(6, 8)} ${time.substring(8, 10)}:${time.substring(10, 12)}`;
+};
 
 export default GridSelect;

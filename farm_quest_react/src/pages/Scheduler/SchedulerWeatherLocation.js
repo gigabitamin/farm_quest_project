@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import GridSelect from './GridSelect';
-import SchedulerModal from './SchedulerModal';
+// import React, { useEffect, useState } from 'react';
+// import GridSelect from './GridSelect';
+// import SchedulerModal from './SchedulerModal';
 
-const SchedulerWeatherLocation = () => {
-  // 날씨정보
-  const [weatherData, setWeatherData] = useState(null);
-  // 위치정보
-  const [selectedLocation1, setSelectedLocation1] = useState('');
-  const [selectedLocation2, setSelectedLocation2] = useState('');
-  const [selectedLocation3, setSelectedLocation3] = useState('');
-  const [storedNx, setStoredNx] = useState(null); 
-  const [storedNy, setStoredNy] = useState(null);  
-  const [showModal, setShowModal] = useState(false);
+// const SchedulerWeatherLocation = () => {
+//   // 날씨정보
+//   const [weatherData, setWeatherData] = useState(null);
+  // // 위치정보
+  // const [selectedLocation1, setSelectedLocation1] = useState('');
+  // const [selectedLocation2, setSelectedLocation2] = useState('');
+  // const [selectedLocation3, setSelectedLocation3] = useState('');
+  // const [storedNx, setStoredNx] = useState(null); 
+  // const [storedNy, setStoredNy] = useState(null);  
+  // const [showModal, setShowModal] = useState(false);
 
-  const handleOpenModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  // const handleOpenModal = () => setShowModal(true);
+  // const handleCloseModal = () => setShowModal(false);
 
   // useEffect(() => {
   //   const storedNx = sessionStorage.getItem('nx');
@@ -123,33 +123,33 @@ const SchedulerWeatherLocation = () => {
   //   onFetchWeatherData();
   // }, [storedNx, storedNy, selectedLocation1, selectedLocation2, selectedLocation3]);
 
-  return (
-    <div>
-      <GridSelect
-        setSelectedLocation1={setSelectedLocation1}
-        setSelectedLocation2={setSelectedLocation2}
-        setSelectedLocation3={setSelectedLocation3}
-        setStoredNx={setStoredNx}
-        setStoredNy={setStoredNy}
-      />
-      <SchedulerModal showModal={showModal} handleCloseModal={handleCloseModal} />
+  // return (
+  //   <div>
+  //     <GridSelect
+  //       setSelectedLocation1={setSelectedLocation1}
+  //       setSelectedLocation2={setSelectedLocation2}
+  //       setSelectedLocation3={setSelectedLocation3}
+  //       setStoredNx={setStoredNx}
+  //       setStoredNy={setStoredNy}
+  //     />
+      {/* <SchedulerModal showModal={showModal} handleCloseModal={handleCloseModal} /> */}
 
-      <h2>날씨정보</h2>
+//       <h2>날씨정보</h2>
 
-      {weatherData && Object.keys(weatherData).map(fcstTime => (
-        <div key={fcstTime}>
-          <h3>{fcstTime}</h3>
-          <p>온도: {weatherData[fcstTime].TMP}</p>
-          <p>습도: {weatherData[fcstTime].REH}</p>
-          <p>구름: {weatherData[fcstTime].SKY}</p>
-          <p>강수: {weatherData[fcstTime].PCP}</p>
-          <p>적설: {weatherData[fcstTime].SNO}</p>
-          <p>풍향: {weatherData[fcstTime].VEC}</p>
-          <p>풍속: {weatherData[fcstTime].WSD}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+//       {weatherData && Object.keys(weatherData).map(fcstTime => (
+//         <div key={fcstTime}>
+//           <h3>{fcstTime}</h3>
+//           <p>온도: {weatherData[fcstTime].TMP}</p>
+//           <p>습도: {weatherData[fcstTime].REH}</p>
+//           <p>구름: {weatherData[fcstTime].SKY}</p>
+//           <p>강수: {weatherData[fcstTime].PCP}</p>
+//           <p>적설: {weatherData[fcstTime].SNO}</p>
+//           <p>풍향: {weatherData[fcstTime].VEC}</p>
+//           <p>풍속: {weatherData[fcstTime].WSD}</p>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
 
-export default SchedulerWeatherLocation;
+// export default SchedulerWeatherLocation;
