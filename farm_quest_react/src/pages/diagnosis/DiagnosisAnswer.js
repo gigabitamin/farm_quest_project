@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './DiagnosisAnswer.css';
+
 
 const DiagnosisAnswer = () => {
     
@@ -54,6 +56,8 @@ const DiagnosisAnswer = () => {
           <div className="diagnosis_answer_wrap">
             <form id="diagnosis_answer_form"  name="diagnosisAnswerComplete" onSubmit={sendPostRequest}>
               <h2>문진표</h2>
+              <hr />
+              <br />
               {diagnosisQuestions.map((question) => (
                 <div key={question.diagnosis_question_no}>
                   <div>{question.diagnosis_question_content}</div>
@@ -76,7 +80,8 @@ const DiagnosisAnswer = () => {
                     아니오
                   </label>
                 </div>
-              ))}              
+              ))}
+              <br />      
               <input type="submit" value="작성완료" />
             </form>
           </div>

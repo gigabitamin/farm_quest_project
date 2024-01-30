@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
 import DiagnosisLink from "./diagnosis/DiagnosisLink";
 import LoginLink from './user/LoginLink'
-import TestLink from './user/TestLink'
 import CsLink from './customerCenter/CsLink'
 
 const Header = () => {
@@ -79,8 +78,7 @@ const Header = () => {
                             <div className="btn_hd"><Link to="/">상품 리스트</Link></div>
                             <div className="btn_hd"><Link to="/">상품 리뷰 분석</Link></div>                    
                         </div>
-                    </div>
-                    <TestLink />
+                    </div>                    
                     <DiagnosisLink />                    
                     {/* 진단 페이지 링크 끝 / 헤더 css 수정시 주석 해제 후 진행바람 */}
 

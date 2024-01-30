@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import CsFaqList from './CsFaqList';
 import { useSelector, useDispatch } from 'react-redux';
-// import CsLeft from './CsLeft';
-// import CsRight from './CsRight';
 
 const CsFaq = ({ mainType }) => {
 
@@ -105,36 +103,35 @@ const CsFaq = ({ mainType }) => {
       }, [mainType]);
   
       return (
-          <section>
-              <div><h2>공지사항</h2></div>
-              <div className='community_main_top_box'>
+          <section class="cs_faq_section">
+              <div><h2>FAQ</h2></div>
+              <div className='cs_faq_main_top_box'>
                   <p>{title()}</p>
                   <button onClick={toCreate}>작성</button>
               </div>
-              <div className='community_main_column_box'>
-                  <div className="community_list_item_display">
-                      <div className="thread_no">번호</div>
-                      <div className="thread_type">분류</div>
-                      <div className="thread_title" style={{textAlign: 'center'}}>제목</div>
-                      <div className="nickname">닉네임</div>
-                      <div className="nums">조회수</div>
+              <div className='cs_faq_main_column_box'>
+                  <div className="cs_faq_list_item_display">
+                      <div className="cs_faq_no">번호</div>                      
+                      <div className="cs_faq_title" style={{textAlign: 'center'}}>제목</div>
+                      <div className="cs_faq_ctg_type">분류</div>
+                                        
                   </div>
               </div>
-              <div className='community_main_center_box'>
+              <div className='cs_faq_main_center_box'>
                   {   
                       data.results.map(item => {
                           return (
-                              <a onClick={() => toDetail(item)}><CsFaqList item={item} /></a>
+                              <CsFaqList item={item} />
                           );
                       })
                   }
               </div>
-              <div className='community_main_bottom_box'>
+              <div className='cs_faq_main_bottom_box'>
                   {mainPage.num > 1 && (<button onClick={toPrevious}>이전</button>)}
                   {
                       pagination.map(idx => {
                           return (
-                              <a
+                              <Link
                                   style={{
                                       padding: '4px',
                                       cursor: idx===mainPage.num || idx===-1 ? 'default' : 'pointer',
@@ -144,7 +141,7 @@ const CsFaq = ({ mainType }) => {
                                   onClick={() => toPage(idx)}
                               >
                               {idx===-1 ? '...' : idx}
-                              </a>
+                              </Link>
                           )
                       })
                   }

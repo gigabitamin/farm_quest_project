@@ -4,15 +4,15 @@ import CsFaq from './CsFaq';
 import CsOne from './CsOne';
 
 const CsIndex = () => {
-  
+
   const [selectedComponent, setSelectedComponent] = useState(null);
 
   const showComponent = (componentName) => {
     setSelectedComponent(componentName);
   };
 
-  return (    
-    <div className="csIndex">   
+  return (
+    <div className="csIndex">
       <div className={`ctg_content ${selectedComponent ? 'cs_layout' : ''}`}>
         <section className="cs_layout">
           <div className="cs_top_bar">
@@ -24,19 +24,25 @@ const CsIndex = () => {
                 FAQ
               </div>
               <div onClick={() => showComponent("cs_one")} className="cs_one">
-                1:1 문의                
+                1:1 문의
               </div>
             </div>
           </div>
 
 
           <div className="cs_content_area">
-            <hr />컨텐츠 영역<hr />
+            {/* <hr />컨텐츠 영역<hr /> */}
             {selectedComponent === "cs_notice" && <CsNotice />}
             {selectedComponent === "cs_faq" && <CsFaq />}
-            {selectedComponent === "cs_one" && <CsOne />}            
+            {selectedComponent === "cs_one" && <CsOne />}
           </div>
           
+          <div>
+            Notice
+            <hr />
+            사이트 이용 중 궁금하신 사항은 1대1 문의를 이용해주세요
+
+          </div>
         </section>
       </div>
     </div>

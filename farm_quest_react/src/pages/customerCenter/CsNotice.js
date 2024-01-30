@@ -102,36 +102,40 @@ const CsMain = ({ mainType }) => {
     }, [mainType]);
 
     return (
-        <section>
+        <section class="cs_notice_section">
             <div><h2>공지사항</h2></div>
-            <div className='community_main_top_box'>
+            <div className='cs_notice_main_top_box'>
                 <p>{title()}</p>
                 <button onClick={toCreate}>작성</button>
             </div>
-            <div className='community_main_column_box'>
-                <div className="community_list_item_display">
-                    <div className="thread_no">번호</div>
-                    <div className="thread_type">분류</div>
-                    <div className="thread_title" style={{textAlign: 'center'}}>제목</div>
-                    <div className="nickname">닉네임</div>
-                    <div className="nums">조회수</div>
+            <div className='cs_notice_main_column_box'>
+                <div className="cs_notice_list_item_display">
+                    <div>
+                        <div className="cs_notice_no">번호</div>                        
+                    </div>
+                    <div className="cs_notice_title" style={{textAlign: 'center'}}>제목</div>
+                    <div>
+                        <div className="cs_nickname">닉네임</div>
+                        <div className="cs_notice_date">작성시간</div>
+                        <div className="cs_notice_ctg_type">분류</div>
+                    </div>
                 </div>
             </div>
-            <div className='community_main_center_box'>
+            <div className='cs_notice_main_center_box'>
                 {   
                     data.results.map(item => {
                         return (
-                            <a onClick={() => toDetail(item)}><CsNoticeList item={item} /></a>
+                            <CsNoticeList item={item} />
                         );
                     })
                 }
             </div>
-            <div className='community_main_bottom_box'>
+            <div className='cs_notice_main_bottom_box'>
                 {mainPage.num > 1 && (<button onClick={toPrevious}>이전</button>)}
                 {
                     pagination.map(idx => {
                         return (
-                            <a
+                            <Link
                                 style={{
                                     padding: '4px',
                                     cursor: idx===mainPage.num || idx===-1 ? 'default' : 'pointer',
@@ -141,7 +145,7 @@ const CsMain = ({ mainType }) => {
                                 onClick={() => toPage(idx)}
                             >
                             {idx===-1 ? '...' : idx}
-                            </a>
+                            </Link>
                         )
                     })
                 }

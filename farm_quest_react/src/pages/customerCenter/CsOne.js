@@ -18,9 +18,11 @@ const CsOne = () => {
                                 </td>
                                 <td>
                                 <select id="category" name="category">
-                                    <option value="option1">사이트 이용</option>
-                                    <option value="option2">결제 관련</option>
+                                    <option value="option1">서비스</option>
+                                    <option value="option2">커뮤니티</option>
+                                    <option value="option3">쇼핑</option>
                                     <option value="option3">회원가입</option>
+                                    <option value="option3">기타</option>
                                 </select>
                                 </td>
                             </tr>
