@@ -17,3 +17,5 @@ ultralytics
 react-redux
 @reduxjs/toolkit
 react-cookie
+
+django-environ
