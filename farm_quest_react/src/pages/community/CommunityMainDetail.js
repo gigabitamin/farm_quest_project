@@ -94,8 +94,8 @@ const CommunityMainDetail = () => {
                 <div className="community_detail_content_box_main">
                     <div className="community_detail_content_box_content">{item.thread_content}</div>
                     <div className="community_detail_content_box_button">
-                        <button onClick={onDelete}>삭제</button>
-                        <button onClick={toUpdate}>수정</button>
+                        <button className='community_button_default' onClick={onDelete}>삭제</button>
+                        <button className='community_button_default' onClick={toUpdate}>수정</button>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@ const CommunityMainDetail = () => {
             </div>
             <form className="community_detail_comment_form" onSubmit={submitForm}>
                 <textarea id='cmt_input' type='text' name='cmt_content' onChange={changeForm} />
-                <button type='submit'>등록</button>
+                <button className='community_button_default' type='submit'>등록</button>
             </form>
         </div>
     );

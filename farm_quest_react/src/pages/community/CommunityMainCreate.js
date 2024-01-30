@@ -79,7 +79,7 @@ const CommunityMainCreate = () => {
                     </tr>
                     </tbody>
                 </table>
-                <button type='submit'>등록</button>
+                <button className='community_button_default' type='submit'>등록</button>
             </form>
         </div>
     );

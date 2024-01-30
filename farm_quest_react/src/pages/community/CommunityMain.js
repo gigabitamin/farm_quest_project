@@ -106,7 +106,7 @@ const CommunityMain = ({ mainType }) => {
         <section>
             <div className='community_main_top_box'>
                 <p>{title()}</p>
-                <button onClick={toCreate}>작성</button>
+                <button className='community_button_default' onClick={toCreate}>작성</button>
             </div>
             <div className='community_main_column_box'>
                 <div className="community_list_item_display">
