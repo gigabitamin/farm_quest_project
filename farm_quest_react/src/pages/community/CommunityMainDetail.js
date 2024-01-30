@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import CommunityMainComment from './CommunityMainComment';
 import axios from 'axios';
+import backButton from '../../images/assets/backButton.png'
 
 const CommunityMainDetail = () => {
     const threadNo = useSelector(state => state.community.threadNo);
@@ -80,7 +81,7 @@ const CommunityMainDetail = () => {
         <div className="community_detail_box">
             <div className="community_detail_content_box">
                 <div className="community_back_button">
-                    <button onClick={backToMain}>뒤로가기</button>
+                    <button onClick={backToMain}><img src={backButton}/></button>
                 </div>
                 <div className="community_detail_content_box_top">
                     <div className="community_detail_content_box_title">{item.thread_title}</div>

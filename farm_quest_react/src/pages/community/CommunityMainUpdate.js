@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import backButton from '../../images/assets/backButton.png'
 
 const CommunityMainUpdate = () => {
     const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const CommunityMainUpdate = () => {
     return (
         <div className='community_form_box'>
             <div className="community_back_button">
-                <button onClick={backToMain}>뒤로가기</button>
+                <button onClick={backToMain}><img src={backButton}/></button>
             </div>
             <form name='formData' onSubmit={submitForm}>
                 <table>
