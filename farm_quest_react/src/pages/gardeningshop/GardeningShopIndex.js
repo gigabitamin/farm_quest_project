@@ -8,19 +8,18 @@ const GardeningShopIndex = () => {
     const [recommendedProducts, setRecommendedProducts] = useState([]);
     const [currentCategory, setCurrentCategory] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 상태 추가
     const categories = ["all", "비료", "흙", "영양제", "씨앗(묘목)", "자재"];
 
     const fetchProducts = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/api/products/?category=${currentCategory}&page=${currentPage}`);
-            console.log("fetchProducts Response: ", response.data);
             setProducts(response.data.results);
+            setTotalPages(response.data.total_pages); // 백엔드에서 전달받은 전체 페이지 수 설정
         } catch (error) {
             console.error("Error fetching data: ", error);
-            
         }
     };
-    
 
     useEffect(() => {
         fetchProducts();
@@ -73,15 +72,20 @@ const GardeningShopIndex = () => {
     };
 
     const renderPagination = () => {
+
+        if (totalPages < 2) {
+            return null;
+        }
+
         let pages = [];
         const pageLimit = 3; // 앞뒤로 보여줄 페이지 수
-        const totalPages = 20; // 전체 페이지 수, 백엔드에서 받아와야 할 수도 있음
+
 
         // 처음 페이지로 이동
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(1)}>
-                    <span className="ion-chevron-left"></span>
+                    <span className="ion-chevron-left">&laquo;</span>
                     <span className="ion-chevron-left"></span>
                 </a>
             </li>
@@ -91,7 +95,7 @@ const GardeningShopIndex = () => {
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>
-                    <span className="ion-chevron-left"></span>
+                    <span className="ion-chevron-left">&lt;</span>
                 </a>
             </li>
         );
@@ -109,7 +113,7 @@ const GardeningShopIndex = () => {
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}>
-                    <span className="ion-chevron-right"></span>
+                    <span className="ion-chevron-right">&gt;</span>
                 </a>
             </li>
         );
@@ -118,7 +122,7 @@ const GardeningShopIndex = () => {
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(totalPages)}>
-                    <span className="ion-chevron-right"></span>
+                    <span className="ion-chevron-right">&raquo;</span>
                     <span className="ion-chevron-right"></span>
                 </a>
             </li>
@@ -143,9 +147,9 @@ const GardeningShopIndex = () => {
                 ))}
             </div>
             <h1 className="product-top">가드닝 샵</h1>
-            <div>
+            <div className="category-buttons">
                 {categories.map((category, index) => (
-                    <button key={index} onClick={() => handleCategoryChange(category)}>
+                    <button key={index} className="category-button" onClick={() => handleCategoryChange(category)}>
                         {category}
                     </button>
                 ))}

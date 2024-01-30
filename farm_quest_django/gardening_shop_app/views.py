@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import time
 import subprocess
+from django.core.paginator import Paginator
 # def gardening_shop_index(request):    
 #     return render(request, 'gardening_shop_app/gardening_shop_index.html')
 
@@ -55,22 +56,27 @@ class StandardResultsSetPagination(PageNumberPagination):
 from django.core.exceptions import FieldError
 
 class ShopingTbList(APIView):
-    pagination_class = StandardResultsSetPagination
-
     def get(self, request, format=None):
         products = ShopingTb.objects.all()
-        category = request.query_params.get('category')
-        try:
-            if category and category != 'all':
-                products = products.filter(shoping_tb_rss_channel_item_category1=category)
+        category = request.query_params.get('category', 'all')
 
-            paginator = StandardResultsSetPagination()
-            result_page = paginator.paginate_queryset(products, request)
-            serializer = ShopingTbSerializer(result_page, many=True)
-            return paginator.get_paginated_response(serializer.data)
-        except FieldError:
-            # 적절한 예외 처리 또는 로깅
-            return Response({"error": "Invalid category field"}, status=status.HTTP_400_BAD_REQUEST)
+        if category != 'all':
+            products = products.filter(shoping_tb_rss_channel_item_category1=category)
+
+        # Paginator 객체 생성
+        paginator = Paginator(products, 20)  # 20개 항목 당 페이지
+        page_number = request.query_params.get('page', 1)
+        page_obj = paginator.get_page(page_number)
+        
+        serializer = ShopingTbSerializer(page_obj, many=True)
+
+        # 전체 페이지 수를 응답에 추가
+        response_data = {
+            'results': serializer.data,
+            'total_pages': paginator.num_pages
+        }
+
+        return Response(response_data)
 
 
 def recommended_products(request):
@@ -157,9 +163,6 @@ def post_review(request):
             return JsonResponse({'error': str(e)}, status=400)
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
-
-
-from django.core.paginator import Paginator
 
 class GardeningShopSearch(APIView):
     def get(self, request, keyword, format=None):

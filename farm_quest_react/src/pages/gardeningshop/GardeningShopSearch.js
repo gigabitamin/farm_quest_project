@@ -41,7 +41,7 @@ const GardeningShopSearch = () => {
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(1)}>
-                    <span className="ion-chevron-left"></span>
+                    <span className="ion-chevron-left">&laquo;</span>
                     <span className="ion-chevron-left"></span>
                 </a>
             </li>
@@ -51,7 +51,7 @@ const GardeningShopSearch = () => {
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>
-                    <span className="ion-chevron-left"></span>
+                    <span className="ion-chevron-left">&lt;</span>
                 </a>
             </li>
         );
@@ -69,7 +69,7 @@ const GardeningShopSearch = () => {
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}>
-                    <span className="ion-chevron-right"></span>
+                    <span className="ion-chevron-right">&gt;</span>
                 </a>
             </li>
         );
@@ -78,7 +78,7 @@ const GardeningShopSearch = () => {
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(totalPages)}>
-                    <span className="ion-chevron-right"></span>
+                    <span className="ion-chevron-right">&raquo;</span>
                     <span className="ion-chevron-right"></span>
                 </a>
             </li>
@@ -89,7 +89,7 @@ const GardeningShopSearch = () => {
 
     return (
         <div>
-            <h1>검색 결과: {keyword}</h1>
+            <h1 className="product-top">검색 결과: {keyword}</h1>
             <div className="product-list">
                 {Array.isArray(searchResults) && searchResults.map((product, index) => (
                     <div key={index} className="product-item">
