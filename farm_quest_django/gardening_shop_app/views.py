@@ -127,7 +127,8 @@ def shopping_reviews(request, shoping_tb_no):
         return JsonResponse(data, safe=False)
     except ObjectDoesNotExist:
         return JsonResponse({'error': 'No reviews found for the specified product.'}, status=404)
-    
+
+   
 @csrf_exempt
 def post_review(request):
     if request.method == 'POST':
@@ -156,3 +157,9 @@ def post_review(request):
             return JsonResponse({'error': str(e)}, status=400)
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
+    
+def gardening_shop_search(request, keyword):
+    search_results = ShopingTb.objects.filter(shoping_tb_rss_channel_item_title__icontains=keyword)
+    serializer = ShopingTbSerializer(search_results, many=True)
+    print(f"Search for {keyword}: {serializer.data}")  # 콘솔에 결과 출력
+    return JsonResponse(serializer.data, safe=False)

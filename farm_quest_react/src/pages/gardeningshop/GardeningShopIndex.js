@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import './gardeningShopIndex.css';
+import './GardeningShopIndex.css';
 
 const GardeningShopIndex = () => {
     const [products, setProducts] = useState([]);
