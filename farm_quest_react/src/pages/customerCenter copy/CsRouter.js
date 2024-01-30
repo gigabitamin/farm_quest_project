@@ -5,8 +5,6 @@ import CsIndex from "./CsIndex";
 import CsNotice from "./CsNotice";
 import CsFaq from "./CsFaq";
 import CsOne from "./CsOne";
-import CsMain from "./CsMain";
-import CsDetail from "./CsDetail";
 
 
 const CsRouter = () => {
@@ -18,9 +16,7 @@ const CsRouter = () => {
                 <Route path="/cs_index" element={<CsIndex />} />
                 <Route path="/cs_notice" element={<CsNotice/>} />
                 <Route path="/cs_faq" element={<CsFaq />} />
-                <Route path="/cs_one" element={<CsOne />} />
-                <Route path="/cs_main" element={<CsMain />} />
-                <Route path="/cs_detail" element={<CsDetail />} />
+                <Route path="/cs_One" element={<CsOne />} />
             </Routes>
         </div>
     );

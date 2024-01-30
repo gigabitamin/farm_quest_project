@@ -4,11 +4,14 @@
 <!-- notice -->
 ### 공지
 
-- 헤더 css 수정 
-- psh 스케쥻러 api 문제결론 -> 포탈 문제  
+### v0.5.9 kdy 240130 customerCenter
 
 ====================================================
 <!-- version -->
+
+### v0.5.9 kdy  
+- 고객센터 - 공지사항, FAQ, 1대1 리액트, CRUD 페이지 기본 완료
+- 수정 중 
 
 ### v0.5.8 psh  
 - React : scheduler pages updated
