@@ -1,0 +1,44 @@
+{
+  "user_select_plant": "1",
+  "boxes": [
+    {
+      "confidence": [
+        0.8336982131004333
+      ],
+      "label": [
+        5.0
+      ],
+      "xyxy": [
+        [
+          139.99058532714844,
+          78.9660415649414,
+          282.57110595703125,
+          227.8170928955078
+        ]
+      ]
+    }
+  ],
+  "keypoints": null,
+  "masks": null,
+  "names": {
+    "0": "0",
+    "1": "\ub538\uae30",
+    "2": "\ud1a0\ub9c8\ud1a0",
+    "3": "\ud30c\ud504\ub9ac\uce74",
+    "4": "\uc624\uc774",
+    "5": "\uace0\ucd94",
+    "6": "\ud3ec\ub3c4"
+  },
+  "orig_shape": [
+    300,
+    300
+  ],
+  "path": "C:\\FINAL_PROJECT\\farm_quest_project\\upload\\diagnosis\\yolo\\origin_img\\b2385bd839b348bb952251992f28bcb3_thumbnailViewer2.jpg",
+  "probs": null,
+  "save_dir": null,
+  "speed": {
+    "preprocess": null,
+    "inference": null,
+    "postprocess": null
+  }
+}
