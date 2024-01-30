@@ -69,7 +69,7 @@ const GardeningShopDetail = () => {
                 className="product-image"
             />
             <h2 className="product-title">{product.shoping_tb_rss_channel_item_title}</h2>
-            <p className="product-price">가격: ${product.shoping_tb_rss_channel_item_lprice}</p>
+            <p className="product-price">가격: {parseInt(product.shoping_tb_rss_channel_item_lprice).toLocaleString()}원</p>
             <Link to="#" className="add-to-cart">장바구니</Link>
             <div className="reviews-section">
                 <h3 className="reviews-title">리뷰</h3>

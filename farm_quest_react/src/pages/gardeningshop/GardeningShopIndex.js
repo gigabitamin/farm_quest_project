@@ -138,7 +138,7 @@ const GardeningShopIndex = () => {
                             <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
                             <h3>{product.shoping_tb_rss_channel_item_title}</h3>
                         </Link>
-                        <p>${product.shoping_tb_rss_channel_item_lprice}</p>
+                        <p>{parseInt(product.shoping_tb_rss_channel_item_lprice).toLocaleString()}원</p>
                     </div>
                 ))}
             </div>
@@ -158,7 +158,7 @@ const GardeningShopIndex = () => {
                         <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
                         <h3>{product.shoping_tb_rss_channel_item_title}</h3>
                     </Link>
-                    <p>${product.shoping_tb_rss_channel_item_lprice}</p>
+                    <p>{parseInt(product.shoping_tb_rss_channel_item_lprice).toLocaleString()}원</p>
                 </div>
             ))}
 

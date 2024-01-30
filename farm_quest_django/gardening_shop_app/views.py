@@ -157,9 +157,21 @@ def post_review(request):
             return JsonResponse({'error': str(e)}, status=400)
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
-    
-def gardening_shop_search(request, keyword):
-    search_results = ShopingTb.objects.filter(shoping_tb_rss_channel_item_title__icontains=keyword)
-    serializer = ShopingTbSerializer(search_results, many=True)
-    print(f"Search for {keyword}: {serializer.data}")  # 콘솔에 결과 출력
-    return JsonResponse(serializer.data, safe=False)
+
+
+from django.core.paginator import Paginator
+
+class GardeningShopSearch(APIView):
+    def get(self, request, keyword, format=None):
+        search_results = ShopingTb.objects.filter(shoping_tb_rss_channel_item_title__icontains=keyword)
+        paginator = Paginator(search_results, 20) # 20개 항목 당 페이지
+        page = request.GET.get('page') or 1
+        results = paginator.get_page(page)
+        serializer = ShopingTbSerializer(results, many=True)
+
+        # 전체 페이지 수 추가
+        response_data = {
+            'results': serializer.data,
+            'total_pages': paginator.num_pages
+        }
+        return Response(response_data)
