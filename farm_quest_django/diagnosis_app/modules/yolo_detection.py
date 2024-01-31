@@ -179,8 +179,9 @@ def detect(save_file_path, plant_name, user_select_plant):
         tf_predict_result_list_sorted = []
         crops_path_list = []
         if len(serialized_boxes) >= 0:
-            tf_predict_disease_list, crops_path_list = tf_detect(serialized_results_list, plant_name, user_select_plant, img_path)
-            print('please')
+            with tf.device('/physical_device:CPU:0'):
+                tf_predict_disease_list, crops_path_list = tf_detect(serialized_results_list, plant_name, user_select_plant, img_path)
+                print('please')
         
         tf_predict_result_list_sorted = solution_service(tf_predict_disease_list)
         print('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
