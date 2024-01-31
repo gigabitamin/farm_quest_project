@@ -1,0 +1,653 @@
+
+/* CsIndex */
+
+.csIndex {
+    /* border:1px solid green; */
+    max-width:1280px;
+    margin: 0 auto;
+}
+  
+.ctg_content {
+    /* border: 1px solid green; */
+}
+
+.cs_layout {
+    /* border: 1px solid green; */
+}
+
+.cs_top_bar {
+    /* border: 1px solid green; */
+    max-width:300px;
+    margin : 0 auto;
+}
+
+.cs_menu {
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.cs_notice {        
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    background-color: antiquewhite;
+    color: black;
+    cursor: pointer;
+  }
+.cs_notice:hover {
+    background-color: rgb(235, 143, 101);
+  }
+
+.cs_faq {        
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    background-color: antiquewhite;
+    color: black;
+    cursor: pointer;
+  }
+.cs_faq:hover {
+    background-color: rgb(130, 206, 247);
+  }
+
+.cs_one {        
+    border:none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    background-color: antiquewhite;
+    color: black;
+    cursor: pointer;
+  }
+.cs_one:hover {
+    background-color: rgb(138, 158, 226);
+  }
+
+.cs_content_area {
+    /* border: 1px solid green; */
+}
+
+
+section.cs_faq_section {    
+    margin: 0 auto;
+    max-width: 1280px;
+}
+section.cs_notice_section {    
+    margin: 0 auto;
+    max-width: 1280px;
+}
+div.cs_one_wrap {    
+    margin: 0 auto;
+    max-width : 1280px;
+}
+
+
+
+
+/* CsOne */
+
+.cs_one_wrap {
+    /* border: 1px solid green; */
+    /* padding : 1px;      */
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+.cs_one_form_table_wrap {
+    /* border: 1px solid green; */
+    /* padding : 1px;      */
+    max-width: 1280px;
+  }
+  
+  .cs_one_form_table {        
+    margin: 0 auto;
+    padding : 1px; 
+    display: flex;    
+    justify-content: center;    
+  }
+  
+  .cs_one_form_table td {
+    border: 1px solid rgb(138, 158, 226);
+    padding: 10px;
+    background-color: rgb(138, 158, 226);
+    color : rgb(0, 0, 0);
+  }
+  
+  .cs_one_form_table label {
+    border: 1px solid white;
+    padding : 10px; 
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .cs_one_form_table textarea,
+  .cs_one_form_table input {
+    border: 1px solid green;
+    padding : 1px; 
+    width: 100%;    
+    box-sizing: border-box;    
+  }
+  
+  .cs_one_form_table button {
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 10px 15px;
+    background-color: rgb(43, 79, 197);
+    color: white;        
+    cursor: pointer;
+  }
+  
+  .cs_one_form_table button:hover {
+    background-color: rgb(88, 119, 220);
+  }
+  
+
+
+
+
+/*  */
+
+
+article#customerCenter {
+    /* position: relative; */
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-bottom: 90px;
+    width: 100%;
+}
+
+
+
+
+/****** 중앙 게시물 관련 양식 ******/
+div.customerCenter\_main_box {
+    margin: 0 auto;
+    width: 90%;
+    /* border: solid 1px black; */
+}
+
+
+
+/****** 중앙 게시물 내부 관련 양식 ******/
+
+/* 공지사항 */
+
+
+/****** 중앙 게시물 내부 관련 양식 ******/
+div.cs_faq_main_top_box {    
+    position: relative;
+    margin: 0 auto;
+    height: 40px;
+    background:rgb(130, 206, 247);
+}
+
+div.cs_faq_main_top_box p {
+    position: absolute;
+    left: 20px;
+    font-size: 30px;
+}
+
+div.cs_faq_main_top_box button {    
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+div.cs_faq_main_column_box {
+    margin-right: 15px;    
+}
+
+div.cs_faq_main_column_box div.cs_list_item_display {
+    margin: 0 3%;        
+}
+
+div.cs_faq_main_column_box div.cus_list_item_display div {
+    background-color: beige;
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+div.cs_faq_main_center_box {
+    margin: 0 auto;
+    padding: 0.5% 0;
+    max-height: 500px;
+    /* height: 62vh; */
+    overflow-y: scroll;
+    /* border: solid 1px black; */
+}
+
+div.cs_faq_main_bottom_box {    
+    margin: 0 auto;
+    background: rgb(130, 206, 247);
+}
+
+
+/****** 중앙 게시물 컨텐츠내용 관련 양식 ******/
+div.cs_faq_content_box_list_item {
+    padding: 3px;
+    margin: 0.5% auto;
+    width: 95%;
+    background: rgb(207, 216, 229);
+    cursor: pointer;
+    /* border-bottom: solid 1px black; */
+}
+
+div.cs_faq_list_item_display {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.cs_faq_list_item_display div {        
+    width:100%;
+}
+
+div.cs_faq_list_item_display div.cs_faq_no {
+    width: 50px;
+    font-size: 13px;
+}
+
+div.cs_faq_list_item_display div.cs_faq_ctg_type {
+    width: 16%;
+    font-size: 0.7em;
+    display: flex;    
+    justify-content: right;    
+}
+
+div.cs_faq_list_item_display div.thread_title {
+    font-size: 13px;
+    flex-grow: 1;
+    padding: 0 5px;
+    text-align: left;
+
+}
+
+div.cs_faq_list_item_display div.nickname {
+    width: 80px;
+    font-size: 13px;
+}
+
+div.cs_faq_list_item_display div.nums {
+    width: 60px;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+/* Notice */
+
+
+div.cs_notice_main_top_box {
+    position: relative;
+    margin: 0 auto;
+    height: 40px;
+    background: rgb(235, 143, 101);
+}
+
+div.cs_notice_main_top_box p {
+    position: absolute;
+    left: 20px;
+    font-size: 30px;
+}
+
+div.cs_notice_main_top_box button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+div.cs_notice_main_column_box {
+    margin-right:7%;
+    /* margin-left: 15px; */
+}
+div.cs_notice_list_item_display {
+    display: flex;
+}
+div.cs_notice_list_item_display > div:nth-child(1){
+    justify-content: flex-start;
+}
+div.cs_notice_list_item_display > div:nth-child(2){
+    display: flex;            
+}
+div.cs_notice_list_item_display > div:nth-child(3){
+    justify-content: flex-end;
+    
+}
+
+div.cs_notice_main_column_box div.customerCenter_list_item_display {
+    margin: 0 3%;
+}
+
+div.cs_notice_main_column_box div.customerCenter_list_item_display div {
+    background-color: beige;
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+div.cs_notice_main_center_box {
+    margin: 0 auto;
+    padding: 0.5% 0;
+    max-height: 500px;
+    /* height: 62vh; */
+    overflow-y: scroll;
+    /* border: solid 1px black; */
+}
+
+div.cs_notice_main_bottom_box {
+    margin: 0 auto;
+    background: rgb(235, 143, 101);
+}
+
+
+/****** 중앙 게시물 컨텐츠내용 관련 양식 ******/
+div.cs_notice_content_box_list_item {
+    padding: 3px;
+    margin: 0.5% auto;
+    width: 95%;
+    background: rgb(255, 232, 221);
+    cursor: pointer;
+
+}
+
+
+.cs_notice_list_item_display > div:nth-child(3){
+    display: flex;    
+    justify-content: flex-end;
+}
+
+div.cs_notice_list_item_display div {    
+    width:100%;
+}
+div.cs_notice_title_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.cs_notice_list_item_display_inbox {
+    display: flex;
+    justify-content: space-between;    
+}
+.cs_notice_list_item_display_inbox > div:nth-child(1) {
+    display: flex;
+    justify-content: flex-start;        
+}
+.cs_notice_list_item_display_inbox > div:nth-child(2) {
+    display: flex;              
+}
+.cs_notice_list_item_display_inbox > div:nth-child(3) {
+    display: flex;
+    justify-content: flex-end;
+}
+
+div.cs_notice_no {
+    font-size:0.7em !important;
+    max-width:50px;    
+}
+div.cs_notice_ctg_type {
+    font-size:0.5em !important;
+    max-width:80px;
+}
+div.cs_notice_title{
+    font-size:0.5em;
+    max-width:80px;
+}
+div.cs_nickname {
+    font-size:0.5em;
+    max-width:80px;
+}
+div.cs_notice_date {
+    font-size:0.5em;
+    max-width:80px;
+}
+
+div.cs_notice_list_item_display div.cs_notice_no {
+    width: 50px;
+    font-size: 13px;
+}
+
+div.cs_notice_list_item_display div.cs_notice_ctg_type {
+    width: 60px;
+    font-size: 13px;
+}
+
+div.cs_notice_list_item_display div.thread_title {
+    font-size: 13px;
+    flex-grow: 1;
+    padding: 0 5px;
+    text-align: left;
+}
+
+div.cs_notice_list_item_display div.nickname {
+    width: 80px;
+    font-size: 13px;
+}
+
+div.cs_notice_list_item_display div.nums {
+    width: 60px;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****** 게시물 상세정보 관련 양식 ******/
+div.customerCenter_detail_box {
+    padding: 1% 0;
+    margin: 1% auto;
+    width: 95%;
+    background: beige;
+}
+
+div.customerCenter_detail_content_box_top, div.customerCenter_detail_content_box_main {
+    margin: 0 auto;
+    width: 96%;
+}
+
+div.customerCenter_detail_content_box_top {
+    border: solid 1px black;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+}
+
+div.customerCenter_detail_content_box_user {
+    position: absolute;
+    background: #88AB8E;
+    left: 0;
+    width: 25%
+}
+
+div.customerCenter_detail_content_box_type {
+    position: absolute;
+    background: #88AB8E;
+    right: 0;
+    width: 15%
+}
+
+div.customerCenter_detail_content_box_main {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border: solid 1px black;
+}
+
+div.customerCenter_detail_content_box_title {
+    padding: 1%;
+    background: #88AB8E;
+}
+
+div.customerCenter_detail_content_box_content {
+    margin: 1% auto;
+    width: 96%;
+    min-height: 250px;
+    padding: 1%;
+    /*
+    메인 컨텐츠 박스의 높이는 안에 들어가는 컨텐츠의 양에 따라 달라진다
+    최소 크기를 250px로 지정해두었다
+    */
+    background: #88AB8E;
+}
+
+
+
+/****** 게시물 댓글 관련 양식 ******/
+div.customerCenter_detail_comment_boxes {
+    position: relative;
+}
+
+div.customerCenter_detail_comment_box {
+    border: solid 1px black;
+    min-height: 40px;
+}
+
+div.customerCenter_detail_comment_box_user {
+    margin-top: 9px;
+    text-align: left;
+    display: inline-block;
+    border: solid 1px black;
+    width: 21%;
+}
+
+div.customerCenter_detail_comment_box_content {
+    line-height: 100%;
+    text-align: left;
+    display: inline-block;
+    border: solid 1px black;
+    right: 0;
+    width: 79%;
+}
+
+
+
+/****** 게시물 작성 관련 양식 ******/
+div.customerCenter_form_box {
+    padding: 1% 0;
+    margin: 1% auto;
+    width: 80%;
+    background: beige;
+}
+
+div.customerCenter_form_box > button {
+    margin-right: 30%;
+    left: 0;
+}
+
+div.customerCenter_form_box table {
+    margin: 0 auto;
+    width: 100%;
+}
+
+div.customerCenter_form_box table td {
+    /* 내부 요소 위치를 지정하기위한 설정 */
+    position: relative; 
+}
+
+div.customerCenter_form_box table th {
+    margin: 0 auto;
+    width: 15%;
+    padding: 3px;
+}
+
+div.customerCenter_form_box input.title {
+    font-size: 15px;
+    height: 25px;
+    width: 100%;   
+}
+
+div.customerCenter_form_box select {
+    font-size: 12px;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+}
+
+div.customerCenter_form_box textarea.content {
+    padding: 2px;
+    font-size: 12px;
+    width: 100%;
+    height: 250px;
+    resize: none; 
+}
