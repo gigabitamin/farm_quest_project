@@ -180,7 +180,7 @@ def detect(save_file_path, plant_name, user_select_plant):
         crops_path_list = []
         if len(serialized_boxes) > 0:
             print('이게 외않되?1')
-            with tf.device('/physical_device:CPU:0'):
+            with tf.device('/cpu:0'):
                 print('이게 외않되?2')
                 tf_predict_disease_list, crops_path_list = tf_detect(serialized_results_list, plant_name, user_select_plant, img_path)
                 print('please')
