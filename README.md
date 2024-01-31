@@ -17,6 +17,11 @@ export default "http://localhost:8000"
 ====================================================
 <!-- version -->
 
+psh
+- React : scheduler pages updated
+- .env updated(file in discord)
+
+
 ### v0.6.2 jsh  
 - AWS 서버 환경에 대응하여 링크 설정
 
