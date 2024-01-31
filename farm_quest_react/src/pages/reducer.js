@@ -1,8 +1,13 @@
+import link from '../DjangoServer';
+
 const initialState = {
+    DjangoServer: link,
+
     loginUser: {
         isLoggedIn: false,
         username: null
     },
+
     community: {
         show: 'main', // 표시 상태
         mainPage: {
@@ -12,6 +17,17 @@ const initialState = {
         threadNo: null, // 디테일 화면 쓰레드 번호
         item: {}
     },
+
+    customerCenter: {
+        show: 'main',
+        mainPage: {
+            link: null,
+            num: null
+        }, 
+        threadNo: null, 
+        item: {}
+    },
+
     diagnosis: {
 
     },
@@ -39,6 +55,7 @@ export default function reducer(state=initialState, action) {
             loginState = { ...initialState.loginUser };
         };
         newState.loginUser = loginState;
+
     } else if (action.part === 'community') {
         // 커뮤니티 관련 실행 코드
         let communityState = { ...state.community };
@@ -60,7 +77,31 @@ export default function reducer(state=initialState, action) {
             communityState = { ...initialState.community };
         };
         newState.community = communityState;
+
+    } else if (action.part === 'customerCenter') {
+        // 고객센터 관련 실행 코드
+        let customerCenterState = { ...state.customerCenter };
+        if (action.type === 'detail') {
+            customerCenterState.show = 'detail';
+            customerCenterState.threadNo = action.threadNo;
+            customerCenterState.mainPage = action.mainPage;
+        } else if (action.type === 'mainBack') {
+            customerCenterState.show = 'main';
+            customerCenterState.threadNo = null;
+        } else if (action.type === 'create') {
+            customerCenterState.show = 'create';
+        } else if (action.type === 'update') {
+            customerCenterState.show = 'update';
+            customerCenterState.item = action.item;
+        } else if (action.type === 'detailBack') {
+            customerCenterState.show = 'detail';
+        } else if (action.type === 'reset') {
+            customerCenterState = { ...initialState.customerCenter };
+        };
+        newState.customerCenter = customerCenterState;
     };
+
+
 
     return newState;
 };

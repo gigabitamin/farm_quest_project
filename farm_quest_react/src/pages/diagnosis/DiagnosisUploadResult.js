@@ -1,12 +1,14 @@
 import React, { useRef} from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './DiagnosisUploadResult.css';
 
 
 const DiagnosisUploadResult = () => {
 
     const location = useLocation();
+
+    const DjangoServer = useSelector(state => state.DjangoServer);
 
     console.log('(location.state.file_name = ', location.state.file_name);
 
@@ -41,7 +43,7 @@ const DiagnosisUploadResult = () => {
     if (serialized_results && serialized_results.boxes && tf_predict_result_list_sorted[0]) {
 
         const url = save_file_name
-            ? `http://127.0.0.1:8000/media/diagnosis/yolo/origin_img/result_img/${save_file_name}`
+            ? `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${save_file_name}`
             : null;
 
         const file_name = save_file_name.split('.')[0];
@@ -94,8 +96,8 @@ const DiagnosisUploadResult = () => {
                                         const confidence = Number(serialized_results.boxes[boxKey]['confidence']).toFixed(4);
                                         const isDisease = label >= 6;
                                         const url_crops = save_file_name && index > 0 ? 
-                                        `http://127.0.0.1:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index}.jpg` : 
-                                        `http://127.0.0.1:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg`;
+                                        `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index}.jpg` : 
+                                        `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg`;
 
                                         if (!isDisease) {
                                             return null;
@@ -196,7 +198,7 @@ const DiagnosisUploadResult = () => {
     }
 
     const url_empty = save_file_name
-        ? `http://127.0.0.1:8000/media/diagnosis/yolo/origin_img/${save_file_name}`
+        ? `${DjangoServer}/media/diagnosis/yolo/origin_img/${save_file_name}`
         : null;
 
     return (

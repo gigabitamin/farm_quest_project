@@ -29,6 +29,7 @@ from ..serializers import SolutionTbSerializer
 from rest_framework import mixins, generics
 from rest_framework import status
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "cpu"
     
 # class SolutionAPIMixins(
 #     mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
@@ -178,7 +179,8 @@ def detect(save_file_path, plant_name, user_select_plant):
         tf_predict_disease_list = []
         tf_predict_result_list_sorted = []
         crops_path_list = []
-        if len(serialized_boxes) >= 0:
+        if len(serialized_boxes) > 0:
+            print('이게 외않되?1')
             tf_predict_disease_list, crops_path_list = tf_detect(serialized_results_list, plant_name, user_select_plant, img_path)
             print('please')
         

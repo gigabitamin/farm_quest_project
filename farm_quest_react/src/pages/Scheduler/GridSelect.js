@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const GridSelect = ({}) => {
     const [location1, setLocation1] = useState([]);

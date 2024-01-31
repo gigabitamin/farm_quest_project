@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import './DiagnosisAnswer.css';
+
 
 const DiagnosisAnswer = () => {
     
   let history = useNavigate();
 
+  const DjangoServer = useSelector(state => state.DjangoServer);
   const [diagnosisQuestions, setDiagnosisQuestions] = useState([]);
   const diagnosisQuestionsLoadData = async () => {
-       const response = await axios.get('http://localhost:8000/diagnosis_questions_api/');       
+       const response = await axios.get(`${DjangoServer}/diagnosis_questions_api/`);
        setDiagnosisQuestions(response.data);
   };
 
@@ -34,7 +38,7 @@ const DiagnosisAnswer = () => {
         frmData.append(`diagnosis_question_${index + 1}`, diagnosisQuestionHistory[`diagnosis_question_${index + 1}`]);
     });
 
-    axios.post('http://localhost:8000/diagnosis_questions_history_api/', frmData)
+    axios.post(`${DjangoServer}/diagnosis_questions_history_api/`, frmData)
         .then(response => {
             alert("문진표 작성 완료");
             history('/diagnosis_choice');
@@ -54,6 +58,8 @@ const DiagnosisAnswer = () => {
           <div className="diagnosis_answer_wrap">
             <form id="diagnosis_answer_form"  name="diagnosisAnswerComplete" onSubmit={sendPostRequest}>
               <h2>문진표</h2>
+              <hr />
+              <br />
               {diagnosisQuestions.map((question) => (
                 <div key={question.diagnosis_question_no}>
                   <div>{question.diagnosis_question_content}</div>
@@ -76,7 +82,8 @@ const DiagnosisAnswer = () => {
                     아니오
                   </label>
                 </div>
-              ))}              
+              ))}
+              <br />      
               <input type="submit" value="작성완료" />
             </form>
           </div>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Logout() {
   const dispatch = useDispatch();
+  const DjangoServer = useSelector(state => state.DjangoServer);
   const { isLoggedIn, username } = useSelector(state => state.loginUser);
   const [auth, setAuth] = useState('')
 
@@ -19,7 +20,7 @@ function Logout() {
       part: 'loginUser',
       type: 'logout'
     });
-    fetch('http://127.0.0.1:8000/logout/', {
+    fetch(`${DjangoServer}/logout/`, {
        method: 'POST',
        headers: {
         'Content-Type': 'application/json',
