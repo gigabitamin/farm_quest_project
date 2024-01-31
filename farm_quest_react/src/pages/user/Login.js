@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../shared/App.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import './user.css'
 
 const Login = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const [cookies, setCookie] = useCookies(['id']);
     const dispatch = useDispatch();
     const history = useNavigate();
@@ -27,7 +28,7 @@ const Login = () => {
     const loginSubmit = (event) => {
         event.preventDefault();
         axios
-            .post("http://127.0.0.1:8000/login/", formData)
+            .post(`${DjangoServer}/login/`, formData)
             .then((response) => {
                 console.log('reponse = ', response)
                 if (response.status < 300) {
@@ -52,7 +53,7 @@ const Login = () => {
     // const checkLoginStatus = () => {
     //     const token = cookies.id;
     //     if (token) {            
-    //         axios.post("http://127.0.0.1:8000/login_check/", { token: token })
+    //         axios.post(`${DjangoServer}/login_check/`, { token: token })
     //             .then((response) => {
     //                 if (response.status < 300) {                    
     //                     dispatch({

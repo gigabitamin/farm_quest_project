@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './DiagnosisRecommend.css';
 
 const DiagnosisRecommend = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const { solutionWord } = useParams();
     const [recommendations, setRecommendations] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
@@ -27,7 +29,7 @@ const DiagnosisRecommend = () => {
     useEffect(() => {
         const fetchDiagnosisItemCart = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/diagnosis_load_cart/', {
+                const response = await axios.get(`${DjangoServer}/diagnosis_load_cart/`, {
                     headers: { Authorization: `Token  ${cookies.id}` },
                     params: { diagnosis_item_cart_id: cookies.diagnosisItemCartId },
                 });
@@ -48,7 +50,7 @@ const DiagnosisRecommend = () => {
     const handleLoadButtonClick = async () => {
         try {
             // 불러오기 버튼을 눌렀을 때 API에서 데이터를 받아옴
-            const response = await axios.get(`http://localhost:8000/diagnosis_load_cart/?diagnosis_item_cart_id=${diagnosisItemCartId}`);
+            const response = await axios.get(`${DjangoServer}/diagnosis_load_cart/?diagnosis_item_cart_id=${diagnosisItemCartId}`);
             
             // 받아온 데이터를 selectedItems 상태로 설정
             setSelectedItems(response.data);
@@ -64,7 +66,7 @@ const DiagnosisRecommend = () => {
     const saveDiagnosisItemCart = async () => {
         try {                        
             const response = await axios.post(
-                'http://localhost:8000/diagnosis_save_cart/', 
+                `${DjangoServer}/diagnosis_save_cart/`, 
                 { 'diagnosis_item_cart_list' : diagnosisItemCartListJSON },
                 { headers: { Authorization: `Token  ${cookies.id}` }}
             );
@@ -99,7 +101,7 @@ const DiagnosisRecommend = () => {
         try {
             setLoading(true);
             console.log('page', page);
-            const response = await axios.get(`http://localhost:8000/diagnosis_recommend/${solutionWord}/?page=${page}`);
+            const response = await axios.get(`${DjangoServer}/diagnosis_recommend/${solutionWord}/?page=${page}`);
             if (response.data.length > 0) {
                 console.log('response', response);
                 setRecommendations((prevData) => [...prevData, ...response.data]);

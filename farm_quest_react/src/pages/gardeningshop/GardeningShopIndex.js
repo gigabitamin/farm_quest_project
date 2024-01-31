@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from "axios";
 import './gardeningShopIndex.css';
 
 const GardeningShopIndex = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const [products, setProducts] = useState([]);
     const [recommendedProducts, setRecommendedProducts] = useState([]);
     const [currentCategory, setCurrentCategory] = useState("all");
@@ -13,7 +15,7 @@ const GardeningShopIndex = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/products/?category=${currentCategory}&page=${currentPage}`);
+            const response = await axios.get(`${DjangoServer}/api/products/?category=${currentCategory}&page=${currentPage}`);
             setProducts(response.data.results); // Django REST framework는 페이징된 결과를 'results' 키에 담습니다.
         } catch (error) {
             console.error("Error fetching data: ", error);
@@ -31,7 +33,7 @@ const GardeningShopIndex = () => {
 
     const fetchRecommendedProducts = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/recommended_products`); // 추천 상품 엔드포인트
+            const response = await axios.get(`${DjangoServer}/api/recommended_products`); // 추천 상품 엔드포인트
             setRecommendedProducts(response.data); // 추천 상품 상태 업데이트
         } catch (error) {
             console.error("Error fetching recommended products: ", error);
@@ -54,7 +56,7 @@ const GardeningShopIndex = () => {
         }
     
         try {
-            const response = await axios.get(`http://localhost:8000/api/shopping_reviews/${shoping_tb_no}`);
+            const response = await axios.get(`${DjangoServer}/api/shopping_reviews/${shoping_tb_no}`);
             // 응답 데이터 처리
         } catch (error) {
             console.error("Error fetching shopping reviews: ", error);

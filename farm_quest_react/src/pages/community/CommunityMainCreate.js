@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import backButton from '../../images/assets/backButton.png'
@@ -11,6 +11,7 @@ const CommunityMainCreate = () => {
         thread_type: ''
     };
 
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const [form, setForm] = useState(initialForm);
     const dispatch = useDispatch();
     const [cookies] = useCookies(['id'])
@@ -31,7 +32,7 @@ const CommunityMainCreate = () => {
     const submitForm = (event) => {
         if (window.confirm('등록하시겠습니까?')) {
             // var formData = new FormData(document.formData);
-            axios.post('http://localhost:8000/community/create/', form, {
+            axios.post(`${DjangoServer}/community/create/`, form, {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(
                 response => {

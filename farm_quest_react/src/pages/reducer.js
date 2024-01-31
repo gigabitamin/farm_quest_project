@@ -1,4 +1,8 @@
+import link from '../DjangoServer';
+
 const initialState = {
+    DjangoServer: link,
+
     loginUser: {
         isLoggedIn: false,
         username: null

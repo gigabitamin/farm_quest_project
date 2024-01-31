@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './DiagnosisChoice.css';
 
 const DiagnosisChoice = () => {
     let history = useNavigate();
 
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const [plantSpecies, setPlantSpecies] = useState([]);
     const plantLoadData = async () => {
-        const response = await axios.get('http://localhost:8000/plant_api/');
+        const response = await axios.get(`${DjangoServer}/plant_api/`);
         setPlantSpecies(response.data);
         console.log(response.data);
     };
@@ -35,7 +37,7 @@ const DiagnosisChoice = () => {
         frmData.append(`user_select_plant`, selectedPlantIndex[`user_select_plant`]);
 
         axios
-            .post('http://localhost:8000/save_diagnosis_result_api/', frmData)
+            .post(`${DjangoServer}/save_diagnosis_result_api/`, frmData)
             .then((response) => {
                 alert('선택한 작물 : ' + selectedPlant.plant_name);
                 history('/diagnosis_upload', { state: { newDiagnosisResultId: response.data } });

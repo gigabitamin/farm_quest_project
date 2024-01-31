@@ -1,6 +1,7 @@
     import React, { useState, useEffect } from 'react';
     import axios from 'axios';
     import { useNavigate } from 'react-router-dom';
+    import { useSelector } from 'react-redux';
     // import { Link } from 'react-router-dom';
     // import './DiagnosisChoice.css';
     import './DiagnosisUpload.css';
@@ -9,6 +10,7 @@
     const DiagnosisUpload = () => {
         const navigate = useNavigate();
 
+        const DjangoServer = useSelector(state => state.DjangoServer);
         const [plantSpecies, setPlantSpecies] = useState([]);
         const [selectedPlantIndex, setSelectedPlantIndex] = useState(null);
         const [selectedFile, setSelectedFile] = useState(null);
@@ -22,7 +24,7 @@
 
         const plantLoadData = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/plant_api/');
+                const response = await axios.get(`${DjangoServer}/plant_api/`);
                 setPlantSpecies(response.data);            
             } catch (error) {
                 console.error('Error fetching plant data:', error);
@@ -68,7 +70,7 @@
             formData.append('imgFile', selectedFile);
 
             axios
-                .post('http://localhost:8000/diagnosis_upload/', formData, {headers: { 'content-type': 'multipart/form-data' },})
+                .post(`${DjangoServer}/diagnosis_upload/`, formData, {headers: { 'content-type': 'multipart/form-data' },})
                 .then(response => {
                     alert("진단 완료 : 진단결과 페이지로 이동합니다");
                     navigate('/diagnosis_upload_result', { state: { file_name: response.data } });

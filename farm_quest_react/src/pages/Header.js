@@ -4,8 +4,10 @@ import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
 import DiagnosisLink from "./diagnosis/DiagnosisLink";
 import LoginLink from './user/LoginLink'
 import CsLink from './customerCenter/CsLink'
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const user = { is_authenticated: false, username: 'exampleUser' };
 
     const portal_search = () => {
@@ -60,9 +62,9 @@ const Header = () => {
             </div>
 
             <nav className="navbar_hd">
-                <ul>                     
+                <ul>
                     {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}                                        
-                    <div className="nav-item_hd"><Link to="http://127.0.0.1:8000">장고로 이동</Link></div>
+                    <div className="nav-item_hd"><Link to={DjangoServer}>장고로 이동</Link></div>
                     <CsLink />
                     <div className="nav-item_hd">
                         <div><a href="{% url 'guide_index' %}" className="nav-link_hd">가이드</a></div>

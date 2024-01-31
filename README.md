@@ -4,10 +4,21 @@
 <!-- notice -->
 ### 공지
 
-### v0.6.1 kdy 240131
+### v0.6.2 jsh
+> 서버 대응을 위해서 Django 서버 링크를 외부로 빼내었다.   
+> farm_quest_react/src 디렉토리 내부에 DjangoServer.js 파일을 생성하여 저장할 필요가 있다.   
+> .gitignore에 설정되어 있으므로 공유되지 않는다.   
+
+```javascript
+// DjangoServer.js 내부
+export default "http://localhost:8000"
+```
 
 ====================================================
 <!-- version -->
+
+### v0.6.2 jsh  
+- AWS 서버 환경에 대응하여 링크 설정
 
 ### v0.6.1 kdy  
 - 프로필 페이지, 프로필 수정 페이지, 회원가입, 로그인 css 완료(완성버전)  

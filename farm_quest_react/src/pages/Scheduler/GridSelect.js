@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const GridSelect = ({ setStoredNx, setStoredNy }) => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const [location1, setLocation1] = useState([]);
     const [location2, setLocation2] = useState([]);
     const [location3, setLocation3] = useState([]);
@@ -10,7 +12,7 @@ const GridSelect = ({ setStoredNx, setStoredNy }) => {
     
     // 위치선택 가져오기
     useEffect(() => {
-        fetch('http://localhost:8000/api/get_grid_data/')
+        fetch(`${DjangoServer}/api/get_grid_data/`)
             .then(response => response.json())
             .then(data => {
                 setLocation1(data.location1.sort());
@@ -23,7 +25,7 @@ const GridSelect = ({ setStoredNx, setStoredNy }) => {
     useEffect(() => {
         const fetchLocations2 = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/get_location2_data/?location1=${selectedLocation1}`);
+                const response = await fetch(`${DjangoServer}/api/get_location2_data/?location1=${selectedLocation1}`);
                 const data = await response.json();
                 setLocation2(data.location2.sort());
             } catch (error) {
@@ -42,7 +44,7 @@ const GridSelect = ({ setStoredNx, setStoredNy }) => {
     useEffect(() => {
         const fetchLocations3 = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/get_location3_data/?location1=${selectedLocation1}&location2=${selectedLocation2}`);
+                const response = await fetch(`${DjangoServer}/api/get_location3_data/?location1=${selectedLocation1}&location2=${selectedLocation2}`);
                 const data = await response.json();
                 setLocation3(data.location3.sort());
             } catch (error) {
