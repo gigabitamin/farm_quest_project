@@ -43,15 +43,15 @@ const Register = () => {
     };
 
     return (
-        <section className="hero is-warning is-large">
-        <div className="hero-body">
-            <div className="container">
-            <div className="columns is-centered">
-                <div className="column is-6-tablet is-5-desktop is-4-widescreen">
+        <section className="resister_wrap">
+        <div className="resister_div_box">
+            <div className="resister_container">
+            <div className="resister_columns">
+                <div className="resister_column_box">
                 <form onSubmit={handleSubmit} className="box">
-                    <div className="field">
-                        <label className="label">아이디</label>
-                        <div className="control has-icons-left">
+                    <div className="resister_input_field">
+                        <label className="resister_input_label">아이디</label>
+                        <div className="resister_input_box">
                             <input
                             type="text"
                             placeholder="150자 이하"
@@ -63,9 +63,9 @@ const Register = () => {
                             />
                         </div>
                     </div>
-                    <div className="field">
-                        <label className="label">이메일</label>
-                        <div className="control has-icons-left">
+                    <div className="resister_input_field">
+                        <label className="resister_input_label">이메일</label>
+                        <div className="resister_input_box">
                             <input
                             type="email"
                             placeholder="farm@farm.com"
@@ -77,9 +77,9 @@ const Register = () => {
                             />
                         </div>
                     </div>
-                    <div className="field">
-                        <label className="label">비밀번호</label>
-                        <div className="control has-icons-left">
+                    <div className="resister_input_field">
+                        <label className="resister_input_label">비밀번호</label>
+                        <div className="resister_input_box">
                             <input
                             type="password"
                             placeholder="8자리 이상, 숫자만 X"
@@ -91,9 +91,9 @@ const Register = () => {
                             />
                         </div>
                     </div>
-                    <div className="field">
-                        <label className="label">비밀번호 확인</label>
-                        <div className="control has-icons-left">
+                    <div className="resister_input_field">
+                        <label className="resister_input_label">비밀번호 확인</label>
+                        <div className="resister_input_box">
                             <input
                             type="password"
                             placeholder="같은 비밀번호를 입력"
@@ -106,9 +106,9 @@ const Register = () => {
                         </div>                    
                     </div>
 
-                    <div className="field">
-                        <label className="label">닉네임</label>
-                        <div className="control has-icons-left">
+                    <div className="resister_input_field">
+                        <label className="resister_input_label">닉네임</label>
+                        <div className="resister_input_box">
                             <input
                                 type="text"
                                 placeholder="사이트 닉네임"
@@ -121,9 +121,9 @@ const Register = () => {
                         </div>                    
                     </div>
 
-                    <div className="field">
-                        <label className="label">성명</label>
-                        <div className="control has-icons-left">
+                    <div className="resister_input_field">
+                        <label className="resister_input_label">성명</label>
+                        <div className="resister_input_box">
                             <input
                                 type="text"
                                 placeholder="본인 성명"
@@ -136,9 +136,9 @@ const Register = () => {
                         </div>                    
                     </div>
 
-                    <div className="field">
-                        <label className="label">휴대폰 번호</label>
-                        <div className="control has-icons-left">
+                    <div className="resister_input_field">
+                        <label className="resister_input_label">휴대폰 번호</label>
+                        <div className="resister_input_box">
                             <input
                                 type="text"
                                 placeholder="11개의 번호 숫자만"
@@ -151,9 +151,9 @@ const Register = () => {
                         </div>                    
                     </div>
 
-                    <div className="field">
-                        <label className="label">주소</label>
-                        <div className="control has-icons-left">
+                    <div className="resister_input_field">
+                        <label className="resister_input_label">주소</label>
+                        <div className="resister_input_box">
                             <input
                                 type="text"
                                 placeholder="주소지"
@@ -165,9 +165,9 @@ const Register = () => {
                             />
                         </div>                    
                     </div>
-                    <div className="field">
+                    <div className="resister_input_field">
                         <button
-                            className="button is-primary is-fullwidth"
+                            className="resister_submit_button"
                             type="submit"
                         >
                             회원가입

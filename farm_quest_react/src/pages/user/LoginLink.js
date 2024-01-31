@@ -22,20 +22,24 @@ const LoginLink = ({ user }) => {
   return (
     <div className="loginBox_hd">
       {isLoggedIn ? (
-        <>
-          <div className="loginUser">{username}</div>
+        <div>
           <div className="logout">            
             <button key="logout" onClick={handleLogout}>
               로그아웃
             </button>
           </div>
-        </>
+          <div title="회원정보로 이동" className="loginUser">            
+            <Link to="./profile">
+              {username}
+            </Link>                        
+          </div>
+        </div>
       ) : (
         <>
           <div className="resister">
             <Link to="/resister">회원가입</Link>
           </div>
-          <div> / </div>
+          <div> </div>
           <div className="login">
             <Link to="/login">로그인</Link>
           </div>          

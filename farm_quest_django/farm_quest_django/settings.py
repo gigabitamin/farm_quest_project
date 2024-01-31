@@ -64,8 +64,10 @@ INSTALLED_APPS = [
     # https ssl - kdy
     # 'django_extensions',
     # 'sslserver',
-    
     # 'webcam_app',
+    
+    # 조회수
+    'hitcount',
 
 
 ]
