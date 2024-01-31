@@ -1,42 +1,52 @@
 import React, { useState } from 'react'; 
-import SchedulerAnnouncement from './SchedulerFilter';
+import { useSelector } from 'react-redux';
 
+import SchedulerWarningDate from './SchedulerWarningDate';
 import prevButtonImage from '../../images/assets/prevButton.png';
 import nextButtonImage from '../../images/assets/nextButton.png';
 
 
 
 // SchedulerAnnouncement 컴포넌트
-// function SchedulerAnnouncement({ fetchedData }) {
-//   const renderAnnouncements = () => {
-//     if (fetchedData) {
-//       const announcements = fetchedData
-//         .filter(item => item.disease_announcement !== null && item.disease_announcement !== "")
-//         .map(item => item.disease_announcement);
-//       console.log('announcements:', announcements);
+function SchedulerAnnouncement() {
+  const fetchedData = useSelector(state => state.scheduler.item);
 
-//       return (
-//         <div>
-//           {announcements.map((announcement, index) => (
-//             <p key={index}>{announcement}</p>
-//           ))}
-//         </div>
-//       );
-//     }
+  const renderAnnouncements = () => {
+      console.log('fetchedData:', fetchedData);
 
-//     return null;
-//   };
+    if (Array.isArray(fetchedData)) {
+      const announcements = fetchedData
+        .filter(item => item.disease_announcement !== null && item.disease_announcement !== "")
+        .map(item => item.disease_announcement);
+      console.log('announcements:', announcements);
 
-//   return (
-//     <div>
-//       <h3>공지사항:</h3>
-//       {renderAnnouncements()}
-//     </div>
-//   );
-// }
+      if (announcements.length > 0) {
+        return (
+          <div>
+            {announcements.map((announcement, index) => (
+              <p key={index}>{announcement}</p>
+            ))}
+          </div>
+        );
+      } else {
+        return <p>발령된 예보가 없습니다.</p>;
+      }
+    }
+
+    return <p>달력을 선택해주세요.</p>;
+  };
+
+  return (
+    <div>
+      <h3>알림판 :</h3>
+      {renderAnnouncements()}
+    </div>
+  );
+}
 
 // CalendarHeader 컴포넌트
-const CalendarHeader = ({ currentDate, onPrevMonth, onNextMonth, fetchedData, onFetchedDataChange }) => {
+const CalendarHeader = ({ currentDate, onPrevMonth, onNextMonth}) => {
+
   const getCurrentDate = () => {
     const year = currentDate.getFullYear();
     const month = currentDate.toLocaleString('default', { month: 'long' });
@@ -54,8 +64,7 @@ const CalendarHeader = ({ currentDate, onPrevMonth, onNextMonth, fetchedData, on
       </button>
 
       <div>
-        fdfsfdf
-
+        <SchedulerAnnouncement />
 
       </div>
     </div>
@@ -123,6 +132,8 @@ function CalendarBody({ currentDate }) {
       <table id="thisMonth">
         <tbody>{generateGrid()}</tbody>
       </table>
+      <SchedulerWarningDate currentDate={currentDate}  />
+
     </div>
   );
 }
@@ -130,6 +141,8 @@ function CalendarBody({ currentDate }) {
 
 const SchedulerCalendar = ({ filteredData, fetchedData }) => {
   console.log('Received filteredData in SchedulerCalendar:', filteredData);
+  console.log('Received fetchedData in SchedulerCalendar:', fetchedData);
+
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const handlePrevMonth = () => {

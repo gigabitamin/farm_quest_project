@@ -52,13 +52,14 @@ def get_location2_data(request):
     
 def get_location3_data(request):
     location2 = request.GET.get('location2', '')
+    location1 = request.GET.get('location1', '')
 
     # location_1이 선택되지 않았을 경우 빈 배열 반환
     if not location2:
         return JsonResponse({'location3': []})
 
     # location_1에 해당하는 location_2 데이터를 필터링하여 가져옴
-    location3_data = GridData.objects.filter(location_2=location2).values_list('location_3', flat=True).distinct()
+    location3_data = GridData.objects.filter(location_1=location1, location_2=location2).values_list('location_3', flat=True).distinct()
 
     return JsonResponse({'location3': list(location3_data)})
 
