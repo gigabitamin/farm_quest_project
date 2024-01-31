@@ -1,33 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function SchedulerAnnouncement({ fetchedData }) {
-  const renderAnnouncements = () => {
-    if (fetchedData) {
-      const announcements = fetchedData
-        .filter(item => item.disease_announcement !== null && item.disease_announcement !== "")
-        .map(item => item.disease_announcement);
-
-      return (
-        <div>
-          {announcements.map((announcement, index) => (
-            <p key={index}>{announcement}</p>
-          ))}
-        </div>
-      );
-    }
-
-    return null;
-  };
-
-  return (
-    <div>
-      <h3>공지사항:</h3>
-      {renderAnnouncements()}
-    </div>
-  );
-}
-
-const SchedulerFilter = () => {
+const SchedulerFilter = ({ onFetchedDataChange }) => {
   const [selectedPlant, setSelectedPlant] = useState(null);
   const [fetchedData, setFetchedData] = useState(null);
 
@@ -47,22 +20,26 @@ const SchedulerFilter = () => {
   const handleClearSelection = () => {
     setSelectedPlant(null);
     setFetchedData(null);
+
   };
 
   useEffect(() => {
     if (selectedPlant !== null) {
       const plantNo = plantNameToNoMapping[selectedPlant];
-      fetch(`/api/scheduler/${plantNo}`)
+      fetch(`http://localhost:8000/api/scheduler/${plantNo}`)
         .then((response) => response.json())
         .then((data) => {
           console.log('Received data:', data);
-          setFetchedData(data);
+          setFetchedData(data); // Update fetchedData state with the received data
+          if (onFetchedDataChange) {
+            onFetchedDataChange(data); // Notify the parent component about the fetched data
+          }
         })
         .catch((error) => {
-          console.error('Error fetching scheduler data:', error);
+          console.error('Error fetching data:', error);
         });
     }
-  }, [selectedPlant]);
+  }, [selectedPlant, onFetchedDataChange]);
 
   return (
     <div id="schedulerFilter">
@@ -84,12 +61,40 @@ const SchedulerFilter = () => {
         <h3>선택된 작목:</h3>
         <p>{selectedPlant}</p>
         <button onClick={handleClearSelection}>Clear</button>
-
-        <SchedulerAnnouncement fetchedData={fetchedData} /> {/* 수정된 부분 */}
-
+        <div id="anno">
+        <SchedulerAnnouncement fetchedData={fetchedData} />
+        </div>
       </div>
     </div>
   );
 };
+
+function SchedulerAnnouncement({ fetchedData }) {
+  const renderAnnouncements = () => {
+    if (fetchedData) {
+      const announcements = fetchedData
+        .filter(item => item.disease_announcement !== null && item.disease_announcement !== "")
+        .map(item => item.disease_announcement);
+      console.log('announcements:', announcements);
+
+      return (
+        <div>
+          {announcements.map((announcement, index) => (
+            <p key={index}>{announcement}</p>
+          ))}
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  return (
+    <div>
+      <h3>공지사항:</h3>
+      {renderAnnouncements()}
+    </div>
+  );
+}
 
 export default SchedulerFilter;

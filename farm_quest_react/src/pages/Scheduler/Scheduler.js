@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SchedulerModal from './SchedulerModal';
 import SchedulerFilter from './SchedulerFilter';
 import SchedulerCalendar from './SchedulerCalendar';
-import SchedulerDateWeather from './SchedulerDateWeather';
+// import SchedulerDateWeather from './SchedulerDateWeather';
 import GridSelect from './GridSelect';
 import './SchedulerCSS.css';
 
@@ -10,34 +10,32 @@ const Scheduler = () => {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-
         const currentTime = new Date();
-        const isModalVisible = currentTime.getHours() >= 0 && currentTime.getHours() < 2;
+        const currentHour = currentTime.getHours();
+        console.log(currentTime)
+        if (currentHour >= 0 && currentHour < 2 && !showModal) {
+            console.log('Initial showModal state:', showModal);
 
-        setShowModal(isModalVisible);
-
-        if (isModalVisible) {
-            const timeoutId = setTimeout(() => {
-                setShowModal(false);
-            }, (2 - currentTime.getHours()) * 60 * 60 * 1000);
-
-            return () => {
-                clearTimeout(timeoutId);
-            };
+            setShowModal(true);
         }
     }, []); 
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
 
     return (
         <div className="Scheduler">
             <div className="filter-container">
                 <SchedulerFilter />
-                <SchedulerDateWeather />
+                {/* <SchedulerDateWeather /> */}
             </div>
 
-            {showModal && <SchedulerModal handleCloseModal={() => setShowModal(false)} />}
+            {showModal && <SchedulerModal handleCloseModal={handleCloseModal} />}
 
             <div className="calendar-container">
-                <GridSelect />
+                <GridSelect /> 
                 <SchedulerCalendar />
             </div>
         </div>

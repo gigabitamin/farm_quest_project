@@ -1,16 +1,45 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState } from 'react'; 
+import SchedulerAnnouncement from './SchedulerFilter';
+
 import prevButtonImage from '../../images/assets/prevButton.png';
 import nextButtonImage from '../../images/assets/nextButton.png';
-import SchedulerFilter from './SchedulerFilter';
 
 
 
-const CalendarHeader = ({ currentDate, onPrevMonth, onNextMonth }) => {
+// SchedulerAnnouncement 컴포넌트
+// function SchedulerAnnouncement({ fetchedData }) {
+//   const renderAnnouncements = () => {
+//     if (fetchedData) {
+//       const announcements = fetchedData
+//         .filter(item => item.disease_announcement !== null && item.disease_announcement !== "")
+//         .map(item => item.disease_announcement);
+//       console.log('announcements:', announcements);
 
+//       return (
+//         <div>
+//           {announcements.map((announcement, index) => (
+//             <p key={index}>{announcement}</p>
+//           ))}
+//         </div>
+//       );
+//     }
+
+//     return null;
+//   };
+
+//   return (
+//     <div>
+//       <h3>공지사항:</h3>
+//       {renderAnnouncements()}
+//     </div>
+//   );
+// }
+
+// CalendarHeader 컴포넌트
+const CalendarHeader = ({ currentDate, onPrevMonth, onNextMonth, fetchedData, onFetchedDataChange }) => {
   const getCurrentDate = () => {
     const year = currentDate.getFullYear();
     const month = currentDate.toLocaleString('default', { month: 'long' });
-
     return `${year}년 ${month} `;
   };
 
@@ -23,37 +52,16 @@ const CalendarHeader = ({ currentDate, onPrevMonth, onNextMonth }) => {
       <button className="calendarTitle" onClick={onNextMonth}>
         <img className="MonthBtn" src={nextButtonImage} alt="다음 달" />
       </button>
+
+      <div>
+        fdfsfdf
+
+
+      </div>
     </div>
   );
 };
 
-
-function SchedulerAnnouncement({ fetchedData }) {
-  const renderAnnouncements = () => {
-    if (fetchedData) {
-      const announcements = fetchedData
-        .filter(item => item.disease_announcement !== null && item.disease_announcement !== "")
-        .map(item => item.disease_announcement);
-
-      return (
-        <div>
-          {announcements.map((announcement, index) => (
-            <p key={index}>{announcement}</p>
-          ))}
-        </div>
-      );
-    }
-
-    return null;
-  };
-
-  return (
-    <div>
-      <h3>공지사항:</h3>
-      {renderAnnouncements()}
-    </div>
-  );
-}
 
 
 function CalendarBody({ currentDate }) {
@@ -134,9 +142,12 @@ const SchedulerCalendar = ({ filteredData, fetchedData }) => {
 
   return (
     <div>
-      <CalendarHeader currentDate={currentDate} onPrevMonth={handlePrevMonth} onNextMonth={handleNextMonth} />
-      <SchedulerAnnouncement fetchedData={fetchedData} /> 
-
+      <CalendarHeader
+        currentDate={currentDate}
+        onPrevMonth={handlePrevMonth}
+        onNextMonth={handleNextMonth}
+        fetchedData={fetchedData}
+      />
       <CalendarBody currentDate={currentDate} />
     </div>
   );

@@ -1,17 +1,65 @@
 import React, { useEffect, useState } from 'react';
 
-const GridSelect = ({ setStoredNx, setStoredNy }) => {
+const GridSelect = ({}) => {
     const [location1, setLocation1] = useState([]);
     const [location2, setLocation2] = useState([]);
     const [location3, setLocation3] = useState([]);
     const [selectedLocation1, setSelectedLocation1] = useState('');
     const [selectedLocation2, setSelectedLocation2] = useState('');
     const [selectedLocation3, setSelectedLocation3] = useState('');
-    const [informations, setInformations] = useState({});
+    // const [informations, setInformations] = useState({});
+    const [storedNx, setStoredNx] = useState(null); 
+    const [storedNy, setStoredNy] = useState(null); 
+    const [weatherInfo, setWeatherInfo] = useState([]);
+    const deg_code = {0 : 'N', 360 : 'N', 180 : 'S', 270 : 'W', 90 : 'E', 22.5 :'NNE',
+                        45 : 'NE', 67.5 : 'ENE', 112.5 : 'ESE', 135 : 'SE', 157.5 : 'SSE',
+                        202.5 : 'SSW', 225 : 'SW', 247.5 : 'WSW', 292.5 : 'WNW', 315 : 'NW',
+                        337.5 : 'NNW'}
+    const sky_code = {1: '맑음', 2: '맑음', 3: '맑음', 4: '맑음', 5: '맑음', 6: '구름많음', 7: '구름많음', 8: '구름많음', 9: '흐림', 10: '흐림'}
+    const pyt_code = {0: '강수 없음', 1: '비', 2: '비/눈', 3: '눈', 5: '빗방울', 6: '진눈깨비', 7: '눈날림'}
+
+
+    function degToDir(deg) {
+        let closeDir = '';
+        let minAbs = 360;
+      
+        if (!(deg in deg_code)) {
+          for (const key in deg_code) {
+            if (Math.abs(key - deg) < minAbs) {
+              minAbs = Math.abs(key - deg);
+              closeDir = deg_code[key];
+            }
+          }
+        } else {
+          closeDir = deg_code[deg];
+        }
+      
+        return closeDir;
+      }
+      
+      console.log(degToDir(0));
+
+      const getWindStrength = (vec, wsd) => {
+        if (vec && wsd) {
+          const vecTemp = degToDir(parseFloat(vec));
+          const wsdTemp = parseFloat(wsd);
+      
+          if (wsdTemp < 4) {
+            return '약한 바람';
+          } else if (wsdTemp >= 4 && wsdTemp < 9) {
+            return '약간 강한 바람';
+          } else if (wsdTemp >= 9 && wsdTemp < 14) {
+            return '강한 바람';
+          } else {
+            return '매우 강한 바람';
+          }
+        }
+        return '바람 없음';
+      };
 
     // 위치선택 가져오기
     useEffect(() => {
-        fetch('/api/get_grid_data/')
+        fetch('http://localhost:8000/api/get_grid_data/')
             .then(response => response.json())
             .then(data => {
                 setLocation1(data.location1.sort());
@@ -24,7 +72,7 @@ const GridSelect = ({ setStoredNx, setStoredNy }) => {
     useEffect(() => {
         const fetchLocations2 = async () => {
             try {
-                const response = await fetch(`/api/get_location2_data/?location1=${selectedLocation1}`);
+                const response = await fetch(`http://localhost:8000/api/get_location2_data/?location1=${selectedLocation1}`);
                 const data = await response.json();
                 setLocation2(data.location2.sort());
             } catch (error) {
@@ -43,7 +91,7 @@ const GridSelect = ({ setStoredNx, setStoredNy }) => {
     useEffect(() => {
         const fetchLocations3 = async () => {
             try {
-                const response = await fetch(`/api/get_location3_data/?location1=${selectedLocation1}&location2=${selectedLocation2}`);
+                const response = await fetch(`http://localhost:8000/api/get_location3_data/?location1=${selectedLocation1}&location2=${selectedLocation2}`);
                 const data = await response.json();
                 setLocation3(data.location3.sort());
             } catch (error) {
@@ -72,12 +120,43 @@ const GridSelect = ({ setStoredNx, setStoredNy }) => {
         setSelectedLocation3(event.target.value);
     };
 //// /////////////////////
-const onFetchWeatherData = async () => {
-    const formattedDate = 20240129
-    const baseTime = 1100
-    const storedNx = 92
-    const storedNy = 132
-    
+const onFetchWeatherData = async (nx, ny) => {
+
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}`;
+    const currentHour = currentDate.getHours();
+    console.log('Base Date:', formattedDate);
+
+    let baseTime;
+
+    if (currentHour < 2 ) {
+        console.error('Not service time');
+        return;
+    } else if (currentHour < 6) {
+        baseTime = '0200';
+    } else if (currentHour < 9) {
+        baseTime = '0500';
+    } else if (currentHour < 12) {
+        baseTime = '0800';
+    } else if (currentHour < 15) {
+        baseTime = '1100';
+    } else if (currentHour < 18) {
+        baseTime = '1400';
+    } else if (currentHour < 21) {
+        baseTime = '1700';
+    } else if (currentHour < 24) {
+        baseTime = '2000';
+    } else {
+        console.error('Not service time');
+        return;
+    }
+
+    console.log('Base Time:', baseTime);
+
+    console.log('storedNx:', storedNx);
+    console.log('storedNy:', storedNy);
+    // console.log('보내기전:', process.env.REACT_APP_API_KEY)
+
     const response = await fetch(
     `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst` +
     `?serviceKey=${process.env.REACT_APP_API_KEY}` +
@@ -90,32 +169,41 @@ const onFetchWeatherData = async () => {
     `&ny=${storedNy}`
     );
 
-
     if (!response.ok) {
     throw new Error('Failed to fetch weather data');
     }
+    // console.log('보낸후:', process.env.REACT_APP_API_KEY)
+    console.log('response:', response)
 
     const data = await response.json();
     console.log('data:', data)
 
 
+
     const rawData = data.response.body.items.item;
-    const informations = {};
+    const weatherInfo = [];
 
     rawData.forEach(item => {
-    const { category, fcstTime, fcstValue } = item;
+        const { category, fcstTime, fcstValue } = item;
 
-    if (!informations[fcstTime]) {
-        informations[fcstTime] = {};
-    }
+        if (!weatherInfo[fcstTime]) {
+            weatherInfo[fcstTime] = {};
+        }
 
-    informations[fcstTime][category] = fcstValue;
+        weatherInfo[fcstTime][category] = fcstValue;
     });
 
-    console.log(informations);
-    setInformations(informations); 
+    Object.keys(weatherInfo).forEach(time => {
+        const vec = weatherInfo[time]['VEC'];
+        const wsd = weatherInfo[time]['WSD'];
+        
+        weatherInfo[time]['WindStrength'] = getWindStrength(vec, wsd);
+      });
+    
+      setWeatherInfo(weatherInfo);
+    };
 
-};
+
 const renderCategories = ['TMP', 'REH', 'SKY', 'POP', 'PTY', 'PCP', 'VEC', 'WSD'];
 
 
@@ -156,28 +244,26 @@ const getRenderName = (originalCategory) => {
 
 // /////////////////////
     const handleSaveAndFetch = () => {
-        // sessionStorage.setItem('selectedLocation1', selectedLocation1);
-        // sessionStorage.setItem('selectedLocation2', selectedLocation2);
-        // sessionStorage.setItem('selectedLocation3', selectedLocation3);
-        onFetchWeatherData ();
+
+        // onFetchWeatherData(setStoredNx, setStoredNy);
 
 
         // 세션 정보를 SchedulerWeatherLocation 모듈에 전송
-        onFetchLocationData(selectedLocation1, selectedLocation2, selectedLocation3,
-            // sessionStorage.getItem('selectedLocation1'),
-            // sessionStorage.getItem('selectedLocation2'),
-            // sessionStorage.getItem('selectedLocation3'),
-            setStoredNx, // setStoredNx 함수 전달
-            setStoredNy  // setStoredNy 함수 전달
-
+        onFetchLocationData(
+            selectedLocation1,
+            selectedLocation2,
+            selectedLocation3,
+            // setStoredNx,
+            // setStoredNy
         );
     };
+
     const onFetchLocationData = (location1, location2, location3) => {
         console.log('Location 1:', location1);
         console.log('Location 2:', location2);
         console.log('Location 3:', location3);
 
-        fetch('/api/get_nx_ny/', {
+        fetch('http://localhost:8000/api/get_nx_ny/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -195,8 +281,15 @@ const getRenderName = (originalCategory) => {
             if (data.error && data.error.includes('Not service time')) {
                 console.error('서비스 시간이 아닙니다');
             } else {
-                sessionStorage.setItem('nx', data.nx);
-                sessionStorage.setItem('ny', data.ny);
+                const { nx, ny } = data;
+                setStoredNx(nx);
+                setStoredNy(ny);
+
+            // sessionStorage.setItem('nx', nx);
+            // sessionStorage.setItem('ny', ny);
+
+            onFetchWeatherData(nx, ny);
+
             }
         })
         .catch(error => console.error('서버 통신 오류:', error));
@@ -236,23 +329,43 @@ const getRenderName = (originalCategory) => {
 
             <button onClick={handleSaveAndFetch}>날씨 정보 가져오기</button>
 
-                {/* informations를 렌더링하는 코드 추가 */}
-                <h2>날씨정보</h2>
-                <ul>
-                {Object.keys(informations).map(time => (
-                    <li key={time}>
-                        <strong>{formatTime(time)}</strong>
-                        <ul>
-                        {Object.entries(informations[time]).map(([category, value]) => (
-                                // 선택한 카테고리만 렌더링
-                                renderCategories.includes(getRenderName(category)) && (
-                                    <li key={category}>
-                                        {getRenderName(category)}: {value}
-                                    </li>
-                                )
-                            ))}
 
-                        </ul>
+            <h2>날씨정보</h2>
+            <ul>
+                {Object.keys(weatherInfo).map(time => (
+                    <li key={time}>
+                        <strong>기준시간 : {formatTime(time)}</strong>
+                        {/* <ul>
+                            {renderCategories.map(category => (
+                                <li key={category}>
+                                    {getRenderName(category)}: {weatherInfo[time][category]}
+                                </li>
+                            ))}
+                        </ul> */}
+
+                        {weatherInfo[time]['SKY'] && weatherInfo[time]['PTY'] && (
+                            <div>
+                                <p>구름: {sky_code[parseInt(weatherInfo[time]['SKY'])]}</p>
+                                <p>강수형태: {pyt_code[parseInt(weatherInfo[time]['PTY'])]}</p>
+                                {weatherInfo[time]['PCP'] !== '강수없음' && (
+                                    <p>시간당 강수량: {weatherInfo[time]['PCP']}mm</p>
+                                )}
+                                {weatherInfo[time]['TMP'] && (
+                                    <p>평균기온: {parseFloat(weatherInfo[time]['TMP'])}℃</p>
+                                )}
+                                {weatherInfo[time]['REH'] && (
+                                    <p>습도: {parseFloat(weatherInfo[time]['REH'])}%</p>
+                                )}
+                                {weatherInfo[time]['VEC'] && weatherInfo[time]['WSD'] && (
+                                    <p>
+                                        풍향: {degToDir(parseFloat(weatherInfo[time]['VEC']))}{' '}<br />
+                                        풍속: {parseFloat(weatherInfo[time]['WSD'])}m/s &nbsp;
+                                        {getWindStrength(weatherInfo[time]['VEC'], weatherInfo[time]['WSD'])}
+
+                                    </p>
+                                )}
+                            </div>
+                        )}
                     </li>
                 ))}
             </ul>
@@ -260,9 +373,16 @@ const getRenderName = (originalCategory) => {
     );
 };
 
-const formatTime = (time) => {
-    // 20240129 1200 -> 2024-01-29 12:00
-    return `${time.substring(0, 4)}-${time.substring(4, 6)}-${time.substring(6, 8)} ${time.substring(8, 10)}:${time.substring(10, 12)}`;
+const formatTime = () => {
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}`;
+    const currentHour = currentDate.getHours();
+    console.log(currentDate);
+    console.log('시간:',currentHour);
+
+    // formattedDate: 20240129, time: 0900 -> 2024-01-29 09:00
+    return `${formattedDate.substring(0, 4)}년 ${formattedDate.substring(4, 6)}월 ${formattedDate.substring(6, 8)}일 ${currentHour}시`;
 };
+
 
 export default GridSelect;
