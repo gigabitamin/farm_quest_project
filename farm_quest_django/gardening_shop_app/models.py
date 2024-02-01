@@ -23,7 +23,7 @@ class ShopingTb(models.Model):
     shoping_tb_rss_channel_item_category1 = models.TextField(blank=True, null=True)
     shoping_tb_rss_channel_item_category2 = models.TextField(blank=True, null=True)
     shoping_tb_rss_channel_item_category3 = models.TextField(blank=True, null=True)
-    shoping_tb_rss_channel_item_category4 = models.TextField(blank=True, null=True)
+    search_keyword_scores = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     shopping_review_scores = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -52,8 +52,35 @@ class UserSearchTerms(models.Model):
     search_id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey('users_app.UsersAppUser', models.DO_NOTHING, blank=True, null=True)
     search_term = models.CharField(max_length=255, blank=True, null=True)
-    search_date = models.DateTimeField(blank=True, null=True)
-
+    search_date = models.DateTimeField(auto_now_add=True)
+    search_keyword_scores = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    
     class Meta:
         managed = False
         db_table = 'user_search_terms'
+
+
+
+class UserSearchTermsBackup(models.Model):
+    search_id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey('users_app.UsersAppUser', models.DO_NOTHING, blank=True, null=True)
+    search_term = models.CharField(max_length=255, blank=True, null=True)
+    search_date = models.DateTimeField(auto_now_add=True)
+    search_keyword_scores = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'user_search_terms_backup'
+
+
+
+class ShoppingSearchData(models.Model):
+    shopping_search_data_id = models.BigAutoField(primary_key=True)
+    shopping_search_data_word = models.CharField(max_length=255)
+    shopping_search_data_score = models.DecimalField(max_digits=3, decimal_places=2)
+
+    class Meta:
+        managed = False
+        db_table = 'shopping_search_data'
+
+

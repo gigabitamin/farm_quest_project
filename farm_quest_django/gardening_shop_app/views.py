@@ -1,7 +1,8 @@
 
+from django.db.models import Avg
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import JsonResponse
-from .models import ShoppingReview, ShopingTb
+from .models import ShoppingReview, ShopingTb, UserSearchTerms, ShoppingSearchData, UserSearchTermsBackup
 from django.db.models import Q
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
@@ -11,7 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 import random
 from django.views.decorators.csrf import csrf_exempt
 import json
-import time
+import urllib.parse
 import subprocess
 from django.core.paginator import Paginator
 # def gardening_shop_index(request):    
@@ -79,20 +80,34 @@ class ShopingTbList(APIView):
         return Response(response_data)
 
 
-def recommended_products(request):
-    # shopping_review_scores에 따라 상위 50개의 상품을 추출
-    top_50_products = ShopingTb.objects.order_by('-shopping_review_scores')[:50]
+def recommended_products(request, user_id):
+    # user_id로 연결된 search_keyword_scores의 평균을 구하기
+    user_search_terms = UserSearchTerms.objects.filter(user_id=user_id)
+    if user_search_terms.exists():
+        avg_score = user_search_terms.aggregate(Avg('search_keyword_scores'))['search_keyword_scores__avg']
+        
+        if avg_score >= 0.6:
+            # 평균 점수가 0.6 이상인 경우, 높은 search_keyword_scores를 가진 상품 추천
+            top_50_products = ShopingTb.objects.order_by('-search_keyword_scores')[:50]
+            recommended = random.sample(list(top_50_products), 10)
+        else:
+            # 평균 점수가 0.6 미만인 경우, 낮은 search_keyword_scores를 가진 상품 추천
+            top_50_products = ShopingTb.objects.order_by('search_keyword_scores')[:50]
+            recommended = random.sample(list(top_50_products), 10)
+    else:
+        # user_id에 연결된 검색어가 없는 경우, 무작위 추천
+            top_50_products = ShopingTb.objects.order_by('-shopping_review_scores')[:50]
+            # 상위 50개 중에서 무작위로 10개를 선택
+            recommended = random.sample(list(top_50_products), 10)
 
-    # 상위 50개 중에서 무작위로 10개를 선택
-    recommended = random.sample(list(top_50_products), 10)
-
+    # 추천 상품 데이터 구성
     data = [
         {
             'shoping_tb_rss_channel_item_productid': p.shoping_tb_rss_channel_item_productid,
             'shoping_tb_rss_channel_item_image': p.shoping_tb_rss_channel_item_image,
             'shoping_tb_rss_channel_item_title': p.shoping_tb_rss_channel_item_title,
             'shoping_tb_rss_channel_item_lprice': p.shoping_tb_rss_channel_item_lprice,
-            'shopping_review_scores': p.shopping_review_scores  # 평점도 포함
+            'shopping_review_scores': p.shopping_review_scores
         } for p in recommended
     ]
 
@@ -163,18 +178,48 @@ def post_review(request):
             return JsonResponse({'error': str(e)}, status=400)
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
-
+    
 class GardeningShopSearch(APIView):
-    def get(self, request, keyword, format=None):
+    def get(self, request, keyword, user_id=None, format=None):
         search_results = ShopingTb.objects.filter(shoping_tb_rss_channel_item_title__icontains=keyword)
         paginator = Paginator(search_results, 20) # 20개 항목 당 페이지
         page = request.GET.get('page') or 1
         results = paginator.get_page(page)
         serializer = ShopingTbSerializer(results, many=True)
 
-        # 전체 페이지 수 추가
+        # 검색어 로깅과 점수 계산 로직
+        score = 0.5  # 기본 점수
+        matching_keywords = ShoppingSearchData.objects.filter(shopping_search_data_word__icontains=keyword).order_by('-shopping_search_data_score')
+        if matching_keywords.exists():
+            exact_match = matching_keywords.filter(shopping_search_data_word=keyword)
+            if exact_match.exists():
+                score = exact_match.first().shopping_search_data_score
+            else:
+                score = matching_keywords.first().shopping_search_data_score
+
+        if user_id != 0:
+            UserSearchTerms.objects.create(
+                user_id=user_id,
+                search_term=keyword,
+                search_keyword_scores=score
+            )
+
+            UserSearchTermsBackup.objects.create(
+                user_id=user_id,
+                search_term=keyword,
+                search_keyword_scores=score
+            )
+
+            # 사용자 ID와 연결된 행의 개수를 확인
+            count = UserSearchTerms.objects.filter(user_id=user_id).count()
+
+            # 5개를 초과하는 경우, 해당 행 모두 삭제
+            if count > 5:
+                UserSearchTerms.objects.filter(user_id=user_id).delete()
+
+        # 전체 페이지 수와 함께 결과 반환
         response_data = {
             'results': serializer.data,
-            'total_pages': paginator.num_pages
+            'total_pages': paginator.num_pages,
         }
         return Response(response_data)
