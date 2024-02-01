@@ -74,6 +74,10 @@ const CommunityMainDetail = () => {
         setItem(response.data);
     };
 
+    const datetimeShow = (string) => {
+        return `${string.substring(0, 10)} ${string.substring(11, 19)}`;
+    };
+
     useEffect(() => {
         loadContent();
     }, []);
@@ -89,7 +93,7 @@ const CommunityMainDetail = () => {
                     <div className="community_detail_content_box_info">
                         <div className="community_detail_content_box_type">{item.thread_type===0 ? '팜로그' : '질문'}</div>
                         <div className="community_detail_content_box_user">{item.user.nickname}</div>
-                        <div className="community_detail_content_box_time">작성시간</div>
+                        <div className="community_detail_content_box_time">{item.thread_date ? datetimeShow(item.thread_date) : null}</div>
                     </div>
                 </div>
                 <div className="community_detail_content_box_main">
