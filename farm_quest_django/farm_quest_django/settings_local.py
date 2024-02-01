@@ -250,7 +250,7 @@ SECRET_KEY = db_settings.SECRET_KEY
 # url에서 사용하는 이름
 MEDIA_URL = '/media/'
 # reactWorkspace 안에 upload 폴더 생성됨
-MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'upload')
+MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'media')
 
 # views.py 에서 이메일 발송을 위한 static 경로 설정 -kdy
 STATICFILES_DIRS = [ 
