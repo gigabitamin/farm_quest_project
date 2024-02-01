@@ -16,8 +16,9 @@ const DiagnosisUploadResult = () => {
     // const obj_result_label = serialized_results.names[serialized_results.boxes[0]['label']]
     // const obj_result_prob = Number(serialized_results.boxes[0]['confidence']).toFixed(4) * 100
 
-    const diagnosis_result_id_list = location.state.file_name.detect_result.diagnosis_result_id_list[0];
+    // const diagnosis_result_id_list = location.state.file_name.detect_result.diagnosis_result_id_list[0];
     const tf_predict_result_list_sorted = location.state.file_name.detect_result.tf_predict_result_list_sorted;
+    const diagnosis_result_pk = location.state.file_name.diagnosis_result_pk
     const containerRef = useRef();
     const crops_path_list = location.state.file_name.detect_result.crops_path_list
 
@@ -93,7 +94,7 @@ const DiagnosisUploadResult = () => {
                                 <article title="info" className="diagnosis_result_analystic_info">
                                     <div><h3>전체 부위 탐색 결과</h3></div>
                                     <div>진단파일명: {save_file_name}</div>
-                                    <div>진단번호: {diagnosis_result_id_list}</div>
+                                    <div>진단번호: {diagnosis_result_pk}</div>
                                 </article>
 
                                 <article title="summary" className="diagnosis_result_analystic_summary_box">
@@ -133,33 +134,24 @@ const DiagnosisUploadResult = () => {
                                         // const url_crops = crops_path_list[index]
                                         // const url_crops = `${process.env.PUBLIC_URL}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg`;
 
-                                        const modifiedPathList = crops_path_list.map(filePath => {
-                                            const parts = filePath.split(/\\/g);
-                                            const index = parts.indexOf('upload');
-                                            if (index !== -1) {
-                                              const relativePath = parts.slice(index + 1).join('/');
-                                              const url = `http://localhost:8000/${relativePath}`;
-                                              return url;
-                                            }
-                                            return null;
-                                          }).filter(url => url !== null);
+                                        // const modifiedPathList = crops_path_list.map(filePath => {
+                                        //     const parts = filePath.split(/\\/g);
+                                        //     const index = parts.indexOf('upload');
+                                        //     if (index !== -1) {
+                                        //       const relativePath = parts.slice(index + 1).join('/');
+                                        //       const url_crops = `http://localhost:8000/${relativePath}`;
+                                        //       return url_crops;
+                                        //     }
+                                        //     return null;
+                                        //   }).filter(url_crops => url_crops !== null);
                                           
-                                        console.log('modifiedPathList)',modifiedPathList);
-                                          
-                                          
-                                               
-
-                                        const url_crops = save_file_name && index > 0 ? 
-                                        // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${decodedFileName}/crops/${decodedLabelName}/${decodedFileName}${index}.jpg` : 
-                                        // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${decodedFileName}/crops/${decodedLabelName}/${decodedFileName}.jpg`;
-                                        `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index+1}.jpg` :                                        
-                                        `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg` ;
-                                        
-                                    
+                                        // console.log('modifiedPathList)',modifiedPathList);
 
                                         if (!isDisease) {
                                             return null;
                                         }
+
+                                        const url_crops = crops_path_list[index];
 
                                         return (
                                             <div title="detect" className="diagnosis_result_detect_item" key={index}><hr />

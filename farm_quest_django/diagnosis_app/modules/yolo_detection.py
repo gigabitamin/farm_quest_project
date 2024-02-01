@@ -29,6 +29,8 @@ from ..serializers import SolutionTbSerializer
 from rest_framework import mixins, generics
 from rest_framework import status
 
+from pathlib import Path
+
 os.environ['CUDA_VISIBLE_DEVICES'] = 'cpu'
 
 
@@ -182,7 +184,7 @@ def detect(save_file_path, plant_name, user_select_plant):
     tf_predict_result_list_sorted = []
     crops_path_list = []
     serialized_results_lists = []
-    diagnosis_result_id_list = []
+    diagnosis_result_id_list = []    
     
     try: 
         # print('save_file_path', save_file_path)       
@@ -277,25 +279,35 @@ def detect(save_file_path, plant_name, user_select_plant):
             json.dump(serialized_results_list[0], file, indent=2)
             print('json 저장완료')
                 
-        diagnosis_result_id_list = save_results_to_database(serialized_results_list)
-        print('diagnosis_result_id_list : ', diagnosis_result_id_list)
-        print('\njson db 저장완료\n')
+        # diagnosis_result_id_list = save_results_to_database(serialized_results_list)
+        # print('diagnosis_result_id_list : ', diagnosis_result_id_list)
+        # print('\njson db 저장완료\n')
         
         # print('serialized_results_list : ', serialized_results_list)
                    
         print('test ex')
 
         if len(serialized_boxes) > 0 :
-            tf_predict_disease_list, crops_path_list = tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, disease_dict, disease_names, disease_codes)
+            tf_predict_disease_list, crops_path_lists = tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, disease_dict, disease_names, disease_codes)
             # print('tf_predict_disease_list', tf_predict_disease_list)
         
         tf_predict_result_list_sorted = tf_solution_service(tf_predict_disease_list)
+        
+        print('crops_path_list 미디어', crops_path_lists)        
 
+
+        for path in crops_path_lists:            
+            modified_path = f'http://localhost:8000/media/{Path(path).as_posix().split("media/", 1)[-1]}'
+            crops_path_list.append(modified_path)
+        
+        print('crops_path_list 미디어', crops_path_list)
                                                             
     except Exception as e:
         print(f"Error: {e}")
         
-    detect_result = {'diagnosis_result_id_list': diagnosis_result_id_list,                
+        
+    detect_result = {
+                # 'diagnosis_result_id_list': diagnosis_result_id_list,                
                'crops_path_list': crops_path_list, 
                'serialized_results_list': serialized_results_list,                
                'tf_predict_result_list_sorted': tf_predict_result_list_sorted,            
@@ -466,7 +478,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
     
     box = []
     tf_disease_predict_list = []
-    crops_path_list = []    
+    crops_path_list = []
     X_t = []
     Y_t = []
     pred_prob = []

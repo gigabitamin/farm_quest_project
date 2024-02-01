@@ -143,11 +143,14 @@ def diagnosis_upload(request):
         )
         diagnosis_result_instance.save()        
 
+        diagnosis_result_pk = diagnosis_result_instance.pk
+
         context = {
             'detect_result': detect_result,
             'save_file_name': save_file_name,
             'plant_name': plant_name,
-            'plant_no' : plant_no,
+            'plant_no': plant_no,
+            'diagnosis_result_pk': diagnosis_result_pk,
         }
                 
         print('완료, 전송')
