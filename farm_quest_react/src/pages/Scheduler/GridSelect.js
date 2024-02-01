@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-
+import CalendarOverlay from './CalendarOverlay';
 
 const GridSelect = ({}) => {
     const dispatch = useDispatch();
@@ -16,10 +16,10 @@ const GridSelect = ({}) => {
     const [storedNy, setStoredNy] = useState(null); 
     const [weatherInfo, setWeatherInfo] = useState([]);
     const [where, setWhere] = useState([]);
-    const deg_code = {0 : 'N', 360 : 'N', 180 : 'S', 270 : 'W', 90 : 'E', 22.5 :'NNE',
-                        45 : 'NE', 67.5 : 'ENE', 112.5 : 'ESE', 135 : 'SE', 157.5 : 'SSE',
-                        202.5 : 'SSW', 225 : 'SW', 247.5 : 'WSW', 292.5 : 'WNW', 315 : 'NW',
-                        337.5 : 'NNW'}
+    const deg_code = {0 : '북', 360 : '북', 180 : '남', 270 : '서', 90 : '동', 22.5 :'북북동',
+                        45 : '북동', 67.5 : '동북동', 112.5 : '동남동', 135 : '남동', 157.5 : '남남동',
+                        202.5 : '남남서', 225 : '남서', 247.5 : '서남서', 292.5 : '서북서', 315 : '북서',
+                        337.5 : '북북서'}
     const sky_code = {1: '맑음', 2: '맑음', 3: '맑음', 4: '맑음', 5: '맑음', 6: '구름많음', 7: '구름많음', 8: '구름많음', 9: '흐림', 10: '흐림'}
     const pyt_code = {0: '강수 없음', 1: '비', 2: '비/눈', 3: '눈', 5: '빗방울', 6: '진눈깨비', 7: '눈날림'}
 
@@ -310,13 +310,16 @@ const getRenderName = (originalCategory) => {
 };
     
     return (
-        <div>
-                        <h2>날씨정보</h2>
-
+        <div id="weatherInfoViewer">
+            <div className='qustionOverlayContainer'>
+            <h2>날씨정보</h2>
+            <CalendarOverlay tooltipText="선택하신 지역의 현재 날씨를 알려드립니다. \n
+             0시부터 2시 사이에는 날씨 정보가 제공되지 않습니다." />
+            </div>
             <div className='locationSelectorBox'>
                 {/* <label className='locationSelector'>시/도:</label> */}
                 <select className='locationDropdown' onChange={handleLocation1Change} value={selectedLocation1}>
-                    <option value="">시/도</option>
+                    <option className='location' value="">시/도</option>
                     {location1.map((location, index) => (
                         <option key={index} value={location}>
                             {location}
@@ -344,15 +347,15 @@ const getRenderName = (originalCategory) => {
                             {location}
                         </option>
                     ))}
-                </select>
+                </select><br />
             </div>
-            <button onClick={handleSaveAndFetch}>날씨 정보 가져오기</button>
-
-
-            <ul>
+                <div>
+                    <button className='schedulerBtn' onClick={handleSaveAndFetch}>날씨 확인하기</button>
+                </div>
+            <ul style={{listStyleType:'none'}}>
                 {Object.keys(weatherInfo).map(time => (
                     <li key={time}>
-                        <strong>기준시간 : {formatTime(time)}</strong>
+                        <strong>{formatTime(time)}</strong>
                         {/* <ul>
                             {renderCategories.map(category => (
                                 <li key={category}>
@@ -377,7 +380,7 @@ const getRenderName = (originalCategory) => {
                                 {weatherInfo[time]['VEC'] && weatherInfo[time]['WSD'] && (
                                     <p>
                                         풍향: {degToDir(parseFloat(weatherInfo[time]['VEC']))}{' '}<br />
-                                        풍속: {parseFloat(weatherInfo[time]['WSD'])}m/s &nbsp;
+                                        풍속: {parseFloat(weatherInfo[time]['WSD'])}m/s <br />
                                         {getWindStrength(weatherInfo[time]['VEC'], weatherInfo[time]['WSD'])}
 
                                     </p>
@@ -393,14 +396,18 @@ const getRenderName = (originalCategory) => {
 
 const formatTime = () => {
     const currentDate = new Date();
-    const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}`;
-    const currentHour = currentDate.getHours();
-    // console.log(currentDate);
-    // console.log('시간:',currentHour);
-    // console.log(typeof(currentDate))
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString(); // 문자열로 변환
+    const day = currentDate.getDate().toString();
+  
     // formattedDate: 20240129, time: 0900 -> 2024-01-29 09:00
-    return `${formattedDate.substring(0, 4)}년 ${formattedDate.substring(4, 6)}월 ${formattedDate.substring(6, 8)}일 ${currentHour}시`;
-};
-
+    // const formattedDate = `${year}${month.padStart(2, '0')}${day.padStart(2, '0')}`;
+    
+    return `${parseInt(year, 10)}년 ${parseInt(month, 10)}월 ${parseInt(day, 10)}일`;
+  };
+  
+  console.log(formatTime());
+  
+  
 
 export default GridSelect;

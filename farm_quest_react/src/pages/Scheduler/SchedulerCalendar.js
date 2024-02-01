@@ -39,7 +39,7 @@ function SchedulerAnnouncement() {
 
   return (
     <div>
-      <h3>알림판 :</h3>
+      <h3 style={{marginTop:'6px'}}>알림판</h3>
       {renderAnnouncements()}
     </div>
   );
@@ -56,12 +56,12 @@ const CalendarHeader = ({ currentDate, onPrevMonth, onNextMonth}) => {
 
   return (
     <div id="calendarTitle">
-      <button className="calendarTitle" onClick={onPrevMonth}>
-        <img className="MonthBtn" src={prevButtonImage} alt="이전 달" />
+      <button className="MonthBtn" onClick={onPrevMonth}>
+        <img className="MonthBtnImg" src={prevButtonImage} alt="이전 달" />
       </button>
       <h1 className="calendarTitle">{getCurrentDate()}</h1>
-      <button className="calendarTitle" onClick={onNextMonth}>
-        <img className="MonthBtn" src={nextButtonImage} alt="다음 달" />
+      <button className="MonthBtn" onClick={onNextMonth}>
+        <img className="MonthBtnImg" src={nextButtonImage} alt="다음 달" />
       </button>
 
       <div>
@@ -149,6 +149,8 @@ function CalendarBody({ currentDate }) {
           const diseaseInfoArray = Array.isArray(fetchedData) ? fetchedData.filter(item => {
             const startDate = new Date(item.disease_start);
             const endDate = new Date(item.disease_end);
+            startDate.setDate(startDate.getDate() - 1);
+
             return item.disease_code && currentDateCell >= startDate && currentDateCell <= endDate;
           }) : [];
           // console.log("데이터임",diseaseInfoArray)
