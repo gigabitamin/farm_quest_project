@@ -23,7 +23,7 @@ class ShopingTb(models.Model):
     shoping_tb_rss_channel_item_category1 = models.TextField(blank=True, null=True)
     shoping_tb_rss_channel_item_category2 = models.TextField(blank=True, null=True)
     shoping_tb_rss_channel_item_category3 = models.TextField(blank=True, null=True)
-    shoping_tb_rss_channel_item_category4 = models.TextField(blank=True, null=True)
+    search_keyword_scores = models.FloatField(blank=True, null=True)
     shopping_review_scores = models.IntegerField(blank=True, null=True)
 
     class Meta:

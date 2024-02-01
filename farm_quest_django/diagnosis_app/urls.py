@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import DiagnosisItemLoadCartAPIMixins, DiagnosisItemSaveCartAPIMixins, DiagnosisRecommendList, DiagnosisResultAPIMixins, DiagnosisQuestionsAPIMixins, DiagnosisQuestionHistoryAPIMixins, PlantAPIMixins, SolutionTbAPIMixins
 
+
 urlpatterns = [
     # 장고
     path('diagnosis_index/', views.diagnosis_index, name='diagnosis_index'),
@@ -20,5 +21,7 @@ urlpatterns = [
     path("diagnosis_recommend/<str:solution_word>/", DiagnosisRecommendList.as_view(), name="diagnosis_recommend"),
     path("diagnosis_save_cart/", DiagnosisItemSaveCartAPIMixins.as_view()),
     path("diagnosis_load_cart/", DiagnosisItemLoadCartAPIMixins.as_view()),
-
+    path("diagnosis_load_cart/", DiagnosisItemLoadCartAPIMixins.as_view()),
+    path('media/diagnosis/yolo/origin_img/result_img/<str:file_name>/crops/<str:label_name>/<str:image_name>/', views.view_crop_image, name='view_crop_image'),
+            
 ]

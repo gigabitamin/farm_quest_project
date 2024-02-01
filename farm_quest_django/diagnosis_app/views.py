@@ -1,3 +1,8 @@
+from django.http import HttpResponse
+from django.conf import settings
+import os
+from urllib.parse import unquote
+
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from rest_framework.response import Response
@@ -79,28 +84,6 @@ class DiagnosisItemSaveCartAPIMixins(generics.CreateAPIView):
         raise PermissionError('토큰가져와')
 
 
-
-
-# class DiagnosisItemSaveCartAPIMixins(
-#     mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
-#     queryset = DiagnosisItemCart.objects.all()
-#     serializer_class = DiagnosisItemCartSerializer
-    
-#     def get(self, request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
-
-#     def post(self, request, *args, **kwargs):
-#         print('Received POST data:', request.data)
-#         return self.create(request, *args, **kwargs)
-
-
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-# from rest_framework import status
-# from django.db.models import Q
-# from .models import ShopingTb
-# from .serializers import ShopingTbSerializer
-
 class DiagnosisRecommendList(APIView):
     def get(self, request, solution_word, format=None):        
         try:
@@ -125,42 +108,6 @@ class DiagnosisRecommendList(APIView):
             return Response(serializer.data, status=200)
         except Exception as e:
             return Response({"에러": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-# class DiagnosisRecommendList(APIView):
-#     pagination_class = PageNumberPagination
-#     page_size = 10  # 한 페이지당 보여줄 아이템 수
-
-#     def get(self, request, solution_word, format=None):
-#         try:
-#             recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))
-            
-#             # 페이지네이션 적용
-#             page = self.paginate_queryset(recommendations)
-            
-#             if page is not None:
-#                 serializer = ShopingTbSerializer(page, many=True)
-#                 return self.get_paginated_response(serializer.data)
-
-#             serializer = ShopingTbSerializer(recommendations, many=True)
-#             return Response(serializer.data)
-#         except Exception as e:
-#             return Response({"에러": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-        
-# class DiagnosisRecommendList(APIView):
-#     def get(self, request, solution_word, format=None):
-#         # solution_word = solution_word
-#         solution_word = '화분'
-#         try:
-#             print('solution_word = ', solution_word)
-#             recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))
-#             print('recommendations = ', recommendations)
-#             serializer = ShopingTbSerializer(recommendations, many=True)
-#             print('serializer = ', serializer)
-#             return Response(serializer.data)
-#         except Exception as e:
-#             return Response({"에러": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class SolutionTbAPIMixins(
@@ -336,3 +283,23 @@ def diagnosis_image(request):
 
 def diagnosis_answer(request):    
     return render(request, 'diagnosis_app/diagnosis_answer.html')
+
+
+
+# 크롭 이미지 한글 파싱 문제 -> 해결되서 굳이 유지할 필요 없음, 필요시 삭제
+def view_crop_image(request, file_name, label_name, image_name):    
+    print('왔냐1', file_name)
+    decoded_file_name = unquote(file_name)
+    decoded_label_name = unquote(label_name)
+    decoded_image_name = unquote(image_name)
+    
+    
+    print('왔냐2', decoded_file_name)
+    image_path = os.path.join(settings.MEDIA_ROOT, 'diagnosis/yolo/origin_img/result_img', decoded_file_name, 'crops', decoded_label_name, decoded_image_name)
+    print('왔냐3', image_path)
+    
+    try:
+        with open(image_path, 'rb') as image_file:
+            return HttpResponse(image_file.read(), content_type='image/jpeg')
+    except FileNotFoundError:
+        return HttpResponse(status=404)

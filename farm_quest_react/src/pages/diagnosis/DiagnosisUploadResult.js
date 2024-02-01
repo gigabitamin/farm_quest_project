@@ -13,20 +13,54 @@ const DiagnosisUploadResult = () => {
     const save_file_name = location.state.file_name.save_file_name;
 
     const serialized_results = location.state.file_name.detect_result.serialized_results_list[0];
-    const obj_result_label = serialized_results.names[serialized_results.boxes[0]['label']]
-    const obj_result_prob = Number(serialized_results.boxes[0]['confidence']).toFixed(4) * 100
+    // const obj_result_label = serialized_results.names[serialized_results.boxes[0]['label']]
+    // const obj_result_prob = Number(serialized_results.boxes[0]['confidence']).toFixed(4) * 100
 
     const diagnosis_result_id_list = location.state.file_name.detect_result.diagnosis_result_id_list[0];
     const tf_predict_result_list_sorted = location.state.file_name.detect_result.tf_predict_result_list_sorted;
     const containerRef = useRef();
+    const crops_path_list = location.state.file_name.detect_result.crops_path_list
+
+    console.log('crops_path_list', crops_path_list)
+
+    let highestConfidence = 0;
+    let selectedBoxIndex = -1;
     
+    for (let i = 0; i < serialized_results.boxes.length; i++) {
+        const label = serialized_results.boxes[i]['label'];
+        const confidence = Number(serialized_results.boxes[i]['confidence']);
+        
+        // label이 6 이상이고 confidence가 현재까지의 최고값보다 크다면 갱신
+        if (label >= 6 && confidence > highestConfidence) {
+            highestConfidence = confidence;
+            selectedBoxIndex = i;
+        }
+    }
+    
+    const obj_result_label = selectedBoxIndex !== -1
+        ? serialized_results.names[serialized_results.boxes[selectedBoxIndex]['label']]
+        : null;
+
+    const obj_result_prob = selectedBoxIndex !== -1
+        ? Number(serialized_results.boxes[selectedBoxIndex]['confidence']).toFixed(4) * 100
+        : null;
+    
+
+    // console.log("솔루션 워드", serialized_results.boxes[selectedBoxIndex]['solution_info']['solution_word'])
+
+    const obj_yolo_solution_word = selectedBoxIndex !== -1
+        ? serialized_results.boxes[selectedBoxIndex]['solution_info']['solution_word']
+        : null;
+
+    
+
     // const solution_row_list_serialized = location.state.file_name.detect_result.solution_row_list_serialized;
 
     // console.log(save_file_name)
-    console.log('diagnosis_result_id_lsit = ', diagnosis_result_id_list)
-    console.log('serialized_results = ', serialized_results)
+    // console.log('diagnosis_result_id_lsit = ', diagnosis_result_id_list)
+    // console.log('serialized_results = ', serialized_results)
     // console.log(serialized_results.boxes)
-    console.log('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
+    // console.log('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
     // console.log(tf_predict_result_list_sorted[0])
     // console.log(tf_predict_result_list_sorted[0][0])
     // console.log(tf_predict_result_list_sorted[0][0][1])
@@ -41,7 +75,7 @@ const DiagnosisUploadResult = () => {
     if (serialized_results && serialized_results.boxes && tf_predict_result_list_sorted[0]) {
 
         const url = save_file_name
-            ? `http://127.0.0.1:8000/media/diagnosis/yolo/origin_img/result_img/${save_file_name}`
+            ? `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${save_file_name}`
             : null;
 
         const file_name = save_file_name.split('.')[0];
@@ -66,13 +100,13 @@ const DiagnosisUploadResult = () => {
                                     <div className="diagnosis_result_analystic_summary_box_item">
                                         <div><h3>진단 요약 (
                                             솔루션 워드 : 
-                                            <Link title="상품추천으로 이동" to={{pathname: `/diagnosis_recommend/${tf_predict_result_list_sorted[0][1]['solution_word']}`,
-                                                        state: { solutionWord: tf_predict_result_list_sorted[0][1]['solution_word'] }
+                                            <Link title="상품추천으로 이동" to={{pathname: `/diagnosis_recommend/${obj_yolo_solution_word}`,
+                                                        state: { solutionWord: obj_yolo_solution_word }
                                                     }}>
-                                                <span className="diagnosis_button">{ tf_predict_result_list_sorted[0][1]['solution_word']}</span>)
+                                                <span className="diagnosis_button">{ obj_yolo_solution_word}</span>)
                                             </Link>
                                         </h3></div>
-                                        <div>{obj_result_prob} % 의 확률로 <span className='diagnosis_button_1'>{obj_result_label}</span> 일 것으로 예상됩니다</div>
+                                        <div>약 {obj_result_prob} % 의 확률로 <span className='diagnosis_button_1'>{obj_result_label}</span> 일 것으로 예상됩니다</div>
                                     </div>
                                     <div className="diagnosis_result_analystic_summary_box_detail">
                                         <div className="diagnosis_result_analystic_image"><img src={url} alt="UploadResult" className="diagnosis_result_analystic_image_img" /></div>
@@ -88,14 +122,40 @@ const DiagnosisUploadResult = () => {
                                 </article>
 
                                 <article className="diagnosis_result_detect_wrap">
-                                    {Object.keys(serialized_results.boxes).map((boxKey, index) => {
-                                        const label = serialized_results.boxes[boxKey]['label'];
+                                    {serialized_results.boxes
+                                        .filter(box => box.label >= 6)
+                                        .map((box, index) => {
+                                        const label = box.label;
                                         const labelName = serialized_results.names[label];
-                                        const confidence = Number(serialized_results.boxes[boxKey]['confidence']).toFixed(4);
+                                        const confidence = Number(box.confidence).toFixed(4);
                                         const isDisease = label >= 6;
+                                        
+                                        // const url_crops = crops_path_list[index]
+                                        // const url_crops = `${process.env.PUBLIC_URL}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg`;
+
+                                        const modifiedPathList = crops_path_list.map(filePath => {
+                                            const parts = filePath.split(/\\/g);
+                                            const index = parts.indexOf('upload');
+                                            if (index !== -1) {
+                                              const relativePath = parts.slice(index + 1).join('/');
+                                              const url = `http://localhost:8000/${relativePath}`;
+                                              return url;
+                                            }
+                                            return null;
+                                          }).filter(url => url !== null);
+                                          
+                                        console.log('modifiedPathList)',modifiedPathList);
+                                          
+                                          
+                                               
+
                                         const url_crops = save_file_name && index > 0 ? 
-                                        `http://127.0.0.1:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index}.jpg` : 
-                                        `http://127.0.0.1:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg`;
+                                        // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${decodedFileName}/crops/${decodedLabelName}/${decodedFileName}${index}.jpg` : 
+                                        // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${decodedFileName}/crops/${decodedLabelName}/${decodedFileName}.jpg`;
+                                        `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index+1}.jpg` :                                        
+                                        `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg` ;
+                                        
+                                    
 
                                         if (!isDisease) {
                                             return null;
@@ -196,7 +256,7 @@ const DiagnosisUploadResult = () => {
     }
 
     const url_empty = save_file_name
-        ? `http://127.0.0.1:8000/media/diagnosis/yolo/origin_img/${save_file_name}`
+        ? `http://localhost:8000/media/diagnosis/yolo/origin_img/${save_file_name}`
         : null;
 
     return (

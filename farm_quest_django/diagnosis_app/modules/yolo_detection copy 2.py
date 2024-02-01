@@ -163,11 +163,11 @@ def plant_select_result(plant_name):
     disease_codes = list(disease.keys())
     disease_codes.append('0')
     # disease_keys.insert(0, '0')
-    # print('disease_codes = ', disease_codes)
+    print('disease_codes = ', disease_codes)
     disease_names = list(disease.values())
-    # print('disease_values = ',disease_names)
+    print('disease_values = ',disease_names)
     disease_items = list(disease.items())
-    # print('disease_items = ', disease_items)
+    print('disease_items = ', disease_items)
     
     return disease_dict, disease_codes, disease_names, disease_items, yolo_model, yolo_class
 
@@ -179,28 +179,29 @@ def detect(save_file_path, plant_name, user_select_plant):
         
     serialized_results_list = []
     try: 
-        # print('save_file_path', save_file_path)       
+        print('save_file_path', save_file_path)       
         file_name, file_extension = os.path.splitext(os.path.basename(save_file_path))
-        # print('img_name', file_name)
+        print('img_name', file_name)
 
         media_path = settings.MEDIA_ROOT
-        # print('media_path : ', media_path)
+        print('media_path : ', media_path)
         
         img_path = os.path.join(media_path, save_file_path)
-        # print('img_path : ', img_path)
-
+        print('img_path : ', img_path)
+        
         project_path = os.path.join(media_path, os.path.dirname(save_file_path), 'result_img') 
-        # print('project_path : ', project_path)
+        print('project_path : ', project_path)
         if not os.path.exists(project_path):
             os.mkdir(project_path)
+                        
         
         serialized_results_path = os.path.join(media_path, os.path.dirname(img_path), 'result_json')
-        # print('serialized_results_path : ', serialized_results_path)
+        print('serialized_results_path : ', serialized_results_path)
         serialized_results_file_path = os.path.join(serialized_results_path, file_name + '.json')
-        # print('serialized_results_file_path : ', serialized_results_file_path)
+        print('serialized_results_file_path : ', serialized_results_file_path)
         if not os.path.exists(serialized_results_path):
             os.makedirs(serialized_results_path)
-        # print(plant_name)
+        print(plant_name)
             
                                              
             
@@ -271,7 +272,7 @@ def detect(save_file_path, plant_name, user_select_plant):
         # print('serialized_results_list[0] = ', serialized_results_list[0])
 
         serialized_results_list = yolo_solution_service(serialized_results_lists)
-        # print('serialized_results_list : ', serialized_results_list)
+        print('serialized_results_list : ', serialized_results_list)
         # print('뭐야')
         with open(serialized_results_file_path, 'w') as file:
             json.dump(serialized_results_list[0], file, indent=2)
@@ -300,7 +301,7 @@ def detect(save_file_path, plant_name, user_select_plant):
         crops_path_list = []
         if len(serialized_boxes) > 0 :
             tf_predict_disease_list, crops_path_list = tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, disease_dict, disease_names, disease_codes)
-            # print('tf_predict_disease_list', tf_predict_disease_list)
+            print('tf_predict_disease_list', tf_predict_disease_list)
         
         tf_predict_result_list_sorted = tf_solution_service(tf_predict_disease_list)
         # print('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
@@ -330,55 +331,55 @@ def yolo_results(results, user_select_plant, disease_dict, disease_names, diseas
     # JSON 직렬화 가능한 정보 추출
     serialized_boxes = []
     disease_codes_list = []
-    serialized_boxes = []
     
-    # print('sr 없냐')
-    if results:
-        # print('sr 진짜 없냐')
+    print('sr 없냐')
+    if results:  # 'results'가 비어있지 않은 경우에만 처리
+        print('sr 진짜 없냐')
             
-        for result in results:
-            # print('sr 진짜 진짜 없냐')
+    for result in results:
+        print('sr 진짜 진짜 없냐')
+        
+        confidence_values = result.boxes.conf.tolist() if hasattr(result.boxes, 'conf') else None
+        label_values = result.boxes.cls.tolist() if hasattr(result.boxes, 'cls') else None
+        xyxy_values = result.boxes.xyxy.tolist() if hasattr(result.boxes, 'xyxy') else None
+        
+        # 이 부분 수정
+        if label_values is not None:
+            label_values = [int(float(label)) for label in label_values]
+        
+        disease_codes_list = []  # 각 박스에 대한 disease 코드를 저장하는 리스트
+        for label_value in label_values:
+            try:
+                label_value = int(float(label_value))
+            except ValueError:
+                pass                
             
-            confidence_values = result.boxes.conf.tolist() if hasattr(result.boxes, 'conf') else None
-            label_values = result.boxes.cls.tolist() if hasattr(result.boxes, 'cls') else None
-            xyxy_values = result.boxes.xyxy.tolist() if hasattr(result.boxes, 'xyxy') else None
-            
-            # 이 부분 수정
-            if label_values is not None:
-                label_values = [int(float(label)) for label in label_values]
-            
-            disease_codes_list = []  # 각 박스에 대한 disease 코드를 저장하는 리스트
-            for label_value in label_values:
-                try:
-                    label_value = int(float(label_value))
-                except ValueError:
-                    pass                
-                
-                # print('label_value', label_value)        
-                class_name = yolo_class[label_value]
-                # print('class_name', class_name)
-                if '_' in class_name:
-                    class_name = class_name.split('_')[0]                
-                else:
-                    print('없')
-                disease_code = '0'
-                for code, name in disease_items:
-                    if name == class_name:
-                        disease_code = code
-                        break
+            print('label_value', label_value)                
+            class_name = yolo_class[label_value]
+            print('class_name', class_name)
+            if '_' in class_name:
+                class_name = class_name.split('_')[0]
+                print('class_name', class_name)
+            else:
+                print('없')
+            disease_code = '0'
+            for code, name in disease_items:
+                if name == class_name:
+                    disease_code = code
+                    break
 
-                disease_codes_list.append(disease_code)
-            
-            serialized_boxes.append({
-                'confidence': confidence_values,
-                'label': label_values,
-                'xyxy': xyxy_values,
-                'disease_code': disease_codes_list,
-            })
+            disease_codes_list.append(disease_code)
+        
+        serialized_boxes.append({
+            'confidence': confidence_values,
+            'label': label_values,
+            'xyxy': xyxy_values,
+            'disease_code': disease_codes_list,
+        })
 
-        # print('serialized_boxes : ', serialized_boxes)
-            
-            
+    print('serialized_boxes : ', serialized_boxes)
+        
+        
         
 
 
@@ -482,48 +483,48 @@ def yolo_results(results, user_select_plant, disease_dict, disease_names, diseas
         #     })
         # print('serialized_boxes : ', serialized_boxes)
 
-        # print('키포인트')
-        serialized_keypoints = []
-        if results and hasattr(results[0], 'keypoints') and results[0].keypoints is not None:
-            for result in results:
-                # 'keypoints' 속성이 있는 경우에만 처리
-                keypoints_values = result.keypoints.keypoints.numpy().tolist() if hasattr(result.keypoints, 'keypoints') else None
-                # print('1 : ', keypoints_values)
-                scores_values = result.keypoints.scores.numpy().tolist() if hasattr(result.keypoints, 'scores') else None
-                # print('2 : ', scores_values)
-                labels_values = result.keypoints.labels.numpy().tolist() if hasattr(result.keypoints, 'labels') else None
-                # print('3 : ', labels_values)
-                serialized_keypoints.append({
-                    'keypoints': keypoints_values,
-                    'scores': scores_values,
-                    'labels': labels_values,
-                })
-            # print('serialized_keypoints : ', serialized_keypoints)
+    # print('키포인트')
+    serialized_keypoints = []
+    if results and hasattr(results[0], 'keypoints') and results[0].keypoints is not None:
+        for result in results:
+            # 'keypoints' 속성이 있는 경우에만 처리
+            keypoints_values = result.keypoints.keypoints.numpy().tolist() if hasattr(result.keypoints, 'keypoints') else None
+            # print('1 : ', keypoints_values)
+            scores_values = result.keypoints.scores.numpy().tolist() if hasattr(result.keypoints, 'scores') else None
+            # print('2 : ', scores_values)
+            labels_values = result.keypoints.labels.numpy().tolist() if hasattr(result.keypoints, 'labels') else None
+            # print('3 : ', labels_values)
+            serialized_keypoints.append({
+                'keypoints': keypoints_values,
+                'scores': scores_values,
+                'labels': labels_values,
+            })
+        # print('serialized_keypoints : ', serialized_keypoints)
 
-        print('데이타')
-        
-        # 'orig_img'를 Base64로 인코딩하여 추가
-        # orig_img_base64 = None
-        # if results and hasattr(results[0], 'orig_img') and results[0].orig_img is not None:
-        #     orig_img_base64 = base64.b64encode(results[0].orig_img.tobytes()).decode('utf-8')
-        
-        serializable_data = {
-            # 'diagnosis_result_id':diagnosis_result_id,
-            'user_select_plant':user_select_plant,
-            'boxes': serialized_boxes,
-            'keypoints': serialized_keypoints if serialized_keypoints else None,
-            'masks': None,  # 'masks'는 처리하지 않음        
-            'names': results[0].names if results and hasattr(results[0], 'names') else None,        
-            'orig_shape': results[0].orig_shape if results else None,
-            'path': results[0].path if results else None,
-            'probs': results[0].probs if results and hasattr(results[0], 'probs') else None,
-            'save_dir': results[0].save_dir if results else None,
-            'speed': results[0].speed if results else None,
-            # 'orig_img': orig_img_base64,
-        }   
-        # print('serializable_data : ', serializable_data)
+    print('데이타')
+    
+    # 'orig_img'를 Base64로 인코딩하여 추가
+    # orig_img_base64 = None
+    # if results and hasattr(results[0], 'orig_img') and results[0].orig_img is not None:
+    #     orig_img_base64 = base64.b64encode(results[0].orig_img.tobytes()).decode('utf-8')
+    
+    serializable_data = {
+        # 'diagnosis_result_id':diagnosis_result_id,
+        'user_select_plant':user_select_plant,
+        'boxes': serialized_boxes,
+        'keypoints': serialized_keypoints if serialized_keypoints else None,
+        'masks': None,  # 'masks'는 처리하지 않음        
+        'names': results[0].names if results and hasattr(results[0], 'names') else None,        
+        'orig_shape': results[0].orig_shape if results else None,
+        'path': results[0].path if results else None,
+        'probs': results[0].probs if results and hasattr(results[0], 'probs') else None,
+        'save_dir': results[0].save_dir if results else None,
+        'speed': results[0].speed if results else None,
+        # 'orig_img': orig_img_base64,
+    }   
+    # print('serializable_data : ', serializable_data)
 
-        return serializable_data, serialized_boxes
+    return serializable_data, serialized_boxes
 
 def yolo_solution_service(serialized_results_lists):
     # Initialize an empty list to store solution information
@@ -547,7 +548,7 @@ def yolo_solution_service(serialized_results_lists):
             serializer = SolutionTbSerializer(solution_row, many=True)
             # print('3serializer', serializer)
             serialized_data = serializer.data
-            # print('4', serialized_data)
+            print('4', serialized_data)
             
             solution_info_id_list.append(serialized_data[0]['solution_id'])
             solution_info_list.append(serialized_data[0])
@@ -557,7 +558,7 @@ def yolo_solution_service(serialized_results_lists):
             solution_info_id_list.append(None)
             solution_info_list.append(None)
             
-    # print('serialized_results_lists', serialized_results_lists)
+    print('serialized_results_lists', serialized_results_lists)
     
     # print('5solution_info_id_list', solution_info_id_list)
     # print('5solution_info_list', solution_info_list)            
@@ -639,7 +640,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         conf = box[0]['confidence']
         # print('7', conf)
         label = names[label_key]
-        print('8', label)
+        # print('8', label)
         
         # 기본경로
         path_dir = os.path.dirname(path_origin)
@@ -669,7 +670,6 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
 
         crops_all = os.path.join(path_dir, 'result_img', file_name, 'crops', '*', file_name+'.jpg')
         crops_all
-        print('crops_all', crops_all)
 
         crops_all_list = glob.glob(crops_all)
         crops_all_list
@@ -678,10 +678,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         for crops_path in crops_all_list:
             if crops_path.split(os.sep)[-2] not in plant:
                 crops_path_list.append(crops_path)
-        print('crops_path_list', crops_path_list)
-        
-        # print('crops_path_list[0]', crops_path_list[0])
-        # print('crops_path_list[1]', crops_path_list[1])
+                print('crops_path_list', crops_path_list)
     
     print('plant_name', plant_name)
 

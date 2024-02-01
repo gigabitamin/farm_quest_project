@@ -6,6 +6,8 @@ upload
 yolo_model
 tf_model
 
+backupTest/
+
 ### Django ###
 *.log
 *.pot
