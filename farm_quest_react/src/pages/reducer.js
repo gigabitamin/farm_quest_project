@@ -35,6 +35,14 @@ const initialState = {
 
     },
     scheduler: {
+        show: 'main',
+        mainPage: {
+            link: null,
+            num: null
+        }, 
+        item: {},
+        where: {},
+        weather: {},
 
     }
 };
@@ -99,8 +107,32 @@ export default function reducer(state=initialState, action) {
             customerCenterState = { ...initialState.customerCenter };
         };
         newState.customerCenter = customerCenterState;
-    };
+      
+        // scheduler
+    } else if (action.part === 'scheduler') {
+        let schedulerState = { ...state.scheduler };
 
+        if (action.type === 'filter') {
+            schedulerState.show = 'filter';
+            schedulerState.item = action.item;
+
+        } else if (action.type === 'location') {
+            schedulerState.show = 'location';
+            schedulerState.where = action.where;
+            schedulerState.weather = action.weather;
+
+        // } else if (action.type === 'create') {
+        //     customerCenterState.show = 'create';
+        // } else if (action.type === 'update') {
+        //     customerCenterState.show = 'update';
+        //     customerCenterState.item = action.item;
+        // } else if (action.type === 'detailBack') {
+        //     customerCenterState.show = 'detail';
+        } else if (action.type === 'reset') {
+            schedulerState = { ...initialState.scheduler };
+        };
+        newState.scheduler = schedulerState;
+    };
 
 
     return newState;

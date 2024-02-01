@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 
 const GridSelect = ({}) => {
+    const dispatch = useDispatch();
+
     const [location1, setLocation1] = useState([]);
     const [location2, setLocation2] = useState([]);
     const [location3, setLocation3] = useState([]);
@@ -12,6 +15,7 @@ const GridSelect = ({}) => {
     const [storedNx, setStoredNx] = useState(null); 
     const [storedNy, setStoredNy] = useState(null); 
     const [weatherInfo, setWeatherInfo] = useState([]);
+    const [where, setWhere] = useState([]);
     const deg_code = {0 : 'N', 360 : 'N', 180 : 'S', 270 : 'W', 90 : 'E', 22.5 :'NNE',
                         45 : 'NE', 67.5 : 'ENE', 112.5 : 'ESE', 135 : 'SE', 157.5 : 'SSE',
                         202.5 : 'SSW', 225 : 'SW', 247.5 : 'WSW', 292.5 : 'WNW', 315 : 'NW',
@@ -38,8 +42,6 @@ const GridSelect = ({}) => {
         return closeDir;
       }
       
-      console.log(degToDir(0));
-
       const getWindStrength = (vec, wsd) => {
         if (vec && wsd) {
           const vecTemp = degToDir(parseFloat(vec));
@@ -171,7 +173,7 @@ const onFetchWeatherData = async (nx, ny) => {
     );
 
     if (!response.ok) {
-    throw new Error('Failed to fetch weather data');
+        throw new Error('Failed to fetch weather data');
     }
     // console.log('보낸후:', process.env.REACT_APP_API_KEY)
     console.log('response:', response)
@@ -204,8 +206,14 @@ const onFetchWeatherData = async (nx, ny) => {
       setWeatherInfo(weatherInfo);
     };
 
+    dispatch({
+        part: 'scheduler',
+        type: 'location',
+        weather: weatherInfo
+    });
+    console.log(weatherInfo)
 
-const renderCategories = ['TMP', 'REH', 'SKY', 'POP', 'PTY', 'PCP', 'VEC', 'WSD'];
+// const renderCategories = ['TMP', 'REH', 'SKY', 'POP', 'PTY', 'PCP', 'VEC', 'WSD'];
 
 
 const getRenderName = (originalCategory) => {
@@ -239,62 +247,67 @@ const getRenderName = (originalCategory) => {
     }
 };
 
-// useEffect(() => {
-//     onFetchWeatherData ();
-// }, []);
 
 // /////////////////////
     const handleSaveAndFetch = () => {
-
-        // onFetchWeatherData(setStoredNx, setStoredNy);
-
-
         // 세션 정보를 SchedulerWeatherLocation 모듈에 전송
         onFetchLocationData(
             selectedLocation1,
             selectedLocation2,
             selectedLocation3,
-            // setStoredNx,
-            // setStoredNy
         );
+
     };
 
-    const onFetchLocationData = (location1, location2, location3) => {
+    const onFetchLocationData = async (location1, location2, location3) => {
         console.log('Location 1:', location1);
         console.log('Location 2:', location2);
         console.log('Location 3:', location3);
 
-        fetch('http://localhost:8000/api/get_nx_ny/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+        try {
+            const response = await fetch('http://localhost:8000/api/get_nx_ny/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             body: JSON.stringify({
                 location1,
                 location2,
                 location3,
             }),
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('서버 응답:', data);
+
+        if (!response.ok) {
+            console.error('Failed to fetch nx and ny data.');
+            return;
+        }
+
+        const data = await response.json();
+        console.log('서버 응답:', data);
+
+        if (data.error && data.error.includes('Not service time')) {
+            console.error('서비스 시간이 아닙니다');
+        } else {
+            const { nx, ny } = data;
+            const where = { nx, ny };
+
+            setStoredNx(nx);
+            setStoredNy(ny);
+            setWhere(where);
     
-            if (data.error && data.error.includes('Not service time')) {
-                console.error('서비스 시간이 아닙니다');
-            } else {
-                const { nx, ny } = data;
-                setStoredNx(nx);
-                setStoredNy(ny);
-
-            // sessionStorage.setItem('nx', nx);
-            // sessionStorage.setItem('ny', ny);
-
-            onFetchWeatherData(nx, ny);
-
-            }
-        })
-        .catch(error => console.error('서버 통신 오류:', error));
-    };
+            // nx와 ny가 설정된 후에 onFetchWeatherData 호출
+            await onFetchWeatherData(nx, ny);
+            dispatch({
+                part: 'scheduler',
+                type: 'location',
+                where: where
+            });
+            console.log(where)
+        }
+    } catch (error) {
+        console.error('서버 통신 오류:', error);
+    }
+};
     
     return (
         <div>
@@ -378,9 +391,9 @@ const formatTime = () => {
     const currentDate = new Date();
     const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}`;
     const currentHour = currentDate.getHours();
-    console.log(currentDate);
-    console.log('시간:',currentHour);
-
+    // console.log(currentDate);
+    // console.log('시간:',currentHour);
+    // console.log(typeof(currentDate))
     // formattedDate: 20240129, time: 0900 -> 2024-01-29 09:00
     return `${formattedDate.substring(0, 4)}년 ${formattedDate.substring(4, 6)}월 ${formattedDate.substring(6, 8)}일 ${currentHour}시`;
 };
