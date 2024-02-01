@@ -33,7 +33,8 @@ class CommunityListShowSerializer(serializers.ModelSerializer):
             "thread_title",
             "thread_date",
             "thread_type",
-            "user"
+            "user",
+            "thread_count",
         ]
 
 class CommunityDetailShowSerializer(serializers.ModelSerializer):
@@ -49,7 +50,8 @@ class CommunityDetailShowSerializer(serializers.ModelSerializer):
             "thread_date",
             "thread_type",
             "user",
-            "thread_comments"
+            "thread_comments",
+            "thread_count",
         ]
 
 class CommunityModifySerializer(serializers.ModelSerializer):
@@ -60,7 +62,6 @@ class CommunityModifySerializer(serializers.ModelSerializer):
             "thread_title",
             "thread_content",
             "thread_img",
-            "thread_date",
             "thread_type",
             "user"
         ]
@@ -71,7 +72,6 @@ class CommunityCommentModifySerializer(serializers.ModelSerializer):
         fields = [
             "cmt_no",
             "cmt_content",
-            "cmt_date",
             "thread_no",
             "user"
         ]

@@ -78,7 +78,6 @@ class CommunityCommentAdd(generics.CreateAPIView):
         if request.auth:
             user_id = request.user.id
             request.data['user'] = user_id
-            print('post : ', request.data)
             return self.create(request, *args, **kwargs)
         raise PermissionError('You have no token information.')
     
