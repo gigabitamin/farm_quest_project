@@ -15,7 +15,7 @@ const Top = () => {
             <Routes>
                 <Route path="/gardening_shop_index" element={<GardeningShopIndex />} />
                 <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} />
-                <Route path="/gardening_shop_search/:keyword" element={<GardeningShopSearch />} />
+                <Route path="/gardening_shop_search/:keyword/:user_id" element={<GardeningShopSearch />} />
                 <Route path="/community/:mainType" element={<Community />} />
                 <Route path="Scheduler" element={<Scheduler />} />
             </Routes>

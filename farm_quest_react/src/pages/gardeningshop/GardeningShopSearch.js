@@ -4,7 +4,7 @@ import axios from 'axios';
 import './GardeningShopIndex.css';
 
 const GardeningShopSearch = () => {
-    const { keyword } = useParams();
+    const { keyword,user_id } = useParams();
     const [searchResults, setSearchResults] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -13,7 +13,7 @@ const GardeningShopSearch = () => {
         const encodedKeyword = encodeURIComponent(keyword);
         const fetchSearchResults = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/gardening_shop_search/${encodedKeyword}/?page=${currentPage}`);
+                const response = await axios.get(`http://localhost:8000/api/gardening_shop_search/${encodedKeyword}/${user_id}/?page=${currentPage}`);
                 setSearchResults(response.data.results);
                 setTotalPages(response.data.total_pages); // 백엔드에서 제공하는 전체 페이지 수 사용
             } catch (error) {
@@ -22,11 +22,12 @@ const GardeningShopSearch = () => {
         };
 
         fetchSearchResults();
-    }, [keyword, currentPage]);
+    }, [keyword, currentPage, user_id]);
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
     };
+
 
     const renderPagination = () => {
 

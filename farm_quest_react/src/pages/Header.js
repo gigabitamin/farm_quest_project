@@ -4,9 +4,14 @@ import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
 import DiagnosisLink from "./diagnosis/DiagnosisLink";
 import LoginLink from './user/LoginLink'
 import TestLink from './user/TestLink'
+import { useCookies } from 'react-cookie'; 
+
 
 const Header = () => {
     const user = { is_authenticated: false, username: 'exampleUser' };
+
+    const [cookies] = useCookies(['id', 'username']);
+    const user_id = cookies.user ? cookies.user.id : 0;
 
     // 기존에 선택된 카테고리를 state로 관리
     const [selectedCategory, setSelectedCategory] = useState('default');
@@ -16,16 +21,16 @@ const Header = () => {
     };
 
     const portal_search = () => {
+
         let keyword = document.getElementById("search_keyword").value;
         
         if (selectedCategory === "gardening_shop_search" && keyword) {
             keyword = encodeURIComponent(keyword);
-            window.location.href = `/gardening_shop_search/${keyword}`;
+            window.location.href = `/gardening_shop_search/${keyword}/${user_id}`;
         }
 
         return false;
     };
-
     // document.addEventListener('DOMContentLoaded', function () {
     //     const navItems = document.querySelectorAll('.nav-item_hd');
     

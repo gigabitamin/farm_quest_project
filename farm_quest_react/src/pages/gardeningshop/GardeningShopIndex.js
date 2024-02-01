@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import './GardeningShopIndex.css';
+import { useCookies } from 'react-cookie'; 
 
 const GardeningShopIndex = () => {
+    const [cookies] = useCookies(['id', 'username']);
+    const user_id = cookies.user ? cookies.user.id : 0;
     const [products, setProducts] = useState([]);
     const [recommendedProducts, setRecommendedProducts] = useState([]);
     const [currentCategory, setCurrentCategory] = useState("all");
@@ -32,8 +35,9 @@ const GardeningShopIndex = () => {
     };
 
     const fetchRecommendedProducts = async () => {
+
         try {
-            const response = await axios.get(`http://localhost:8000/api/recommended_products`);
+            const response = await axios.get(`http://localhost:8000/api/recommended_products/${user_id}`);
             setRecommendedProducts(response.data);
         } catch (error) {
             console.error("Error fetching recommended products: ", error);
