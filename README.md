@@ -16,10 +16,10 @@ export default "http://localhost:8000"
 
 ====================================================
 <!-- version -->
+### v0.6.3 psh  
 
-psh
 - React : scheduler pages updated
-- .env updated(file in discord)
+- .env updated(file text in 'discord')
 
 
 ### v0.6.2 jsh  

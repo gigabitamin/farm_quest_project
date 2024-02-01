@@ -7,6 +7,16 @@
   /* 모바일 */
   /* } */
 
+/* 도움말 */
+.qustionOverlayContainer {
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+  padding-bottom: 8px;
+  padding-top: 5px;
+}
+
+
 /* 캘린더 필터 */
 
 #schedularFilter {
@@ -20,11 +30,25 @@
 }
 
 /* 필터 스타일 */
+/* #schedulerselector { */
+/*  */
+/* } */
+
+#shcedulerDiseaseExp{
+  text-align:left;
+}
+
+#shcedulerDiseaseExpColor {
+  margin-top: 4px;
+}
 
 #schedulerFilterUi {
   display: flex; /* Flexbox 사용 */
   align-items: center; /* 수직 정렬을 가운데로 조절 */
   flex-direction: row; /* Flexbox의 방향을 가로로 설정 */
+  padding: 2px;
+  margin-top: 2px;
+  margin-bottom: 4px;
 }
 
 #schedulerFilterUi label.schedulerFilterUi {
@@ -72,7 +96,8 @@
 /* 캘린더 바디 */
 
 .filter-container,
-.calendar-container {
+.calendar-container,
+.weather-container {
     display: inline-block;
     vertical-align: top; /* 위쪽 시작점 정렬 */
     margin-top:20px;
@@ -155,13 +180,29 @@
     margin-bottom: 150px;
   }
 
+/* 날씨 */
+  #weatherDropDown {
+    text-align: left;
+  
+  }
 
 /* 지역 */
-#weatherDropDown {
+
+
+.locationSelectorBox {
   text-align: left;
 
 }
 
+.locationSelector {
+  font-size: 18px;
+}
+
+.locationDropdown {
+  text-align:center;
+  width: 120px;
+
+}
 /* 모달용 임시css 충돌시 삭제 */
 
 .modal-overlay {

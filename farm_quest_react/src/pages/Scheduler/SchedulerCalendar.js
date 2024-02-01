@@ -4,6 +4,7 @@ import { getDiseaseColor } from './getDiseaseColor'; // 경로에 맞게 수정
 
 import prevButtonImage from '../../images/assets/prevButton.png';
 import nextButtonImage from '../../images/assets/nextButton.png';
+// import CalendarOverlay from './CalendarOverlay';
 import './SchedulerCSS.css';
 
 
@@ -244,12 +245,14 @@ const SchedulerCalendar = ({ filteredData, fetchedData }) => {
 
   return (
     <div>
-      <CalendarHeader
-        currentDate={currentDate}
-        onPrevMonth={handlePrevMonth}
-        onNextMonth={handleNextMonth}
-        fetchedData={fetchedData}
-      />
+        <CalendarHeader
+          currentDate={currentDate}
+          onPrevMonth={handlePrevMonth}
+          onNextMonth={handleNextMonth}
+          fetchedData={fetchedData}
+        />
+
+
       <CalendarBody currentDate={currentDate} />
     </div>
   );

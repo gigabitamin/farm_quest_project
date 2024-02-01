@@ -41,15 +41,13 @@ const Scheduler = () => {
         <div className="Scheduler">
             <div className="filter-container">
                 <SchedulerFilter />
-
             </div>
-
-            {showModal && <SchedulerModal handleCloseModal={handleCloseModal} />}
-
+                {showModal && <SchedulerModal handleCloseModal={handleCloseModal} />}
             <div className="calendar-container">
-                <GridSelect />
-
                 <SchedulerCalendar />
+            </div>
+            <div className="weather-container">
+                <GridSelect />
             </div>
         </div>
     );

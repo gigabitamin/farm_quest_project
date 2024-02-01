@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo  } from 'react';
 import { useDispatch } from 'react-redux';
-
 import { getDiseaseColor } from './getDiseaseColor'; // 경로에 맞게 수정
+
+import CalendarOverlay from './CalendarOverlay'
 
 const SchedulerFilter = ({ onFetchedDataChange }) => {
   const [selectedPlant, setSelectedPlant] = useState(null);
@@ -73,7 +74,10 @@ const SchedulerFilter = ({ onFetchedDataChange }) => {
 
   return (
     <div id="schedulerFilter">
-      <h2>달력 보기</h2>
+      <div className='qustionOverlayContainer'>
+        <h2 id='schedulerselector'>달력 보기</h2>
+        <CalendarOverlay tooltipText="작물별 질병의 빈발 시기를 알려드립니다." />
+      </div>
       {Object.entries(plantNameToNoMapping).map(([plantName, plantNo]) => (
         <div id="schedulerFilterUi" key={plantName}>
           <input
@@ -85,27 +89,25 @@ const SchedulerFilter = ({ onFetchedDataChange }) => {
           />
           <label className='schedulerFilterUi' htmlFor={plantName}>{plantName}</label>
         </div>
-      ))}
-
+      ))}<br />
       <div>
-        <button onClick={handleClearSelection}>달력 비우기</button>
         {selectedPlantData && (
-          <div>
-            {/* <h3>{`${selectedPlant} 질병 색상`}</h3> */}
-            <h3>질병 색상</h3>
-            <ul>
-              {selectedPlantData.map((item, index) => (
-                <li key={index}>
-                  <span style={{ background: getDiseaseColor(item.disease_code) }}>{`${item.disease_name} `}</span>
-                </li>
-                
-              ))}
-            </ul>
-          </div>
-        )}
+          <div id='shcedulerDiseaseExp'>
+              <h3>질병 색상</h3>
+              <ul id='shcedulerDiseaseExpColor'>
+                {selectedPlantData.map((item, index) => (
+                  <li key={index}>
+                    <span style={{ background: getDiseaseColor(item.disease_code) }}>{`${item.disease_name} `}</span>
+                  </li>
+                ))}
+              </ul>
+              <button className='' onClick={handleClearSelection}>달력 비우기</button>
+
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export default SchedulerFilter;

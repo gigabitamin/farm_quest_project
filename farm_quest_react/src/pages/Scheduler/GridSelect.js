@@ -311,40 +311,44 @@ const getRenderName = (originalCategory) => {
     
     return (
         <div>
-            <label>시/도:</label>
-            <select onChange={handleLocation1Change} value={selectedLocation1}>
-                <option value="">선택</option>
-                {location1.map((location, index) => (
-                    <option key={index} value={location}>
-                        {location}
-                    </option>
-                ))}
-            </select>
+                        <h2>날씨정보</h2>
 
-            <label>시/군/구:</label>
-            <select onChange={handleLocation2Change} value={selectedLocation2}>
-                <option value="">선택</option>
-                {location2.map((location, index) => (
-                    <option key={index} value={location}>
-                        {location}
-                    </option>
-                ))}
-            </select>
-
-            <label>읍/면/동:</label>
-            <select onChange={handleLocation3Change} value={selectedLocation3}>
-                <option value="">선택</option>
-                {location3.map((location, index) => (
-                    <option key={index} value={location}>
-                        {location}
-                    </option>
-                ))}
-            </select>
-
+            <div className='locationSelectorBox'>
+                {/* <label className='locationSelector'>시/도:</label> */}
+                <select className='locationDropdown' onChange={handleLocation1Change} value={selectedLocation1}>
+                    <option value="">시/도</option>
+                    {location1.map((location, index) => (
+                        <option key={index} value={location}>
+                            {location}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <div className='locationSelectorBox'>
+                {/* <label className='locationSelector'>시/군/구:</label> */}
+                <select className='locationDropdown' onChange={handleLocation2Change} value={selectedLocation2}>
+                    <option value="">시/군/구</option>
+                    {location2.map((location, index) => (
+                        <option key={index} value={location}>
+                            {location}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <div className='locationSelectorBox'>
+                {/* <label className='locationSelector'>읍/면/동:</label> */}
+                <select className='locationDropdown' onChange={handleLocation3Change} value={selectedLocation3}>
+                    <option value="">읍/면/동</option>
+                    {location3.map((location, index) => (
+                        <option key={index} value={location}>
+                            {location}
+                        </option>
+                    ))}
+                </select>
+            </div>
             <button onClick={handleSaveAndFetch}>날씨 정보 가져오기</button>
 
 
-            <h2>날씨정보</h2>
             <ul>
                 {Object.keys(weatherInfo).map(time => (
                     <li key={time}>
