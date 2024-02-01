@@ -1,5 +1,6 @@
 import React, { useState } from 'react'; 
 import { useSelector } from 'react-redux';
+import { getDiseaseColor } from './getDiseaseColor'; // 경로에 맞게 수정
 
 import prevButtonImage from '../../images/assets/prevButton.png';
 import nextButtonImage from '../../images/assets/nextButton.png';
@@ -79,33 +80,33 @@ function CalendarBody({ currentDate }) {
   const generateGrid = () => {
 
     
-  const getDiseaseColor = (disease_code) => {
-    const diseaseColorMap = {
-      'a1': '#b88b8b',
-      'a2': '#496349',
-      'a3': '#89b9ab',
-      'a4': '#e799cd',
-      'a5': '#1f6148',
-      'a6': '#c7c979',
-      'a7': '#7c78b3',
-      'a8': '#c5845e',
-      'a9': '#29e09a',
-      'a10': '#63f863',
-      'a11': '#c22561',
-      'a12': '#3e70cc',
-      'b1': '#442222',
-      'b2': '#094b09',
-      'b3': '#130e31',
-      'b4': '#95aa20',
-      'b5': '#2eb185',
-      'b6': '#697069',
-      'b7': '#a4a712',
-      'b8': '#00e1ff',
-    };
+  // const getDiseaseColor = (disease_code) => {
+  //   const diseaseColorMap = {
+  //     'a1': '#b88b8b',
+  //     'a2': '#496349',
+  //     'a3': '#89b9ab',
+  //     'a4': '#e799cd',
+  //     'a5': '#1f6148',
+  //     'a6': '#c7c979',
+  //     'a7': '#7c78b3',
+  //     'a8': '#c5845e',
+  //     'a9': '#29e09a',
+  //     'a10': '#63f863',
+  //     'a11': '#c22561',
+  //     'a12': '#3e70cc',
+  //     'b1': '#442222',
+  //     'b2': '#094b09',
+  //     'b3': '#130e31',
+  //     'b4': '#95aa20',
+  //     'b5': '#2eb185',
+  //     'b6': '#697069',
+  //     'b7': '#a4a712',
+  //     'b8': '#00e1ff',
+  //   };
   
-    // 질병 코드에 해당하는 색상이 매핑에 있는지 확인하고 반환
-    return diseaseColorMap[disease_code] || 'defaultColor'; // 적절한 기본 색상을 지정하거나 기본값으로 설정
-  };
+  //   // 질병 코드에 해당하는 색상이 매핑에 있는지 확인하고 반환
+  //   return diseaseColorMap[disease_code] || 'defaultColor'; // 적절한 기본 색상을 지정하거나 기본값으로 설정
+  // };
 
     const rows = 6;
     const columns = 7;
@@ -152,41 +153,59 @@ function CalendarBody({ currentDate }) {
           // console.log("데이터임",diseaseInfoArray)
 
           
-          const diseaseStyles = diseaseInfoArray.reduce((styles, diseaseInfo, index) => {
-            const height = (index + 1) * 6;
-            styles[diseaseInfo.disease_code] = {
-              borderBottom: `${height}px solid ${getDiseaseColor(diseaseInfo.disease_code)}`
+          const lineHeights = diseaseInfoArray.map((info, index) => (index + 2));
+
+          
+          const diseaseStyles = lineHeights.reduce((styles, _, index) => {
+            const diseaseCode = diseaseInfoArray[index].disease_code;
+            styles[diseaseCode] = {
+              background: `${getDiseaseColor(diseaseCode)}`,
+              height: '4px',
+              width: '100%', // 선의 전체 너비를 셀의 가로 크기에 맞게 조절
+              display: 'block', // block 요소로 설정하여 한 줄에 하나의 선만 표시
             };
             return styles;
           }, {});
+          
 
         
           console.log('diseaseStyles:', diseaseStyles);
 
           
         // 오늘날짜표시
-          const todayStyle = isToday ? { border: '4px dashed green' } : {};
-
-
+        const todayStyle = isToday
+        ? {
+            border: '4px dashed green',
+            background: diseaseInfoArray.map(info => getDiseaseColor(info.disease_code)).join(', '), // 여러 질병에 대한 배경색을 콤마로 구분하여 적용
+          }
+        : {};
+      
           row.push(
-            <td key={cellKey} className="calendarBodyDateCell" style={{ ...diseaseStyles[diseaseInfoArray[0]?.disease_code], ...todayStyle }}>
+            <td key={cellKey} className="calendarBodyDateCell" style={{ ...todayStyle, ...(isToday && diseaseInfoArray.length > 0 && { background: getDiseaseColor(diseaseInfoArray[0].disease_code) }) }}>
               {`${currentDay}`}
-              {isToday && diseaseInfoArray.map(info => (
-                <div key={info.disease_code}>{info.disease_name}</div>
+              { diseaseInfoArray.map((info, index) => (
+                <div
+                  key={info.disease_code}
+                  className={`diseaseLine line${index}`}
+                  style={{
+                    background: `${getDiseaseColor(info.disease_code)}`,
+                    height: `${index === 0 ? 10 : 10}px`, // 첫 번째 질병 코드에는 2px, 나머지에는 1px의 높이를 부여
+                  }}
+                />
               ))}
             </td>
           );
+          
 
-
-        isCurrentMonthRow = true;
-        currentDay++;
-      } else {
-
-          // 다음달
+          isCurrentMonthRow = true;
+          currentDay++;
+        } else {
+          // 다음 달
           const nextMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDay - lastDay);
           row.push(<td key={cellKey} className="nextMonthCell calendarBodyDateCell">{nextMonthDate.getDate()}</td>);
           currentDay++;
         }
+    
       }
 
       // 해당 행이 이번 달의 날짜를 포함하고 있는 경우에만 행 추가

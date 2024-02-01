@@ -201,20 +201,11 @@
   border: 1px solid #ccc;
 }
 
-.disease-a1 {
-  background-color: #b88b8b; /* 빨간색 */
-}
 
-.disease-a2 {
-  background-color: #496349; /* 초록색 */
-}
-
-.disease-a3 {
-  background-color: #89b9ab; /* 빨간색 */
-}
+/* 컬러맵으로 컴포넌트에서 사용 */
 
 .disease-a4 {
-  background-color: #e799cd; /* 초록색 */
+  background-color: #e799cd; /* 초록색* /
 }
 
 .disease-a5 {
@@ -278,10 +269,85 @@
   background-color: #00e1ff; /* 초록색 */
 }
 
-.yellowBackground {
-  background-color: yellow;
-}
 
 .todayStyle {
   border: 4px dashed green;
 }
+
+
+.diseaseLine {
+  width: 100%;
+  position: block;
+  bottom: 0;
+}
+.disease-a1 {
+  background-color: #b88b8b;
+}
+
+.disease-a2 {
+  background-color: #489148;
+}
+
+.disease-a3 {
+  background-color: #c26711;
+}
+
+.disease-a4 {
+  background-color: #c49b65;
+}
+
+.disease-a5 {
+  background-color: #347a8f;
+}
+
+.disease-a6 {
+  background-color: #682044;
+}
+.disease-a7 {
+  background-color: #afaecc;
+}
+.disease-a8 {
+  background-color: #9ec1d1;
+}
+.disease-a9 {
+  background-color: #5a1c42;
+}
+.disease-a10 {
+  background-color: #ce6879;
+}
+.disease-a11 {
+  background-color: #861449;
+}
+.disease-a12 {
+  background-color: #16beb6;
+}
+
+.disease-b1 {
+  background-color: #162fbe;
+}
+
+.disease-b2 {
+  background-color: #be161e;
+}
+
+.disease-b3 {
+  background-color: #9fbe16;
+}
+.disease-b4 {
+  background-color: #b016be;
+}
+.disease-b5 {
+  background-color: #bca0d3;
+}
+.disease-b6 {
+  background-color: #aad385;
+}
+
+.disease-b7 {
+  background-color: #ad9287;
+}
+
+.disease-b8 {
+  background-color: #3b2b35;
+}
+

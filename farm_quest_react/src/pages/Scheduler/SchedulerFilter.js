@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useMemo  } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { getDiseaseColor } from './getDiseaseColor'; // 경로에 맞게 수정
 
 const SchedulerFilter = ({ onFetchedDataChange }) => {
   const [selectedPlant, setSelectedPlant] = useState(null);
+  const [selectedPlantData, setSelectedPlantData] = useState(null); // 추가된 부분
+
   const dispatch = useDispatch();
 
   const plantNameToNoMapping = useMemo(() => ({ // 또는 usememo 삭제
@@ -19,10 +22,14 @@ const SchedulerFilter = ({ onFetchedDataChange }) => {
     console.log('Selected plant:', plantName);
 
     setSelectedPlant(plantName);
+    setSelectedPlantData(null);
+
   };
 
   const handleClearSelection = () => {
     setSelectedPlant(null);
+    setSelectedPlantData(null);
+
     dispatch({
       part: 'scheduler',
       type: 'filter',
@@ -31,6 +38,7 @@ const SchedulerFilter = ({ onFetchedDataChange }) => {
     // setFetchedData(null);
 
   };
+  
 
   useEffect(() => {
     if (selectedPlant !== null) {
@@ -45,6 +53,7 @@ const SchedulerFilter = ({ onFetchedDataChange }) => {
             item: data
         });
           console.log(data);
+          setSelectedPlantData(data); // 작물 데이터 업데이트
 
           // console.log('Received data:', data);
           // setFetchedData(data); // Update fetchedData state with the received data
@@ -79,39 +88,24 @@ const SchedulerFilter = ({ onFetchedDataChange }) => {
       ))}
 
       <div>
-        {/* <p>{selectedPlant}</p> */}
         <button onClick={handleClearSelection}>달력 비우기</button>
+        {selectedPlantData && (
+          <div>
+            {/* <h3>{`${selectedPlant} 질병 색상`}</h3> */}
+            <h3>질병 색상</h3>
+            <ul>
+              {selectedPlantData.map((item, index) => (
+                <li key={index}>
+                  <span style={{ background: getDiseaseColor(item.disease_code) }}>{`${item.disease_name} `}</span>
+                </li>
+                
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
 };
-
-// function SchedulerAnnouncement({ fetchedData }) {
-//   const renderAnnouncements = () => {
-//     if (fetchedData) {
-//       const announcements = fetchedData
-//         .filter(item => item.disease_announcement !== null && item.disease_announcement !== "")
-//         .map(item => item.disease_announcement);
-//       console.log('announcements:', announcements);
-
-//       return (
-//         <div>
-//           {announcements.map((announcement, index) => (
-//             <p key={index}>{announcement}</p>
-//           ))}
-//         </div>
-//       );
-//     }
-
-//     return null;
-//   };
-
-//   return (
-//     <div>
-//       <h3>공지사항:</h3>
-//       {renderAnnouncements()}
-//     </div>
-//   );
-// }
 
 export default SchedulerFilter;
