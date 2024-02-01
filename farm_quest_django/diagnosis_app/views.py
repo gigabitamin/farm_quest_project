@@ -134,6 +134,14 @@ def diagnosis_upload(request):
         fs.save(save_file_path, origin_file)
     
         detect_result = detect(save_file_path, plant_name,plant_no)
+        
+        diagnosis_result_instance = DiagnosisResultAll(
+            detect_result=detect_result,
+            save_file_name=save_file_name,
+            plant_name=plant_name,
+            plant_no=plant_no,            
+        )
+        diagnosis_result_instance.save()        
 
         context = {
             'detect_result': detect_result,
