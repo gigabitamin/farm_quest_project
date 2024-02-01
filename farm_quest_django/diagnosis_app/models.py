@@ -1,6 +1,16 @@
 from django.db import models
 
 class DiagnosisResult(models.Model):
+    detect_result = models.JSONField(blank=True, null=True)
+    save_file_name = models.CharField(max_length=255, blank=True, null=True)
+    plant_name = models.CharField(max_length=255, blank=True, null=True)
+    plant_no = models.IntegerField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.save_file_name
+
+
+class DiagnosisResult(models.Model):
     diagnosis_result_id = models.AutoField(primary_key=True)
     user_select_plant = models.ForeignKey('PlantTb', models.DO_NOTHING, db_column='user_select_plant', blank=True, null=True)
     boxes = models.JSONField(blank=True, null=True)

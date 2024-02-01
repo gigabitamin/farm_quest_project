@@ -9,8 +9,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view   
 from rest_framework import mixins, generics
-from .models import DiagnosisItemCart, DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
-from .serializers import DiagnosisItemCartSerializer, ShopingTbSerializer, PlantTbSerializer, DiagnosisResultSerializer, DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionTbSerializer
+from .models import *
+from .serializers import *
 from users_app.models import User, UsersAppUser
 
 # yolov8 관련
@@ -87,9 +87,7 @@ class DiagnosisItemSaveCartAPIMixins(generics.CreateAPIView):
 class DiagnosisRecommendList(APIView):
     def get(self, request, solution_word, format=None):        
         try:
-            print('solution word ', solution_word)
-            # print('1')
-            # solution_word = '화분'
+            print('solution word ', solution_word)            
             page = int(request.GET.get('page', 1))
             page_size = 10
             print('page', page)
@@ -100,15 +98,10 @@ class DiagnosisRecommendList(APIView):
             print('end_index', end_index)
 
             recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
-            # print('가냐?', recommendations)
-            # print('3')
-            serializer = ShopingTbSerializer(recommendations, many=True)
-            # print('진짜 가냐?', serializer)
-            # print('4')
+            serializer = ShopingTbSerializer(recommendations, many=True)            
             return Response(serializer.data, status=200)
         except Exception as e:
             return Response({"에러": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 class SolutionTbAPIMixins(
     mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
@@ -127,64 +120,30 @@ class SolutionTbAPIMixins(
 def diagnosis_upload(request):
     if request.method == "POST":
         origin_file = request.FILES.get('imgFile')       
-        fs = FileSystemStorage() # ../upload
-            
-        # diagnosis_result_id = request.POST.get('diagnosis_result_id')
-        # print('diagnosis_result_id', diagnosis_result_id)
+        fs = FileSystemStorage() # ../media
+
         plant_name = request.POST.get('plant_name')
         print(plant_name)
         plant_no = request.POST.get('plant_no')
 
-        
         uuid = uuid4().hex
         save_file_name = uuid + '_' +  origin_file.name
         save_file_path = os.path.join('diagnosis', 'yolo', 'origin_img', save_file_name)
         print('save_file_path : ', save_file_path)
-        
-        # save_file_name, origin_file # upload 폴더(fs)에 저장
-        fs.save(save_file_path, origin_file)
-        
-        # 디버깅용
-        # print('origin_file.name : ', origin_file.name)
-        # print('save_file_name : ', save_file_name)
-        # print('diagnosis_result_id', diagnosis_result_id)
-        # YOLO 객체 탐지 함수 호출, 서버 upload 폴더에 업로드 된 파일명만 전달하도록 수정
-        
                 
+        fs.save(save_file_path, origin_file)
+    
         detect_result = detect(save_file_path, plant_name,plant_no)
-        # print('detect_result = ', detect_result)
-        # print('results : ', results)
-        # print('직렬화')
-        # serialized_results = serialize_results(results)
-        # print('serialized_results : ', serialized_results[0])
-        # print('diagnosis_result_id', diagnosis_result_id)
-        # print('tf_pred_prob', tf_pred_prob[0])
-        # print('tf_pred_prob', str(tf_pred_prob[0]))
-        # solution_row_list_serialized = []
-        # print('solution_row_list_serialized3 = ', solution_row_list_serialized)
-                                                                    
+
         context = {
             'detect_result': detect_result,
             'save_file_name': save_file_name,
-            # 'serialized_results': serialized_results[0] if serialized_results else None,
-            # 'diagnosis_result_id': diagnosis_result_id,
             'plant_name': plant_name,
             'plant_no' : plant_no,
-            # 'tf_predict_desease_list_sorted' : tf_predict_desease_list_sorted,            
-            # 'crops_path_list': crops_path_list,
-            # 'solution_row_list_serialized' : solution_row_list_serialized,
         }
-        
-        
-        
-        # print('plant_name : ', plant_name)
-        # print('crops_path_list', crops_path_list)
+                
         print('완료, 전송')
-        # print('save_file_name : ', save_file_name)
-        # print('tf_pred_prob', tf_pred_prob)        
-        # print('user_select_plant_name: ', plant_name)
-        # print('user_select_plant_no: ', plant_no)
-
+        
     return JsonResponse(context, status=200)
 
 
@@ -283,7 +242,6 @@ def diagnosis_image(request):
 
 def diagnosis_answer(request):    
     return render(request, 'diagnosis_app/diagnosis_answer.html')
-
 
 
 # 크롭 이미지 한글 파싱 문제 -> 해결되서 굳이 유지할 필요 없음, 필요시 삭제
