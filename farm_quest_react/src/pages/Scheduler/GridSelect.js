@@ -15,6 +15,7 @@ const GridSelect = ({}) => {
     const [storedNx, setStoredNx] = useState(null); 
     const [storedNy, setStoredNy] = useState(null); 
     const [weatherInfo, setWeatherInfo] = useState([]);
+    const [where, setWhere] = useState([]);
     const deg_code = {0 : 'N', 360 : 'N', 180 : 'S', 270 : 'W', 90 : 'E', 22.5 :'NNE',
                         45 : 'NE', 67.5 : 'ENE', 112.5 : 'ESE', 135 : 'SE', 157.5 : 'SSE',
                         202.5 : 'SSW', 225 : 'SW', 247.5 : 'WSW', 292.5 : 'WNW', 315 : 'NW',
@@ -41,8 +42,6 @@ const GridSelect = ({}) => {
         return closeDir;
       }
       
-      console.log(degToDir(0));
-
       const getWindStrength = (vec, wsd) => {
         if (vec && wsd) {
           const vecTemp = degToDir(parseFloat(vec));
@@ -258,7 +257,6 @@ const getRenderName = (originalCategory) => {
             selectedLocation3,
         );
 
-
     };
 
     const onFetchLocationData = async (location1, location2, location3) => {
@@ -291,11 +289,20 @@ const getRenderName = (originalCategory) => {
             console.error('서비스 시간이 아닙니다');
         } else {
             const { nx, ny } = data;
+            const where = { nx, ny };
+
             setStoredNx(nx);
             setStoredNy(ny);
-
+            setWhere(where);
+    
             // nx와 ny가 설정된 후에 onFetchWeatherData 호출
             await onFetchWeatherData(nx, ny);
+            dispatch({
+                part: 'scheduler',
+                type: 'location',
+                where: where
+            });
+            console.log(where)
         }
     } catch (error) {
         console.error('서버 통신 오류:', error);

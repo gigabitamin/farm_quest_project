@@ -41,7 +41,9 @@ const initialState = {
             num: null
         }, 
         item: {},
-        weather: {}
+        where: {},
+        weather: {},
+
     }
 };
 
@@ -116,6 +118,7 @@ export default function reducer(state=initialState, action) {
 
         } else if (action.type === 'location') {
             schedulerState.show = 'location';
+            schedulerState.where = action.where;
             schedulerState.weather = action.weather;
 
         // } else if (action.type === 'create') {

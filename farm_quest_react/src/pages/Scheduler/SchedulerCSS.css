@@ -192,11 +192,96 @@
   text-align: center;
 }
 
-/* 스케줄러 질병경고 */
-.disease-1 {
-  background-color: #ff0000; /* 빨강 */
+
+/* CSS 파일에 추가 */
+.calendarBodyDateCell {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid #ccc;
 }
 
-.plant-1 {
-  border: 2px solid #ff0000; /* 빨강 */
+.disease-a1 {
+  background-color: #b88b8b; /* 빨간색 */
+}
+
+.disease-a2 {
+  background-color: #496349; /* 초록색 */
+}
+
+.disease-a3 {
+  background-color: #89b9ab; /* 빨간색 */
+}
+
+.disease-a4 {
+  background-color: #e799cd; /* 초록색 */
+}
+
+.disease-a5 {
+  background-color: #1f6148; /* 빨간색 */
+}
+
+.disease-a6 {
+  background-color: #c7c979; /* 초록색 */
+}
+
+.disease-a7 {
+  background-color: #7c78b3; /* 빨간색 */
+}
+
+.disease-a8 {
+  background-color: #c5845e; /* 초록색 */
+}
+
+.disease-a9 {
+  background-color: #29e09a; /* 빨간색 */
+}
+
+.disease-a10 {
+  background-color: #63f863; /* 초록색 */
+}
+
+.disease-a11 {
+  background-color: #c22561; /* 빨간색 */
+}
+
+.disease-a12 {
+  background-color: #3e70cc; /* 초록색 */
+}
+
+.disease-b1 {
+  background-color: #442222; /* 빨간색 */
+}
+
+.disease-b2 {
+  background-color: #094b09; /* 초록색 */
+}
+.disease-b3 {
+  background-color: #130e31; /* 빨간색 */
+}
+
+.disease-b4 {
+  background-color: #95aa20; /* 초록색 */
+}
+.disease-b5 {
+  background-color: #2eb185; /* 빨간색 */
+}
+
+.disease-b6 {
+  background-color: #697069; /* 초록색 */
+}
+.disease-b7 {
+  background-color: #a4a712; /* 빨간색 */
+}
+
+.disease-b8 {
+  background-color: #00e1ff; /* 초록색 */
+}
+
+.yellowBackground {
+  background-color: yellow;
+}
+
+.todayStyle {
+  border: 4px dashed green;
 }
