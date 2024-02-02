@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './OverlayCSS.css';
+import './schedulerOverlayCSS.css';
 
 const CalendarOverlay = ({ tooltipText }) => {
   const [showTooltip, setShowTooltip] = useState(false);
