@@ -1,7 +1,6 @@
 import React, { useState } from 'react'; 
 import { useSelector } from 'react-redux';
 import { getDiseaseColor } from './getDiseaseColor'; // 경로에 맞게 수정
-import 'normalize.css';
 
 import prevButtonImage from '../../images/assets/prevButton.png';
 import nextButtonImage from '../../images/assets/nextButton.png';
