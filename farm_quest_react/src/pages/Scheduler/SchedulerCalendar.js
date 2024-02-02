@@ -40,14 +40,9 @@ function SchedulerAnnouncement() {
   return (
     <div>
       <div id='headerInnercontents'>
-          <h3 style={{marginTop:'6px'}}>알림판</h3>
-          <CalendarOverlay tooltipText="농촌진흥청 '병해충 발생정보' 발췌" />
-
-          {/* <div className='questionOverlayContainer'> */}
-
-      {renderAnnouncements()}
-
-              {/* </div> */}
+          <h3 className='noticeTitle' style={{marginTop:'6px'}}>알림판</h3>
+          <CalendarOverlay className='noticeTitle' tooltipText="농촌진흥청 '병해충 발생정보' 발췌" />
+        {renderAnnouncements()}
 
       </div>
     </div>

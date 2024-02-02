@@ -21,8 +21,21 @@
 
 /* 도움말 */
 .questionOverlayContainer {
-  display: flex;
-  align-items: center;
+  display: flex ;
+  padding-right: 5px;
+  padding-bottom: 8px;
+  padding-top: 5px;
+}
+.questionOverlayContainer h2 {
+  text-align: center;
+}
+
+.noticeTitle{
+  display: contents;
+
+}
+
+#headerInnercontents {
   padding-right: 5px;
   padding-bottom: 8px;
   padding-top: 5px;
@@ -35,9 +48,10 @@
   cursor:help;
 }
 
-#headerInnercontents {
-  display:flex row;
-}
+
+/* #headerInnercontents { */
+  /* display:flex row; */
+/* } */
 
 .ifAnoNotNull {
   color: rgba(212, 0, 0, 0.788);
@@ -62,17 +76,18 @@
 
 .schedulerBtn {
   font-family: 'neodgm', 'sans';
-
+  font-size: 14px;
   cursor: pointer;
   margin-top: 4px;
   margin-bottom: 8px;
   /* margin-left:-3px; */
-  padding:5px;
+  padding:4px;
   background-color: white;
   border-radius: 5px;
   /* transition: transform 0.3s; */
 
 }
+
 .schedulerBtn:hover {
   transform: scale(1.03);
 }
@@ -82,9 +97,7 @@
 
 }
 /* 필터 스타일 */
-/* #schedulerselector { */
-/*  */
-/* } */
+
 
 #shcedulerDiseaseExp{
   text-align:left;
@@ -173,17 +186,161 @@
 
 }
 
-/* 캘린더 바디 */
+/* 날씨렌더링 */
+.weatherInfoViewer {
+  list-style-type: none;
+  padding: 0;
+  margin-top:6px;
+  background-color: rgb(214, 231, 221);
+  width:180px;
+  padding:5px;
+  border-radius: 4px;
+  display: block;
+  align-items: center;
 
+}
+.weatherPrintContainer {
+  display: flex;
+  /* background-color: #5a007e; */
+  margin-top: 5px;
+  justify-content: space-between;
+
+}
+
+#printedWeatherInfo{
+  margin-top: 10px;
+  
+}
+
+.weatherTextPrint {
+  display: block;
+  /* justify-content: space-between; */
+  /* background-color: #86d69e; */
+  width: 45%;
+  text-align: justify;/*삭제대기*/
+
+
+}
+
+.weatherInfoPrint {
+  display: block;
+  /* justify-content: space-between; */
+  /* background-color: #007e73; */
+  width: 55%;
+  text-align: justify; /*삭제대기*/
+
+}
+.weatherTextPrint span {
+  letter-spacing: 0px;
+}
+
+.weatherTextPrint span,
+.weatherInfoPrint span {
+  display: inline-block;
+  text-align: justify;
+  /* justify-content: space-between; */
+  width: 100%;
+  display: inline-block;/*삭제대기*/
+  line-height: 20px;
+  /* letter-spacing: px; */
+}
+
+#weatherInfoViewer {
+  border: 10px  #c1e4bc85;
+  border-style: ridge ridge dashed double;
+  box-sizing: border-box;
+  padding: 0px;
+  border-radius: 8px; 
+  width:220px;
+  display: grid;/*삭제대기*/
+  place-items: center;/*삭제대기*/
+}
+.weatherPrintTitle.firstItem {
+  background-color: #9cc581;
+  border-color:rgb(182, 216, 190);
+
+  margin-top:6px;
+  padding: 4px;
+  font-size: large;
+  border-radius: 5px;
+  border-style: outset;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-left: 5px;
+  margin-bottom: 20px;
+}
+
+.weatherPrintContainer.firstItem {
+  /* font-weight: bold;  */
+  background-color: beige;
+  color: rgb(49, 18, 6);
+  border-color:rgb(250, 194, 148);
+
+  border:5px;
+  border-style: outset;
+  border-radius: 10px;
+  padding-top: 3px;
+  padding-left: 4px;
+}
+
+/* #windstr{ */
+  /* background-color: #d4d4d4; */
+  /* line-height: 20px; */
+  /* margin-bottom: 20px; */
+/* } */
+
+
+/* 캘린더 바디 */
+/* @media screen and (min-width: 1200px) {
 .filter-container,
 .calendar-container,
 .weather-container {
     font-family: 'neodgm', sans-serif;
-    /* font-family: 'pixelroborobo', sans-serif; */
     display: inline-block;
-    vertical-align: top; /* 위쪽 시작점 정렬 */
+    vertical-align: top;
     margin-top:20px;
     margin-right: 20px;
+}
+}
+
+@media screen and (max-width: 1px) {
+  .filter-container,
+  .calendar-container,
+  .weather-container {
+      font-family: 'neodgm', sans-serif;
+      display: inline-block;
+      vertical-align: top; 
+      margin-top:20px;
+      margin-right: 20px;
+  }
+  } */
+
+/* 캘린더 바디 */
+.filter-container,
+.calendar-container,
+.weather-container {
+  font-family: 'neodgm', sans-serif;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+/* mobile */
+@media screen and (max-width: 11px) {
+  .SchedulerWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .weather-container {
+    order: 1;
+  }
+
+  .calendar-container {
+    order: 2;
+  }
 }
 
 #shedulerCalendarBox{
@@ -301,7 +458,7 @@
 }
 
 .locationSelector {
-  font-size: 18px;
+  font-size: 1px;
 }
 
 .custom-dropdown {
@@ -370,20 +527,10 @@
 }
 
 
-#weatherInfoViewer {
-  border: 10px  #c1e4bc85;
-  border-style: ridge ridge dashed double;
-  display: flex;
-  box-sizing: border-box;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  border-radius: 8px; 
-
-}
 
 
-/* 모달용 임시css 충돌시 삭제 */
+
+/* 모달 */
 
 .modal-overlay {
   display: flex;

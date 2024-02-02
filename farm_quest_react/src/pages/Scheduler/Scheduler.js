@@ -8,9 +8,6 @@ import GridSelect from './GridSelect';
 import { useDispatch } from 'react-redux';
 
 import './SchedulerCSS.css';
-let currentPath = "";
-
-
 
 const Scheduler = () => {
     const dispatch = useDispatch();
@@ -22,7 +19,7 @@ const Scheduler = () => {
         const currentHour = currentTime.getHours();
         console.log(currentTime)
 
-        if (currentHour >= 0 && currentHour < 2 && !showModal) {
+        if (currentHour >= 0 && currentHour < 1 && !showModal) {
             console.log('Initial showModal state:', showModal);
 
             setShowModal(true);
@@ -41,7 +38,7 @@ const Scheduler = () => {
 
 
     return (
-        <div className="Scheduler">
+        <div className="SchedulerWrapper">
             <div className="filter-container">
                 <SchedulerFilter />
             </div>

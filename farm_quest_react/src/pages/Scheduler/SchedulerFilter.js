@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useMemo  } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getDiseaseColor } from './getDiseaseColor'; // 경로에 맞게 수정
 
 import CalendarOverlay from './CalendarOverlay'
 
 const SchedulerFilter = ({ onFetchedDataChange }) => {
+  const DjangoServer = useSelector(state => state.DjangoServer);
+
   const [selectedPlant, setSelectedPlant] = useState(null);
   const [selectedPlantData, setSelectedPlantData] = useState(null); // 추가된 부분
 
@@ -44,7 +46,7 @@ const SchedulerFilter = ({ onFetchedDataChange }) => {
   useEffect(() => {
     if (selectedPlant !== null) {
       const plantNo = plantNameToNoMapping[selectedPlant];
-      fetch(`http://localhost:8000/api/scheduler/${plantNo}`)
+      fetch(`${DjangoServer}/api/scheduler/${plantNo}`)
         .then((response) => response.json())
         .then((data) => {
           // 됏다!!!!!!!!!!!!!!!!!!!!!!!!!!!!

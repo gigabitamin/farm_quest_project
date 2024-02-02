@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import CalendarOverlay from './CalendarOverlay';
 
 const GridSelect = ({}) => {
     const dispatch = useDispatch();
+    const DjangoServer = useSelector(state => state.DjangoServer);
 
     const [location1, setLocation1] = useState([]);
     const [location2, setLocation2] = useState([]);
@@ -21,8 +23,7 @@ const GridSelect = ({}) => {
                         202.5 : '남남서', 225 : '남서', 247.5 : '서남서', 292.5 : '서북서', 315 : '북서',
                         337.5 : '북북서'}
     const sky_code = {1: '맑음', 2: '맑음', 3: '맑음', 4: '맑음', 5: '맑음', 6: '구름많음', 7: '구름많음', 8: '구름많음', 9: '흐림', 10: '흐림'}
-    const pyt_code = {0: '강수 없음', 1: '비', 2: '비/눈', 3: '눈', 5: '빗방울', 6: '진눈깨비', 7: '눈날림'}
-
+    const pty_code = {0: '강수 없음', 1: '비', 2: '비/눈', 3: '눈', 5: '빗방울', 6: '진눈깨비', 7: '눈날림'}
 
     function degToDir(deg) {
         let closeDir = '';
@@ -62,7 +63,7 @@ const GridSelect = ({}) => {
 
     // 위치선택 가져오기
     useEffect(() => {
-        fetch('http://localhost:8000/api/get_grid_data/')
+        fetch(`${DjangoServer}/api/get_grid_data/`)
             .then(response => response.json())
             .then(data => {
                 setLocation1(data.location1.sort());
@@ -75,7 +76,7 @@ const GridSelect = ({}) => {
     useEffect(() => {
         const fetchLocations2 = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/get_location2_data/?location1=${selectedLocation1}`);
+                const response = await fetch(`${DjangoServer}/api/get_location2_data/?location1=${selectedLocation1}`);
                 const data = await response.json();
                 setLocation2(data.location2.sort());
             } catch (error) {
@@ -94,7 +95,7 @@ const GridSelect = ({}) => {
     useEffect(() => {
         const fetchLocations3 = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/get_location3_data/?location1=${selectedLocation1}&location2=${selectedLocation2}`);
+                const response = await fetch(`${DjangoServer}/api/get_location3_data/?location1=${selectedLocation1}&location2=${selectedLocation2}`);
                 const data = await response.json();
                 setLocation3(data.location3.sort());
             } catch (error) {
@@ -132,23 +133,57 @@ const onFetchWeatherData = async (nx, ny) => {
 
     let baseTime;
 
-    if (currentHour < 2 ) {
+    if (currentHour < 1 ) {
         console.error('Not service time');
         return;
-    } else if (currentHour < 6) {
-        baseTime = '0200';
-    } else if (currentHour < 9) {
-        baseTime = '0500';
-    } else if (currentHour < 12) {
-        baseTime = '0800';
-    } else if (currentHour < 15) {
-        baseTime = '1100';
-    } else if (currentHour < 18) {
-        baseTime = '1400';
-    } else if (currentHour < 21) {
-        baseTime = '1700';
-    } else if (currentHour < 24) {
-        baseTime = '2000';
+    } else if (currentHour <= 1) {
+        baseTime = '0030';
+    } else if (currentHour <= 2) {
+        baseTime = '0130';
+    } else if (currentHour <= 3) {
+        baseTime = '0230';
+    } else if (currentHour <= 4) {
+        baseTime = '0330';
+    } else if (currentHour <= 5) {
+        baseTime = '0430';
+    } else if (currentHour <= 6) {
+        baseTime = '0530';
+    } else if (currentHour <= 7) {
+        baseTime = '0630';
+    } else if (currentHour <= 8) {
+        baseTime = '0730';
+    } else if (currentHour <= 9) {
+        baseTime = '0830';
+    } else if (currentHour <= 10) {
+        baseTime = '0930';
+    } else if (currentHour <= 11) {
+        baseTime = '1030';
+    } else if (currentHour <= 12) {
+        baseTime = '1130';
+    } else if (currentHour <= 13) {
+        baseTime = '1230';
+    } else if (currentHour <= 14) {
+        baseTime = '1330';
+    } else if (currentHour <= 15) {
+        baseTime = '1430';
+    } else if (currentHour <= 16) {
+        baseTime = '1530';
+    } else if (currentHour <= 17) {
+        baseTime = '1630';
+    } else if (currentHour <= 18) {
+        baseTime = '1730';
+    } else if (currentHour <= 19) {
+        baseTime = '1830';
+    } else if (currentHour <= 20) {
+        baseTime = '1930';
+    } else if (currentHour <= 21) {
+        baseTime = '2030';
+    } else if (currentHour <= 22) {
+        baseTime = '2130';
+    } else if (currentHour <= 23) {
+        baseTime = '2230';
+    } else if (currentHour <= 24) {
+        baseTime = '2330';
     } else {
         console.error('Not service time');
         return;
@@ -161,10 +196,10 @@ const onFetchWeatherData = async (nx, ny) => {
     // console.log('보내기전:', process.env.REACT_APP_API_KEY)
 
     const response = await fetch(
-    `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst` +
+    `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst` +
     `?serviceKey=${process.env.REACT_APP_API_KEY}` +
     `&pageNo=1` +
-    `&numOfRows=10` +
+    `&numOfRows=60` +
     `&dataType=json` +
     `&base_date=${formattedDate}` +
     `&base_time=${baseTime}` +
@@ -218,7 +253,7 @@ const onFetchWeatherData = async (nx, ny) => {
 
 const getRenderName = (originalCategory) => {
     switch (originalCategory) {
-        case 'TMP':
+        case 'T1H':
             return '온도'; //
         case 'UUU':
             return '풍속(동서)';
@@ -228,20 +263,22 @@ const getRenderName = (originalCategory) => {
             return '풍속'; //
         case 'SKY':
             return '구름'; //
-        case 'POP':
-            return '강수확률'; //
-        case 'WAV':
-            return '파도높이';
+        // case 'POP':
+        //     return '강수확률'; //
+        // case 'WAV':
+        //     return '파도높이';
         case 'PTY':
             return '강수형태'; //         
         case 'VVV':
             return '풍속(남북)';
-        case 'PCP':
+        case 'RN1':
             return '강수량'; //
         case 'REH':
             return '습도'; //
-        case 'SNO':
-            return '적설';
+        case 'LGT':
+            return '낙뢰';
+        // case 'SNO':
+        //     return '적설';
         default:
             return originalCategory; 
     }
@@ -259,13 +296,27 @@ const getRenderName = (originalCategory) => {
 
     };
 
+    const handleClearSelection = () => {
+        if (weatherInfo !== null) {
+            setWeatherInfo([]);
+            dispatch({
+                part: 'scheduler',
+                type: 'location',
+                weather: [],
+                where: []
+            });
+        }
+    };
+    
+    
+
     const onFetchLocationData = async (location1, location2, location3) => {
         console.log('Location 1:', location1);
         console.log('Location 2:', location2);
         console.log('Location 3:', location3);
 
         try {
-            const response = await fetch('http://localhost:8000/api/get_nx_ny/', {
+            const response = await fetch(`${DjangoServer}/api/get_nx_ny/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -293,10 +344,11 @@ const getRenderName = (originalCategory) => {
 
             setStoredNx(nx);
             setStoredNy(ny);
-            setWhere(where);
     
             // nx와 ny가 설정된 후에 onFetchWeatherData 호출
             await onFetchWeatherData(nx, ny);
+            setWhere(where);
+
             dispatch({
                 part: 'scheduler',
                 type: 'location',
@@ -311,104 +363,121 @@ const getRenderName = (originalCategory) => {
     
     return (
         <div id="weatherInfoViewer">
-            <div className='questionOverlayContainer'>
-            <h2>날씨정보</h2>
-            <CalendarOverlay tooltipText="선택하신 지역의 현재 날씨를 알려드립니다. \n
-             0시부터 2시 사이에는 날씨 정보가 제공되지 않습니다." />
-            </div>
-            <div className='locationSelectorBox'>
-                {/* <label className='locationSelector'>시/도:</label> */}
-                <select className='locationDropdown' onChange={handleLocation1Change} value={selectedLocation1}>
-                    <option className='location' value="">시/도</option>
-                    {location1.map((location, index) => (
-                        <option key={index} value={location}>
-                            {location}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <div className='locationSelectorBox'>
-                {/* <label className='locationSelector'>시/군/구:</label> */}
-                <select className='locationDropdown' onChange={handleLocation2Change} value={selectedLocation2}>
-                    <option value="">시/군/구</option>
-                    {location2.map((location, index) => (
-                        <option key={index} value={location}>
-                            {location}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <div className='locationSelectorBox'>
-                {/* <label className='locationSelector'>읍/면/동:</label> */}
-                <select className='locationDropdown' onChange={handleLocation3Change} value={selectedLocation3}>
-                    <option value="">읍/면/동</option>
-                    {location3.map((location, index) => (
-                        <option key={index} value={location}>
-                            {location}
-                        </option>
-                    ))}
-                </select><br />
-            </div>
+            <div id='weatherselectbox'>
+                <div className='questionOverlayContainer'>
+                <h2>날씨정보</h2>
+                <CalendarOverlay tooltipText={<>선택하신 지역의 현재 날씨를 알려드립니다.
+                <br />1시부터 1시 사이에는 날씨 정보가 제공되지 않습니다.</>} />
+                </div>
+                <div className='locationSelectorBox'>
+                    {/* <label className='locationSelector'>시/도:</label> */}
+                    <select className='locationDropdown' onChange={handleLocation1Change} value={selectedLocation1}>
+                        <option className='location' value="">시/도</option>
+                        {location1.map((location, index) => (
+                            <option key={index} value={location}>
+                                {location}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className='locationSelectorBox'>
+                    {/* <label className='locationSelector'>시/군/구:</label> */}
+                    <select className='locationDropdown' onChange={handleLocation2Change} value={selectedLocation2}>
+                        <option value="">시/군/구</option>
+                        {location2.map((location, index) => (
+                            <option key={index} value={location}>
+                                {location}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className='locationSelectorBox'>
+                    {/* <label className='locationSelector'>읍/면/동:</label> */}
+                    <select className='locationDropdown' onChange={handleLocation3Change} value={selectedLocation3}>
+                        <option value="">읍/면/동</option>
+                        {location3.map((location, index) => (
+                            <option key={index} value={location}>
+                                {location}
+                            </option>
+                        ))}
+                    </select><br />
+                </div>
                 <div>
                     <button className='schedulerBtn' onClick={handleSaveAndFetch}>날씨 확인하기</button>
                 </div>
-            <ul style={{listStyleType:'none'}}>
-                {Object.keys(weatherInfo).map(time => (
-                    <li key={time}>
-                        <strong>{formatTime(time)}</strong>
-                        {/* <ul>
-                            {renderCategories.map(category => (
-                                <li key={category}>
-                                    {getRenderName(category)}: {weatherInfo[time][category]}
-                                </li>
-                            ))}
-                        </ul> */}
+            </div>
 
-                        {weatherInfo[time]['SKY'] && weatherInfo[time]['PTY'] && (
-                            <div>
-                                <p>구름양: {sky_code[parseInt(weatherInfo[time]['SKY'])]}</p>
-                                <p>강수형태: {pyt_code[parseInt(weatherInfo[time]['PTY'])]}</p>
-                                {weatherInfo[time]['PCP'] !== '강수없음' && (
-                                    <p>시간당 강수량: {weatherInfo[time]['PCP']}mm</p>
-                                )}
-                                {weatherInfo[time]['TMP'] && (
-                                    <p>평균기온: {parseFloat(weatherInfo[time]['TMP'])}℃</p>
-                                )}
-                                {weatherInfo[time]['REH'] && (
-                                    <p>습도: {parseFloat(weatherInfo[time]['REH'])}%</p>
-                                )}
-                                {weatherInfo[time]['VEC'] && weatherInfo[time]['WSD'] && (
-                                    <p>
-                                        풍향: {degToDir(parseFloat(weatherInfo[time]['VEC']))}{' '}<br />
-                                        풍속: {parseFloat(weatherInfo[time]['WSD'])}m/s <br />
-                                        {getWindStrength(weatherInfo[time]['VEC'], weatherInfo[time]['WSD'])}
+                <ul style={{ listStyleType: 'none' }}>
+                {Object.keys(weatherInfo).map((time, index) => (
+                        <li key={time}>
+                        <div id='printedWeatherInfo'>
+                        <strong className={`weatherPrintTitle ${index === 0 ? 'firstItem' : ''}`}>{formatTime(time)}</strong>
+                            {weatherInfo[time]['SKY'] && weatherInfo[time]['PTY'] ? (
+                        <>          
+                            <div className={`weatherPrintContainer ${index === 0 ? 'firstItem' : ''}`}>
 
-                                    </p>
-                                )}
-                            </div>
-                        )}
-                    </li>
-                ))}
-            </ul>
+                                <div className='weatherTextPrint'>
+                                <span>&nbsp;구 름 양   </span><br/>
+                                <span>&nbsp;강수형태  </span><br/>
+                                <span>&nbsp;강 수 량    </span><br/>
+                                <span>&nbsp;평균기온  </span><br/>
+                                <span>&nbsp;습 &nbsp;&nbsp; 도   </span><br/>
+                                <span>&nbsp;풍 &nbsp;&nbsp; 향   </span><br/>
+                                <span>&nbsp;풍 &nbsp;&nbsp; 속   </span><br/>
+                                </div>
+                                <div className='weatherInfoPrint'>
+                                <span>: {sky_code[parseInt(weatherInfo[time]['SKY'])]}</span><br/>
+                                <span>: {pty_code[parseInt(weatherInfo[time]['PTY'])]}</span><br/>
+                                <span>: {weatherInfo[time]['RN1'] !== '강수없음' ? weatherInfo[time]['RN1'] : '-'}</span><br/>
+                                <span>: {weatherInfo[time]['T1H'] && parseFloat(weatherInfo[time]['T1H'])}℃</span><br/>
+                                <span>: {weatherInfo[time]['REH'] && parseFloat(weatherInfo[time]['REH'])}%</span><br/>
+                                <span>: {weatherInfo[time]['VEC'] && weatherInfo[time]['WSD'] && degToDir(parseFloat(weatherInfo[time]['VEC']))}{' '}</span><br/>
+                                <span>: {weatherInfo[time]['VEC'] && weatherInfo[time]['WSD'] && parseFloat(weatherInfo[time]['WSD'])}m/s</span>
+                                <span id='windstr' style={{marginBottom:'10px'}}>{getWindStrength(weatherInfo[time]['VEC'], weatherInfo[time]['WSD'])}</span>
+
+                                </div>
+
+                                </div>
+                                <hr />
+                            </>
+                            ) : (
+                            <div>-</div>
+                            )}
+                        </div>
+                        </li>
+                    ))}
+                </ul>
+
+            {Object.keys(weatherInfo).length > 0 && (
+                    <button className='schedulerBtn' onClick={handleClearSelection}>날씨 비우기</button>
+                )}                
         </div>
     );
 };
 
-const formatTime = () => {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = (currentDate.getMonth() + 1).toString(); // 문자열로 변환
-    const day = currentDate.getDate().toString();
-    const hours = currentDate.getHours().toString().padStart(2, '0'); // 시간
 
-    // formattedDate: 20240129, time: 0900 -> 2024-01-29 09:00
-    // const formattedDate = `${year}${month.padStart(2, '0')}${day.padStart(2, '0')}`;
-    
+const formatTime = (fcstTime) => {
+    const currentDate = new Date();
+    const currentHour = currentDate.getHours();
+    const year = currentDate.getFullYear();
+    let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    let day = currentDate.getDate().toString().padStart(2, '0');
+    let hours = fcstTime.slice(0, 2);
+
+    if (parseInt(hours, 10) <= currentHour) {
+        day = (currentDate.getDate() + 1).toString().padStart(2, '0');
+    }
+
+    if (parseInt(hours, 10) < currentHour) {
+        if ((currentDate.getDate() + 1) > new Date(year, currentDate.getMonth() + 1, 0).getDate()) {
+            month = (currentDate.getMonth() + 2).toString().padStart(2, '0');
+            day = '01';
+        } else {
+            day = (currentDate.getDate() + 1).toString().padStart(2, '0');
+        }
+    }
+
     return `${parseInt(year, 10)}년 ${parseInt(month, 10)}월 ${parseInt(day, 10)}일 ${hours}시`;
-  };
-  
-  console.log(formatTime());
-  
-  
+};
 
 export default GridSelect;
