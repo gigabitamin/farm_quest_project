@@ -125,6 +125,7 @@ div.community_main_center_box {
 div.community_main_bottom_box {
     border-radius: 4px;
     padding: 3px;
+    width: 98%;
     margin: 0 auto;
     background: #adb6afdb;
 }

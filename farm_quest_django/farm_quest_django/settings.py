@@ -24,7 +24,7 @@ API_KEY = env('serviceKey')
 # SECRET_KEY = "django-insecure-)ggi*w1=crxv=#p=%lz@+nh@q0aaz^#6q0x44#v$suouo2dj1a"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = []
 
