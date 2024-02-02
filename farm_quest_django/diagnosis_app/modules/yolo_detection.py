@@ -30,10 +30,10 @@ from rest_framework import mixins, generics
 from rest_framework import status
 
 from pathlib import Path
-import platform 
-import pathlib 
-plt = platform.system() 
-if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
+# import platform 
+# import pathlib 
+# plt = platform.system() 
+# if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
 
 
 os.environ['CUDA_VISIBLE_DEVICES'] = 'cpu'

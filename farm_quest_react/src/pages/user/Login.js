@@ -45,32 +45,6 @@ const Login = () => {
         console.log('cookies = ', cookies)
     }
 
-    // useEffect(() => {
-    //     checkLoginStatus();
-    // }, []);
-
-    // const checkLoginStatus = () => {
-    //     const token = cookies.id;
-    //     if (token) {            
-    //         axios.post("http://127.0.0.1:8000/login_check/", { token: token })
-    //             .then((response) => {
-    //                 if (response.status < 300) {                    
-    //                     dispatch({
-    //                         part: 'loginUser',
-    //                         type: 'login',
-    //                         username: response.data.username
-    //                     });
-    //                     history("/");
-    //                 }
-    //             })
-    //             .catch(() => {                    
-    //                 dispatch({
-    //                     part: 'loginUser',
-    //                     type: 'logout',
-    //                 });
-    //             });
-    //     }
-    // };
 
     return (
       <section className="login_wrap">
@@ -78,6 +52,8 @@ const Login = () => {
           <div className="login_container">
             <div className="login_container_box">
               <div className="login_column_box">
+                <h2>로그인</h2>
+                <hr />
                 <form onSubmit={loginSubmit} className="box">
                   <div className="login_field">
                     <label className="login_label">아이디</label>

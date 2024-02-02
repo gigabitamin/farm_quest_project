@@ -92,18 +92,20 @@ class DiagnosisItemSaveCartAPIMixins(generics.CreateAPIView):
 class DiagnosisRecommendList(APIView):
     def get(self, request, solution_word, format=None):        
         try:
-            print('solution word ', solution_word)            
+            # print('solution word ', solution_word)            
             page = int(request.GET.get('page', 1))
             page_size = 10
-            print('page', page)
+            # print('page', page)
 
             start_index = (page - 1) * page_size
-            print('start_index', start_index)
+            # print('start_index', start_index)
             end_index = start_index + page_size
-            print('end_index', end_index)
+            # print('end_index', end_index)
 
             recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
-            serializer = ShopingTbSerializer(recommendations, many=True)            
+            # print('recommendations', recommendations)
+            serializer = ShopingTbSerializer(recommendations, many=True)
+            # print('serializer', serializer)    
             return Response(serializer.data, status=200)
         except Exception as e:
             return Response({"에러": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
