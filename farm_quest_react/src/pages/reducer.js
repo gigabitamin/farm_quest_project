@@ -112,7 +112,9 @@ export default function reducer(state=initialState, action) {
     } else if (action.part === 'scheduler') {
         let schedulerState = { ...state.scheduler };
 
-        if (action.type === 'filter') {
+        if (action.type === 'mainback') {
+            schedulerState.show = 'main';
+        } else if (action.type === 'filter') {
             schedulerState.show = 'filter';
             schedulerState.item = action.item;
 

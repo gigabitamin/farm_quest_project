@@ -8,6 +8,9 @@ import GridSelect from './GridSelect';
 import { useDispatch } from 'react-redux';
 
 import './SchedulerCSS.css';
+let currentPath = "";
+
+
 
 const Scheduler = () => {
     const dispatch = useDispatch();
@@ -27,7 +30,7 @@ const Scheduler = () => {
         
         return () => dispatch({
             part: 'scheduler',
-            type: 'reset'
+            type: 'mainback'
         });
 
     }, []);

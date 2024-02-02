@@ -1,6 +1,7 @@
 import React, { useState } from 'react'; 
 import { useSelector } from 'react-redux';
 import { getDiseaseColor } from './getDiseaseColor'; // 경로에 맞게 수정
+import 'normalize.css';
 
 import prevButtonImage from '../../images/assets/prevButton.png';
 import nextButtonImage from '../../images/assets/nextButton.png';
@@ -25,16 +26,16 @@ function SchedulerAnnouncement() {
         return (
           <div>
             {announcements.map((announcement, index) => (
-              <p key={index}>{announcement}</p>
+              <p className='schedulerAnnounsment ifAnoNotNull' key={index}>{announcement}</p>
             ))}
           </div>
         );
       } else {
-        return <p>발령된 예보가 없습니다.</p>;
+        return <p className='schedulerAnnounsment'>발령된 예보가 없습니다.</p>;
       }
     }
 
-    return <p>달력을 선택해주세요.</p>;
+    return <p className='schedulerAnnounsment'>달력을 선택해주세요.</p>;
   };
 
   return (

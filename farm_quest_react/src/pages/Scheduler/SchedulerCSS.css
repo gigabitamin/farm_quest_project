@@ -1,3 +1,15 @@
+/* Copyright © 2017-2022, Eunbin Jeong (Dalgona.) <project-neodgm@dalgona.dev> */
+/* with reserved font name "Neo둥근모" and "NeoDunggeunmo". */
+@font-face {
+  font-family: 'neodgm';
+  src: url('../../fonts/neodgm.woff');
+}
+@font-face {
+  font-family: 'pixelroborobo.otf';
+  src: url('../../fonts/pixelroborobo.otf') format('opentype');
+}
+
+  
   /* @media screen and (min-width: 999px) { */
 
   /* PC */
@@ -16,26 +28,40 @@
   padding-top: 5px;
 }
 
+.schedulerAnnounsment{
+  margin: 4px;
+  margin-bottom: -2px; 
+  cursor:help;
+}
+
+.ifAnoNotNull {
+  color: rgba(212, 0, 0, 0.788);
+}
+
 /* .tooltip{ */
   /* white-space: pre-line; */
 /* } */
 /* 캘린더 필터 */
 
 #schedularFilter {
+  
   margin-top: 20px;
   padding-right: 20px;
 }
 
 #schedularFilter h2 {
+  
   font-size: 24px;
   margin-bottom: 20px;
 }
 
 .schedulerBtn {
+  font-family: 'neodgm', 'sans';
+
   cursor: pointer;
   margin-top: 4px;
   margin-bottom: 8px;
-  margin-left:-3px;
+  /* margin-left:-3px; */
   padding:5px;
   background-color: white;
   border-radius: 5px;
@@ -91,11 +117,13 @@
   padding: 2px;
   margin-top: 2px;
   margin-bottom: 4px;
+  /* vertical-align:bottom; */
 }
 
 #schedulerFilterUi label.schedulerFilterUi {
   display: block;
   cursor:pointer;
+
 }
 
 #schedulerFilterUi label.schedulerFilterUi:hover {
@@ -120,6 +148,7 @@
 
 #schedulerFilterUi input[type="radio"] {
   display: none;
+  vertical-align: top;
 
 }
 
@@ -130,9 +159,8 @@
   height: 14px;
   border-radius: 20%;
   border: 2px solid rgb(102, 51, 8);
-  background-color: #fff;
+  background-color: rgb(255, 255, 239);
   margin-right: 6px;
-
 }
 
 #schedulerFilterUi input[type="radio"]:checked + label.schedulerFilterUi::before {
@@ -145,6 +173,8 @@
 .filter-container,
 .calendar-container,
 .weather-container {
+    font-family: 'neodgm', sans-serif;
+    /* font-family: 'pixelroborobo', sans-serif; */
     display: inline-block;
     vertical-align: top; /* 위쪽 시작점 정렬 */
     margin-top:20px;
@@ -170,6 +200,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
     margin-bottom: 10px;
+
   }
 
   .calendarTitle {
@@ -177,15 +208,23 @@
     align-items: center;
     margin-right: 20px;
     margin-left: 20px;
-    vertical-align: top;
+    vertical-align:super;
+    margin-bottom:-25px;
+    margin-top: -25px;
     
   }
-  
+  /* .calendarTitle h1 {
+    font-family: 'pixelroborobo', sans-serif;
+
+  } */
+
   .MonthBtn {
 
     background-color: beige;
     border-style: none;
     cursor: pointer;
+    /* margin-top: -5px; */
+    /* vertical-align: middle; */
 
   }
 
@@ -236,11 +275,6 @@
     margin-bottom: 150px;
   }
 
-/* 날씨 */
-  #weatherDropDown {
-    text-align: left;
-  
-  }
 
 /* 지역 */
 
@@ -257,7 +291,8 @@
 
 /* 드롭다운 버튼 스타일 */
 .locationDropdown {
-  background-color: #fcfff8;
+  font-family: 'neodgm', 'sans';
+  background-color: rgb(255, 255, 239);
   border: 2px solid #723d3d;
   border-radius: 5px;
   cursor: pointer; 
@@ -267,7 +302,7 @@
   font-size: 14px;
   height: 24px;
   border-radius: 5px;
-  padding: 4px;
+  padding: 2px;
 }
 
 .locationDropdown:focus {
@@ -323,8 +358,6 @@
   text-align: center;
 }
 
-
-/* CSS 파일에 추가 */
 .calendarBodyDateCell {
   width: 30px;
   height: 30px;
