@@ -25,10 +25,11 @@
   padding-right: 5px;
   padding-bottom: 8px;
   padding-top: 5px;
+  
 }
-.questionOverlayContainer h2 {
+/* .questionOverlayContainer h2 {
   text-align: center;
-}
+} */
 
 .noticeTitle{
   display: contents;
@@ -451,10 +452,15 @@
 
 /* 지역 */
 
+/* .questionOverlayContainer.wet {
+  text-align: center;
+  align-content: center;
+  align-items: center;
 
+} */
 .locationSelectorBox {
-  text-align: left;
-
+  text-align: center;
+  align-content: center;
 }
 
 .locationSelector {

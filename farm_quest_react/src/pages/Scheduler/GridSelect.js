@@ -363,13 +363,14 @@ const getRenderName = (originalCategory) => {
     
     return (
         <div id="weatherInfoViewer">
+                            <div className='locationSelectorBox'>
+
             <div id='weatherselectbox'>
                 <div className='questionOverlayContainer'>
                 <h2>날씨정보</h2>
                 <CalendarOverlay tooltipText={<>선택하신 지역의 현재 날씨를 알려드립니다.
                 <br />1시부터 1시 사이에는 날씨 정보가 제공되지 않습니다.</>} />
                 </div>
-                <div className='locationSelectorBox'>
                     {/* <label className='locationSelector'>시/도:</label> */}
                     <select className='locationDropdown' onChange={handleLocation1Change} value={selectedLocation1}>
                         <option className='location' value="">시/도</option>
@@ -449,7 +450,7 @@ const getRenderName = (originalCategory) => {
                 </ul>
 
             {Object.keys(weatherInfo).length > 0 && (
-                    <button className='schedulerBtn' onClick={handleClearSelection}>날씨 비우기</button>
+                    <button className='schedulerBtn weatherClear' onClick={handleClearSelection}>날씨 비우기</button>
                 )}                
         </div>
     );
