@@ -1,10 +1,12 @@
+
+
 from datetime import timedelta
 import os
 import environ
 from pathlib import Path
 from urllib import request
 import db_settings as db_settings
-# import allowed_host
+import allowed_host
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +30,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = []
 
-# ALLOWED_HOSTS = allowed_host.ALLOWED_HOSTS
+ALLOWED_HOSTS = allowed_host.ALLOWED_HOSTS
 SECRET_KEY = db_settings.SECRET_KEY
 
 # Application definition
@@ -66,7 +68,6 @@ INSTALLED_APPS = [
     
     # 조회수
     'hitcount',
-    'diagnosis_board_app',
 
 
 ]
@@ -114,7 +115,8 @@ SIMPLE_JWT = {
 # 리액트 로그인 관련 끝 -kdy
 
 
-MIDDLEWARE = [   
+MIDDLEWARE = [
+        
     # 리액트 연동 (순서 중요)
     'corsheaders.middleware.CorsMiddleware',        
     
@@ -129,17 +131,28 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# 리액트 연동
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOWED_ORIGINS = [    
+#     "http://127.0.0.1:3000",
+#     "http://127.0.0.1:8000",
+#     "http://localhost:3000",
+#     "http://localhost:8000"
+# ]
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
 
 
 ROOT_URLCONF = 'farm_quest_django.urls'
 
-TEMP_DIR = os.path.join(BASE_DIR, 'build') 
+
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': [BASE_DIR / 'templates'],
-        'DIRS': [TEMP_DIR],
+        'DIRS': [BASE_DIR / 'templates'],
+        # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -197,17 +210,17 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static',
-#     os.path.join(BASE_DIR, 'static') # 경로처리 -kdy
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+    os.path.join(BASE_DIR, 'static') # 경로처리 -kdy
+]
 
 
 # Default primary key field type
@@ -241,7 +254,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'media')
 
 # views.py 에서 이메일 발송을 위한 static 경로 설정 -kdy
 STATICFILES_DIRS = [ 
-    os.path.join(BASE_DIR, 'build/static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 # python manage.py collectstatic 이메일 이미지 첨부 경로를 위한 세팅 -kdy
@@ -256,20 +269,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # SESSION_COOKIE_SECURE = False
 # SESSION_COOKIE_DOMAIN = '127.0.0.1:8000'
 
-
-# 리액트 연동
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOWED_ORIGINS = [    
-#     "http://127.0.0.1:3000",
-#     "http://127.0.0.1:8000",
-#     "http://localhost:3000",
-#     "http://localhost:8000"
-# ]
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS = db_settings.ALLOWED_HOSTS
-
-CORS_ALLOWED_ORIGINS = db_settings.CORS_ALLOWED_ORIGINS
-SECURE_CROSS_ORIGIN_OPENER_POLICY = None
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

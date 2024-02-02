@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import backButton from '../../images/assets/backButton.png'
+import { useDispatch, useSelector } from 'react-redux';
 
-const CommunityMainUpdate = () => {
+const DiagnosisBoardMainCreate = () => {
     const DjangoServer = useSelector(state => state.DjangoServer);
-    const dispatch = useDispatch();
-    const item = useSelector(state => state.community.item);
-    const [cookies] = useCookies(['id']);
 
-    const [form, setForm] = useState({
-        thread_title: item.thread_title,
-        thread_type: item.thread_type,
-        thread_content: item.thread_content,
-        user_id: cookies.user_id
-    });
+    const initialForm = {
+        thread_title: '',
+        thread_content: '',
+        thread_type: ''
+    };
+
+    const [form, setForm] = useState(initialForm);
+    const dispatch = useDispatch();
+    const [cookies] = useCookies(['id'])
 
     const changeForm = (e) => {
         let {name, value} = e.target;
@@ -30,13 +31,13 @@ const CommunityMainUpdate = () => {
     };
 
     const submitForm = (event) => {
-        if (window.confirm('수정하시겠습니까?')) {
+        if (window.confirm('등록하시겠습니까?')) {
             // var formData = new FormData(document.formData);
-            axios.put(`${DjangoServer}/community/detail/modify/${item.thread_no}`, form, {
+            axios.post(`${DjangoServer}/diagnosis_board/create/`, form, {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(
                 response => {
-                    alert("수정되었습니다.");
+                    alert("등록되었습니다.");
                     // dispatch({type: 'back'});
                 }
             );
@@ -47,25 +48,27 @@ const CommunityMainUpdate = () => {
 
     const backToMain = () => {
         dispatch({
-            part: 'community',
-            type: 'detailBack'
+            part: 'diagnosisBoard',
+            type: 'mainBack'
         });
     };
 
     return (
         <div className='community_form_box'>
-            <button className='back_button' onClick={backToMain}>뒤로가기</button>
-            <form name='formData' onReset={() => dispatch({type: 'back'})} onSubmit={submitForm}>
+            <div className="community_back_button">
+                <button onClick={backToMain}><img src={backButton} alt="Back Button" /></button>
+            </div>
+            <form name='formData' onSubmit={submitForm}>
                 <table>
                     <tbody>
                     <tr>
                         <th>제목</th>
-                        <td><input className='title' type='text' name='thread_title' defaultValue={item.thread_title} onChange={changeForm} /></td>
+                        <td><input className='title' type='text' name='thread_title' onChange={changeForm} /></td>
                     </tr>
                     <tr>
                         <th>분류</th>
                         <td>
-                            <select className='type' name='thread_type' defaultValue={item.thread_type} onChange={changeForm} >
+                            <select className='type' name='thread_type' onChange={changeForm}>
                                 <option>분류 선택</option>
                                 <option value='0'>일반</option>
                                 <option value='1'>질문</option>
@@ -74,15 +77,14 @@ const CommunityMainUpdate = () => {
                     </tr>
                     <tr>
                         <th>내용</th>
-                        <td><textarea className='content' type='text' name='thread_content' defaultValue={item.thread_content} onChange={changeForm} /></td>
+                        <td><textarea className='content' name='thread_content' onChange={changeForm} /></td>
                     </tr>
                     </tbody>
                 </table>
-                <button type='submit'>등록</button>
-                <button type='reset'>취소</button>
+                <button className='community_button_default' type='submit'>등록</button>
             </form>
         </div>
     );
 };
 
-export default CommunityMainUpdate;
+export default DiagnosisBoardMainCreate;

@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import backButton from '../../images/assets/backButton.png'
 
-const CommunityMainUpdate = () => {
+const DiagnosisBoardMainUpdate = () => {
+
     const DjangoServer = useSelector(state => state.DjangoServer);
+
     const dispatch = useDispatch();
-    const item = useSelector(state => state.community.item);
+    const item = useSelector(state => state.diagnosisBoard.item);
     const [cookies] = useCookies(['id']);
 
     const [form, setForm] = useState({
@@ -32,7 +35,7 @@ const CommunityMainUpdate = () => {
     const submitForm = (event) => {
         if (window.confirm('수정하시겠습니까?')) {
             // var formData = new FormData(document.formData);
-            axios.put(`${DjangoServer}/community/detail/modify/${item.thread_no}`, form, {
+            axios.put(`${DjangoServer}/diagnosis_board/detail/modify/${item.thread_no}`, form, {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(
                 response => {
@@ -47,15 +50,17 @@ const CommunityMainUpdate = () => {
 
     const backToMain = () => {
         dispatch({
-            part: 'community',
+            part: 'diagnosisBoard',
             type: 'detailBack'
         });
     };
 
     return (
         <div className='community_form_box'>
-            <button className='back_button' onClick={backToMain}>뒤로가기</button>
-            <form name='formData' onReset={() => dispatch({type: 'back'})} onSubmit={submitForm}>
+            <div className="community_back_button">
+                <button onClick={backToMain}><img src={backButton} alt="Back Button" /></button>
+            </div>
+            <form name='formData' onSubmit={submitForm}>
                 <table>
                     <tbody>
                     <tr>
@@ -78,11 +83,10 @@ const CommunityMainUpdate = () => {
                     </tr>
                     </tbody>
                 </table>
-                <button type='submit'>등록</button>
-                <button type='reset'>취소</button>
+                <button className='community_button_default' type='submit'>등록</button>
             </form>
         </div>
     );
 };
 
-export default CommunityMainUpdate;
+export default DiagnosisBoardMainUpdate;

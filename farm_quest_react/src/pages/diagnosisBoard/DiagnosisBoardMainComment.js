@@ -1,15 +1,15 @@
 import React from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const CommunityMainComment = ({ commentItem, loadContent }) => {
+const DiagnosisBoardMainComment = ({ commentItem, loadContent }) => {
     const DjangoServer = useSelector(state => state.DjangoServer);
     const [cookies] = useCookies(['id']);
 
     const onDelete = (event) => {
         if (window.confirm('해당 댓글을 삭제하시겠습니까?')){
-            axios.delete(`${DjangoServer}/community/detail/comment/delete/${commentItem.cmt_no}`, {
+            axios.delete(`${DjangoServer}/diagnosis_board/detail/comment/delete/${commentItem.cmt_no}`, {
                     headers: { Authorization: `Token  ${cookies.id}` }
                 }).then(() => {
                     // alert('삭제되었습니다.');
@@ -29,4 +29,4 @@ const CommunityMainComment = ({ commentItem, loadContent }) => {
     );
 };
 
-export default CommunityMainComment;
+export default DiagnosisBoardMainComment;

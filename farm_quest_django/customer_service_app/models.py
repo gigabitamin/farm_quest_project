@@ -29,7 +29,7 @@ class CsNoticeTb(models.Model):
     cs_notice_ctg_type = models.IntegerField(blank=True, null=True)
     cs_notice_title = models.TextField()
     cs_notice_content = models.TextField()
-    cs_notice_date = models.DateTimeField(blank=True, null=True)
+    cs_notice_date = models.DateTimeField(auto_now_add=True)
     cs_notice_img = models.TextField(blank=True, null=True)
     user = models.ForeignKey('users_app.UsersAppUser', models.DO_NOTHING, blank=True, null=True)      
 
@@ -43,7 +43,7 @@ class CsOneTb(models.Model):
     cs_one_ctg_type = models.IntegerField()
     cs_one_title = models.TextField()
     cs_one_content = models.TextField()
-    cs_one_date = models.DateTimeField(blank=True, null=True)
+    cs_one_date = models.DateTimeField(auto_now_add=True)
     cs_one_img = models.TextField(blank=True, null=True)
     user = models.ForeignKey('users_app.UsersAppUser', models.DO_NOTHING, blank=True, null=True)
 

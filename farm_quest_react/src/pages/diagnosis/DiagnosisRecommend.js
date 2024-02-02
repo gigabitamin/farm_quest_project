@@ -4,9 +4,11 @@ import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './DiagnosisRecommend.css';
+import DjangoServer from '../../DjangoServer'
+
 
 const DiagnosisRecommend = () => {
-    const DjangoServer = useSelector(state => state.DjangoServer);
+    // const DjangoServer = useSelector(state => state.DjangoServer);
     const { solutionWord } = useParams();
     const [recommendations, setRecommendations] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);

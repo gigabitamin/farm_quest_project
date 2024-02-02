@@ -6,11 +6,12 @@
     // import './DiagnosisChoice.css';
     import './DiagnosisUpload.css';
     // import DiagnosisUpload from './DiagnosisUpload';
+    import DjangoServer from '../../DjangoServer'
 
     const DiagnosisUpload = () => {
         const navigate = useNavigate();
 
-        const DjangoServer = useSelector(state => state.DjangoServer);
+        // const DjangoServer = useSelector(state => state.DjangoServer);
         const [plantSpecies, setPlantSpecies] = useState([]);
         const [selectedPlantIndex, setSelectedPlantIndex] = useState(null);
         const [selectedFile, setSelectedFile] = useState(null);
@@ -72,6 +73,7 @@
             axios
                 .post(`${DjangoServer}/diagnosis_upload/`, formData, {headers: { 'content-type': 'multipart/form-data' },})
                 .then(response => {
+                    console.log('response', response)
                     alert("진단 완료 : 진단결과 페이지로 이동합니다");
                     navigate('/diagnosis_upload_result', { state: { file_name: response.data } });
                 });

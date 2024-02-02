@@ -6,6 +6,8 @@ upload
 yolo_model
 tf_model
 
+backupTest/
+
 ### Django ###
 *.log
 *.pot
@@ -17,6 +19,7 @@ db.sqlite3-journal
 media
 backupTest/
 server_nginx/
+server_nginx
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files

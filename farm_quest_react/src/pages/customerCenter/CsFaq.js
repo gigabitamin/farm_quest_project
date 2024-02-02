@@ -5,62 +5,62 @@ import CsFaqList from './CsFaqList';
 import { useSelector, useDispatch } from 'react-redux';
 
 const CsFaq = ({ mainType }) => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
+    const dispatch = useDispatch();
+    const mainPagePreset = {link: `${DjangoServer}/cs_faq/main/${mainType}`, num: 1};
+    const mainPage_ = useSelector(state => state.customerCenter.mainPage);
+    const [mainPage, setMainPage] = useState(mainPage_.link ? mainPage_ : mainPagePreset);
+    const [data, setData] = useState({results: []});
+    const [pagination, setPagination] = useState([]);
 
-      const dispatch = useDispatch();
-      const mainPagePreset = {link: `http://localhost:8000/cs_faq/main/${mainType}`, num: 1};
-      const mainPage_ = useSelector(state => state.customerCenter.mainPage);
-      const [mainPage, setMainPage] = useState(mainPage_.link ? mainPage_ : mainPagePreset);
-      const [data, setData] = useState({results: []});
-      const [pagination, setPagination] = useState([]);
-  
-      const linkPreset = mainPagePreset.link + "?page=";
-  
-      const title = () => {
-          if (mainType === 'main') {
-              return '전체';
-          } else if (mainType === 'service') {
-              return '서비스'
-          } else if (mainType === 'community') {
-              return '커뮤니티'
-          } else if (mainType === 'shop') {
-              return '쇼핑'
-          }
-      }
-  
-      const paginator = (currentPageNum, lastPageNum, range=2) => {
-          const cond1 = 1 < currentPageNum - range;
-          const cond2 = lastPageNum > currentPageNum + range;
-          let arr = [];
-          if (2*range + 1 >= lastPageNum){
-              return [...Array(lastPageNum)].map((_, i) => {return i + 1});
-          };
-          if (cond1 && cond2) {
-              arr = arr.concat([-1]);
-              arr = arr.concat([...Array(2*range + 1)].map((_, i) => {return currentPageNum - range + i}));
-              return arr.concat([-1]);
-          };
-          if (cond1 && !cond2) {
-              arr = arr.concat([-1]);
-              return arr.concat([...Array(lastPageNum + range + 1 - currentPageNum)].map((_, i) => {return currentPageNum - range + i}));
-          };
-          if (!cond1 && cond2) {
-              arr = arr.concat([...Array(currentPageNum + range)].map((_, i) => {return i + 1}));
-              return arr.concat([-1]);
-          };
-      };
-  
-      const loadData = async () => {
-          const response = await axios.get(mainPage.link);
-          setPagination(paginator(mainPage.num, response.data.page_count));
-          setData(response.data);
-          console.log('공지사항 데이타 ', response.data)
-      };
-  
-      const toNext = () => {
-          if (data.next) {
-              setMainPage({link: data.next, num: mainPage.num+1});
-          };
-      };
+    const linkPreset = mainPagePreset.link + "?page=";
+
+    const title = () => {
+        if (mainType === 'main') {
+            return '전체';
+        } else if (mainType === 'service') {
+            return '서비스'
+        } else if (mainType === 'community') {
+            return '커뮤니티'
+        } else if (mainType === 'shop') {
+            return '쇼핑'
+        }
+    }
+
+    const paginator = (currentPageNum, lastPageNum, range=2) => {
+        const cond1 = 1 < currentPageNum - range;
+        const cond2 = lastPageNum > currentPageNum + range;
+        let arr = [];
+        if (2*range + 1 >= lastPageNum){
+            return [...Array(lastPageNum)].map((_, i) => {return i + 1});
+        };
+        if (cond1 && cond2) {
+            arr = arr.concat([-1]);
+            arr = arr.concat([...Array(2*range + 1)].map((_, i) => {return currentPageNum - range + i}));
+            return arr.concat([-1]);
+        };
+        if (cond1 && !cond2) {
+            arr = arr.concat([-1]);
+            return arr.concat([...Array(lastPageNum + range + 1 - currentPageNum)].map((_, i) => {return currentPageNum - range + i}));
+        };
+        if (!cond1 && cond2) {
+            arr = arr.concat([...Array(currentPageNum + range)].map((_, i) => {return i + 1}));
+            return arr.concat([-1]);
+        };
+    };
+
+    const loadData = async () => {
+        const response = await axios.get(mainPage.link);
+        setPagination(paginator(mainPage.num, response.data.page_count));
+        setData(response.data);
+        console.log('공지사항 데이타 ', response.data)
+    };
+
+    const toNext = () => {
+        if (data.next) {
+            setMainPage({link: data.next, num: mainPage.num+1});
+        };
+    };
   
       const toPrevious = () => {
           if (data.previous) {
