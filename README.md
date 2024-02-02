@@ -4,6 +4,9 @@
 <!-- notice -->
 ### 공지
 
+### v0.6.5 jsh
+<br>
+
 ### v0.6.4 jsh
 > setting.py에서 db_settings.py와 allowed_host.py로 분리되어있던 관련 변수를 모두 db_settings.py로 통합하였다.  
 > 서버 실행시 변수 오류가 생길 경우 db_settings.py의 수정이 필요하다.
@@ -45,9 +48,13 @@
 // DjangoServer.js 내부
 export default "http://localhost:8000"
 ```
+<br>
 
 ====================================================
 <!-- version -->
+
+### v0.6.5 jsh
+- React-Django 통합환경 새로고침 오류에 대응하여 BrowserRouter -> HashRouter 변경
 
 ### v0.6.4 jsh  
 - react build 관련하여 django의 settings.py와 urls.py및 관련 파일 수정
