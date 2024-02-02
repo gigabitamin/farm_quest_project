@@ -5,6 +5,7 @@ db_settings.py
 upload
 yolo_model
 tf_model
+db_settings_local
 
 ### Django ###
 *.log
