@@ -4,6 +4,9 @@
 <!-- notice -->
 ### 공지
 
+### v0.6.7 kdy  
+- 병합테스트
+
 ### v0.6.6 psh
 scheduler 90%
 
