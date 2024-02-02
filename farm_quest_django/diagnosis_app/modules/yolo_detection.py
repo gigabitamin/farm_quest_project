@@ -302,8 +302,9 @@ def detect(save_file_path, plant_name, user_select_plant):
 
 
         for path in crops_path_lists:            
-            modified_path = f'http://localhost:8000/media/{Path(path).as_posix().split("media/", 1)[-1]}'
+            modified_path = f'http://localhost:8000/media/{Path(path).as_posix().split("upload/", 1)[-1]}'
             crops_path_list.append(modified_path)
+            print('미디어', crops_path_list)
         
         print('crops_path_list 미디어', crops_path_list)
                                                             
@@ -519,9 +520,11 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         result_path = 'result_img'
         crops_folder = 'crops'
         label = label
-        crops_path = os.path.join(path_dir, result_path, file_name, crops_folder, label, file_name+'.jpg')        
-        crops_all = os.path.join(path_dir, 'result_img', file_name, 'crops', '*', file_name+'.jpg')                
-        crops_all_list = glob.glob(crops_all)        
+        # crops_path = os.path.join(path_dir, result_path, file_name, crops_folder, label, file_name+'.jpg')
+        crops_all = os.path.join(path_dir, 'result_img', file_name, 'crops', '**', '*.jpg')
+        print('crops_all', crops_all)
+        crops_all_list = glob.glob(crops_all)
+        print('crops_all_list', crops_all_list)
                 
         for crops_path in crops_all_list:
             if crops_path.split(os.sep)[-2] not in plant:

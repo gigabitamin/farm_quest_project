@@ -22,7 +22,7 @@ import os
 # 추천 상품 관련
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
-from gardening_shop_app.models import ShopingTb
+# from gardening_shop_app.models import ShopingTb
 from django.db.models import Q
 
 from rest_framework.permissions import IsAuthenticated
@@ -47,10 +47,10 @@ class DiagnosisItemLoadCartAPIMixins(APIView):
                 diagnosis_item_cart_list = diagnosis_item_cart.diagnosis_item_cart_list
                 print('diagnosis_item_cart_list = ', diagnosis_item_cart_list)
                                 
-                products = ShopingTb.objects.filter(Q(shoping_tb_no__in=diagnosis_item_cart_list))
+                products = DiagnosisShopingTb.objects.filter(Q(shoping_tb_no__in=diagnosis_item_cart_list))
                 print('products = ', products)
-                serializer = ShopingTbSerializer(products, many=True)
-                print('serializer =', serializer)
+                serializer = DiagnosisShopingTbSerializer(products, many=True)
+                print('serializer =', serializer.data)
                 return Response(serializer.data, status=200)
             except DiagnosisItemCart.DoesNotExist:
                 return Response({'error': '없는데?'}, status=404)
@@ -102,9 +102,11 @@ class DiagnosisRecommendList(APIView):
             end_index = start_index + page_size
             print('end_index', end_index)
 
-            recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
-            serializer = ShopingTbSerializer(recommendations, many=True)            
-            return Response(serializer.data, status=200)
+            recommendations = DiagnosisShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
+            print('recommendations',recommendations)
+            serializer = DiagnosisShopingTbSerializer(recommendations, many=True)
+            print('serializer', serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"에러": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -125,10 +127,12 @@ class SolutionTbAPIMixins(
 def diagnosis_upload(request):
     plt = platform.system() 
     if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
+    print('plt',plt)
 
     if request.method == "POST":
         origin_file = request.FILES.get('imgFile')       
         fs = FileSystemStorage() # ../media
+        print('fs', fs)
 
         plant_name = request.POST.get('plant_name')
         print(plant_name)
@@ -310,6 +314,7 @@ def view_crop_image(request, file_name, label_name, image_name):
             return HttpResponse(image_file.read(), content_type='image/jpeg')
     except FileNotFoundError:
         return HttpResponse(status=404)
+    
     
     
     

@@ -9,6 +9,7 @@ import GardeningShopDetail from './gardeningshop/GardeningShopDetail';
 import Scheduler from './Scheduler/Scheduler';
 // import GardeningShopRouter from './gardeningshop/GardeningShopRouter';
 import CsRouter from './customerCenter/CsRouter';
+import Home from './Home'
 
 const Top = () => {    
 
@@ -19,8 +20,8 @@ const Top = () => {
 
     return (
         <div>
-  
-            <Routes>
+            
+            <Routes>                
                 <Route path="/gardening_shop_index" element={<GardeningShopIndex />} />
                 <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} />
                 <Route path="/community/:mainType" element={<Community />} />                
