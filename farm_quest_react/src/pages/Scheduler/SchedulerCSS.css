@@ -20,7 +20,7 @@
   /* } */
 
 /* 도움말 */
-.qustionOverlayContainer {
+.questionOverlayContainer {
   display: flex;
   align-items: center;
   padding-right: 5px;
@@ -31,7 +31,12 @@
 .schedulerAnnounsment{
   margin: 4px;
   margin-bottom: -2px; 
+  min-width:700px;
   cursor:help;
+}
+
+#headerInnercontents {
+  display:flex row;
 }
 
 .ifAnoNotNull {
@@ -105,7 +110,7 @@
 #schedulerFilter {
   border: 10px  #c1e4bc85;
   border-radius: 8px; 
-  border-style: ridge dashed dashed ridge;
+  border-style: ridge double dashed ridge;
   padding: 10px;
   padding-left: 16px;
 }
@@ -181,6 +186,18 @@
     margin-right: 20px;
 }
 
+#shedulerCalendarBox{
+  border: 10px  #c1e4bc85;
+  border-style: ridge double ridge double ;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px; 
+  margin-bottom: 20px;
+}
+
 #thisMonth {
     border-collapse: collapse;
     width: 100%;
@@ -195,12 +212,11 @@
 
   #calendarTitle {
     background-color: beige;
-    padding-left: 100px;
-    padding-right: 100px;
+
     padding-top: 20px;
     padding-bottom: 20px;
     margin-bottom: 10px;
-
+    width: 700px;
   }
 
   .calendarTitle {
@@ -211,12 +227,14 @@
     vertical-align:super;
     margin-bottom:-25px;
     margin-top: -25px;
-    
+    vertical-align: middle;
+
   }
   /* .calendarTitle h1 {
     font-family: 'pixelroborobo', sans-serif;
 
   } */
+
 
   .MonthBtn {
 
@@ -224,7 +242,7 @@
     border-style: none;
     cursor: pointer;
     /* margin-top: -5px; */
-    /* vertical-align: middle; */
+    vertical-align: middle;
 
   }
 
@@ -271,9 +289,7 @@
     background-color: rgba(247, 247, 247, 0.842);
   }
 
-  #thisMonthBody {
-    margin-bottom: 150px;
-  }
+
 
 
 /* 지역 */
@@ -288,6 +304,40 @@
   font-size: 18px;
 }
 
+.custom-dropdown {
+  position: relative;
+  width: 140px;
+  border: 2px solid #723d3d;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.selected-option {
+  padding: 2px;
+  text-align: center;
+}
+
+.options-list {
+  display: none;
+  position: absolute;
+  width: 140px;
+  border: 2px solid #723d3d;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.options-list li {
+  padding: 2px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.custom-dropdown.open .options-list {
+  display: block;
+}
 
 /* 드롭다운 버튼 스타일 */
 .locationDropdown {
@@ -305,6 +355,11 @@
   padding: 2px;
 }
 
+.locationDropdown option{
+  border-radius: 5px;
+
+}
+
 .locationDropdown:focus {
   outline: ridge #ccc 2px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* 포커스 시 그림자 효과 */
@@ -317,7 +372,7 @@
 
 #weatherInfoViewer {
   border: 10px  #c1e4bc85;
-  border-style: ridge dashed dashed ridge;
+  border-style: ridge ridge dashed double;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;

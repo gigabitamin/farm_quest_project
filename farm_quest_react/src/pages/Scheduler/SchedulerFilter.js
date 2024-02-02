@@ -75,7 +75,7 @@ const SchedulerFilter = ({ onFetchedDataChange }) => {
   return (
     <div>
       <div id="schedulerFilter">
-        <div className='qustionOverlayContainer'>
+        <div className='questionOverlayContainer'>
           <h2 id='schedulerselector'>달력 보기</h2>
           <CalendarOverlay tooltipText="작물별 질병의 빈발 시기를 알려드립니다." />
         </div>

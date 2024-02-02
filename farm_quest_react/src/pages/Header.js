@@ -94,12 +94,12 @@ const Header = () => {
                     
                     <div className="nav-item_hd">
                         <div className="nav-link_hd"><Link to="/Scheduler">스케쥴러</Link></div>
-                        <div className="dropdown-menu_hd">
-                            <div className="btn_hd"><Link to="/scheduler">진입</Link></div>
+                        {/* <div className="dropdown-menu_hd"> */}
+                            {/* <div className="btn_hd"><Link to="/scheduler">진입</Link></div> */}
 
                             {/* <div><a href="{% url 'scheduler_personal' %}" className="btn_hd">개인 스케쥴러</a></div>                     */}
                         </div>
-                    </div>                    
+                    {/* </div>                     */}
 
                     <div className="nav-item_hd">
                         <div><a href="{% url 'mypage' %}" className="nav-link_hd">마이페이지</a></div>

@@ -311,7 +311,7 @@ const getRenderName = (originalCategory) => {
     
     return (
         <div id="weatherInfoViewer">
-            <div className='qustionOverlayContainer'>
+            <div className='questionOverlayContainer'>
             <h2>날씨정보</h2>
             <CalendarOverlay tooltipText="선택하신 지역의 현재 날씨를 알려드립니다. \n
              0시부터 2시 사이에는 날씨 정보가 제공되지 않습니다." />
@@ -366,7 +366,7 @@ const getRenderName = (originalCategory) => {
 
                         {weatherInfo[time]['SKY'] && weatherInfo[time]['PTY'] && (
                             <div>
-                                <p>구름: {sky_code[parseInt(weatherInfo[time]['SKY'])]}</p>
+                                <p>구름양: {sky_code[parseInt(weatherInfo[time]['SKY'])]}</p>
                                 <p>강수형태: {pyt_code[parseInt(weatherInfo[time]['PTY'])]}</p>
                                 {weatherInfo[time]['PCP'] !== '강수없음' && (
                                     <p>시간당 강수량: {weatherInfo[time]['PCP']}mm</p>
@@ -399,11 +399,12 @@ const formatTime = () => {
     const year = currentDate.getFullYear();
     const month = (currentDate.getMonth() + 1).toString(); // 문자열로 변환
     const day = currentDate.getDate().toString();
-  
+    const hours = currentDate.getHours().toString().padStart(2, '0'); // 시간
+
     // formattedDate: 20240129, time: 0900 -> 2024-01-29 09:00
     // const formattedDate = `${year}${month.padStart(2, '0')}${day.padStart(2, '0')}`;
     
-    return `${parseInt(year, 10)}년 ${parseInt(month, 10)}월 ${parseInt(day, 10)}일`;
+    return `${parseInt(year, 10)}년 ${parseInt(month, 10)}월 ${parseInt(day, 10)}일 ${hours}시`;
   };
   
   console.log(formatTime());

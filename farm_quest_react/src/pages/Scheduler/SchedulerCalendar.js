@@ -5,7 +5,7 @@ import 'normalize.css';
 
 import prevButtonImage from '../../images/assets/prevButton.png';
 import nextButtonImage from '../../images/assets/nextButton.png';
-// import CalendarOverlay from './CalendarOverlay';
+import CalendarOverlay from './CalendarOverlay';
 import './SchedulerCSS.css';
 
 
@@ -24,7 +24,7 @@ function SchedulerAnnouncement() {
 
       if (announcements.length > 0) {
         return (
-          <div>
+          <div id='schedulerAnnounsmentdiv'>
             {announcements.map((announcement, index) => (
               <p className='schedulerAnnounsment ifAnoNotNull' key={index}>{announcement}</p>
             ))}
@@ -40,11 +40,21 @@ function SchedulerAnnouncement() {
 
   return (
     <div>
-      <h3 style={{marginTop:'6px'}}>알림판</h3>
+      <div id='headerInnercontents'>
+          <h3 style={{marginTop:'6px'}}>알림판</h3>
+          <CalendarOverlay tooltipText="농촌진흥청 '병해충 발생정보' 발췌" />
+
+          {/* <div className='questionOverlayContainer'> */}
+
       {renderAnnouncements()}
+
+              {/* </div> */}
+
+      </div>
     </div>
   );
 }
+
 
 // CalendarHeader 컴포넌트
 const CalendarHeader = ({ currentDate, onPrevMonth, onNextMonth}) => {
@@ -247,7 +257,7 @@ const SchedulerCalendar = ({ filteredData, fetchedData }) => {
   };
 
   return (
-    <div>
+    <div id='shedulerCalendarBox'>
         <CalendarHeader
           currentDate={currentDate}
           onPrevMonth={handlePrevMonth}
