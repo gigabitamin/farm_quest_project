@@ -6,6 +6,8 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from rest_framework.decorators import APIView
 from rest_framework import status, mixins, generics
+from hitcount.views import HitCountMixin
+from hitcount.models import HitCount
 from . import models, serializers, pagination
 
 # Create your views here.
@@ -42,6 +44,11 @@ class CommunityDetailShow(generics.RetrieveAPIView):
     queryset = models.CommunityTb.objects.all()
     serializer_class = serializers.CommunityDetailShowSerializer
     lookup_field = 'thread_no'
+
+    def get(self, request, *args, **kwargs):
+        hit_count = HitCount.objects.get_for_object(self.get_object())
+        hit_count_resp = HitCountMixin.hit_count(request, hit_count)
+        return self.retrieve(request, *args, **kwargs)
 
 
 class CommunityDetailModify(generics.UpdateAPIView, generics.DestroyAPIView):

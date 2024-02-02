@@ -6,7 +6,7 @@ import './index.css';
 import App from './App';
 import LoginCheck from './pages/user/LoginCheck'; 
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import reducer from './pages/reducer';
 import { CookiesProvider } from 'react-cookie';
 
@@ -15,12 +15,12 @@ const store = configureStore({ reducer: reducer });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <CookiesProvider>
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
         <LoginCheck />
         <App />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   </CookiesProvider>
 );
 
