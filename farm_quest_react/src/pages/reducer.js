@@ -27,6 +27,17 @@ const initialState = {
     diagnosis: {
 
     },
+
+    diagnosisBoard: {
+        show: 'main',
+        mainPage: {
+            link: null,
+            num: null
+        }, 
+        threadNo: null, 
+        item: {}
+    },
+
     gardeningShop: {
 
     },
@@ -95,7 +106,31 @@ export default function reducer(state=initialState, action) {
             customerCenterState = { ...initialState.customerCenter };
         };
         newState.customerCenter = customerCenterState;
+
+    } else if (action.part === 'diagnosisBoard') {
+        // 진단 게시판 관련 실행 코드
+        let diagnosisBoardState = { ...state.diagnosisBoard };
+        if (action.type === 'detail') {
+            diagnosisBoardState.show = 'detail';
+            diagnosisBoardState.threadNo = action.threadNo;
+            diagnosisBoardState.mainPage = action.mainPage;
+        } else if (action.type === 'mainBack') {
+            diagnosisBoardState.show = 'main';
+            diagnosisBoardState.threadNo = null;
+        } else if (action.type === 'create') {
+            diagnosisBoardState.show = 'create';
+        } else if (action.type === 'update') {
+            diagnosisBoardState.show = 'update';
+            diagnosisBoardState.item = action.item;
+        } else if (action.type === 'detailBack') {
+            diagnosisBoardState.show = 'detail';
+        } else if (action.type === 'reset') {
+            diagnosisBoardState = { ...initialState.diagnosisBoard };
+        };
+        newState.diagnosisBoard = diagnosisBoardState;
+
     };
+    
 
 
 

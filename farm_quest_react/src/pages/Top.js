@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Community from "./community/Community";
 import UserRouter from "./user/UserRouter"
 import DiagnosisRouter from "./diagnosis/DiagnosisRoute"
+import DiagnosisBoardRoute from "./diagnosisBoard/DiagnosisBoardRoute";
 import GardeningShopIndex from './gardeningshop/GardeningShopIndex';
 import GardeningShopDetail from './gardeningshop/GardeningShopDetail';
 import Scheduler from './Scheduler/Scheduler';
@@ -22,10 +23,11 @@ const Top = () => {
             <Routes>
                 <Route path="/gardening_shop_index" element={<GardeningShopIndex />} />
                 <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} />
-                <Route path="/community/:mainType" element={<Community />} />
+                <Route path="/community/:mainType" element={<Community />} />                
                 <Route path="/Scheduler" element={<Scheduler />} />
             </Routes>
             {/* <GardeningShopRouter /> */}
+            <DiagnosisBoardRoute />
             <UserRouter />
             <DiagnosisRouter />
             <CsRouter />

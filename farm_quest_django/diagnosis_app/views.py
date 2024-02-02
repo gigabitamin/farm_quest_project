@@ -29,6 +29,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 import json
 
+import platform 
+import pathlib
+
+from django.views.decorators.csrf import csrf_exempt
+
 
 class DiagnosisItemLoadCartAPIMixins(APIView):
     def get(self, request, *args, **kwargs):
@@ -118,6 +123,9 @@ class SolutionTbAPIMixins(
 
 @api_view(['POST'])   
 def diagnosis_upload(request):
+    plt = platform.system() 
+    if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
+
     if request.method == "POST":
         origin_file = request.FILES.get('imgFile')       
         fs = FileSystemStorage() # ../media
@@ -133,16 +141,21 @@ def diagnosis_upload(request):
                 
         fs.save(save_file_path, origin_file)
     
-        detect_result = detect(save_file_path, plant_name,plant_no)
+        detect_result = detect(save_file_path, plant_name, plant_no)
         
-        diagnosis_result_instance = DiagnosisResultAll(
-            detect_result=detect_result,
-            save_file_name=save_file_name,
-            plant_name=plant_name,
-            plant_no=plant_no,            
-        )
+        data = {
+            'detect_result': detect_result,
+            'save_file_name': save_file_name,
+            'plant_name': plant_name,
+            'plant_no': plant_no,
+            'user': request.user.id if request.user.is_authenticated else None,
+        }
+        
+        diagnosis_result_instance = diagnosis_upload_user(data)
+        print('돼냐?',diagnosis_result_instance)
         diagnosis_result_instance.save()        
-
+        
+        print('완료, 전송3')
         diagnosis_result_pk = diagnosis_result_instance.pk
 
         context = {
@@ -152,10 +165,35 @@ def diagnosis_upload(request):
             'plant_no': plant_no,
             'diagnosis_result_pk': diagnosis_result_pk,
         }
-                
-        print('완료, 전송')
         
+        print('완료, 전송4')
+        
+    else:            
+        context = {
+            'error': '로그인이 필요합니다.',
+        }
+
     return JsonResponse(context, status=200)
+
+
+
+@csrf_exempt
+def diagnosis_upload_user(data):
+    try:
+        diagnosis_result_instance = DiagnosisResultAll.objects.create(
+            detect_result=data['detect_result'],
+            save_file_name=data['save_file_name'],
+            plant_name=data['plant_name'],
+            plant_no=data['plant_no'],
+            user_id=data['user'],
+        )
+        # print('diagnosis_result_instance', diagnosis_result_instance)
+        # print('diagnosis_result_instance', diagnosis_result_instance)
+
+        return diagnosis_result_instance
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=400)
+
 
 
 class DiagnosisResultAPIMixins(
@@ -272,3 +310,8 @@ def view_crop_image(request, file_name, label_name, image_name):
             return HttpResponse(image_file.read(), content_type='image/jpeg')
     except FileNotFoundError:
         return HttpResponse(status=404)
+    
+    
+    
+    
+    
