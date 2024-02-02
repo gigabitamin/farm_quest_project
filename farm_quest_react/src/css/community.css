@@ -19,7 +19,7 @@ div.community_back_button {
 
 div.community_back_button button {
     border-radius: 50%;
-    background-color: #2de0b6;
+    background-color: #a3ce9b;
     width: 50px;
     height: 50px;
 }
@@ -32,7 +32,7 @@ div.community_back_button img {
 
 button.community_button_default {
     border-radius: 5px;
-    background-color: #2de0b6;
+    background-color: #a3ce9b;
     width: 40px;
     height: 30px;
 }
@@ -52,7 +52,7 @@ aside#community_left_menu, aside#community_right_menu {
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    background: #2de0b6;
+    background: #9ab195;
     width: 15%;
     max-width: 120px;
     min-width: 90px;
@@ -61,7 +61,7 @@ aside#community_left_menu, aside#community_right_menu {
 
 div.community_left_box, div.community_right_box {
     border-radius: 5px;
-    background: #88AB8E;
+    background: #dbe4dc;
     margin: 0 auto;
     margin-top: 5px;
     width: 90%;
@@ -137,7 +137,7 @@ div.community_content_box_list_item {
     padding: 3px;
     margin: 0.5% auto;
     width: 95%;
-    background: #2de0b6;
+    background: #dbe6dd;
     cursor: pointer;
     /* border-bottom: solid 1px black; */
 }
@@ -190,7 +190,7 @@ div.community_detail_box {
     padding: 1% 0;
     margin: 5px auto;
     width: 96%;
-    background: #2de0b6;
+    background: #cfcfcf;
 }
 
 div.community_detail_content_box_top, div.community_detail_content_box_main {
