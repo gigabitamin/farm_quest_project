@@ -1,0 +1,110 @@
+.container_gd2 {
+display: flex;
+height: 2000px;
+}
+
+.sidebar_gd2 {
+width: 10%; 
+background-color: #F2F1EB;
+border-right: 1px solid #ddd;
+padding: 20px;
+}
+
+.menu_gd2 ul {
+list-style: none;
+}
+
+.menu_gd2 ul li a {
+display: block;
+padding: 10px;
+color: black;
+text-decoration: none;
+border-bottom: 1px solid #ddd;
+transition: background-color 0.3s ease;
+}
+
+.menu_gd2 ul li a:hover {
+background-color: #eaeaea;
+}
+.content_gd2 {
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 100%;
+  }
+  .crop-info_gd2 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .crop-body_gd2 {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .crop-description_gd2{
+    margin-top: 20px;
+    width: 700px;
+  }
+ 
+  .crop-image_gd2 img {
+    width: 300px; /* 이미지 크기 고정 */
+    height: auto; /* 이미지 비율 유지 */
+  }
+  
+  
+  .videos_gd2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* 가로로 정렬 */
+    gap: 15px; /* 비디오 간 간격 */
+    margin-top: 20px;
+  }
+  
+  .video_gd2 {
+    flex: 0 0 350px; /* 폭 고정, 성장 및 축소 방지 */
+    height: 200px; /* 높이 고정 */
+    margin-bottom: 20px;
+  }
+  
+  .video_gd2 iframe {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  @media (max-width: 768px) {
+    .content_gd2 {
+      padding: 20px;
+    }
+  
+    .crop-image_gd2 {
+      width: 100%;
+      float: none;
+    }
+
+    .videos_gd2 {
+        justify-content: center; /* 화면이 작을 때 중앙 정렬 */
+      }  
+
+    .video_gd2 {
+        flex-basis: 100%; /* 화면이 작아졌을 때 전체 너비를 차지하도록 설정 */
+        max-width: 350px; /* 최대 폭 제한 */
+        height: auto; /* 높이 자동 조정 */
+    }
+  
+    .video_gd2:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+
+  @media (max-width: 600px) {
+    .crop-body_gd2 {
+      flex-direction: column;
+    }
+  
+    .crop-image_gd2 img {
+      width: 100%; /* 모바일 디바이스에서 이미지 크기 조정 */
+    }
+  }  
+  

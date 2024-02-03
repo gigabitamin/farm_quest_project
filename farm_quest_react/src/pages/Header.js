@@ -89,7 +89,7 @@ const Header = () => {
                     </div>           
 
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'guide_index' %}" className="nav-link_hd">가이드</a></div>
+                        <div><Link to="/guide_index">가이드</Link></div>
                         <div className="dropdown-menu_hd">
                             <div><a href="{% url 'guide_index' %}" className="btn_hd">가이드 안내</a></div>
                             <div><a href="{% url 'guide_detail' %}" className="btn_hd">가이드 상세</a></div>                    
