@@ -3,8 +3,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const LoginCheck = (props) => {
+	const DjangoServer = useSelector(state => state.DjangoServer);
 	const [cookies, removeCookie] = useCookies(['id']);
 	const [username, setUserId] = useState(null);
 	const navigate = useNavigate();
@@ -13,7 +15,7 @@ const LoginCheck = (props) => {
 		const token = cookies.id; 
     console.log(token)
 		axios
-			.post('http://127.0.0.1:8000/login_check', { token: token }) 
+			.post(`${DjangoServer}/login_check`, { token: token }) 
 			.then((response) => {
         console.log(response.data.id)
 				setUserId(response.data.id); 

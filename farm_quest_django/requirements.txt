@@ -10,4 +10,12 @@ seaborn
 tensorflow
 opencv-python
 ultralytics
-environ
+django-environ
+konlpy
+joblib
+scikit-learn
+imbalanced-learn
+JPype1
+
+# 조회수 관련
+django-hitcount

@@ -1,65 +1,175 @@
-import React from 'react';
-import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
-import './DiagnosisUpload.css'
+    import React, { useState, useEffect } from 'react';
+    import axios from 'axios';
+    import { useNavigate } from 'react-router-dom';
+    import { useSelector } from 'react-redux';
+    // import { Link } from 'react-router-dom';
+    // import './DiagnosisChoice.css';
+    import './DiagnosisUpload.css';
+    // import DiagnosisUpload from './DiagnosisUpload';
+    import DjangoServer from '../../DjangoServer'
 
-const DiagnosisUpload = () => {
-    const location = useLocation();
-    console.log(location.state);
-    console.log(location.state.data);
-    
-    const newDiagnosisResultId = location.state.newDiagnosisResultId.diagnosis_result_id;
-    const user_select_plant = location.state.newDiagnosisResultId.user_select_plant;    
+    const DiagnosisUpload = () => {
+        const navigate = useNavigate();
 
-    let history = useNavigate();
+        // const DjangoServer = useSelector(state => state.DjangoServer);
+        const [plantSpecies, setPlantSpecies] = useState([]);
+        const [selectedPlantIndex, setSelectedPlantIndex] = useState(null);
+        const [selectedFile, setSelectedFile] = useState(null);
+        const [previewUrl, setPreviewUrl] = useState('');
+        const [selectedPlant, setSelectedPlant] = useState(null);
+        const [diagnosisReadyNotice, setDiagnosisReadyNotice] = useState('이미지를 업로드 후 작물 종을 선택하세요')
 
-    const setThumbnailOne = (e) => {
-        let img = document.createElement("img");
-        const reader = new FileReader();
+        useEffect(() => {
+            plantLoadData();
+        }, []);
+
+        const plantLoadData = async () => {
+            try {
+                const response = await axios.get(`${DjangoServer}/plant_api/`);
+                setPlantSpecies(response.data);            
+            } catch (error) {
+                console.error('Error fetching plant data:', error);
+            }
+        };
+
+        const handlePlantChange = (e) => {
+            setSelectedPlantIndex(e.target.value);
             
-        document.querySelector("#imgPreviewOne").innerHTML = '';
-    
-        reader.onload = function (event) {
-            img.setAttribute("src", event.target.result);
-        }
-    
-        reader.readAsDataURL(e.target.files[0]);
-        document.querySelector("#imgPreviewOne").appendChild(img);
-    }
-    
-    const onSubmit = (e) => {
-        e.preventDefault();
+            const selectedPlant = plantSpecies.find((plant) => plant.plant_no === parseInt(e.target.value, 10));
+            setSelectedPlant(selectedPlant);            
+            setDiagnosisReadyNotice('진단하실 작물 종이 맞는지 확인 후 시작 버튼을 눌러주세요');
+        };
 
-        var frmData = new FormData(document.frmUpload);
-    
-        frmData.append('diagnosis_result_id', newDiagnosisResultId);
-        frmData.append('plant_name', user_select_plant.plant_name)
-        frmData.append('plant_no', user_select_plant.plant_no)
+        
+        const setThumbnailOne = (e) => {
+            const file = e.target.files[0];
+            setSelectedFile(file);
 
-        axios.post(`http://localhost:8000/diagnosis_upload/`, frmData, {
-            headers: { 'content-type': 'multipart/form-data' }
-        })
-            .then(
-                response => {
-                    alert("업로드 완료");
-                    console.log(response.data);                    
-                    history('/diagnosis_upload_result', {
-                        state: { file_name: response.data }
-                    }); 
-                }
-            )
+            const reader = new FileReader();
+            reader.onload = () => {
+                setPreviewUrl(reader.result);
+            };
+            reader.readAsDataURL(file);
+        };
+
+        const handleUploadSubmit = (e) => {
+            e.preventDefault();
+
+            if (!selectedFile) {
+                alert('진단할 이미지를 선택해주세요.');
+                return;
+            }
+
+            if (!selectedPlant) {
+                alert('진단할 작물을 선택해 주세요');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('plant_name', selectedPlant.plant_name);
+            formData.append('plant_no', selectedPlant.plant_no);
+            formData.append('imgFile', selectedFile);
+
+            axios
+                .post(`${DjangoServer}/diagnosis_upload/`, formData, {headers: { 'content-type': 'multipart/form-data' },})
+                .then(response => {
+                    console.log('response', response)
+                    alert("진단 완료 : 진단결과 페이지로 이동합니다");
+                    navigate('/diagnosis_upload_result', { state: { file_name: response.data } });
+                });
+        };
+
+
+        return (
+            <div className="diagnosis_ready_wrap">
+                <section className="diagnosis_ready_section_wrap">
+                    <article title="title" className="diagnosis_ready_title"><h1>작물 진단</h1></article>
+                    <article title="notice" className="diagnosis_ready_notice"><span>{diagnosisReadyNotice}</span></article>
+                    <article title="content" className="diagnosis_ready_content_warp">
+                                
+                        <section className="diagnosis_ready_process_wrap">
+                            <article title="upload_image" className="diagnosis_ready_process_upload_image">
+                                <input
+                                    type="file"
+                                    name="imgFile"
+                                    id="imgFile"
+                                    onChange={setThumbnailOne}
+                                    className="diagnosis_ready_submit_setThumbnailOne"
+                                />
+                                {selectedPlant && previewUrl && (
+                                    <input
+                                        type="submit"
+                                        value={selectedPlant.plant_name + " : 진단 시작"}
+                                        name="imgFile"
+                                        id="imgFile"                                                    
+                                        className="diagnosis_ready_submit_handleUploadSubmit"
+                                        onClick={handleUploadSubmit}
+                                    />
+                                )}
+                            </article>
+
+                            <article title="select_plant" className="diagnosis_ready_process_select_plant_wrap">
+                                {previewUrl && (
+                                    <div className="diagnosis_ready_process_select_plant_div">
+                                        <article className="diagnosis_upload_image_content_box">
+                                            <div className="diagnosis_upload_image_content_img_box">
+                                                <img className="diagnosis_upload_image_content_img" src={previewUrl} alt="진단할 작물"/>
+                                            </div>
+
+                                            <div className="diagnosis_upload_image_content_plant">
+                                                {plantSpecies.map((plant) => (
+                                                    <div key={plant.plant_no} className="diagnosis_upload_image_content_select_plant">
+                                                        <label>
+                                                            <div className="diagnosis_upload_image_select_plant_box">
+                                                                <div>
+                                                                    <input
+                                                                        type="radio"
+                                                                        name="choice_plant"
+                                                                        value={plant.plant_no}
+                                                                        onChange={handlePlantChange}
+                                                                    />
+                                                                </div>
+                                                                <div>{plant.plant_name}</div>                                                                                
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                ))} 
+                                            </div>
+                                        </article>                                        
+                                        <article className="diagnosis_choice_map_box">
+                                            {plantSpecies.map((plant) => (
+                                                <div key={plant.plant_no} className="diagnosis_choice_map_one">
+                                                    <label>
+                                                        <div className="diagnosis_choice_select_box">
+                                                            <input
+                                                                type="radio"
+                                                                name="choice_plant"
+                                                                value={plant.plant_no}
+                                                                onChange={handlePlantChange}
+                                                            /> 
+                                                            <div>
+                                                                <img
+                                                                    src={plant.plant_main_img}
+                                                                    alt={plant.plant_no}
+                                                                    className="diagnosis_choice_plant_image_box"
+                                                                />                                                                
+                                                                <div>{plant.plant_name}</div>
+                                                            </div>                                                                                                                        
+                                                            <div>{plant.plant_content}</div>                                                            
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </article>                                        
+                                    </div>
+                                )}
+                            </article>
+                        </section>                        
+
+                    </article>
+                </section>
+            </div>
+        );
     };
 
-    return (
-        <div ClassName="diagnosis_upload_image_box">            
-            <form name="frmUpload" method='post' onSubmit={onSubmit}>                
-                진단할 이미지 : {user_select_plant.plant_name} <br />
-                이미지 : <input type='file' name='imgFile' id='imgFile' onChange={setThumbnailOne} />
-                <input type='submit' value='완료' />
-            </form><br /><br />
-            <div id="imgPreviewOne"></div>
-        </div>
-    );
-};
-
-export default DiagnosisUpload;
+    export default DiagnosisUpload;

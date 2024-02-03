@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import DiagnosisRecommendList, DiagnosisResultAPIMixins, DiagnosisQuestionsAPIMixins, DiagnosisQuestionHistoryAPIMixins, PlantAPIMixins, SolutionTbAPIMixins
+from .views import *
 
 urlpatterns = [
     # 장고
@@ -18,4 +18,8 @@ urlpatterns = [
     path("diagnosis_upload/", views.diagnosis_upload, name='diagnosis_upload'),
     path("save_diagnosis_result_api/", DiagnosisResultAPIMixins.as_view()),
     path("diagnosis_recommend/<str:solution_word>/", DiagnosisRecommendList.as_view(), name="diagnosis_recommend"),
+    path("diagnosis_save_cart/", DiagnosisItemSaveCartAPIMixins.as_view()),
+    path("diagnosis_load_cart/", DiagnosisItemLoadCartAPIMixins.as_view()),    
+    path('media/diagnosis/yolo/origin_img/result_img/<str:file_name>/crops/<str:label_name>/<str:image_name>/', views.view_crop_image, name='view_crop_image'),
+    
 ]

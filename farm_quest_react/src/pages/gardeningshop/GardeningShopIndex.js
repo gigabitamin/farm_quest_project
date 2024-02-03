@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from "axios";
 import './GardeningShopIndex.css';
 import { useCookies } from 'react-cookie'; 
 
 const GardeningShopIndex = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const [cookies] = useCookies(['id', 'username']);
     const user_id = cookies.user ? cookies.user.id : 0;
     const [products, setProducts] = useState([]);
@@ -16,7 +18,7 @@ const GardeningShopIndex = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/products/?category=${currentCategory}&page=${currentPage}`);
+            const response = await axios.get(`${DjangoServer}/api/products/?category=${currentCategory}&page=${currentPage}`);
             setProducts(response.data.results);
             setTotalPages(response.data.total_pages); // 백엔드에서 전달받은 전체 페이지 수 설정
         } catch (error) {
@@ -37,7 +39,7 @@ const GardeningShopIndex = () => {
     const fetchRecommendedProducts = async () => {
 
         try {
-            const response = await axios.get(`http://localhost:8000/api/recommended_products/${user_id}`);
+            const response = await axios.get(`${DjangoServer}/api/recommended_products/${user_id}`);
             setRecommendedProducts(response.data);
         } catch (error) {
             console.error("Error fetching recommended products: ", error);
@@ -61,7 +63,7 @@ const GardeningShopIndex = () => {
         }
     
         try {
-            const response = await axios.get(`http://localhost:8000/api/shopping_reviews/${shoping_tb_no}`);
+            const response = await axios.get(`${DjangoServer}/api/shopping_reviews/${shoping_tb_no}`);
             // 응답 데이터 처리
         } catch (error) {
             console.error("Error fetching shopping reviews: ", error);

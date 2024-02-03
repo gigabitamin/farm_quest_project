@@ -3,12 +3,14 @@ import { Routes, Route } from 'react-router-dom';
 import Community from "./community/Community";
 import UserRouter from "./user/UserRouter"
 import DiagnosisRouter from "./diagnosis/DiagnosisRoute"
+import DiagnosisBoardRoute from "./diagnosisBoard/DiagnosisBoardRoute";
 import GardeningShopIndex from './gardeningshop/GardeningShopIndex';
 import GardeningShopDetail from './gardeningshop/GardeningShopDetail';
 import GardeningShopSearch from './gardeningshop/GardeningShopSearch';
 import GuideIndex from './guide/GuideIndex';
 import GuideDetail from './guide/GuideDetail';
 import Scheduler from './Scheduler/Scheduler';
+import CsRouter from './customerCenter/CsRouter';
 import Body from './Body';
 const Top = () => {    
 
@@ -24,8 +26,11 @@ const Top = () => {
                 <Route path="/community/:mainType" element={<Community />} />
                 <Route path="Scheduler" element={<Scheduler />} />
             </Routes>
+            {/* <GardeningShopRouter /> */}
+            <DiagnosisBoardRoute />
             <UserRouter />
             <DiagnosisRouter />
+            <CsRouter />
         </div>
     );
 };

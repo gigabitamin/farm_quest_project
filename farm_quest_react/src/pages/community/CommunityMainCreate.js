@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import backButton from '../../images/assets/backButton.png'
 
 const CommunityMainCreate = () => {
     const initialForm = {
@@ -10,13 +11,10 @@ const CommunityMainCreate = () => {
         thread_type: ''
     };
 
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const [form, setForm] = useState(initialForm);
     const dispatch = useDispatch();
     const [cookies] = useCookies(['id'])
-
-    const resetForm = () => {
-        setForm(initialForm)
-    };
 
     const changeForm = (e) => {
         let {name, value} = e.target;
@@ -34,7 +32,7 @@ const CommunityMainCreate = () => {
     const submitForm = (event) => {
         if (window.confirm('등록하시겠습니까?')) {
             // var formData = new FormData(document.formData);
-            axios.post('http://localhost:8000/community/create/', form, {
+            axios.post(`${DjangoServer}/community/create/`, form, {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(
                 response => {
@@ -56,8 +54,10 @@ const CommunityMainCreate = () => {
 
     return (
         <div className='community_form_box'>
-            <button className='back_button' onClick={backToMain}>뒤로가기</button>
-            <form name='formData' onReset={resetForm} onSubmit={submitForm}>
+            <div className="community_back_button">
+                <button onClick={backToMain}><img src={backButton}/></button>
+            </div>
+            <form name='formData' onSubmit={submitForm}>
                 <table>
                     <tbody>
                     <tr>
@@ -80,8 +80,7 @@ const CommunityMainCreate = () => {
                     </tr>
                     </tbody>
                 </table>
-                <button type='submit'>등록</button>
-                <button type='reset'>취소</button>
+                <button className='community_button_default' type='submit'>등록</button>
             </form>
         </div>
     );

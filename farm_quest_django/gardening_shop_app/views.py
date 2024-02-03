@@ -172,7 +172,6 @@ def post_review(request):
             # Execute the update_review_recent.py script using manage.py
             subprocess.run(["python", "manage.py", "update_review_recent"])
             subprocess.run(["python", "manage.py", "initialize_scores"])
-
             return JsonResponse({'message': 'Review added successfully'})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)

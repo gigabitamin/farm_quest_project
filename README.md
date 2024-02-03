@@ -1,13 +1,121 @@
 # Final Project Farm Quest with Team Final Farmtasy
 
+<!-- newest virsion-->
+### v0.6.8 kdy  
+
+
 <!-- notice -->
 ### 공지
 
+### v0.6.4 jsh
+> setting.py에서 db_settings.py와 allowed_host.py로 분리되어있던 관련 변수를 모두 db_settings.py로 통합하였다.  
+> 서버 실행시 변수 오류가 생길 경우 db_settings.py의 수정이 필요하다.
+>```python
+># db_settings.py 예시 코드
+>
+>import pymysql
+>pymysql.install_as_MySQLdb() # react build시 MySQL 대응 설정
+>
+>DATABASES = {
+>    "default": {
+>        "ENGINE": "django.db.backends.mysql",  # 엔진
+>        "NAME": "final2",  # 데이터베이스 이름
+>        "USER": "root",  # 사용자
+>        "PASSWORD": "1234",  # 비밀번호
+>        "HOST": "localhost",  # 호스트
+>        "PORT": "3306",  # 포트번호
+>    }
+>}
+>
+>SECRET_KEY = "*" # 가지고 있는 키 값 입력
+>
+># 아래는 원래 allowde_host.py에서 관리하던 변수지만 통합했음
+>ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+>
+>CORS_ALLOWED_ORIGINS = [
+>    'http://localhost:8000',
+>    'http://127.0.0.1:8000',
+>]
+>```
+<br>
 
-### v0.5.4 jsh (develop)
+### v0.6.2 jsh
+> 서버 대응을 위해서 Django 서버 링크를 외부로 빼내었다.   
+> farm_quest_react/src 디렉토리 내부에 DjangoServer.js 파일을 생성하여 저장할 필요가 있다.   
+> .gitignore에 설정되어 있으므로 공유되지 않는다.   
+
+```javascript
+// DjangoServer.js 내부
+export default "http://localhost:8000"
+```
+<br>
+
 
 ====================================================
 <!-- version -->
+
+-jsh feather bugfix, psh confirmed
+
+
+### v0.6.8 kdy  
+- 진단 결과 공유하는 사용자 진단 게시판 추가 diagnosisBoard / diagnosisBoard_app
+
+### v0.6.7 kdy  
+- 진단 시스템 이미지 경로 수정 및 버그 수정, Path 경로 사용  
+- 진단 시스템 전체 결과 저장하는 db 테이블 모델 새로 생성
+
+### v0.6.6 psh
+scheduler 90%
+
+### v0.6.5 jsh
+- React-Django 통합환경 새로고침 오류에 대응하여 BrowserRouter -> HashRouter 변경
+
+### v0.6.4 jsh  
+- react build 관련하여 django의 settings.py와 urls.py및 관련 파일 수정
+- 서버에서의 문제로 인해 커뮤니티 페이지와 관련한 Link태그의 reloadDocument 코드를 제거하고 과거 형식으로 롤백하였다
+
+### v0.6.3 psh 
+- React : scheduler pages updated
+- .env updated(file in discord)
+
+### v0.6.2 jsh  
+- AWS 서버 환경에 대응하여 링크 설정
+
+### v0.6.1 kdy  
+- 프로필 페이지, 프로필 수정 페이지, 회원가입, 로그인 css 완료(완성버전)  
+- 헤더의 로그인 로그아웃 표시 수정  
+
+### v0.6.0 kdy  
+- 고객센터 css 완료 (완성 버전)
+- 헤더 메뉴 정리
+
+### v0.5.9 kdy  
+- 고객센터 - 공지사항, FAQ, 1대1 리액트, CRUD 페이지 기본 완료
+- 수정 중 
+
+### v0.5.8 psh  
+- React : scheduler pages updated
+- django : scheduler module, views, urls updated
+- DB : scheduler table added (with plant_tb FK)
+
+### v0.5.7 kdy  
+- 로그인 체크 오류 수정 
+
+### v0.5.6 ltj  
+- 가드닝샵 리뷰 예측 시스템 업데이트 완료  
+- db 수정 완료  
+
+### v0.5.5 kdy  
+- 진단시스템 페이지 css 전부 완료(진단 준비, 진단 결과, 솔루션 상품 페이지)
+- 솔루션 상품 페이지 상단에 찜하기(상품 목록 localStorage -> db에 저장, 불러오기) 기능 추가
+
+### v0.5.4a kdy  
+- 진단 페이지 CSS 수정  
+- 작물 선택 이미지 업로드 통합   
+- 반응형으로 전환 중, @media screen and (max-width: 720px)
+- 진단 결과 페이지 수정, TOP2로 변경
+- 진단결과 페이지 CSS 수정
+
 ### v0.5.4 jsh 
 - 커뮤니티 댓글 기능 구현
 

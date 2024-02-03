@@ -5,6 +5,7 @@ header {
     flex-direction: column; /* headerMenu와 navbar를 세로로 배치 */
     align-items: center;
     padding: 20px;
+    /* background-color: #88AB8E; */
     background-color: #88AB8E;
     color: #F2F1EB;
 }

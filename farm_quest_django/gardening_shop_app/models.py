@@ -82,5 +82,3 @@ class ShoppingSearchData(models.Model):
     class Meta:
         managed = False
         db_table = 'shopping_search_data'
-
-

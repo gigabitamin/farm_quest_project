@@ -16,16 +16,18 @@ const DiagnosisRoute = () => {
 
     return (
         <div>
-            <Routes>      
+            <Routes>
                 <Route path="/diagnosis_link" element={<DiagnosisLink />} />
                 <Route path="/diagnosis_index" element={<DiagnosisIndex />} />
-                <Route path="/diagnosis_choice" element={<DiagnosisChoice/>} />
+                <Route path="/diagnosis_choice" element={<DiagnosisChoice />} />
                 <Route path="/diagnosis_answer" element={<DiagnosisAnswer />} />
                 <Route path="/diagnosis_result" element={<DiagnosisResult />} />
                 <Route path="/diagnosis_upload" element={<DiagnosisUpload plantSpecies={plantSpecies} setPlantSpecies={setPlantSpecies} />} />
-                <Route path="/diagnosis_upload_result" element={<DiagnosisUploadResult/>} />
-                <Route path="/diagnosis_recommend/:solutionWord" element={<DiagnosisRecommend />}/>                
-                <Route path="/diagnosis_detail" element={<DiagnosisDetail/>} />
+                <Route path="/diagnosis_upload_result" element={<DiagnosisUploadResult />} />
+                <Route path="/diagnosis_recommend/:solutionWord" element={<DiagnosisRecommend />} />
+                <Route path="/diagnosis_detail" element={<DiagnosisDetail />} />
+
+
             </Routes>
         </div>
     );

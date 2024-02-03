@@ -1,5 +1,22 @@
 from django.db import models
 
+class DiagnosisResultAll(models.Model):
+    diagnosis_result_all_id = models.AutoField(primary_key=True)
+    detect_result = models.JSONField(blank=True, null=True)
+    save_file_name = models.CharField(max_length=255, blank=True, null=True)
+    plant_name = models.CharField(max_length=255, blank=True, null=True)
+    plant_no = models.IntegerField(blank=True, null=True)
+    diagnosis_create_time = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey('users_app.UsersAppUser', models.DO_NOTHING, blank=True, null=True)    
+    
+    class Meta:
+        managed = False
+        db_table = 'diagnosis_result_all'    
+    
+    def __str__(self):
+        return self.save_file_name        
+
+
 class DiagnosisResult(models.Model):
     diagnosis_result_id = models.AutoField(primary_key=True)
     user_select_plant = models.ForeignKey('PlantTb', models.DO_NOTHING, db_column='user_select_plant', blank=True, null=True)
@@ -52,16 +69,7 @@ class PlantTb(models.Model):
     class Meta:
         managed = False
         db_table = 'plant_tb'
-        
-class DiagnosisHistory(models.Model):
-    diagnosis_history_no = models.CharField(primary_key=True, max_length=45)
-    diagnosis_history_content = models.CharField(max_length=45, blank=True, null=True)
-    user_plant_no = models.ForeignKey('UserPlantTb', models.DO_NOTHING, db_column='user_plant_no')
-    solution_id = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'diagnosis_history'                    
+          
         
        
 class SolutionTb(models.Model):
@@ -83,35 +91,44 @@ class SolutionTb(models.Model):
         managed = False
         db_table = 'solution_tb' 
 
-class UserPlantTb(models.Model):
-    user_plant_no = models.AutoField(primary_key=True)
-    user_plant_img = models.TextField(blank=True, null=True)
-    user = models.ForeignKey('UsersAppUser', models.DO_NOTHING, blank=True, null=True)
-    plant_no = models.ForeignKey(PlantTb, models.DO_NOTHING, db_column='plant_no')
-
+        
+        
+class DiagnosisItemCart(models.Model):
+    diagnosis_item_cart_id = models.AutoField(primary_key=True)
+    diagnosis_item_cart_list = models.JSONField(blank=True, null=True)
+    user = models.ForeignKey('users_app.UsersAppUser', models.DO_NOTHING, blank=True, null=True)
+    
     class Meta:
         managed = False
-        db_table = 'user_plant_tb'        
+        db_table = 'diagnosis_item_cart'
         
         
 
-class UsersAppUser(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.IntegerField(blank=True, null=True)
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=150, blank=True, null=True)
-    last_name = models.CharField(max_length=150, blank=True, null=True)
-    email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
-    date_joined = models.DateTimeField()
-    # user_name = models.CharField(max_length=30)
-    # user_phone = models.CharField(max_length=20)
-    # user_address = models.CharField(max_length=200)    
-    profile_image = models.TextField(blank=True, null=True)
+class DiagnosisShopingTb(models.Model):
+    shoping_tb_no = models.IntegerField(primary_key=True)
+    # shoping_tb_s = models.TextField(blank=True, null=True)
+    # shoping_tb_rss_channel = models.TextField(blank=True, null=True)
+    # shoping_tb_rss_channel_lastbuilddate = models.TextField(db_column='shoping_tb_rss_channel_lastBuildDate', blank=True, null=True)  # Field name made lowercase.
+    # shoping_tb_rss_channel_total = models.TextField(blank=True, null=True)
+    # shoping_tb_rss_channel_start = models.TextField(blank=True, null=True)
+    # shoping_tb_rss_channel_display = models.TextField(blank=True, null=True)
+    # shoping_tb_rss_channel_item = models.TextField(blank=True, null=True)
+    shoping_tb_rss_channel_item_title = models.TextField(blank=True, null=True)
+    shoping_tb_rss_channel_item_link = models.TextField(blank=True, null=True)
+    shoping_tb_rss_channel_item_image = models.TextField(blank=True, null=True)
+    shoping_tb_rss_channel_item_lprice = models.IntegerField(blank=True, null=True)
+    # shoping_tb_rss_channel_item_hprice = models.TextField(blank=True, null=True)
+    # shoping_tb_rss_channel_item_mallname = models.TextField(db_column='shoping_tb_rss_channel_item_mallName', blank=True, null=True)  # Field name made lowercase.
+    # shoping_tb_rss_channel_item_productid = models.BigIntegerField(db_column='shoping_tb_rss_channel_item_productId', blank=True, null=True)  # Field name made lowercase.
+    # shoping_tb_rss_channel_item_producttype = models.IntegerField(db_column='shoping_tb_rss_channel_item_productType', blank=True, null=True)  # Field name made lowercase.
+    # shoping_tb_rss_channel_item_maker = models.TextField(blank=True, null=True)
+    # shoping_tb_rss_channel_item_brand = models.TextField(blank=True, null=True)
+    # shoping_tb_rss_channel_item_category1 = models.TextField(blank=True, null=True)
+    # shoping_tb_rss_channel_item_category2 = models.TextField(blank=True, null=True)
+    # shoping_tb_rss_channel_item_category3 = models.TextField(blank=True, null=True)
+    # search_keyword_scores = models.FloatField(blank=True, null=True)
+    # shopping_review_scores = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'users_app_user'        
+        db_table = 'shoping_tb'
