@@ -11,84 +11,52 @@ const DiagnosisRecommend = () => {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const containerRef = useRef();
+    const [cookies, setCookie, removeCookie] = useCookies(['selectedItems']);
+    // const cartList = localStorage['selectedItems']
+    const dataString = JSON.stringify(selectedItems)
     const diagnosisItemCartList = selectedItems.map(item => item.shoping_tb_no);
     const diagnosisItemCartListJSON = JSON.stringify(diagnosisItemCartList);
-    const [cookies, setCookie] = useCookies(['id']);
-    const [diagnosisItemCartId, setDiagnosisItemCartId] = useState(null);
-    const [diagnosisItemCart, setDiagnosisItemCart] = useState(null);
-
-    useEffect(() => {        
-        if (cookies.diagnosisItemCartId) {
-          setDiagnosisItemCartId(cookies.diagnosisItemCartId);
-        }
-      }, []);
-
-
-    useEffect(() => {
-        const fetchDiagnosisItemCart = async () => {
-            try {
-                const response = await axios.get('http://localhost:8000/diagnosis_load_cart/', {
-                    headers: { Authorization: `Token  ${cookies.id}` },
-                    params: { diagnosis_item_cart_id: cookies.diagnosisItemCartId },
-                });
-
-                setDiagnosisItemCart(response.data);
-            } catch (error) {
-                console.error('에러났다:', error);
-            }
-        };
-
-        if (cookies.diagnosisItemCartId) {
-            fetchDiagnosisItemCart();
-        }        
-    }, [cookies.diagnosisItemCartId, cookies.id]);
-
     
+    // const sendDataToServer = async () => {
+    //     try {
+    //       await axios.post('http://localhost:8000/diagnosis_save_cart', { shopingTbNoList });
+    //       alert('목록 저장 완료');
+    //     } catch (error) {
+    //       console.error('에러났다:', error);
+    //       alert('삐삐에러발생');
+    //     }
+    //   };
+    
+    // // sendDataToServer 함수 호출
+    // sendDataToServer();
 
-    const handleLoadButtonClick = async () => {
-        try {
-            // 불러오기 버튼을 눌렀을 때 API에서 데이터를 받아옴
-            const response = await axios.get(`http://localhost:8000/diagnosis_load_cart/?diagnosis_item_cart_id=${diagnosisItemCartId}`);
-            
-            // 받아온 데이터를 selectedItems 상태로 설정
-            setSelectedItems(response.data);
-        } catch (error) {
-            console.error('데이터 불러오기 에러:', error);
-            alert('데이터 불러오기에 실패했습니다.');
-        }
+
+    // console.log('dataString = ', dataString)
+
+    const handleDeleteButtonClick = () => {
+        setSelectedItems([]);
     };
 
-    
-
-
-    const saveDiagnosisItemCart = async () => {
+    const handleSaveButtonClick = async () => {
         try {                        
-            const response = await axios.post(
-                'http://localhost:8000/diagnosis_save_cart/', 
-                { 'diagnosis_item_cart_list' : diagnosisItemCartListJSON },
-                { headers: { Authorization: `Token  ${cookies.id}` }}
-            );
-            console.log('res113 ', response.data);
+            
+            // await axios.post('http://localhost:8000/diagnosis_save_cart/', { diagnosis_item_cart_list: dataString });
+            await axios.post('http://localhost:8000/diagnosis_save_cart/', { 'diagnosis_item_cart_list' : diagnosisItemCartListJSON });
+            
             alert('목록 저장 완료');
-                  
-            setDiagnosisItemCartId(response.data.diagnosis_item_cart_id);
-            setCookie('diagnosisItemCartId', response.data.diagnosis_item_cart_id);
-
         } catch (error) {
             console.error('에러났다:', error);
             alert('삐삐에러발생');
         }
     };
-    console.log('diagnosis_item_cart_id = ', diagnosisItemCartId);
+    
 
-
-
-    // useEffect(() => {
-    //     const savedItems = cookies.selectedItems;
-    //     if (savedItems) {
-    //         setSelectedItems(savedItems);
-    //     }
-    // }, [cookies.selectedItems]);
+    useEffect(() => {
+        const savedItems = cookies.selectedItems;
+        if (savedItems) {
+            setSelectedItems(savedItems);
+        }
+    }, [cookies.selectedItems]);
 
     useEffect(() => {        
         const savedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
@@ -147,7 +115,7 @@ const DiagnosisRecommend = () => {
                 ? prevItems.filter(item => item !== recommendations[index])
                 : [...prevItems, recommendations[index]];
 
-            // setCookie('selectedItems', updatedItems, { path: '/' });
+            setCookie('selectedItems', updatedItems, { path: '/' });
             updateLocalStorage(updatedItems);
 
             return updatedItems;
@@ -159,30 +127,24 @@ const DiagnosisRecommend = () => {
             const selectedItem = selectedItems[index];
             const updatedItems = prevItems.filter(item => item !== selectedItem);
 
-            // setCookie('selectedItems', updatedItems, { path: '/' });
+            setCookie('selectedItems', updatedItems, { path: '/' });
             updateLocalStorage(updatedItems);
     
             return updatedItems;
         });
     };
     
-    const handleDeleteButtonClick = () => {
-        setSelectedItems([]);
-        localStorage.removeItem('selectedItems');
-    };
 
     useEffect(() => {
         setRecommendations((prevData) => prevData.map(item => (selectedItems.includes(item) ? item : item)));
     }, [selectedItems]);
 
-
-    
     
 
     // console.log('cookie = ', cookies)
     // console.log("cart_list = ", cartList)    
     // console.log("localStorage = ", localStorage)
-    console.log('diagnosisItemCart = ', diagnosisItemCart)
+
 
 
     return (
@@ -190,12 +152,10 @@ const DiagnosisRecommend = () => {
 
             <div className="diagnosis_recommend_section_1_wrap">
                 <div className="diagnosis_recommend_section_1_title_wrap">
-                    <div className="diagnosis_recommend_section_1_title_cart">                        
-                        <div>No.{diagnosisItemCartId}</div>
+                    <div className="diagnosis_recommend_section_1_title_cart">
                         <div onClick={handleDeleteButtonClick}>삭제</div>
-                        <div>장바구니 찜 목록</div>
-                        <div onClick={saveDiagnosisItemCart}>저장</div>
-                        <div onClick={handleLoadButtonClick}>불러오기</div>                     
+                        <div>솔루션 아이템 목록</div>
+                        <div onClick={handleSaveButtonClick}>저장</div>                                              
                     </div>                    
                 </div>
 

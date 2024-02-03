@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6d38d24c.css",
+    "main.js": "/static/js/main.69efc376.js",
+    "static/js/787.1f625349.chunk.js": "/static/js/787.1f625349.chunk.js",
+    "static/media/pixelroborobo.otf": "/static/media/pixelroborobo.2e17dc896bc6cb8e8b80.otf",
+    "static/media/farm_quest_site.png": "/static/media/farm_quest_site.8d4f004674266fabc569.png",
+    "static/media/neodgm.woff": "/static/media/neodgm.523c21df1190c7db8544.woff",
+    "static/media/farm_quest_site.svg": "/static/media/farm_quest_site.c683604ddfdea77000e48ec64ffbe023.svg",
+    "index.html": "/index.html",
+    "main.6d38d24c.css.map": "/static/css/main.6d38d24c.css.map",
+    "main.69efc376.js.map": "/static/js/main.69efc376.js.map",
+    "787.1f625349.chunk.js.map": "/static/js/787.1f625349.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6d38d24c.css",
+    "static/js/main.69efc376.js"
+  ]
+}
