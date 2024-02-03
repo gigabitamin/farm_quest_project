@@ -1,22 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
 import DiagnosisLink from "./diagnosis/DiagnosisLink";
 import LoginLink from './user/LoginLink'
 import CsLink from './customerCenter/CsLink'
 import { useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie'; 
+
 
 const Header = () => {
     const DjangoServer = useSelector(state => state.DjangoServer);
     const user = { is_authenticated: false, username: 'exampleUser' };
 
-    const portal_search = () => {
-        let keyword = document.getElementById("search_keyword").value;
-        console.log(keyword)
-        return false
-        // window.location.href = keyword;
-    };    
+    const [cookies] = useCookies(['id', 'username']);
+    const user_id = cookies.user ? cookies.user.id : 0;
 
+    // 기존에 선택된 카테고리를 state로 관리
+    const [selectedCategory, setSelectedCategory] = useState('default');
+
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+    };
+
+    const portal_search = () => {
+
+        let keyword = document.getElementById("search_keyword").value;
+        
+        if (selectedCategory === "gardening_shop_search" && keyword) {
+            keyword = encodeURIComponent(keyword);
+            window.location.href = `/gardening_shop_search/${keyword}/${user_id}`;
+        }
+
+        return false;
+    };
     // document.addEventListener('DOMContentLoaded', function () {
     //     const navItems = document.querySelectorAll('.nav-item_hd');
     
@@ -46,8 +62,8 @@ const Header = () => {
                 {/* 통합 검색창 시작 - kdy
                 원하는 카테고리 선택후 검색어 입력 -> 검색 클릭 시 portal_search() js 함수 호출 */}
                 <div className="portal_search">
-                    <select id="portal_select">
-                        <option selected>선택</option>
+                    <select id="portal_select" value={selectedCategory} onChange={handleCategoryChange}>
+                        <option value="default">선택</option>
                         <option value="gardening_shop_search">가드닝 샵</option>
                         <option value="customer_service_center">고객센터</option>                
                     </select>                                
@@ -65,18 +81,10 @@ const Header = () => {
                 <ul>
                     {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}                                        
                     
-                    
-
-                    <div className="nav-item_hd">
-                        <div className="nav-item_hd"><Link to={DjangoServer}>장고</Link></div>
-                        <div className="dropdown-menu_hd">                            
-                            {/* <div className="btn_hd"><Link to="http://localhost:8000">장고 로컬</Link></div> */}
-                        </div>
-                    </div>
-
                     <CsLink />
+
                     <div className="nav-item_hd">
-                    <div className="nav-item_hd"><Link >가이드</Link></div>
+                        <div><Link to="/guide_index">가이드</Link></div>
                         <div className="dropdown-menu_hd">
                             <div className="btn_hd"><Link >가이드 안내</Link></div>
                             <div className="btn_hd"><Link >가이드 상세</Link></div>

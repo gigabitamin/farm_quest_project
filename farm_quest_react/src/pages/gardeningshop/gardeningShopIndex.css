@@ -2,6 +2,26 @@
   padding-top:30px;
 }
 
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.category-button {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-button:hover {
+  background-color: #e2e6ea;
+}
+
 /* 상품 리스트 스타일 */
 .product-list {
   display: grid;
