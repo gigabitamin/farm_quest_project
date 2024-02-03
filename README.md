@@ -54,6 +54,8 @@ export default "http://localhost:8000"
 ====================================================
 <!-- version -->
 
+-jsh feather bugfix, psh confirmed
+
 
 ### v0.6.8 kdy  
 - 진단 결과 공유하는 사용자 진단 게시판 추가 diagnosisBoard / diagnosisBoard_app
