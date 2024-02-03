@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    <!-- <link rel="stylesheet" href="../../../static/css/style_ltj.css">
+    <link rel="stylesheet" href="../../../static/css/schedular.css"> -->
+    
+
+<!-- 메인 -->
+    <main class="container index_main">
+
+        <section class="scd_btn_section">
+                <a class="schedular_btn" href="{% url 'schedular' %}">
+                    <div class="schedular_btn">gen_btn</div>
+                </a>
+
+                </a>
+        </section>
+        <br>
+        <section class="scd_content_section">
+            <div id="schedular_filter">filter
+                <p>
+                    <ul id="schedule_filter">
+                        <li><input type="checkbox" id="ck1" name="ck1" value="1" >
+                            <label for="ck1">딸기</label></li>
+                        <li><input type="checkbox" id="ck2" name="ck2" value="1" >
+                            <label for="ck2">토마토</label></li>
+                        <li><input type="checkbox" id="ck3" name="ck3" value="1" >
+                            <label for="ck3">파프리카</label></li>
+                        <li><input type="checkbox" id="ck4" name="ck4" value="1" >
+                            <label for="ck4">오이</label></li>
+                        <li><input type="checkbox" id="ck4" name="ck5" value="1" >
+                            <label for="ck4">고추</label></li>
+                        <li><input type="checkbox" id="ck4" name="ck6" value="1" >
+                            <label for="ck4">포도</label></li>
+                    </ul>
+                </p>
+            </div>
+            <div id="schedular_content">schedular</div>
+        </section>
+    </main>
+
+
+
+    {% endblock content %}

@@ -6,25 +6,50 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
+from django.core.files.base import ContentFile
+from PIL import Image
+
+
 
 class Profile(models.Model):
     # user = models.OneToOneField(User, on_delete=models.CASCADE)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    nickname = models.CharField(max_length=128)
-    position = models.CharField(max_length=128)
-    subjects = models.CharField(max_length=128)
-    image = models.ImageField(upload_to='profile/', default='default.png')
+    id = models.BigAutoField(primary_key=True)
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.IntegerField(blank=True, null=True)
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=150, blank=True, null=True)
+    last_name = models.CharField(max_length=150, blank=True, null=True)
+    email = models.CharField(max_length=254, blank=True, null=True)    
+    is_staff = models.IntegerField(blank=True, null=True)
+    is_active = models.IntegerField(blank=True, null=True)
+    date_joined = models.DateTimeField(blank=True, null=True)
+    profile_image = models.BinaryField(blank=True, null=True)
+    # profile_image = models.TextField(blank=True, null=True)
+    nickname = models.CharField(max_length=150)
+    user_name = models.CharField(max_length=45)
+    phone_number = models.CharField(max_length=11)
+    address = models.CharField(max_length=255)
+    
+        
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            User.objects.create(user=instance)
+            
+            if instance.profile.profile_image:
+                image_data = instance.profile.profile_image.read()
+                instance.profile.profile_image.save(instance.username + '_profile_image.png', ContentFile(image_data), save=False)
+                instance.profile.save()
 
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+        if instance.profile.profile_image:
+            image_data = instance.profile.profile_image.read()
+            instance.profile.profile_image.save(instance.username + '_profile_image.png', ContentFile(image_data), save=False)
+            instance.profile.save()
 
 
 # django
@@ -100,23 +125,27 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
-
-
+    
+    
 class User(AbstractUser):
     # pass # 기본 auth_user 테이블과 동일
     
     # 새로운 필드 추가 
     
     # 장고
-    # user_name = models.CharField(max_length=30)
-    # user_phone = models.CharField(max_length=20)
-    # user_address = models.CharField(max_length=200)
+    nickname = models.CharField(max_length=150, unique=True)
+    user_name = models.CharField(max_length=45, unique=True) 
+    phone_number = models.CharField(max_length=11, unique=True)
+    address = models.CharField(max_length=255, unique=True)
+    profile_image = models.CharField(max_length=255, unique=True)
 
-    # 리액트
-    email = models.EmailField(unique=True)
-    # email = models.CharField(max_length=254, unique=True)  
-
-
+    # 리액트 
+    # email = models.EmailField(unique=True)
+    # email = models.CharField(max_length=254, unique=True)      
+    
+    class Meta:
+        managed = False
+        db_table = 'users_app_user'
 
 class UsersAppUser(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -126,15 +155,17 @@ class UsersAppUser(models.Model):
     username = models.CharField(unique=True, max_length=150)
     first_name = models.CharField(max_length=150, blank=True, null=True)
     last_name = models.CharField(max_length=150, blank=True, null=True)
-    email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
-    date_joined = models.DateTimeField()
-    # user_name = models.CharField(max_length=30)
-    # user_phone = models.CharField(max_length=20)
-    # user_address = models.CharField(max_length=200)    
-    profile_image = models.TextField(blank=True, null=True)
-
+    email = models.CharField(max_length=254, blank=True, null=True)    
+    is_staff = models.IntegerField(blank=True, null=True)
+    is_active = models.IntegerField(blank=True, null=True)
+    date_joined = models.DateTimeField(blank=True, null=True)
+    profile_image = models.BinaryField(blank=True, null=True)
+    # profile_image = models.TextField(blank=True, null=True)
+    nickname = models.CharField(max_length=150, blank=True, null=True)
+    user_name = models.CharField(max_length=45, blank=True, null=True) 
+    phone_number = models.CharField(max_length=11, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    
     class Meta:
         managed = False
         db_table = 'users_app_user'

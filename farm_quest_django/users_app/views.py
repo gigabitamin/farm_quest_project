@@ -24,19 +24,183 @@ from django.shortcuts import get_object_or_404, render, redirect
 # DRF
 from rest_framework import generics, status
 from rest_framework.response import Response
+from .serializers import CustomUserSerializer, RegisterSerializer, LoginSerializer, ProfileSerializer, UserSerializers
+from .models import Profile
+
+# 리액트 로그인 관련
+from django.contrib.auth import authenticate
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
 from .serializers import RegisterSerializer, LoginSerializer, ProfileSerializer
 from .models import Profile
-from .models import User
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework import status, permissions
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+import base64
+from django.views import View
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 
+from django.contrib.auth import get_user_model
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+
+
+class UserProfileDeleteView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, *args, **kwargs):
+        print('hi')
+        user = request.user
+        print('hi2')
+        user.delete()
+        print('hi3')
+        return Response({"message": "탈퇴 성공"}, status=status.HTTP_204_NO_CONTENT)
 
 
 
+# class UserProfileDeleteView(APIView):
+#     permission_classes = [permissions.IsAuthenticated]
+
+#     def delete(self, request, *args, **kwargs):
+#         user = request.user
+
+#         # 여기서 토큰 검증을 추가
+#         token = request.data.get('token', None)
+#         if token:
+#             try:
+#                 token_obj = Token.objects.get(key=token)
+#             except Token.DoesNotExist:
+#                 return Response({'error': '토큰 꽝'}, status=status.HTTP_400_BAD_REQUEST)
+
+#             # 토큰이 유효한 경우에만 삭제 진행
+#             user.delete()
+#             return Response({"message": "탈퇴 성공"}, status=status.HTTP_204_NO_CONTENT)
+
+#         return Response({'error': '토큰 없어'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 
+# class UserProfileDeleteView(APIView):
+#     permission_classes = [IsAuthenticated]
 
+#     def delete(self, request, *args, **kwargs):
+#         try:
+#             ('hi')
+#             user = get_user_model().objects.get(pk=request.user.pk)
+#             user.delete()
+#             return Response({"message": "탈퇴 성공"}, status=status.HTTP_204_NO_CONTENT)
+#         except get_user_model().DoesNotExist:
+#             return Response({"error": "존재하지 않는 사용자"}, status=status.HTTP_404_NOT_FOUND)
+#         except Exception as e:
+#             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# class UserProfileDeleteView(APIView):
+#     permission_classes = [IsAuthenticatedOrReadOnly]
+
+#     def delete(self, request, *args, **kwargs):
+#         print('hi1')
+#         user = request.user
+#         print('hi2')
+#         user.delete()
+#         print('hi3')
+#         return Response({"message": "탈출 성공"}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+class ProfileImageView(View):
+    def get(self, request, pk):
+        print('hi1')
+        try:
+            print('hi2')
+            profile = User.objects.get(id=pk)
+            print('profiel = ', profile)
+            if profile.profile_image:
+                print('hi3')
+                image_data = base64.b64encode(profile.profile_image).decode('utf-8')
+                print('hi4', image_data)
+                return JsonResponse({'image_data': image_data})
+            else:
+                return JsonResponse({'error': '이미지 없다'})
+        except User.DoesNotExist:
+            return JsonResponse({'error': '없어'})
+
+
+class ProfileView(generics.RetrieveUpdateAPIView):    
+    queryset = User.objects.all()
+    serializer_class = ProfileSerializer
+
+    # def patch(self, request):
+    #     profile = Profile.objects.get(user=request.user)
+    #     serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     data = serializer.validated_data
+    #     profile.nickname = request.data['nickname']
+    #     profile.user_name = request.data['user_name']
+    #     profile.phone_number = request.data['phone_number']
+    #     profile.address = request.data['address']
+    #     print('profile.nickname = ', profile.nickname)
+    #     print('profile.user_name = ', profile.user_name)
+    #     print('profile.phone_number = ', profile.phone_number)
+    #     print('profile.address = ', profile.address)
+    #     print('data = ', data)
+    #     print('request.data = ', request.data)        
+    #     if request.data['image']:
+    #         profile.image = request.data['image']
+    #         print('profile.image = ', profile.image)
+    #     print('profile = ', profile)
+    #     profile.save()
+        
+    #     return Response({"result": "ok"}, status=status.HTTP_206_PARTIAL_CONTENT)
+
+    # def get(self, request):
+    #     profile = Profile.objects.get(user=request.user)
+    #     serializer = self.get_serializer(profile)
+    #     print('serializer 1 = ', serializer)
+    #     return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def login_check(request):    
+    token = request.data.get('token', None)
+    print('token = ', token)
+
+    if token:        
+        try:
+            token_obj = Token.objects.get(key=token)
+            print('token_obj = ', token_obj)
+        except Token.DoesNotExist:
+            return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        user = token_obj.user
+        print('user = ', user)
+        user_context = {'id': user.id, 'username':user.username}
+        print('user_context = ', user_context)
+        return Response(user_context, status=status.HTTP_200_OK)
+
+    return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class UserInfoView(generics.RetrieveAPIView):
+    serializer_class = CustomUserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -49,31 +213,13 @@ class LoginView(generics.GenericAPIView):
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        token = serializer.validated_data
-        return Response({"token": token.key}, status=status.HTTP_200_OK)
+        token, serialized_user = serializer.validated_data
+        
+        return Response({"token": token.key, 'user': serialized_user}, status=status.HTTP_200_OK)
 
 
-class ProfileView(generics.GenericAPIView):
-    serializer_class = ProfileSerializer
 
-    def patch(self, request):
-        profile = Profile.objects.get(user=request.user)
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        data = serializer.validated_data
-        profile.nickname = data['nickname']
-        profile.position = data['position']
-        profile.subjects = data['subjects']
-        if request.data['image']:
-            profile.image = request.data['image']
-        profile.save()
-        return Response({"result": "ok"},
-                        status=status.HTTP_206_PARTIAL_CONTENT)
 
-    def get(self, request):
-        profile = Profile.objects.get(user=request.user)
-        serializer = self.get_serializer(profile)
-        return Response(serializer.data)
 
 # 리액트 연동
 def sign_in2(request):
@@ -87,7 +233,6 @@ def sign_in2(request):
             return JsonResponse({'message': '로그인 성공'})
         else:            
             return JsonResponse({'message': '로그인 실패'}, status=400)
-
 
 # django
 def sign_in(request):

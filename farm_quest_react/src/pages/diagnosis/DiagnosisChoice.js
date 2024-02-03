@@ -1,67 +1,82 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './DiagnosisChoice.css'
 
 const DiagnosisChoice = () => {
+    let history = useNavigate();
   
-    //서버로 부터 받은 데이터 state 설정
-    const [plantSpecies, setplantSpecies] = useState([]);
-
-    // 서버에 요청해서 데이터 받아와서
-    // state 값 저장하는 함수
-    const planLoadData = async () => {
+    const [plantSpecies, setPlantSpecies] = useState([]); 
+    const plantLoadData = async () => {
         const response = await axios.get('http://localhost:8000/plant_api/');
-        console.log(response.data);
-        // 받아온 값으로 state 값 저장
-        setplantSpecies(response.data);
+        setPlantSpecies(response.data);
+        console.log(response.data)
     };
 
-    // useEffect() : 컴포넌트가 렌더링될 때마다 특정 작업을 실행할 수 있도록 해주는 Hook
-    // 렌더링 될 때마다 호출 
-    // loadData() 한 번만 호출하도록 설정 : 빈 배열 지정
     useEffect(() => {
-      planLoadData();
+        plantLoadData();
     }, []);
 
-  const [selectedPlant, setSelectedPlant] = useState({});
-  const handlePlantChange = (e) => {
-    setSelectedPlant(e.target.value);
-  };
+    const [selectedPlantIndex, setSelectedPlantIndex] = useState(null);
 
-  const handleChoiceSubmit = () => {
-    if (selectedPlant) {
-      alert("선택한 작물: " + selectedPlant);
-    } else {
-      alert("진단하실 작물을 선택해주세요");
-    }
-  };
+    const handlePlantChange = (e) => {
+        setSelectedPlantIndex((selectedPlantIndex) => ({
+            ...selectedPlantIndex,
+            [`user_select_plant`]: e.target.value,            
+        }));
+    };
 
-  return (
-    <div className="diagnosis_choice_main diagnosis_main">
-      <section className="diagnosis_choice_section">
-        <article className="diagnosis_choice_article">
-          <div className="diagnosis_choice_wrap">
-            <form id="diagnosis_choice_form">
-              <h2>작물 선택</h2>
-              {plantSpecies.map((plant) => (
-                <label key={plant.plant_name}>
-                  <input
-                    type="radio"
-                    name="choice_plant"
-                    value={plant.plant_name}
-                    onChange={handlePlantChange}
-                  />
-                  {plant.plant_name}
-                </label>
-              ))}
-              <button type="button" onClick={handleChoiceSubmit}>
-                선택완료
-              </button>
-            </form>
-          </div>
-        </article>
-      </section>
-    </div>
-  );
+    const handleChoiceSubmit = (e) => {
+        e.preventDefault();        
+
+        const selectedPlant = plantSpecies.find(plant => plant.plant_no === parseInt(selectedPlantIndex['user_select_plant'], 10));
+  
+        let frmData = new FormData(document.diagnosisChoiceForm); 
+        frmData.append(`user_select_plant`, selectedPlantIndex[`user_select_plant`])        
+    
+        axios.post('http://localhost:8000/save_diagnosis_result_api/', frmData)
+            .then(response => {                                      
+                alert("선택한 작물 : " + selectedPlant.plant_name);                
+                history('/diagnosis_upload', {state : {newDiagnosisResultId : response.data}});
+            })
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    };
+    
+    return (        
+        <div className="diagnosis_choice_main diagnosis_main">
+            <section className="diagnosis_choice_section">
+                <article className="diagnosis_choice_article">
+                    <div className="diagnosis_choice_wrap">
+                        <form  id="diagnosis_choice_form" name="diagnosisChoiceForm" onSubmit={handleChoiceSubmit}>
+                            <h2>작물 선택</h2>
+                            <input type="submit" value="선택완료" />              
+                            {plantSpecies.map((plant) => (
+                                <div key={plant.plant_no}>
+                                    <label>
+                                        <div>
+                                        <div><img src={plant.plant_main_img }
+                                            alt={plant.plant_no}
+                                            style={{ width: '100px', height: 'auto' }}></img>
+                                        </div>
+                                        <div>{plant.plant_name}</div>
+                                        <div>{plant.plant_content}</div>
+                                        </div>                                        
+                                        <input type="radio" name="choice_plant" value={plant.plant_no} onChange={handlePlantChange}/>
+                                    </label>
+                                </div>
+                            ))}
+                            
+                        </form>
+                    </div>
+                </article>
+            </section>
+        </div>    
+    );
 };
 
 export default DiagnosisChoice;

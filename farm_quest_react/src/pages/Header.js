@@ -1,18 +1,36 @@
 import React, { useState } from 'react';
-import {Link, Routes, Route} from 'react-router-dom';
-import DiagnosisIndex from "./diagnosis/DiagnosisIndex"
-import DiagnosisAnswer from "./diagnosis/DiagnosisAnswer"
-import DiagnosisResult from "./diagnosis/DiagnosisResult"
+import {Link} from 'react-router-dom';
 import FarmQuestSiteLogo from '../images/logo/farm_quest_site.svg';
+import DiagnosisLink from "./diagnosis/DiagnosisLink";
+import LoginLink from './user/LoginLink'
+import TestLink from './user/TestLink'
+import { useCookies } from 'react-cookie'; 
+
 
 const Header = () => {
-    const portal_search = () => {
-        let keyword = document.getElementById("search_keyword").value;
-        console.log(keyword)
-        return false
-        // window.location.href = keyword;
-    };    
+    const user = { is_authenticated: false, username: 'exampleUser' };
 
+    const [cookies] = useCookies(['id', 'username']);
+    const user_id = cookies.user ? cookies.user.id : 0;
+
+    // 기존에 선택된 카테고리를 state로 관리
+    const [selectedCategory, setSelectedCategory] = useState('default');
+
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+    };
+
+    const portal_search = () => {
+
+        let keyword = document.getElementById("search_keyword").value;
+        
+        if (selectedCategory === "gardening_shop_search" && keyword) {
+            keyword = encodeURIComponent(keyword);
+            window.location.href = `/gardening_shop_search/${keyword}/${user_id}`;
+        }
+
+        return false;
+    };
     // document.addEventListener('DOMContentLoaded', function () {
     //     const navItems = document.querySelectorAll('.nav-item_hd');
     
@@ -26,13 +44,8 @@ const Header = () => {
     //     });
     // });
     
-    const [solutionContent, setSolutionContent] = useState([]);
-    const [diagnosisQuestions, setDiagnosisQuestions] = useState([]);
-
-    
-    
     return (
-        <header>
+        <header>            
             <div className="headerMenu">
                 <a href="/"><img src={FarmQuestSiteLogo} alt="Logo" id="logo"/></a>
                 {/* 주석처리 - kdy
@@ -47,8 +60,8 @@ const Header = () => {
                 {/* 통합 검색창 시작 - kdy
                 원하는 카테고리 선택후 검색어 입력 -> 검색 클릭 시 portal_search() js 함수 호출 */}
                 <div className="portal_search">
-                    <select id="portal_select">
-                        <option selected>선택</option>
+                    <select id="portal_select" value={selectedCategory} onChange={handleCategoryChange}>
+                        <option value="default">선택</option>
                         <option value="gardening_shop_search">가드닝 샵</option>
                         <option value="customer_service_center">고객센터</option>                
                     </select>                                
@@ -57,24 +70,14 @@ const Header = () => {
                 </div>
                 {/* 통합 검색창 끝 */}
 
-                        
-                {/* 회원가입 로그인 박스 시작 login.css - kdy */}
-                {/* <div className="loginBox_hd">
-                    {% if user.is_authenticated %}
-                        <div className="login_sign_in">{{ user.username }}</div>
-                        <div className="login_sign_out"><a href="{% url 'sign_out' %}">Logout</a></div>
-                    {% else %}
-                        <div className="login_sign_up"><a href="{% url 'sign_up2' %}">회원가입</a></div>
-                        <div> / </div>
-                        <div className="login_sign_in"><a href="{% url 'sign_in' %}">로그인</a></div>
-                    {% endif %}    
-                </div> */}
-                {/* 회원가입 로그인 박스 끝 - kdy */}
+                {/* 회원가입 로그인 박스 컴포넌트 - kdy */}                                
+                <LoginLink user={user} />
+            
             </div>
 
             <nav className="navbar_hd">
-                <ul> 
-                    {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}
+                <ul>                     
+                    {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}                                        
                     <div className="btn_hd"><Link to="http://127.0.0.1:8000">장고로 이동</Link></div>
                     <div className="nav-item_hd">                        
                         <div><a href="{% url 'customer_service_index' %}" className="nav-link_hd">고객센터</a></div>
@@ -86,7 +89,7 @@ const Header = () => {
                     </div>           
 
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'guide_index' %}" className="nav-link_hd">가이드</a></div>
+                        <div><Link to="/guide_index">가이드</Link></div>
                         <div className="dropdown-menu_hd">
                             <div><a href="{% url 'guide_index' %}" className="btn_hd">가이드 안내</a></div>
                             <div><a href="{% url 'guide_detail' %}" className="btn_hd">가이드 상세</a></div>                    
@@ -94,36 +97,30 @@ const Header = () => {
                     </div>            
 
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'gardening_shop_index' %}" className="nav-link_hd">가드닝 샵</a></div>
+                        <div className="nav-link_hd"><Link to="/gardening_shop_index">가드닝 샵</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'gardening_shop_index' %}" className="btn_hd">상품 리스트</a></div>
-                            <div><a href="{% url 'gardening_shop_review_anlystics' %}" className="btn_hd">상품 리뷰 분석</a></div>                    
+                            <div className="btn_hd"><Link to="/">상품 리스트</Link></div>
+                            <div className="btn_hd"><Link to="/">상품 리뷰 분석</Link></div>                    
                         </div>
                     </div>
-
-                    {/* diagnosis Link start */}
-                    <div className="nav-item_hd">                        
-                        <div className="nav-link_hd"><Link to="/diagnosis_index">작물 진단</Link></div>
-                        <div className="dropdown-menu_hd">
-                            <div className="btn_hd"><Link to="/diagnosis_answer">진단 문진표 작성</Link></div>
-                            <div className="btn_hd"><Link to="/diagnosis_result">진단 결과</Link></div>
-                        </div>
-                    </div>
-                    {/* diagnosis Link end */}
+                    <TestLink />
+                    <DiagnosisLink />                    
+                    {/* 진단 페이지 링크 끝 / 헤더 css 수정시 주석 해제 후 진행바람 */}
 
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'community_index' %}" className="nav-link_hd">커뮤니티</a></div>
+                        <div className="nav-link_hd"><Link reloadDocument to="/community/main">커뮤니티</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'farm_log_index' %}" className="btn_hd">팜로그</a></div>
-                            <div><a href="{% url 'qna_index' %}" className="btn_hd">질문/답변</a></div>                    
+                            <div className="btn_hd"><Link reloadDocument to="/community/farmlog">팜로그</Link></div>
+                            <div className="btn_hd"><Link reloadDocument to="/community/qna">질문/답변</Link></div>                    
                         </div>
                     </div>
                     
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'scheduler_general' %}" className="nav-link_hd">스케쥴러</a></div>
+                        <div className="nav-link_hd"><Link to="/Scheduler">스케쥴러</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'scheduler_general' %}" className="btn_hd">일반 스케쥴러</a></div>
-                            <div><a href="{% url 'scheduler_personal' %}" className="btn_hd">개인 스케쥴러</a></div>                    
+                            <div className="btn_hd"><Link to="/scheduler">진입</Link></div>
+
+                            {/* <div><a href="{% url 'scheduler_personal' %}" className="btn_hd">개인 스케쥴러</a></div>                     */}
                         </div>
                     </div>                    
 
@@ -131,18 +128,15 @@ const Header = () => {
                         <div><a href="{% url 'mypage' %}" className="nav-link_hd">마이페이지</a></div>
                         <div className="dropdown-menu_hd">                 
                             <div><a href="{% url 'user_plant' %}" className="btn_hd">나의 작물</a></div>
-                            <div><a href="{% url 'user_farmlog' %}" className="btn_hd">남의 팜로그</a></div>
+                            <div><a href="{% url 'user_farmlog' %}" className="btn_hd">나의 팜로그</a></div>
                             <div><a href="{% url 'user_QnA' %}" className="btn_hd">나의 QnA</a></div>
                             <div><a href="{% url 'user_bookmark' %}" className="btn_hd">즐겨찾기</a></div>                    
                         </div>
                     </div>
+                    
+
                 </ul>
             </nav>
-            <Routes>
-                <Route path="/diagnosis_index" element={<DiagnosisIndex solutionContent={solutionContent} setSolutionContent={setSolutionContent} />} />
-                <Route path="/diagnosis_answer" element={<DiagnosisAnswer diagnosisQuestions={diagnosisQuestions} setDiagnosisQuestions={setDiagnosisQuestions} />} />
-                <Route path="/diagnosis_result" element={<DiagnosisResult />} />
-            </Routes>
         </header>
     );
 };

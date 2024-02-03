@@ -1,0 +1,11 @@
+# login -kdy
+react-cookie
+# npm i @types/node
+
+# @types/node
+
+# scheduler -psh
+# npm install --save-dev @babel/plugin-proposal-private-property-in-object@^1.0.7
+# "devDependencies": {
+#   "@babel/plugin-proposal-private-property-in-object": "^1.0.7"
+# }
