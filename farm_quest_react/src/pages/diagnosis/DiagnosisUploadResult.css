@@ -1,38 +1,40 @@
-
 @media screen and (max-width: 999px) {
 
   .diagnosis_result_section_wrap {
     border: 31px solid green;
-    padding:3px;
+    padding: 3px;
   }
-  
+
   .diagnosis_result_analystic_summary_box_detail {
     flex-direction: column;
   }
-  
+
   .diagnosis_result_detect_wrap {
     flex-direction: column;
   }
 
   .diagnosis_result_detect_item {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     /* margin: 0 auto; */
     /* align-items: center; */
   }
+
   .diagnosis_result_detect_item_content {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     margin: 0 auto;
     align-items: center;
   }
+
   .diagnosis_result_predict_disease_item_summary {
     flex-direction: column;
   }
+
   .diagnosis_result_predict_disease_list_box {
     flex-direction: column;
   }
-  
+
 }
 
 
@@ -49,18 +51,18 @@
 
 .diagnosis_result_wrap {
   border: 3px solid green;
-  padding:3px;
-  background-color: #e0e0e0;  
-  margin:0 auto;  
+  padding: 3px;
+  background-color: #F2F1EB;
+  margin: 0 auto;
   max-width: 1280px;
 }
 
 .diagnosis_result_section_wrap {
   border: 3px solid green;
-  padding:3px;
-  display:flex;
-  flex-direction: column;  
-  margin : 0 auto;  
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }
 
 .diagnosis_result_title {
@@ -81,7 +83,7 @@
 .diagnosis_result_analystic_wrap {
   border: 3px solid green;
   padding: 3px;
-  
+
 }
 
 
@@ -98,15 +100,18 @@
   border: 3px solid green;
   padding: 3px;
 }
+
 .diagnosis_result_analystic_info h3 {
   border: 3px solid green;
   padding: 3px;
 }
-.diagnosis_result_analystic_info > div:nth-child(2){
+
+.diagnosis_result_analystic_info>div:nth-child(2) {
   border: 3px solid green;
   padding: 3px;
 }
-.diagnosis_result_analystic_info > div:nth-child(3){
+
+.diagnosis_result_analystic_info>div:nth-child(3) {
   border: 3px solid green;
   padding: 3px;
 }
@@ -114,16 +119,16 @@
 .diagnosis_result_analystic_summary_box {
   border: 3px solid green;
   padding: 3px;
-  display: flex; 
+  display: flex;
   flex-direction: column;
-  width:100%;
+  width: 100%;
 }
 
 
 .diagnosis_result_analystic_summary_box_detail {
   border: 3px solid green;
   padding: 3px;
-  display: flex;  
+  display: flex;
   /* flex-direction: column; */
   /* min-height:200px; */
   /* max-height:500px; */
@@ -131,22 +136,22 @@
 
 .diagnosis_result_analystic_image {
   border: 3px solid green;
-  padding:3px;
-  width:100%;  
-  display: flex;  
-  align-items: center;  
+  padding: 3px;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .diagnosis_result_analystic_image_img {
   border: 3px solid green;
-  padding:3px;
-  width:100%;
+  padding: 3px;
+  width: 100%;
 }
 
-.diagnosis_result_analystic_summary_content{
+.diagnosis_result_analystic_summary_content {
   border: 3px solid green;
   padding: 3px;
-  width:100%;
+  width: 100%;
 }
 
 .diagnosis_result_analystic_summary_solution_item {
@@ -154,17 +159,20 @@
   padding: 3px;
   height: 100%;
 }
-.diagnosis_result_analystic_summary_solution_item > div:nth-child(1) {
+
+.diagnosis_result_analystic_summary_solution_item>div:nth-child(1) {
   border: 3px solid green;
   padding: 3px;
   /* overflow-y: auto; */
 }
-.diagnosis_result_analystic_summary_solution_item > div:nth-child(2) {
+
+.diagnosis_result_analystic_summary_solution_item>div:nth-child(2) {
   border: 3px solid green;
   padding: 3px;
   /* overflow-y: auto; */
 }
-.diagnosis_result_analystic_summary_solution_item > div:nth-child(3) {
+
+.diagnosis_result_analystic_summary_solution_item>div:nth-child(3) {
   border: 3px solid green;
   padding: 3px;
   /* overflow-y: auto; */
@@ -183,7 +191,7 @@
 .diagnosis_result_detect_wrap {
   border: 3px solid green;
   padding: 3px;
-  display: flex; 
+  display: flex;
 }
 
 .diagnosis_result_detect_item {
@@ -191,20 +199,24 @@
   padding: 3px;
   /* display: flex; */
   /* flex-direction: column;   */
-  margin:0 auto;
+  margin: 0 auto;
 }
+
 .diagnosis_result_detect_item_1 {
   border: 3px solid green;
   padding: 3px;
 }
+
 .diagnosis_result_detect_item_2 {
   border: 3px solid green;
   padding: 3px;
 }
+
 .diagnosis_result_detect_item_title {
   border: 3px solid green;
   padding: 3px;
 }
+
 .diagnosis_result_detect_item_content {
   border: 3px solid green;
   padding: 3px;
@@ -216,17 +228,22 @@
 .diagnosis_result_predict_image {
   border: 3px solid green;
   padding: 3px;
-  max-height:200px;
-  width:130px;
+
+
+  width: 100%;
+  height: 100%;
   /* max-width:130px;
   min-width:130px; */
   /* height:200px; */
 }
-.diagnosis_result_predict_image > img {
+
+.diagnosis_result_predict_image>img {
   border: 3px solid green;
   padding: 3px;
-  height:100%;
-  width:100%;
+  /* max-height:170px; */
+  /* max-width:170px; */
+  height: 100%;
+  width: 100%;
 }
 
 .diagnosis_result_detect_content {
@@ -236,7 +253,7 @@
 
 }
 
-.diagnosis_result_detect_content > h3 {
+.diagnosis_result_detect_content>h3 {
   border: 3px solid green;
   padding: 3px;
 }
@@ -246,11 +263,13 @@
   padding: 3px;
 
 }
-.diagnosis_result_predict_item > div:nth-child(1) {
+
+.diagnosis_result_predict_item>div:nth-child(1) {
   border: 3px solid green;
   padding: 3px;
 }
-.diagnosis_result_predict_item > div:nth-child(2) {
+
+.diagnosis_result_predict_item>div:nth-child(2) {
   border: 3px solid green;
   padding: 3px;
 }
@@ -292,7 +311,7 @@
   padding: 3px;
 }
 
-.diagnosis_result_predict_disease_list_wrap > h3 {
+.diagnosis_result_predict_disease_list_wrap>h3 {
   border: 3px solid green;
   padding: 3px;
 }
@@ -319,7 +338,7 @@
   padding: 3px;
 }
 
-.diagnosis_result_predict_disease_item_summary_item{
+.diagnosis_result_predict_disease_item_summary_item {
   border: 3px solid green;
   padding: 3px;
 }
@@ -370,34 +389,34 @@
 /*  */
 .diagnosis_result_none {
   border: 3px solid green;
-  padding:3px;
-  background-color: #e0e0e0;  
-  margin:0 auto;  
+  padding: 3px;
+  background-color: #e0e0e0;
+  margin: 0 auto;
   max-width: 1280px;
 }
 
 .diagnosis_result_none_info {
   border: 3px solid green;
-  padding:3px;
+  padding: 3px;
   /* display:flex; */
   /* flex-direction: column;   */
-  margin : 0 auto;  
+  margin: 0 auto;
 }
 
 .diagnosis_result_none_info_img_div {
   border: 3px solid green;
-  padding:3px;
+  padding: 3px;
   /* display:flex; */
   /* flex-direction: column;   */
-  margin : 0 auto;  
+  margin: 0 auto;
 }
 
 .diagnosis_result_none_info_img {
   border: 3px solid green;
-  padding:3px;
+  padding: 3px;
   /* display:flex; */
   /* flex-direction: column;   */
-  margin : 0 auto;  
+  margin: 0 auto;
 }
 
 
@@ -413,9 +432,10 @@
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;  
-  margin:0 auto;
+  cursor: pointer;
+  margin: 0 auto;
 }
+
 .diagnosis_button:hover {
   background-color: #c971af;
 }
@@ -427,9 +447,10 @@
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;  
-  margin:0 auto;
+  cursor: pointer;
+  margin: 0 auto;
 }
+
 .diagnosis_button_1:hover {
   background-color: #61d0db;
 }

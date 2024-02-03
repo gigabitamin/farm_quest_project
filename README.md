@@ -1,15 +1,11 @@
 # Final Project Farm Quest with Team Final Farmtasy
 
+<!-- newest virsion-->
+### v0.6.8 kdy  
+
 
 <!-- notice -->
 ### 공지
-
-### v0.6.6 psh
-scheduler 90%
-
-### v0.6.5 jsh
-<br>해시라우터로 변경
-
 
 ### v0.6.4 jsh
 > setting.py에서 db_settings.py와 allowed_host.py로 분리되어있던 관련 변수를 모두 db_settings.py로 통합하였다.  
@@ -54,8 +50,20 @@ export default "http://localhost:8000"
 ```
 <br>
 
+
 ====================================================
 <!-- version -->
+
+
+### v0.6.8 kdy  
+- 진단 결과 공유하는 사용자 진단 게시판 추가 diagnosisBoard / diagnosisBoard_app
+
+### v0.6.7 kdy  
+- 진단 시스템 이미지 경로 수정 및 버그 수정, Path 경로 사용  
+- 진단 시스템 전체 결과 저장하는 db 테이블 모델 새로 생성
+
+### v0.6.6 psh
+scheduler 90%
 
 ### v0.6.5 jsh
 - React-Django 통합환경 새로고침 오류에 대응하여 BrowserRouter -> HashRouter 변경

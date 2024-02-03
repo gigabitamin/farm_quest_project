@@ -64,13 +64,22 @@ const Header = () => {
             <nav className="navbar_hd">
                 <ul>
                     {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}                                        
-                    <div className="nav-item_hd"><Link to={DjangoServer}>장고로 이동</Link></div>
+                    
+                    
+
+                    <div className="nav-item_hd">
+                        <div className="nav-item_hd"><Link to={DjangoServer}>장고</Link></div>
+                        <div className="dropdown-menu_hd">                            
+                            {/* <div className="btn_hd"><Link to="http://localhost:8000">장고 로컬</Link></div> */}
+                        </div>
+                    </div>
+
                     <CsLink />
                     <div className="nav-item_hd">
-                        <div><a href="{% url 'guide_index' %}" className="nav-link_hd">가이드</a></div>
+                    <div className="nav-item_hd"><Link >가이드</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div><a href="{% url 'guide_index' %}" className="btn_hd">가이드 안내</a></div>
-                            <div><a href="{% url 'guide_detail' %}" className="btn_hd">가이드 상세</a></div>                    
+                            <div className="btn_hd"><Link >가이드 안내</Link></div>
+                            <div className="btn_hd"><Link >가이드 상세</Link></div>
                         </div>
                     </div>            
 

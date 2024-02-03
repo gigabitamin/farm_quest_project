@@ -2,7 +2,8 @@ from requests import Response
 from rest_framework import serializers
 from community_app.serializers import UserInfoSerializer
 from .models import DiagnosisItemCart, DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
-from gardening_shop_app.models import ShopingTb
+# from gardening_shop_app.models import ShopingTb
+from .models import DiagnosisShopingTb
 from users_app.models import UsersAppUser 
 
 class UserInfoSerializer(serializers.ModelSerializer):
@@ -30,10 +31,17 @@ class PlantTbSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 
-class ShopingTbSerializer(serializers.ModelSerializer):
+class DiagnosisShopingTbSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ShopingTb
-        fields = '__all__' 
+        model = DiagnosisShopingTb
+        # fields = '__all__' 
+        fields = [
+            'shoping_tb_no',
+            'shoping_tb_rss_channel_item_link',
+            'shoping_tb_rss_channel_item_image',
+            'shoping_tb_rss_channel_item_title',
+            'shoping_tb_rss_channel_item_lprice',
+        ]
 
 
 class DiagnosisResultSerializer(serializers.ModelSerializer):
