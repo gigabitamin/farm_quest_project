@@ -1,61 +1,65 @@
 .diagnosis_ready_wrap {
-  border: 3px solid green;
-  padding:3px;
-  background-color: #e0e0e0;  
-  margin:0 auto;  
+  /* border: 3px solid #88AB8E; */
+  /* padding:3px; */
+  background-color: #F2F1EB;
+  margin: 0 auto;
   max-width: 720px;
 }
 
 .diagnosis_ready_section_wrap {
-  border: 3px solid green;
-  padding:3px;
-  display:flex;
-  flex-direction: column;  
-  margin : 0 auto;  
+  border: 3px solid #88AB8E;
+  /* padding:3px; */
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }
 
 .diagnosis_ready_title {
-  border: 3px solid green;
-  padding:3px;  
+  border: 3px solid #88AB8E;
+  /* padding:3px;   */
 }
 
 .diagnosis_ready_notice {
-  border: 3px solid green;
-  padding:3px;  
+  border: 3px solid #88AB8E;
+  /* padding:3px;   */
 }
 
 .diagnosis_ready_content_warp {
-  border: 3px solid green;
-  padding:3px;  
+  /* border: 3px solid #88AB8E; */
+  /* padding:3px;   */
 }
 
 .diagnosis_ready_process_wrap {
-  border: 3px solid green;
-  padding:3px;  
+  /* border: 3px solid #88AB8E; */
+  /* padding:3px;   */
 }
 
 .diagnosis_ready_process_upload_image {
-  border: 3px solid green;
-  padding:3px;
-  display: flex; 
+  border: 3px solid #88AB8E;
+  /* padding:3px; */
+  display: flex;
   flex-direction: column;
 }
+
 .diagnosis_ready_submit_setThumbnailOne {
   margin-top: 10px;
   padding: 10px;
-  background-color: #4caf50;
-  color: white;
+  background-color: #88AB8E;
+  color: black;
   border: none;
   border-radius: 5px;
-  cursor: pointer;  
-  margin:0 auto;
+  cursor: pointer;
+  margin: 0 auto;
 }
+
 .diagnosis_ready_submit_setThumbnailOne[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #e7dc9a;
 }
+
 .diagnosis_ready_submit_setThumbnailOne[type="file"] {
   margin-top: 10px;
 }
+
 .diagnosis_ready_submit_handleUploadSubmit {
   margin-top: 10px;
   padding: 10px;
@@ -63,71 +67,73 @@
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;  
+  cursor: pointer;
   /* margin:0 auto; */
 }
+
 .diagnosis_ready_submit_handleUploadSubmit[type="submit"]:hover {
   background-color: #e37777;
 }
+
 .diagnosis_ready_submit_handleUploadSubmit[type="file"] {
   margin-top: 10px;
 }
 
 .diagnosis_ready_process_select_plant_wrap {
-  border: 3px solid green;
-  padding:3px;  
-  margin:0 auto;  
+  border: 3px solid #88AB8E;
+  /* padding:3px;   */
+  margin: 0 auto;
 }
 
 .diagnosis_ready_process_select_plant_div {
-  border: 3px solid green;
-  padding:3px;
+  border: 3px solid #F2F1EB;
+  /* padding:3px; */
   display: flex;
   flex-direction: column;
 }
 
 .diagnosis_upload_image_content_box {
-  border: 3px solid green;
-  padding:3px;
+  /* border: 3px solid #88AB8E; */
+  /* padding:3px; */
   display: flex;
   flex-direction: row;
-  
+
 }
 
 .diagnosis_upload_image_content_img_box {
-  border: 3px solid green;
-  padding:3px;
-  flex-grow: 1;    
-  max-width:28em;
+  /* border: 3px solid #88AB8E; */
+  /* padding:3px; */
+  flex-grow: 1;
+  max-width: 30em;
 }
 
 .diagnosis_upload_image_content_img {
-  border: 3px solid green;
-  padding:3px;
+  /* border: 3px solid #88AB8E; */
+  /* padding:3px; */
   max-height: 21em;
-  max-width:100%;
+  max-width: 100%;
 }
 
 .diagnosis_upload_image_content_plant {
-  border: 3px solid green;
-  padding:3px;
+  border: 3px solid #88AB8E;
+  /* padding:3px; */
   flex-grow: 1;
 
 }
 
 .diagnosis_upload_image_content_select_plant {
-  border: 3px solid green;
-  padding:3px;
+  border: 3px solid #88AB8E;
+  /* padding:3px; */
 }
 
 .diagnosis_upload_image_select_plant_box {
-  border: 3px solid green;
-  padding: 3px;
+  border: 3px solid #88AB8E;
+  /* padding: 3px; */
   display: flex;
-  flex-direction: row;    
+  flex-direction: row;
   align-items: center;
-  margin:0 auto;
-  width:100%; 
+  margin: 0 auto;
+  width: 100%;
 }
 
 
@@ -138,52 +144,56 @@
 
 
 
-.diagnosis_choice_map_box{
-  border:3px solid green;
-  padding:3px;
-  display:flex;
-  flex-direction: column;      
+.diagnosis_choice_map_box {
+  border: 3px solid #88AB8E;
+  /* padding:3px; */
+  display: flex;
+  flex-direction: column;
 }
 
-.diagnosis_choice_map_one{
-  border:3px solid green;
-  padding:3px;     
+.diagnosis_choice_map_one {
+  border: 3px solid #88AB8E;
+  /* padding:3px;      */
 }
 
 
-.diagnosis_choice_plant_image_box { 
-  border: 3px solid green;
-  padding: 3px;  
-  width:130px;
+.diagnosis_choice_plant_image_box {
+  border: 3px solid white;
+  /* padding: 3px;   */
+  width: 130px;
 }
 
 /*  */
 
-.diagnosis_choice_select_box > div:nth-child(1){
-  border: 3px solid green;
-  padding: 3px;  
+.diagnosis_choice_select_box>div:nth-child(1) {
+  /* border: 3px solid #88AB8E; */
+  /* padding: 3px;   */
 }
-.diagnosis_choice_select_box > div:nth-child(1) > div:nth-child(1) {
-  border: 3px solid green;
+
+.diagnosis_choice_select_box>div:nth-child(1)>div:nth-child(1) {
+  /* border: 3px solid #88AB8E; */
+  /* padding: 3px; */
+}
+
+.diagnosis_choice_select_box>div:nth-child(1)>div:nth-child(2) {
+  /* border: 3px solid #88AB8E; */
+  /* padding: 3px; */
+}
+
+.diagnosis_choice_select_box>div:nth-child(2) {
+  border: 3px solid #88AB8E;
   padding: 3px;
-}
-.diagnosis_choice_select_box > div:nth-child(1) > div:nth-child(2) {
-  border: 3px solid green;
-  padding: 3px;
+  flex-grow: 1;
 }
 
-.diagnosis_choice_select_box > div:nth-child(2){
-  border: 3px solid green;
-  padding: 3px;
-  flex-grow:1;
+.diagnosis_choice_select_box>div:nth-child(2)>div:nth-child(1) {
+  /* border: 3px solid #88AB8E; */
+  /* padding: 3px; */
 }
-.diagnosis_choice_select_box > div:nth-child(2) > div:nth-child(1) {
-  border: 3px solid green;
-  padding: 3px;
-}
-.diagnosis_choice_select_box > div:nth-child(2) > div:nth-child(2) {
-  border: 3px solid green;
-  padding: 3px;
+
+.diagnosis_choice_select_box>div:nth-child(2)>div:nth-child(2) {
+  border: 3px solid #88AB8E;
+  /* padding: 3px; */
 }
 
 
@@ -191,3 +201,43 @@
 
 
 
+
+/*  */
+
+.diagnosis_choice_select_title {
+  /* border: 3px solid #88AB8E; */
+  /* padding: 3px; */
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  /* align-items: center; */
+}
+
+
+.diagnosis_choice_map_box {
+  /* border: 3px solid #88AB8E; */
+  /* padding: 3px; */
+  display: flex;
+  flex-direction: column;
+}
+
+.diagnosis_choice_map_one {
+  /* border: 3px solid #88AB8E; */
+  /* padding: 3px; */
+}
+
+.diagnosis_choice_select_box {
+  /* border: 3px solid #88AB8E; */
+  /* padding: 3px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.diagnosis_choice_plant_image_box {
+  /* border: 3px solid #88AB8E; */
+  /* padding: 3px; */
+  width: 130px;
+}

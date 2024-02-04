@@ -193,7 +193,7 @@ const DiagnosisRecommend = () => {
                     <div className="diagnosis_recommend_section_1_title_cart">                        
                         <div>No.{diagnosisItemCartId}</div>
                         <div onClick={handleDeleteButtonClick}>삭제</div>
-                        <div>솔루션 아이템 목록</div>
+                        <div>장바구니 찜 목록</div>
                         <div onClick={saveDiagnosisItemCart}>저장</div>
                         <div onClick={handleLoadButtonClick}>불러오기</div>                     
                     </div>                    
@@ -253,8 +253,8 @@ const DiagnosisRecommend = () => {
                                     </div>
 
                                     <div className="diagnosis_recommend_section_2_content_1_1_2">
-                                        <div className="diagnosis_recommend_section_2_content_1_1_2">
-                                            <div className="diagnosis_recommend_section_2_content_1_1_2_1">{recommend.shoping_tb_rss_channel_item_title}</div>
+                                        <div className="diagnosis_recommend_section_2_content_1_1_2_1">
+                                            <div className="diagnosis_recommend_section_2_content_1_1_2_1_1">{recommend.shoping_tb_rss_channel_item_title}</div>
                                         </div>                                    
                                     </div>
 

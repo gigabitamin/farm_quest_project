@@ -1,0 +1,113 @@
+.diagnosis_choice_wrap {
+  border: 3px solid green;
+  padding:3px;
+  background-color: #e0e0e0;
+  margin:0 auto;  
+  max-width: 1280px;
+}
+
+.diagnosis_choice_section {
+  border: 3px solid green;
+  padding:3px;
+}
+
+.diagnosis_choice_article {
+  border: 3px solid green;  
+  padding:3px;
+}
+
+.diagnosis_choice_div_wrap {
+  border: 3px solid green;
+  padding:3px;  
+}
+
+.diagnosis_choice_form {
+  border: 3px solid green;
+  padding:3px;  
+}
+
+
+/*  */
+
+.diagnosis_choice_select_title {
+  border: 3px solid green;
+  padding:3px;
+  display:flex;
+  flex-direction: column;  
+  margin : 0 auto;
+  /* align-items: center; */
+}
+
+.diagnosis_choice_submit_button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;  
+  /* margin:0 auto; */
+}
+
+
+.diagnosis_choice_map_box{
+  border:3px solid green;
+  padding:3px;
+  display:flex;
+  flex-direction: column;      
+}
+
+.diagnosis_choice_map_one{
+  border:3px solid green;
+  padding:3px;     
+}
+
+.diagnosis_choice_select_box {
+  border: 3px solid green;
+  padding: 3px;
+  display: flex;
+  flex-direction: row;    
+  align-items: center;
+  margin:0 auto;
+  width:100%;    
+}
+.diagnosis_choice_plant_image_box { 
+  border: 3px solid green;
+  padding: 3px;  
+  width:130px;
+}
+
+/*  */
+
+.diagnosis_choice_select_box > div:nth-child(1){
+  border: 3px solid green;
+  padding: 3px;  
+}
+.diagnosis_choice_select_box > div:nth-child(1) > div:nth-child(1) {
+  border: 3px solid green;
+  padding: 3px;
+}
+.diagnosis_choice_select_box > div:nth-child(1) > div:nth-child(2) {
+  border: 3px solid green;
+  padding: 3px;
+}
+
+.diagnosis_choice_select_box > div:nth-child(2){
+  border: 3px solid green;
+  padding: 3px;
+  flex-grow:1;
+}
+.diagnosis_choice_select_box > div:nth-child(2) > div:nth-child(1) {
+  border: 3px solid green;
+  padding: 3px;
+}
+.diagnosis_choice_select_box > div:nth-child(2) > div:nth-child(2) {
+  border: 3px solid green;
+  padding: 3px;
+}
+
+
+
+
+
+

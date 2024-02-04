@@ -11,6 +11,7 @@ const DiagnosisUploadResult = () => {
     console.log('(location.state.file_name = ', location.state.file_name);
 
     const save_file_name = location.state.file_name.save_file_name;
+    const yolo_plant_name = location.state.file_name.plant_name;
 
     const serialized_results = location.state.file_name.detect_result.serialized_results_list[0];
     // const obj_result_label = serialized_results.names[serialized_results.boxes[0]['label']]
@@ -84,7 +85,7 @@ const DiagnosisUploadResult = () => {
         return (
             <div className="diagnosis_result_wrap">
                 <section className="diagnosis_result_section_wrap">
-                    <article title="title" className="diagnosis_result_title"><h1>진단 결과</h1></article>
+                    <article title="title" className="diagnosis_result_title"></article>
                     <article title="notice" className="diagnosis_result_notice"><span></span></article>
                     <article title="content" className="diagnosis_result_content_wrap">
 
@@ -92,23 +93,38 @@ const DiagnosisUploadResult = () => {
 
                             <section className="diagnosis_result_yolo_analystic_wrap">
                                 <article title="info" className="diagnosis_result_analystic_info">
-                                    <div><h3>전체 부위 탐색 결과</h3></div>
-                                    <div>진단파일명: {save_file_name}</div>
-                                    <div>진단번호: {diagnosis_result_pk}</div>
+                                    <div>
+                                        <h3>전체 부위 탐색 결과 (진단 작물 : 
+                                            <Link title="가이드로 이동" to={{pathname: `/diagnosis_recomme/${obj_yolo_solution_word}`,
+                                                                state: { solutionWord: obj_yolo_solution_word }
+                                                            }}>
+                                                <span className="diagnosis_button">{yolo_plant_name}</span>
+                                            </Link>)
+                                            </h3>
+                                        </div>
+                                    <div>진단파일명: {save_file_name}</div>                                    
+                                    <div>진단번호: 
+                                        <Link title="가이드로 이동" to={{pathname: `/diagnosis_recomme/${obj_yolo_solution_word}`,
+                                                    state: { solutionWord: obj_yolo_solution_word }
+                                                }}>
+                                            <span className='diagnosis_button_1'>{diagnosis_result_pk}</span>
+                                        </Link>                 
+                                    </div>
                                 </article>
 
                                 <article title="summary" className="diagnosis_result_analystic_summary_box">
                                     <div className="diagnosis_result_analystic_summary_box_item">
-                                        <div><h3>진단 요약 (
-                                            솔루션 워드 :
-                                            <Link title="상품추천으로 이동" to={{
-                                                pathname: `/diagnosis_recommend/${obj_yolo_solution_word}`,
-                                                state: { solutionWord: obj_yolo_solution_word }
-                                            }}>
-                                                <span className="diagnosis_button">{obj_yolo_solution_word}</span>)
-                                            </Link>
+                                        <div><h3>진단 요약
                                         </h3></div>
                                         <div>약 {obj_result_prob} % 의 확률로 <span className='diagnosis_button_1'>{obj_result_label}</span> 일 것으로 예상됩니다</div>
+
+                                        <div>
+                                            솔루션 워드 : 
+                                            <Link title="상품추천으로 이동" to={{pathname: `/diagnosis_recommend/${obj_yolo_solution_word}`,
+                                                        state: { solutionWord: obj_yolo_solution_word }
+                                                    }}>
+                                                <span className="diagnosis_button">{ obj_yolo_solution_word}</span>
+                                            </Link></div>
                                     </div>
                                     <div className="diagnosis_result_analystic_summary_box_detail">
                                         <div className="diagnosis_result_analystic_image"><img src={url} alt="UploadResult" className="diagnosis_result_analystic_image_img" /></div>
@@ -160,7 +176,7 @@ const DiagnosisUploadResult = () => {
                                             // const url_crops = crops_path_list[index];
 
                                             return (
-                                                <div title="detect" className="diagnosis_r  esult_detect_item" key={index}><hr />
+                                                <div title="detect" className="diagnosis_result_detect_item" key={index}><hr />
 
                                                     <div className="diagnosis_result_detect_item_content">
                                                         <div className="diagnosis_result_predict_image">
