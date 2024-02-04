@@ -35,6 +35,9 @@ urlpatterns = [
     path('my_page/delete/', views.my_page_delete, name='my_page_delete'),
     path('my_page/delete/view/', views.MyPageDeleteView.as_view(), name='my_page_delete_view'),
 
+    # path('my_page/update_last_login/', views.update_last_login, name='update_last_login'),
+
+
     # 마이페이지
     path('mypage/', views.mypage, name='mypage'),
     path('user_plant/', views.user_plant_render, name='user_plant'),

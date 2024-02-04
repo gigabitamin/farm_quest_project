@@ -1,0 +1,370 @@
+/* Register.css */
+
+/* font */
+@font-face {
+  font-family: 'neodgm';
+  src: url('../../fonts/neodgm.woff');
+}
+
+  /* 프로필 */
+
+.profile_container_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+
+    padding-bottom: 30px;
+  }
+  
+
+
+  /* 반응형 */
+  @media (max-width: 999px) {
+    .container {
+      margin: 10px;
+    }
+  
+    .profile-img {
+      margin-top: 20px;
+    }
+
+  }
+
+
+/* 프로필 */
+
+
+/* user.css */
+
+.profile_img_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Profile Image Div */
+.profile_img_div {
+  margin-top: 20px;
+}
+
+/* Profile Image 128 */
+
+
+.profile_image_128 img {
+  border-radius: 50%;
+  border: 5px;
+  border-color: #88ab8e;
+  border-style: double;
+  width: 60%;
+}
+
+.profile_img_div {
+  width: 60%;
+}
+
+.profile_img {
+  display: grid;
+  justify-content: center;
+}
+
+/* Profile Texts */
+.profile_texts {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Profile Tag Medium */
+.profile_tag_medium {
+  margin-top: 10px;
+  display: flex;
+  background-color: #88ab8e;
+  border-radius:2mm;
+  border-style: outset  ;
+  border-color: #88ab8e;
+
+}
+
+.profileName {
+  padding:5% 0% 0% 0%;
+  border-radius:2mm;
+  box-sizing: border-box;
+  background-color: antiquewhite;
+  width: 130px;
+  margin: 10px;
+  justify-content: space-between;
+  cursor:default;
+}
+
+.profileName span{
+  flex: 1;
+  text-align: justify;
+}
+
+.profileInfo {
+  padding:5% 5% 2% 5%;
+  background-color: rgb(197, 230, 210);
+  width: 240px;
+  margin: 10px;
+  border-radius:2mm;
+  cursor:default;
+  box-sizing: border-box;
+}
+
+.profile_tag {
+  margin-bottom: 10px;
+}
+
+.profileName:hover,
+.profileInfo:hover {
+  transform: scale(1.00);
+  border:#a7caac dotted;
+  
+}
+
+/* Delete Profile Link */
+.delete_profile {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Profile Image Upload Box */
+
+#profileModifyContainer {
+  border-style: dashed;
+  border-radius: 10px;
+  border: 10px ridge rgb(214, 231, 221);
+  background-color: #f1f1eb;
+  width: 500px;
+}
+
+.profile_img_is {
+  margin-top: 20px;
+  /* background-color: #8bb3f0; */
+  width: 250px;
+  height: 250px;
+  display: grid;
+  align-items: center;
+
+}
+
+.profileFileImg img{
+  max-width: 70%; 
+  height: auto;
+  border: #6d8f78 double 5px;
+  border-radius: 50%;
+  margin:10px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.profile_file_label {
+  cursor: pointer;
+  font-size: 20px;
+  padding:0px;
+}
+
+/* Profile File Input */
+.profile_file_input {
+  display: none;
+
+}
+
+.profile_file_input {
+  box-sizing: border-box;
+
+}
+
+#profileModifyWrap{
+  margin-top: 10px;
+  display: flex;
+  background-color: #88ab8e;
+  border-radius: 2mm;
+  border-style: outset;
+  border-color: #88ab8e;
+  justify-content: center;
+  width: 416px;
+}
+
+.profileModifyTitle{
+  padding:5% 1% 1% 1%;
+  border-radius:2mm;
+  box-sizing: border-box;
+  background-color: antiquewhite;
+  width: 130px;
+  margin: 10px;
+  justify-content: space-between;
+  cursor:default;
+
+}
+
+.profileModifyInput{
+  /* justify-content: end; */
+  padding:4% 4% 2% 4%;
+  background-color: rgb(197, 230, 210);
+  width: 240px;
+  margin: 5px;
+  border-radius:2mm;
+  cursor:default;
+  box-sizing: border-box;
+
+}
+
+.profile_tag_modify {
+  margin-top:3px;
+  margin-bottom: 20px;
+}
+
+.profile_tag input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* File CTA */
+.file_cta {
+  background-color: rgb(43, 139, 158);
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100px;
+}
+
+/* File Icon */
+.file_icon {
+  margin-right: 5px;
+}
+
+/* Profile Image File */
+.profile_image_file {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .profile_container {
+    margin: 10px;
+  }
+
+  .profile_img_div {
+    margin-top: 20px;
+  }
+}
+
+#profileModify {
+  display: flex;
+  justify-content:center;
+}
+
+
+/* Profile Update Button */
+.profile_update_button {
+  margin-top:10px;
+  font-family : 'neodgm';
+  font-size : '20px';
+  background-color: rgb(43, 139, 158);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:0.1s;
+}
+
+.profile_update_button:hover {
+  transform:scale(1.02);
+  background-color: #c1e0fa; /* 활성화 상태에서의 배경 색상 */
+  color: rgb(35, 36, 0); /* 활성화 상태에서의 글자색 */
+}
+
+/* Profile Input */
+/* .profile_input {
+  width: 50%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+} */
+
+/* Profile Button */
+
+.profile_button {
+  margin-top:20px;
+  font-family : 'neodgm';
+  font-size : '20px';
+  background-color: rgb(15, 143, 47);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:0.1s;
+  margin-bottom: 20px;
+}
+
+.profile_button:hover {
+  transform:scale(1.02);
+  background-color: #7fc563; /* 활성화 상태에서의 배경 색상 */
+  color: rgb(35, 36, 0); /* 활성화 상태에서의 글자색 */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .profile_container {
+    margin: 10px;
+  }
+
+  .profile_img_div {
+    margin-top: 20px;
+  }
+
+  .profile_input {
+    width: 100%;
+  }
+}
+
+.delete_profile {
+  font-family: 'neodgm';
+  background-color: rgb(146, 182, 189);
+  color: rgb(26, 0, 0);
+  font-size: 14px;
+  padding-top:4px;
+  padding-bottom:4px;
+  border-radius: 4px;
+  cursor: pointer;
+  width:100px;
+}
+
+.delete_profile:hover {
+  transform:scale(0.95);
+  background-color: #919191; /* 활성화 상태에서의 배경 색상 */
+  color: rgb(35, 36, 0); /* 활성화 상태에서의 글자색 */
+}
+
+
+div.profile_container_box {
+  font-family: 'neodgm';
+  background-color: #88ab8e;
+  margin:0 auto;
+}
+
+div.profile_container_box > div > div {
+  border-style: dashed;
+  border-radius: 10px;
+  border: 10px ridge rgb(214, 231, 221);
+  background-color: #f1f1eb;
+  width:500px;
+}
+
+.profile_container_box_put {
+  font-family: 'neodgm', sans-serif;
+  background-color: #88ab8e;
+  display: grid;
+  place-items: center;
+
+}

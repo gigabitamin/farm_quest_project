@@ -113,6 +113,11 @@ SIMPLE_JWT = {
 }
 # 리액트 로그인 관련 끝 -kdy
 
+# 장고 last_login 갱신
+# AUTHENTICATION_BACKENDS = [
+#     'path.to.signals.update_last_login',
+# ]
+
 
 MIDDLEWARE = [   
     # 리액트 연동 (순서 중요)

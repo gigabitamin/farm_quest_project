@@ -136,54 +136,55 @@ const onFetchWeatherData = async (nx, ny) => {
     if (currentHour < 1 ) {
         console.error('Not service time');
         return;
-    } else if (currentHour <= 1) {
-        baseTime = '0030';
     } else if (currentHour <= 2) {
-        baseTime = '0130';
+        baseTime = '0030';
     } else if (currentHour <= 3) {
-        baseTime = '0230';
+        baseTime = '0130';
     } else if (currentHour <= 4) {
-        baseTime = '0330';
+        baseTime = '0230';
     } else if (currentHour <= 5) {
-        baseTime = '0430';
+        baseTime = '0330';
     } else if (currentHour <= 6) {
-        baseTime = '0530';
+        baseTime = '0430';
     } else if (currentHour <= 7) {
-        baseTime = '0630';
+        baseTime = '0530';
     } else if (currentHour <= 8) {
-        baseTime = '0730';
+        baseTime = '0630';
     } else if (currentHour <= 9) {
-        baseTime = '0830';
+        baseTime = '0730';
     } else if (currentHour <= 10) {
-        baseTime = '0930';
+        baseTime = '0830';
     } else if (currentHour <= 11) {
-        baseTime = '1030';
+        baseTime = '0930';
     } else if (currentHour <= 12) {
-        baseTime = '1130';
+        baseTime = '1030';
     } else if (currentHour <= 13) {
-        baseTime = '1230';
+        baseTime = '1130';
     } else if (currentHour <= 14) {
-        baseTime = '1330';
+        baseTime = '1230';
     } else if (currentHour <= 15) {
-        baseTime = '1430';
+        baseTime = '1330';
     } else if (currentHour <= 16) {
-        baseTime = '1530';
+        baseTime = '1430';
     } else if (currentHour <= 17) {
-        baseTime = '1630';
+        baseTime = '1530';
     } else if (currentHour <= 18) {
-        baseTime = '1730';
+        baseTime = '1630';
     } else if (currentHour <= 19) {
-        baseTime = '1830';
+        baseTime = '1730';
     } else if (currentHour <= 20) {
-        baseTime = '1930';
+        baseTime = '1830';
     } else if (currentHour <= 21) {
-        baseTime = '2030';
+        baseTime = '1930'
     } else if (currentHour <= 22) {
-        baseTime = '2130';
+        baseTime = '2030';
     } else if (currentHour <= 23) {
-        baseTime = '2230';
+        baseTime = '2130';
     } else if (currentHour <= 24) {
-        baseTime = '2330';
+        baseTime = '2230';
+
+    // } else if (currentHour >= 24) {
+    //     baseTime = '2330';
     } else {
         console.error('Not service time');
         return;
@@ -459,24 +460,25 @@ const getRenderName = (originalCategory) => {
 
 const formatTime = (fcstTime) => {
     const currentDate = new Date();
-    const currentHour = currentDate.getHours();
+    // const nextDate = currentDate.getDay()+1;
+    // const currentHour = currentDate.getHours();
     const year = currentDate.getFullYear();
     let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
     let day = currentDate.getDate().toString().padStart(2, '0');
     let hours = fcstTime.slice(0, 2);
 
-    if (parseInt(hours, 10) <= currentHour) {
-        day = (currentDate.getDate() + 1).toString().padStart(2, '0');
-    }
+    // if ((parseInt(hours, 10) > currentHour) && (parseInt(day, 10) > nextDate))
+        // day = nextDate
+    
 
-    if (parseInt(hours, 10) < currentHour) {
-        if ((currentDate.getDate() + 1) > new Date(year, currentDate.getMonth() + 1, 0).getDate()) {
-            month = (currentDate.getMonth() + 2).toString().padStart(2, '0');
-            day = '01';
-        } else {
-            day = (currentDate.getDate() + 1).toString().padStart(2, '0');
-        }
-    }
+    // if (parseInt(hours, 10) < currentHour) {
+    //     if ((currentDate.getDate() + 1) > new Date(year, currentDate.getMonth() + 1, 0).getDate()) {
+    //         month = (currentDate.getMonth() + 2).toString().padStart(2, '0');
+    //         day = '01';
+    //     } else {
+    //         day = (currentDate.getDate() + 1).toString().padStart(2, '0');
+    //     }
+    // }
 
     return `${parseInt(year, 10)}년 ${parseInt(month, 10)}월 ${parseInt(day, 10)}일 ${hours}시`;
 };

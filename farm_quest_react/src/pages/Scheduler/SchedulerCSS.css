@@ -122,6 +122,7 @@
   border-radius: 3.5px; 
 }
 #schedulerFilter {
+  width: 220px;
   border: 10px  #c1e4bc85;
   border-radius: 8px; 
   border-style: ridge double dashed ridge;
@@ -284,63 +285,41 @@
   padding-left: 4px;
 }
 
-/* #windstr{ */
-  /* background-color: #d4d4d4; */
-  /* line-height: 20px; */
-  /* margin-bottom: 20px; */
-/* } */
+.schedulerMainwrap {
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
 
 /* 캘린더 바디 */
-/* @media screen and (min-width: 1200px) {
-.filter-container,
-.calendar-container,
-.weather-container {
+@media screen and (min-width: 1251px) {
+  .SchedulerWrapper{
     font-family: 'neodgm', sans-serif;
-    display: inline-block;
-    vertical-align: top;
-    margin-top:20px;
-    margin-right: 20px;
-}
-}
-
-@media screen and (max-width: 1px) {
-  .filter-container,
-  .calendar-container,
-  .weather-container {
-      font-family: 'neodgm', sans-serif;
-      display: inline-block;
-      vertical-align: top; 
-      margin-top:20px;
-      margin-right: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    /* margin-right: 20px; */
+    background-color: white;
   }
-  } */
-
-/* 캘린더 바디 */
-.filter-container,
-.calendar-container,
-.weather-container {
-  font-family: 'neodgm', sans-serif;
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 20px;
-  margin-right: 20px;
+  .SchedulerWrapper2{
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 /* mobile */
-@media screen and (max-width: 11px) {
+@media screen and (max-width: 1250px) {
   .SchedulerWrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction:row;
+    margin-top: 10px;
   }
 
-
-  .weather-container {
-    order: 1;
-  }
-
-  .calendar-container {
-    order: 2;
+  .SchedulerWrapper2 {
+    display: flex;
+    flex-direction: row;
   }
 }
 
@@ -354,6 +333,9 @@
   padding: 10px;
   border-radius: 8px; 
   margin-bottom: 20px;
+  width: 740px;
+  margin-left :10px;
+  margin-right:10px;
 }
 
 #thisMonth {
@@ -422,10 +404,17 @@
 
   }
 
+  .calendarBodyDateCell:hover {
+    background-color: #9cc581;
+    cursor: help;
+  }
+
+
   .dayNameCell {
     font-weight: bolder;
-    font-size:large;
-    
+    font-size:18px;
+    background-color: #fffdef;
+    border: 1px solid #ccc;
   }
 
   .sundayStyle,

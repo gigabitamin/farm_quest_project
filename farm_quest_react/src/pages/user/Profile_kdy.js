@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
-import { useSelector } from 'react-redux';
 import ProfileImage from './ProfileImage'; 
 import ProfileImg from '../../images/profile/farm_quest_site.png';
 import { Link } from 'react-router-dom';
@@ -20,7 +19,6 @@ const Profile = (props) => {
   const [imageData, setImageData] = useState("");
   
   const history = useNavigate()
-  const DjangoServer = useSelector(state => state.DjangoServer);
   const [cookies, setCookie] = useCookies(['id', 'user']);
   const imageUrl = `data:image/png;base64,${imageData}`;
   console.log('imageUrl = ', imageUrl.data)
@@ -67,7 +65,7 @@ const Profile = (props) => {
     formData.append("address", address);
   
     axios
-      .patch(`${DjangoServer}/profile/${userId}/`, formData, {
+      .patch(`http://localhost:8000/profile/${userId}/`, formData, {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: `Token ${token}`,
@@ -90,7 +88,7 @@ const Profile = (props) => {
     const token = cookies.id;
     const userId = cookies.user.id;
     axios
-      .get(`${DjangoServer}/profile/${userId}`, {
+      .get(`http://localhost:8000/profile/${userId}`, {
         headers: {
           Authorization: `Token ${token}`,
         },
@@ -115,7 +113,7 @@ const Profile = (props) => {
     const getProfileImage = () => {
       const userId = cookies.user.id;
       axios
-        .get(`${DjangoServer}/profile_image/${userId}/`)
+        .get(`http://localhost:8000/profile_image/${userId}/`)
         .then((response) => {
           console.log('image res = ', response)
           if (response.data.image_data) {
@@ -144,13 +142,13 @@ const Profile = (props) => {
 
     if (isUpdate === false) {
       return (
-        <div className="profile_container_box">
+        <div className="profile_profile_container_box">
           <div>
           <div>
           <div className="profile_img_box">
             <div className="profile_img_div">
-            <h2>{nickname}</h2>
               <figure className="profile_image_128">
+                <h2>프로필 페이지</h2>
                 <br />
                 <img src={ProfileImg} alt="프로필" />
                 
@@ -166,59 +164,34 @@ const Profile = (props) => {
               <div className="title" onChange={handleChange}>
                 
               </div>
-
               <div className="profile_tag_medium">
-                <div className="profileName">
-                  <div className="profile_tag">
-                  아이디
-                  </div> 
-                  <div className="profile_tag">
-                  닉네임
-                  </div> 
-                  <div className="profile_tag">
-                  성명
-                  </div> 
-                  <div className="profile_tag">
-                  전화번호
-                  </div> 
-                  <div className="profile_tag">
-                  마이팜 위치
-                  </div>
+                <div className="profile_tag">
+                아이디 {cookies.user.username}
                 </div> 
-                <div className="profileInfo">
-                    <div className="profile_tag">
-                    {cookies.user.username}
-                    </div> 
-                    <div className="profile_tag">
-                    {nickname}
-                    </div> 
-                    <div className="profile_tag">
-                    {userName}
-                    </div> 
-                    <div className="profile_tag">
-                    {phoneNumber}
-                    </div> 
-                    <div className="profile_tag">
-                    {address}
-                    </div> 
-                </div>
+                <div className="profile_tag">
+                닉네임 {nickname}
+                </div> 
+                <div className="profile_tag">
+                성명 {userName}
+                </div> 
+                <div className="profile_tag">
+                휴대폰 번호 {phoneNumber}
+                </div> 
+                <div className="profile_tag">
+                주소 {address}
+                </div> 
               </div>
-
               <br />
-              <div className="profile_update" onClick={updateClick}>
-                <button className="profile_update_button" >프로필 수정하기</button>                                
+              <div className="profile_update_button" onClick={updateClick}>
+                <button>프로필 수정하기</button>                                
               </div>
               <br />
               
             </div>
           </div>
-          <br />
-            <button className="delete_profile">
-              <Link to="/delete_profile" style={{ textDecoration: 'none', color: 'inherit' }}>
-                회원탈퇴
-              </Link>
-            </button>
-              </div>
+          
+          <div className="delete_profile"><Link to="/delete_profile"> 회원탈퇴</Link></div>
+          </div>
           </div>
         </div>
       );
@@ -230,7 +203,7 @@ const Profile = (props) => {
             <div className="profile_img_box">
               <div className="profile_img_is">
                 <label className="profile_image_label">
-                <div className="profil_file_label">프로필 사진 변경</div>
+                <div className="profil_file_label">프로필 이미지 업로드</div>
                   <div>
                   <input
                     className="profile_file_input"

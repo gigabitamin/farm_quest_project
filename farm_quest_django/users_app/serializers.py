@@ -100,5 +100,8 @@ class ProfileSerializer(serializers.ModelSerializer):
                   "user_name", 
                   "phone_number", 
                   "address", 
-                  "profile_image")
+                  "profile_image",
+                #   psh 추가
+                  "email",
+                  "last_login")
         # extra_kwargs = {"image": {"required": False, "allow_null": True}}

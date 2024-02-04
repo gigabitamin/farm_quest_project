@@ -9,6 +9,7 @@ import GardeningShopDetail from './gardeningshop/GardeningShopDetail';
 import Scheduler from './Scheduler/Scheduler';
 // import GardeningShopRouter from './gardeningshop/GardeningShopRouter';
 import CsRouter from './customerCenter/CsRouter';
+import MypageMain from './mypage/MypageMain';
 // import Home from './Home'
 
 const Top = () => {    
@@ -25,6 +26,7 @@ const Top = () => {
                 <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} />
                 <Route path="/community/:mainType" element={<Community />} />                
                 <Route path="/Scheduler" element={<Scheduler />} />
+                <Route path="/MypageMain" element={<MypageMain />} />
             </Routes>
             {/* <GardeningShopRouter /> */}
             <DiagnosisBoardRoute />
