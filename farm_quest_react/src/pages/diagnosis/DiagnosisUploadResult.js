@@ -78,7 +78,6 @@ const DiagnosisUploadResult = () => {
     if (serialized_results && serialized_results.boxes && tf_predict_result_list_sorted[0]) {
 
         const url = save_file_name
-            // ? `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${save_file_name}`
             ? `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${save_file_name}`
             : null;
 
@@ -161,7 +160,7 @@ const DiagnosisUploadResult = () => {
                                                 
                                                 <div className="diagnosis_result_detect_item_content">
                                                     <div className="diagnosis_result_predict_image">
-                                                        {url_crops && (<img src={url_crops} alt={`Crops_${index}`} />)}
+                                                        {url_crops && (<img src={url_crops.subtring(49)} alt={`Crops_${index}`} />)}
                                                     </div>                                        
                                                     <div className="diagnosis_result_detect_content">
                                                         <div>
