@@ -10,8 +10,6 @@ const CommunityLeft = ({ setMainType }) => {
             {/* <Link reloadDocument to="/community/main"><div className="community_left_box">전체보기</div></Link>
             <Link reloadDocument to="/community/farmlog"><div className="community_left_box">팜로그</div></Link>
             <Link reloadDocument to="/community/qna"><div className="community_left_box">QnA</div></Link> */}
-            <div className="community_left_box">미구현</div>
-            <div className="community_left_box">미구현</div>
         </aside>
     );
 };

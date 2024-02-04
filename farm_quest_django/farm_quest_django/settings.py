@@ -3,7 +3,7 @@ import os
 import environ
 from pathlib import Path
 from urllib import request
-import db_settings as db_settings
+import db_settings
 # import allowed_host
 
 
@@ -26,9 +26,6 @@ API_KEY = env('serviceKey')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
-
-# ALLOWED_HOSTS = allowed_host.ALLOWED_HOSTS
 SECRET_KEY = db_settings.SECRET_KEY
 
 # Application definition
@@ -228,7 +225,6 @@ LANGUAGE_CODE = 'ko-kr'
 LOGIN_REDIRECT_URL = '/'
 
 DATABASES = db_settings.DATABASES
-SECRET_KEY = db_settings.SECRET_KEY
 
 
 # users_app/sign_up2.html 이미지 업로드 기능 관련 -kdy
