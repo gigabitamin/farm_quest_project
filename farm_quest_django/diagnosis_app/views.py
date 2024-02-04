@@ -51,9 +51,9 @@ class DiagnosisItemLoadCartAPIMixins(APIView):
                 print('products = ', products)
                 serializer = DiagnosisShopingTbSerializer(products, many=True)
                 print('serializer =', serializer.data)
-                return Response(serializer.data, status=200)
+                return Response(serializer.data)
             except DiagnosisItemCart.DoesNotExist:
-                return Response({'error': '없는데?'}, status=404)
+                return Response({'error'    : '없는데?'}, status=404)
         else:
             return Response({'error': '진짜없는데??'}, status=400)
 
@@ -100,15 +100,18 @@ class DiagnosisRecommendList(APIView):
             start_index = (page - 1) * page_size
             # print('start_index', start_index)
             end_index = start_index + page_size
-            # print('end_index', end_index)
-
-            recommendations = DiagnosisShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
+            # print('end_index', end_index)            
+            recommendations = DiagnosisShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__icontains=solution_word))[start_index:end_index]
             print('recommendations',recommendations)
             serializer = DiagnosisShopingTbSerializer(recommendations, many=True)
-            print('serializer', serializer.data)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            print('serializer', serializer)            
+            return Response(serializer.data)
         except Exception as e:
-            return Response({"에러": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"에러": str(e)})
+
+
+
+
 
 class SolutionTbAPIMixins(
     mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView

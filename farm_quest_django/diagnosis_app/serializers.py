@@ -32,16 +32,26 @@ class PlantTbSerializer(serializers.ModelSerializer):
         
 
 class DiagnosisShopingTbSerializer(serializers.ModelSerializer):
+    shoping_tb_no = serializers.IntegerField() 
+
     class Meta:
         model = DiagnosisShopingTb
-        # fields = '__all__' 
-        fields = [
-            'shoping_tb_no',
-            'shoping_tb_rss_channel_item_link',
-            'shoping_tb_rss_channel_item_image',
-            'shoping_tb_rss_channel_item_title',
-            'shoping_tb_rss_channel_item_lprice',
-        ]
+        fields = '__all__'
+
+        # fields = [
+        #     'shoping_tb_no',
+        #     'shoping_tb_rss_channel_item_link',
+        #     'shoping_tb_rss_channel_item_image',
+        #     'shoping_tb_rss_channel_item_title',
+        #     'shoping_tb_rss_channel_item_lprice',
+        # ]
+        
+    # def to_representation(self, instance):
+    #     data = super().to_representation(instance)
+    #     user_context = self.context.get('user_context', {})
+    #     # user_context에 따른 추가 로직 수행
+    #     data['user_context'] = user_context
+    #     return data
 
 
 class DiagnosisResultSerializer(serializers.ModelSerializer):

@@ -35,6 +35,8 @@ from pathlib import Path
 # plt = platform.system() 
 # if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
 
+from db_settings import DjangoServer
+
 
 os.environ['CUDA_VISIBLE_DEVICES'] = 'cpu'
 
@@ -301,10 +303,9 @@ def detect(save_file_path, plant_name, user_select_plant):
         print('crops_path_list 미디어', crops_path_lists)        
 
 
-        for path in crops_path_lists:            
-            modified_path = f'http://localhost:8000/media/{Path(path).as_posix().split("upload/", 1)[-1]}'
-            crops_path_list.append(modified_path)
-            print('미디어', crops_path_list)
+        for path in crops_path_lists:
+            modified_path = f'{DjangoServer}/media/{Path(path).as_posix().split("media/", 1)[-1]}'
+            crops_path_list.append(modified_path)        
         
         print('crops_path_list 미디어', crops_path_list)
                                                             
@@ -532,7 +533,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         for crops_path in crops_all_list:
             if crops_path.split(os.sep)[-2] not in plant:
                 crops_path_list.append(crops_path)
-        # print('crops_path_list', crops_path_list)
+        print('crops_path_list', crops_path_list)
                 
     # print('plant_name', plant_name)
 

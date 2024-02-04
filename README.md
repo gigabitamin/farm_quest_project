@@ -1,7 +1,7 @@
 # Final Project Farm Quest with Team Final Farmtasy
 
 <!-- newest virsion-->
-### v0.6.8a jsh  
+### v0.7.0 kdy
 
 
 <!-- notice -->
@@ -55,8 +55,12 @@ export default "http://localhost:8000"
 <!-- version -->
 
 
-### v0.6.9 kdy  
-- 전 페이지 css 수정 완료  
+### v0.7.0 kdy  
+- 전 페이지 css 색상 수정 기본 완료
+
+### v0.6.9 jsh  
+- 서버 대응 완료
+- 커뮤니티 CSS 수정
 
 ### v0.6.8a jsh  
 - 서버에 대응하여 진단 시스템 마이너 수정
