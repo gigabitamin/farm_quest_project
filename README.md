@@ -1,7 +1,7 @@
 # Final Project Farm Quest with Team Final Farmtasy
 
 <!-- newest virsion-->
-### v0.6.8 kdy  
+### v0.6.8a jsh  
 
 
 <!-- notice -->
@@ -54,7 +54,11 @@ export default "http://localhost:8000"
 ====================================================
 <!-- version -->
 
--jsh feather bugfix, psh confirmed
+### v0.6.8a jsh  
+- 서버에 대응하여 진단 시스템 마이너 수정
+- 가이드 페이지 이미지 링크 연결
+
+- jsh feather bugfix, psh confirmed
 
 
 ### v0.6.8 kdy  
