@@ -30,8 +30,6 @@ class ShopingTb(models.Model):
         managed = False
         db_table = 'shoping_tb'
 
-        
-        
 
 class ShoppingReview(models.Model):
     shopping_review_no = models.AutoField(primary_key=True)

@@ -6,6 +6,7 @@ import axios from 'axios';
 import backButton from '../../images/assets/backButton.png'
 
 const DiagnosisBoardMainDetail = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const threadNo = useSelector(state => state.diagnosisBoard.threadNo);
     const initialForm = {cmt_content: '', thread_no: threadNo};
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const DiagnosisBoardMainDetail = () => {
     const [cookies] = useCookies(['id']);
 
     const loadContent = async () => {
-        const response = await axios.get(`http://localhost:8000/diagnosis_board/detail/show/${threadNo}`);
+        const response = await axios.get(`${DjangoServer}/diagnosis_board/detail/show/${threadNo}`);
         // 테스트 출력 
         // console.log(response.data);
         setItem(response.data);
@@ -22,7 +23,7 @@ const DiagnosisBoardMainDetail = () => {
 
     const onDelete = (event) => {
         if (window.confirm('해당 게시물을 삭제하시겠습니까?')){
-            axios.delete(`http://localhost:8000/diagnosis_board/detail/modify/${threadNo}`, {
+            axios.delete(`${DjangoServer}/diagnosis_board/detail/modify/${threadNo}`, {
                     headers: { Authorization: `Token  ${cookies.id}` }
                 }).then(() => {
                     alert('삭제되었습니다.');
@@ -64,10 +65,10 @@ const DiagnosisBoardMainDetail = () => {
 
     const submitForm = async (event) => {
         event.preventDefault();
-        await axios.post('http://localhost:8000/diagnosis_board/detail/comment/add/', form, {
+        await axios.post(`${DjangoServer}/diagnosis_board/detail/comment/add/`, form, {
             headers: { Authorization: `Token  ${cookies.id}` }
         });
-        const response = await axios.get(`http://localhost:8000/diagnosis_board/detail/show/${threadNo}`);
+        const response = await axios.get(`${DjangoServer}/diagnosis_board/detail/show/${threadNo}`);
         console.log(response.data);
         resetForm();
         setItem(response.data);
@@ -81,7 +82,7 @@ const DiagnosisBoardMainDetail = () => {
         <div className="community_detail_box">
             <div className="community_detail_content_box">
                 <div className="community_back_button">
-                    <button onClick={backToMain}><img src={backButton}/></button>
+                    <button onClick={backToMain}><img src={backButton} alt=''/></button>
                 </div>
                 <div className="community_detail_content_box_top">
                     <div className="community_detail_content_box_title">{item.thread_title}</div>

@@ -5,8 +5,9 @@ import CsNoticeList from './CsNoticeList';
 import { useSelector, useDispatch } from 'react-redux';
 
 const CsMain = ({ mainType }) => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const dispatch = useDispatch();
-    const mainPagePreset = {link: `http://localhost:8000/cs_notice/main/${mainType}`, num: 1};
+    const mainPagePreset = {link: `${DjangoServer}/cs_notice/main/${mainType}`, num: 1};
     const mainPage_ = useSelector(state => state.customerCenter.mainPage);
     const [mainPage, setMainPage] = useState(mainPage_.link ? mainPage_ : mainPagePreset);
     const [data, setData] = useState({results: []});

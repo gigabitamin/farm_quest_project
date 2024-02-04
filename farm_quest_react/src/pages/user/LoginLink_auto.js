@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 const LoginLink = ({ user }) => {
+  const DjangoServer = useSelector(state => state.DjangoServer);
   const { isLoggedIn, username } = useSelector(state => state.loginUser);
 
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const LoginLink = ({ user }) => {
       part: 'loginUser',
       type: 'logout'
     });
-    fetch('http://127.0.0.1:8000/logout/', {
+    fetch(`${DjangoServer}/logout/`, {
        method: 'POST',
        headers: {
         'Content-Type': 'application/json',
@@ -22,7 +23,7 @@ const LoginLink = ({ user }) => {
     .then(data => {
       console.log(localStorage);
       // localStorage.clear();
-      window.location.replace('http://localhost:3000/login');
+      window.location.replace(`${DjangoServer}/login`);
     });
   };
   console.log(username)

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import backButton from '../../images/assets/backButton.png'
+import { useDispatch, useSelector } from 'react-redux';
 
 const DiagnosisBoardMainCreate = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
+
     const initialForm = {
         thread_title: '',
         thread_content: '',
@@ -31,7 +33,7 @@ const DiagnosisBoardMainCreate = () => {
     const submitForm = (event) => {
         if (window.confirm('등록하시겠습니까?')) {
             // var formData = new FormData(document.formData);
-            axios.post('http://localhost:8000/diagnosis_board/create/', form, {
+            axios.post(`${DjangoServer}/diagnosis_board/create/`, form, {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(
                 response => {

@@ -5,6 +5,9 @@ import axios from 'axios';
 import backButton from '../../images/assets/backButton.png'
 
 const DiagnosisBoardMainUpdate = () => {
+
+    const DjangoServer = useSelector(state => state.DjangoServer);
+
     const dispatch = useDispatch();
     const item = useSelector(state => state.diagnosisBoard.item);
     const [cookies] = useCookies(['id']);
@@ -32,7 +35,7 @@ const DiagnosisBoardMainUpdate = () => {
     const submitForm = (event) => {
         if (window.confirm('수정하시겠습니까?')) {
             // var formData = new FormData(document.formData);
-            axios.put(`http://localhost:8000/diagnosis_board/detail/modify/${item.thread_no}`, form, {
+            axios.put(`${DjangoServer}/diagnosis_board/detail/modify/${item.thread_no}`, form, {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(
                 response => {

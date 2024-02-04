@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 const CommunityMainUpdate = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const dispatch = useDispatch();
     const item = useSelector(state => state.community.item);
     const [cookies] = useCookies(['id']);
@@ -31,7 +32,7 @@ const CommunityMainUpdate = () => {
     const submitForm = (event) => {
         if (window.confirm('수정하시겠습니까?')) {
             // var formData = new FormData(document.formData);
-            axios.put(`http://localhost:8000/community/detail/modify/${item.thread_no}`, form, {
+            axios.put(`${DjangoServer}/community/detail/modify/${item.thread_no}`, form, {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(
                 response => {

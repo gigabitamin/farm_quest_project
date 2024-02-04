@@ -15,18 +15,19 @@ const GardeningShopDetail = () => {
     const [cookies] = useCookies(['id', 'username']);
     // Redux 스토어에서 로그인 상태 가져오기
     const isLoggedIn = useSelector(state => state.loginUser.isLoggedIn);
+    const DjangoServer = useSelector(state => state.DjangoServer);
 
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
-                const productResponse = await axios.get(`http://localhost:8000/api/products/${id}`);
+                const productResponse = await axios.get(`${DjangoServer}/api/products/${id}`);
                 setProduct(productResponse.data);
         
                 // 상품 응답에서 shoping_tb_no를 추출합니다 d.
                 const shoping_tb_no = productResponse.data.shoping_tb_no;
         
                 // shoping_tb_no를 사용하여 리뷰를 가져옵니다.
-                const reviewResponse = await axios.get(`http://localhost:8000/api/shopping_reviews/${shoping_tb_no}`);
+                const reviewResponse = await axios.get(`${DjangoServer}/api/shopping_reviews/${shoping_tb_no}`);
                 setReviews(reviewResponse.data);
             } catch (error) {
                 console.error("Error fetching data: ", error);
@@ -47,7 +48,7 @@ const GardeningShopDetail = () => {
         const user_id = cookies.user.id; // 쿠키에서 사용자 ID 사용
 
         try {
-            const response = await axios.post('http://localhost:8000/api/reviews/', {
+            const response = await axios.post(`${DjangoServer}/api/reviews/`, {
                 user: user_id,
                 shoping_tb_no: product.shoping_tb_no,
                 shopping_review_content: newReviewContent,
@@ -69,7 +70,7 @@ const GardeningShopDetail = () => {
                 className="product-image"
             />
             <h2 className="product-title">{product.shoping_tb_rss_channel_item_title}</h2>
-            <p className="product-price">가격: ${product.shoping_tb_rss_channel_item_lprice}</p>
+            <p className="product-price">가격: {parseInt(product.shoping_tb_rss_channel_item_lprice).toLocaleString()}원</p>
             <Link to="#" className="add-to-cart">장바구니</Link>
             <div className="reviews-section">
                 <h3 className="reviews-title">리뷰</h3>

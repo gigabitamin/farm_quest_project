@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import { useSelector } from 'react-redux';
 import ProfileImage from './ProfileImage'; 
 import ProfileImg from '../../images/profile/farm_quest_site.png';
 import { Link } from 'react-router-dom';
@@ -19,6 +20,7 @@ const Profile = (props) => {
   const [imageData, setImageData] = useState("");
   
   const history = useNavigate()
+  const DjangoServer = useSelector(state => state.DjangoServer);
   const [cookies, setCookie] = useCookies(['id', 'user']);
   const imageUrl = `data:image/png;base64,${imageData}`;
   console.log('imageUrl = ', imageUrl.data)
@@ -65,7 +67,7 @@ const Profile = (props) => {
     formData.append("address", address);
   
     axios
-      .patch(`http://localhost:8000/profile/${userId}/`, formData, {
+      .patch(`${DjangoServer}/profile/${userId}/`, formData, {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: `Token ${token}`,
@@ -88,7 +90,7 @@ const Profile = (props) => {
     const token = cookies.id;
     const userId = cookies.user.id;
     axios
-      .get(`http://localhost:8000/profile/${userId}`, {
+      .get(`${DjangoServer}/profile/${userId}`, {
         headers: {
           Authorization: `Token ${token}`,
         },
@@ -113,7 +115,7 @@ const Profile = (props) => {
     const getProfileImage = () => {
       const userId = cookies.user.id;
       axios
-        .get(`http://localhost:8000/profile_image/${userId}/`)
+        .get(`${DjangoServer}/profile_image/${userId}/`)
         .then((response) => {
           console.log('image res = ', response)
           if (response.data.image_data) {

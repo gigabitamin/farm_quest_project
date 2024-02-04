@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
-import Home from './Home';
+import { Link, Routes } from 'react-router-dom';
 
 
 const Footer = () => {
@@ -20,7 +19,6 @@ const Footer = () => {
                 <div className="btn_ltj btn-social"><Link to="/"><i className="fab fa-linkedin-in"></i></Link></div>
             </div>
             <Routes>
-                <Route path="/" element={<Home />}></Route>
             </Routes>
         </footer>
     );

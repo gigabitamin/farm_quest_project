@@ -2,8 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const DeleteProfile = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const [cookies, setCookie] = useCookies(['id']);
     const history = useNavigate();    
     const handleDeleteAccount = async () => {
@@ -14,7 +16,7 @@ const DeleteProfile = () => {
             const userId = cookies.user.id;
             console.log('token 123213', token)
 
-            const response = await axios.delete(`http://localhost:8000/delete_profile/${userId}`, 
+            const response = await axios.delete(`${DjangoServer}/delete_profile/${userId}`, 
             {
                 // headers: {
                 //     'X-CSRFToken': token,

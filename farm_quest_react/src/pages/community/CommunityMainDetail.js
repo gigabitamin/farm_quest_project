@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import CommunityMainComment from './CommunityMainComment';
 import axios from 'axios';
 import backButton from '../../images/assets/backButton.png'
 
 const CommunityMainDetail = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const threadNo = useSelector(state => state.community.threadNo);
     const initialForm = {cmt_content: '', thread_no: threadNo};
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const CommunityMainDetail = () => {
     const [cookies] = useCookies(['id']);
 
     const loadContent = async () => {
-        const response = await axios.get(`http://localhost:8000/community/detail/show/${threadNo}`);
+        const response = await axios.get(`${DjangoServer}/community/detail/show/${threadNo}`);
         // 테스트 출력 
         // console.log(response.data);
         setItem(response.data);
@@ -22,7 +23,7 @@ const CommunityMainDetail = () => {
 
     const onDelete = (event) => {
         if (window.confirm('해당 게시물을 삭제하시겠습니까?')){
-            axios.delete(`http://localhost:8000/community/detail/modify/${threadNo}`, {
+            axios.delete(`${DjangoServer}/community/detail/modify/${threadNo}`, {
                     headers: { Authorization: `Token  ${cookies.id}` }
                 }).then(() => {
                     alert('삭제되었습니다.');
@@ -64,13 +65,17 @@ const CommunityMainDetail = () => {
 
     const submitForm = async (event) => {
         event.preventDefault();
-        await axios.post('http://localhost:8000/community/detail/comment/add/', form, {
+        await axios.post(`${DjangoServer}/community/detail/comment/add/`, form, {
             headers: { Authorization: `Token  ${cookies.id}` }
         });
-        const response = await axios.get(`http://localhost:8000/community/detail/show/${threadNo}`);
+        const response = await axios.get(`${DjangoServer}/community/detail/show/${threadNo}`);
         console.log(response.data);
         resetForm();
         setItem(response.data);
+    };
+
+    const datetimeShow = (string) => {
+        return `${string.substring(0, 10)} ${string.substring(11, 19)}`;
     };
 
     useEffect(() => {
@@ -88,7 +93,7 @@ const CommunityMainDetail = () => {
                     <div className="community_detail_content_box_info">
                         <div className="community_detail_content_box_type">{item.thread_type===0 ? '팜로그' : '질문'}</div>
                         <div className="community_detail_content_box_user">{item.user.nickname}</div>
-                        <div className="community_detail_content_box_time">작성시간</div>
+                        <div className="community_detail_content_box_time">{item.thread_date ? datetimeShow(item.thread_date) : null}</div>
                     </div>
                 </div>
                 <div className="community_detail_content_box_main">

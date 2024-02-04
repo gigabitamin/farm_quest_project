@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 const CommunityMainCreate = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const initialForm = {
         thread_title: '',
         thread_content: '',
@@ -34,7 +35,7 @@ const CommunityMainCreate = () => {
     const submitForm = (event) => {
         if (window.confirm('등록하시겠습니까?')) {
             // var formData = new FormData(document.formData);
-            axios.post('http://localhost:8000/community/create/', form, {
+            axios.post(`${DjangoServer}/community/create/`, form, {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(
                 response => {

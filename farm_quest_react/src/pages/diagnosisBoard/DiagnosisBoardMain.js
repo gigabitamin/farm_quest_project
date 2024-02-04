@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import DiagnosisBoardMainList from './DiagnosisBoardMainList';
-import DiagnosisBoardMainDetail from './DiagnosisBoardMainDetail';
+// import DiagnosisBoardMainDetail from './DiagnosisBoardMainDetail';
 import { useSelector, useDispatch } from 'react-redux';
 
 const DiagnosisBoardMain = ({ mainType }) => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const dispatch = useDispatch();
-    const mainPagePreset = { link: `http://localhost:8000/diagnosis_board/${mainType}`, num: 1 };
+    const mainPagePreset = { link: `${DjangoServer}/diagnosis_board/${mainType}`, num: 1 };
     // console.log(mainPagePreset)
     const mainPage_ = useSelector(state => state.diagnosisBoard.mainPage);
     const [mainPage, setMainPage] = useState(mainPage_.link ? mainPage_ : mainPagePreset);

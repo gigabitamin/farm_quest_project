@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../../shared/App.css";
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const Register = () => {
 
     let history = useNavigate();
+
+    const DjangoServer = useSelector(state => state.DjangoServer);
 
     const [formData, setFormData] = useState({
         username: "",
@@ -32,7 +35,7 @@ const Register = () => {
         event.preventDefault();
         console.log('hi2', formData)
         axios
-        .post("http://localhost:8000/register/", formData)
+        .post(`${DjangoServer}/register/`, formData)
         .then((response => {
             alert("회원가입 완료")
             console.log(response.data);

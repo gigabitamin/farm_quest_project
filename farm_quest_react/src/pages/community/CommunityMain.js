@@ -6,8 +6,9 @@ import CommunityMainDetail from './CommunityMainDetail';
 import { useSelector, useDispatch } from 'react-redux';
 
 const CommunityMain = ({ mainType }) => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const dispatch = useDispatch();
-    const mainPagePreset = {link: `http://localhost:8000/community/main/${mainType}`, num: 1};
+    const mainPagePreset = {link: `${DjangoServer}/community/main/${mainType}`, num: 1};
     const mainPage_ = useSelector(state => state.community.mainPage);
     const [mainPage, setMainPage] = useState(mainPage_.link ? mainPage_ : mainPagePreset);
     const [data, setData] = useState({results: []});

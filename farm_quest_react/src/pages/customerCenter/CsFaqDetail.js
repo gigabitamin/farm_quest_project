@@ -5,6 +5,7 @@ import CsNoticeComment from './CsNoticeComment';
 import axios from 'axios';
 
 const CommunityMainDetail = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const threadNo = useSelector(state => state.customerCenter.threadNo);
     const initialForm = { cmt_content: '', thread_no: threadNo };
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const CommunityMainDetail = () => {
     const [cookies] = useCookies(['id']);
 
     const loadContent = async () => {
-        const response = await axios.get(`http://localhost:8000/cs_notice/detail/show/${threadNo}`);
+        const response = await axios.get(`${DjangoServer}/cs_notice/detail/show/${threadNo}`);
         // 테스트 출력 
         // console.log(response.data);
         setItem(response.data);
@@ -21,7 +22,7 @@ const CommunityMainDetail = () => {
 
     const onDelete = (event) => {
         if (window.confirm('해당 게시물을 삭제하시겠습니까?')) {
-            axios.delete(`http://localhost:8000/cs_notice/detail/modify/${threadNo}`, {
+            axios.delete(`${DjangoServer}/cs_notice/detail/modify/${threadNo}`, {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(() => {
                 alert('삭제되었습니다.');

@@ -1,25 +1,152 @@
+/* Copyright © 2017-2022, Eunbin Jeong (Dalgona.) <project-neodgm@dalgona.dev> */
+/* with reserved font name "Neo둥근모" and "NeoDunggeunmo". */
+@font-face {
+  font-family: 'neodgm';
+  src: url('../../fonts/neodgm.woff');
+}
+@font-face {
+  font-family: 'pixelroborobo.otf';
+  src: url('../../fonts/pixelroborobo.otf') format('opentype');
+}
+
+  
+  /* @media screen and (min-width: 999px) { */
+
+  /* PC */
+  /* } */
+  /* @media screen and (max-width: 999px) { */
+  
+  /* 모바일 */
+  /* } */
+
+/* 도움말 */
+.questionOverlayContainer {
+  display: flex ;
+  padding-right: 5px;
+  padding-bottom: 8px;
+  padding-top: 5px;
+  
+}
+/* .questionOverlayContainer h2 {
+  text-align: center;
+} */
+
+.noticeTitle{
+  display: contents;
+
+}
+
+#headerInnercontents {
+  padding-right: 5px;
+  padding-bottom: 8px;
+  padding-top: 5px;
+}
+
+.schedulerAnnounsment{
+  margin: 4px;
+  margin-bottom: -2px; 
+  min-width:700px;
+  cursor:help;
+}
+
+
+/* #headerInnercontents { */
+  /* display:flex row; */
+/* } */
+
+.ifAnoNotNull {
+  color: rgba(212, 0, 0, 0.788);
+}
+
+/* .tooltip{ */
+  /* white-space: pre-line; */
+/* } */
 /* 캘린더 필터 */
 
 #schedularFilter {
+  
   margin-top: 20px;
   padding-right: 20px;
 }
 
 #schedularFilter h2 {
+  
   font-size: 24px;
   margin-bottom: 20px;
 }
 
+.schedulerBtn {
+  font-family: 'neodgm', 'sans';
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  /* margin-left:-3px; */
+  padding:4px;
+  background-color: white;
+  border-radius: 5px;
+  /* transition: transform 0.3s; */
+
+}
+
+.schedulerBtn:hover {
+  transform: scale(1.03);
+}
+.schedulerBtn:active {
+  transform: scale(0.95);
+  background: linear-gradient(to bottom, #ffffff, #dfffc9);
+
+}
 /* 필터 스타일 */
 
+
+#shcedulerDiseaseExp{
+  text-align:left;
+  font-size: 18px;
+
+}
+
+#shcedulerDiseaseExpColor {
+  list-style-type: none;
+  padding: 3px;
+}
+
+#shcedulerDiseaseExpColor li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 120px;
+}
+
+#shcedulerDiseaseExpColor li span {
+  padding: 2px; 
+  border-radius: 3.5px; 
+}
+#schedulerFilter {
+  border: 10px  #c1e4bc85;
+  border-radius: 8px; 
+  border-style: ridge double dashed ridge;
+  padding: 10px;
+  padding-left: 16px;
+}
+
 #schedulerFilterUi {
-  display: flex; /* Flexbox 사용 */
-  align-items: center; /* 수직 정렬을 가운데로 조절 */
-  flex-direction: row; /* Flexbox의 방향을 가로로 설정 */
+  display: flex; 
+  align-items: center; 
+  flex-direction: row; 
+  padding: 2px;
+  margin-top: 2px;
+  margin-bottom: 4px;
+  /* vertical-align:bottom; */
 }
 
 #schedulerFilterUi label.schedulerFilterUi {
-  display: block; /* 블록 레벨로 설정 */
+  display: block;
+  cursor:pointer;
+
+}
+
+#schedulerFilterUi label.schedulerFilterUi:hover {
+  transform: scale(1.05);
 }
 
 #schedulerFilterUi label.schedulerFilterUi {
@@ -40,6 +167,7 @@
 
 #schedulerFilterUi input[type="radio"] {
   display: none;
+  vertical-align: top;
 
 }
 
@@ -50,9 +178,8 @@
   height: 14px;
   border-radius: 20%;
   border: 2px solid rgb(102, 51, 8);
-  background-color: #fff;
+  background-color: rgb(255, 255, 239);
   margin-right: 6px;
-
 }
 
 #schedulerFilterUi input[type="radio"]:checked + label.schedulerFilterUi::before {
@@ -60,14 +187,173 @@
 
 }
 
-/* 캘린더 바디 */
+/* 날씨렌더링 */
+.weatherInfoViewer {
+  list-style-type: none;
+  padding: 0;
+  margin-top:6px;
+  background-color: rgb(214, 231, 221);
+  width:180px;
+  padding:5px;
+  border-radius: 4px;
+  display: block;
+  align-items: center;
 
+}
+.weatherPrintContainer {
+  display: flex;
+  /* background-color: #5a007e; */
+  margin-top: 5px;
+  justify-content: space-between;
+
+}
+
+#printedWeatherInfo{
+  margin-top: 10px;
+  
+}
+
+.weatherTextPrint {
+  display: block;
+  /* justify-content: space-between; */
+  /* background-color: #86d69e; */
+  width: 45%;
+  text-align: justify;/*삭제대기*/
+
+
+}
+
+.weatherInfoPrint {
+  display: block;
+  /* justify-content: space-between; */
+  /* background-color: #007e73; */
+  width: 55%;
+  text-align: justify; /*삭제대기*/
+
+}
+.weatherTextPrint span {
+  letter-spacing: 0px;
+}
+
+.weatherTextPrint span,
+.weatherInfoPrint span {
+  display: inline-block;
+  text-align: justify;
+  /* justify-content: space-between; */
+  width: 100%;
+  display: inline-block;/*삭제대기*/
+  line-height: 20px;
+  /* letter-spacing: px; */
+}
+
+#weatherInfoViewer {
+  border: 10px  #c1e4bc85;
+  border-style: ridge ridge dashed double;
+  box-sizing: border-box;
+  padding: 0px;
+  border-radius: 8px; 
+  width:220px;
+  display: grid;/*삭제대기*/
+  place-items: center;/*삭제대기*/
+}
+.weatherPrintTitle.firstItem {
+  background-color: #9cc581;
+  border-color:rgb(182, 216, 190);
+
+  margin-top:6px;
+  padding: 4px;
+  font-size: large;
+  border-radius: 5px;
+  border-style: outset;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-left: 5px;
+  margin-bottom: 20px;
+}
+
+.weatherPrintContainer.firstItem {
+  /* font-weight: bold;  */
+  background-color: beige;
+  color: rgb(49, 18, 6);
+  border-color:rgb(250, 194, 148);
+
+  border:5px;
+  border-style: outset;
+  border-radius: 10px;
+  padding-top: 3px;
+  padding-left: 4px;
+}
+
+/* #windstr{ */
+  /* background-color: #d4d4d4; */
+  /* line-height: 20px; */
+  /* margin-bottom: 20px; */
+/* } */
+
+
+/* 캘린더 바디 */
+/* @media screen and (min-width: 1200px) {
 .filter-container,
-.calendar-container {
+.calendar-container,
+.weather-container {
+    font-family: 'neodgm', sans-serif;
     display: inline-block;
-    vertical-align: top; /* 위쪽 시작점 정렬 */
+    vertical-align: top;
     margin-top:20px;
     margin-right: 20px;
+}
+}
+
+@media screen and (max-width: 1px) {
+  .filter-container,
+  .calendar-container,
+  .weather-container {
+      font-family: 'neodgm', sans-serif;
+      display: inline-block;
+      vertical-align: top; 
+      margin-top:20px;
+      margin-right: 20px;
+  }
+  } */
+
+/* 캘린더 바디 */
+.filter-container,
+.calendar-container,
+.weather-container {
+  font-family: 'neodgm', sans-serif;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+/* mobile */
+@media screen and (max-width: 11px) {
+  .SchedulerWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .weather-container {
+    order: 1;
+  }
+
+  .calendar-container {
+    order: 2;
+  }
+}
+
+#shedulerCalendarBox{
+  border: 10px  #c1e4bc85;
+  border-style: ridge double ridge double ;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px; 
+  margin-bottom: 20px;
 }
 
 #thisMonth {
@@ -84,31 +370,50 @@
 
   #calendarTitle {
     background-color: beige;
-    padding-left: 100px;
-    padding-right: 100px;
+
     padding-top: 20px;
     padding-bottom: 20px;
     margin-bottom: 10px;
+    width: 700px;
   }
 
   .calendarTitle {
     display:inline-block;
     align-items: center;
     margin-right: 20px;
-    
+    margin-left: 20px;
+    vertical-align:super;
+    margin-bottom:-25px;
+    margin-top: -25px;
+    vertical-align: middle;
+
   }
-  
+  /* .calendarTitle h1 {
+    font-family: 'pixelroborobo', sans-serif;
+
+  } */
+
+
   .MonthBtn {
-    width: 30px;
-    height: 30px;
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
+
+    background-color: beige;
+    border-style: none;
+    cursor: pointer;
+    /* margin-top: -5px; */
+    vertical-align: middle;
+
+  }
+
+  .MonthBtnImg {
+    width:40px;
+    height:40px;
     cursor: pointer;
 
   }
+  .MonthBtnImg:hover {
+    transform: scale(1.15);
 
+  }
   .calendarBodyDateCell {
     line-height:30px;
     vertical-align: top;
@@ -142,49 +447,155 @@
     background-color: rgba(247, 247, 247, 0.842);
   }
 
-  #thisMonthBody {
-    margin-bottom: 150px;
-  }
+
 
 
 /* 지역 */
-#weatherDropDown {
-  text-align: left;
 
+/* .questionOverlayContainer.wet {
+  text-align: center;
+  align-content: center;
+  align-items: center;
+
+} */
+.locationSelectorBox {
+  text-align: center;
+  align-content: center;
 }
 
-/* 모달용 임시css 충돌시 삭제 */
-body {
-  font-family: Arial, sans-serif;
+.locationSelector {
+  font-size: 1px;
 }
 
-.modal {
-  display:block;
-  /* display:None; */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-
-.modal h5 {
-  margin-bottom: 10px;
-}
-
-.close {
+.custom-dropdown {
+  position: relative;
+  width: 140px;
+  border: 2px solid #723d3d;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-/* 스케줄러 질병경고 */
-.disease-1 {
-  background-color: #ff0000; /* 빨강 */
+.selected-option {
+  padding: 2px;
+  text-align: center;
 }
 
-.plant-1 {
-  border: 2px solid #ff0000; /* 빨강 */
+.options-list {
+  display: none;
+  position: absolute;
+  width: 140px;
+  border: 2px solid #723d3d;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.options-list li {
+  padding: 2px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.custom-dropdown.open .options-list {
+  display: block;
+}
+
+/* 드롭다운 버튼 스타일 */
+.locationDropdown {
+  font-family: 'neodgm', 'sans';
+  background-color: rgb(255, 255, 239);
+  border: 2px solid #723d3d;
+  border-radius: 5px;
+  cursor: pointer; 
+  text-align:center;
+  width: 140px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  height: 24px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.locationDropdown option{
+  border-radius: 5px;
+
+}
+
+.locationDropdown:focus {
+  outline: ridge #ccc 2px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* 포커스 시 그림자 효과 */
+}
+
+.locationDropdown:hover {
+  transform: scale(1.03);
+}
+
+
+
+
+
+/* 모달 */
+
+.modal-overlay {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(185, 185, 185, 0.5); /* 반투명한 회색 배경 */
+  justify-content: center;
+  align-items: center;
+}
+
+.visible {
+  display: inline;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.modal-content {
+  text-align: center;
+}
+
+.calendarBodyDateCell {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+
+.todayStyle {
+  border: 4px dashed green;
+}
+
+.diseaseLine {
+  width: 100%;
+  position: block;
+  bottom: 0;
+}
+
+/* 슬라이드효과 */
+.slide-container {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s ease-in-out;
+  height: auto; /* 높이를 자동으로 조절하도록 설정 */
+}
+
+.slide-out {
+  transform: translateY(-100%);
+}
+
+.slide-in {
+  transform: translateY(0);
 }

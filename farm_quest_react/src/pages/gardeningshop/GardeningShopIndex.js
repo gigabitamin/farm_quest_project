@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from "axios";
-import './gardeningShopIndex.css';
+import './GardeningShopIndex.css';
+import { useCookies } from 'react-cookie'; 
 
 const GardeningShopIndex = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
+    const [cookies] = useCookies(['id', 'username']);
+    const user_id = cookies.user ? cookies.user.id : 0;
     const [products, setProducts] = useState([]);
     const [recommendedProducts, setRecommendedProducts] = useState([]);
     const [currentCategory, setCurrentCategory] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
-    const categories = ["all", "비료", "흙", "영양제", "씨앗(모종)", "자재"];
-    const itemsPerPage = 5;
+    const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 상태 추가
+    const categories = ["all", "비료", "흙", "영양제", "씨앗(묘목)", "자재"];
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/products/?category=${currentCategory}&page=${currentPage}`);
-            setProducts(response.data.results); // Django REST framework는 페이징된 결과를 'results' 키에 담습니다.
+            const response = await axios.get(`${DjangoServer}/api/products/?category=${currentCategory}&page=${currentPage}`);
+            setProducts(response.data.results);
+            setTotalPages(response.data.total_pages); // 백엔드에서 전달받은 전체 페이지 수 설정
         } catch (error) {
             console.error("Error fetching data: ", error);
         }
@@ -22,6 +28,7 @@ const GardeningShopIndex = () => {
 
     useEffect(() => {
         fetchProducts();
+        fetchRecommendedProducts();
     }, [currentCategory, currentPage]);
 
     const handleCategoryChange = (category) => {
@@ -30,18 +37,20 @@ const GardeningShopIndex = () => {
     };
 
     const fetchRecommendedProducts = async () => {
+
         try {
-            const response = await axios.get(`http://localhost:8000/api/recommended_products`); // 추천 상품 엔드포인트
-            setRecommendedProducts(response.data); // 추천 상품 상태 업데이트
+            const response = await axios.get(`${DjangoServer}/api/recommended_products/${user_id}`);
+            setRecommendedProducts(response.data);
         } catch (error) {
             console.error("Error fetching recommended products: ", error);
         }
     };
 
-    useEffect(() => {
-        fetchProducts();
-        fetchRecommendedProducts();
-    }, [currentCategory, currentPage]);
+    // 필터링된 상품 목록
+    const filteredProducts = currentCategory === "all"
+        ? products
+        : products.filter(product => product.shoping_tb_rss_channel_item_category1 === currentCategory);
+
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
@@ -54,7 +63,7 @@ const GardeningShopIndex = () => {
         }
     
         try {
-            const response = await axios.get(`http://localhost:8000/api/shopping_reviews/${shoping_tb_no}`);
+            const response = await axios.get(`${DjangoServer}/api/shopping_reviews/${shoping_tb_no}`);
             // 응답 데이터 처리
         } catch (error) {
             console.error("Error fetching shopping reviews: ", error);
@@ -69,15 +78,20 @@ const GardeningShopIndex = () => {
     };
 
     const renderPagination = () => {
+
+        if (totalPages < 2) {
+            return null;
+        }
+
         let pages = [];
         const pageLimit = 3; // 앞뒤로 보여줄 페이지 수
-        const totalPages = 20; // 전체 페이지 수, 백엔드에서 받아와야 할 수도 있음
+
 
         // 처음 페이지로 이동
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(1)}>
-                    <span className="ion-chevron-left"></span>
+                    <span className="ion-chevron-left">&laquo;</span>
                     <span className="ion-chevron-left"></span>
                 </a>
             </li>
@@ -87,7 +101,7 @@ const GardeningShopIndex = () => {
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>
-                    <span className="ion-chevron-left"></span>
+                    <span className="ion-chevron-left">&lt;</span>
                 </a>
             </li>
         );
@@ -105,7 +119,7 @@ const GardeningShopIndex = () => {
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}>
-                    <span className="ion-chevron-right"></span>
+                    <span className="ion-chevron-right">&gt;</span>
                 </a>
             </li>
         );
@@ -114,7 +128,7 @@ const GardeningShopIndex = () => {
         pages.push(
             <li className="page-item">
                 <a className="page-link" href="#" onClick={() => handlePageChange(totalPages)}>
-                    <span className="ion-chevron-right"></span>
+                    <span className="ion-chevron-right">&raquo;</span>
                     <span className="ion-chevron-right"></span>
                 </a>
             </li>
@@ -130,33 +144,34 @@ const GardeningShopIndex = () => {
                 {recommendedProducts.slice(0, 10).map((product, index) => (
                     <div key={index} className="product-item" onClick={(e) => handleProductClick(e, product.shoping_tb_no)}>
                         {/* 상품 이미지와 이름에 Link 컴포넌트 적용 */}
-                        <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productId}`}> {/* 상품 고유 ID를 URL 경로에 포함 */}
+                        <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productid}`}> {/* 상품 고유 ID를 URL 경로에 포함 */}
                             <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
                             <h3>{product.shoping_tb_rss_channel_item_title}</h3>
                         </Link>
-                        <p>${product.shoping_tb_rss_channel_item_lprice}</p>
+                        <p>{parseInt(product.shoping_tb_rss_channel_item_lprice).toLocaleString()}원</p>
                     </div>
                 ))}
             </div>
             <h1 className="product-top">가드닝 샵</h1>
-            <div>
+            <div className="category-buttons">
                 {categories.map((category, index) => (
-                    <button key={index} onClick={() => handleCategoryChange(category)}>
+                    <button key={index} className="category-button" onClick={() => handleCategoryChange(category)}>
                         {category}
                     </button>
                 ))}
             </div>
             <div className="product-list">
-                {products.map((product, index) => (
-                    <div key={index} className="product-item" onClick={(e) => handleProductClick(e, product.shoping_tb_no)}>
-                    <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productId}`}>
+            {filteredProducts.map((product, index) => (
+                <div key={index} className="product-item" onClick={(e) => handleProductClick(e, product.shoping_tb_no)}>
+                    {/* 상품 ID 필드명을 확인하여 여기에 적용하세요 */}
+                    <Link to={`/gardening_shop_detail/${product.shoping_tb_rss_channel_item_productid}`}>
                         <img src={product.shoping_tb_rss_channel_item_image} alt={product.shoping_tb_rss_channel_item_title} />
                         <h3>{product.shoping_tb_rss_channel_item_title}</h3>
                     </Link>
-                        <p>${product.shoping_tb_rss_channel_item_lprice}</p> 
-                        {/* <p>{product.shoping_tb_rss_channel_item_lprice} 원</p> */}
-                    </div>
-                ))}
+                    <p>{parseInt(product.shoping_tb_rss_channel_item_lprice).toLocaleString()}원</p>
+                </div>
+            ))}
+
             </div>
             <div className="pagination">
                 {renderPagination()}

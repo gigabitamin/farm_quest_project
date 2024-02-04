@@ -207,7 +207,7 @@
   }
   
   .file-cta {
-    background-color: rgb(43, 139, 158);
+    background-color:#88AB8E;
     color: white;
     padding: 10px;
     border-radius: 4px;
@@ -240,13 +240,13 @@ div.loginUser {
     border: none;
     border-radius: 4px;
     padding: 2px 2px;
-    background-color: rgb(24, 132, 172);    
+    background-color: #4f8959;    
     cursor: pointer;
 }
 
 div.loginUser:hover {
     padding: 2px 2px;
-    background-color: rgb(119, 178, 230);
+    background-color: #487f50;
 }
 
 div.loginBox_hd {
@@ -262,7 +262,7 @@ div.resister {
 }
 div.resister:hover {
     padding: 2px 2px;
-    background-color:rgb(16, 125, 147);
+    background-color:#487f50;
 }
 
 div.login {
@@ -272,18 +272,18 @@ div.login {
 }
 div.login:hover {
     padding: 2px 2px;
-    background-color: rgb(52, 174, 199);
+    background-color: #487f50;
 }
 
 div.login_wrap_div_box{
-    border:10px solid rgb(52, 174, 199);
+    border:10px solid #88AB8E;
     max-width:360px;
     margin: 0 auto;    
 }
 
 div.login_container {    
     border: 1px solid white;
-    background-color:  rgb(52, 174, 199);
+    background-color:  #88AB8E;
     padding:50px;
     max-width:350px;
     margin: 0 auto;    
@@ -291,7 +291,7 @@ div.login_container {
 
 
 div.resister_div_box{
-    border:5px solid rgb(64, 134, 148);
+    border:5px solid #88AB8E;
     max-width:360px;
     margin: 0 auto;
     color:rgb(252, 252, 252);
@@ -299,7 +299,7 @@ div.resister_div_box{
 
 div.resister_container {    
     border: 2px solid white;
-    background-color:  rgb(43, 139, 158);
+    background-color:  #88AB8E;
     padding:25px;
     max-width:350px;
     margin: 0 auto;    
@@ -392,7 +392,7 @@ div.resister_container {
 
 /* File CTA */
 .file_cta {
-  background-color: rgb(43, 139, 158);
+  background-color: #88AB8E;
   color: white;
   padding: 10px;
   border-radius: 4px;
@@ -429,7 +429,7 @@ div.resister_container {
 
 /* Profile Update Button */
 .profile_update_button button {
-  background-color: rgb(43, 139, 158);
+  background-color: #578c5f;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -448,7 +448,7 @@ div.resister_container {
 
 /* Profile Button */
 .profile_button {
-  background-color: rgb(43, 139, 158);
+  background-color: #578c5f;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -477,7 +477,7 @@ div.resister_container {
 }
 
 .delete_profile {
-  background-color: rgb(43, 139, 158);
+  background-color: #88AB8E;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -492,7 +492,7 @@ div.resister_container {
 
 div.profile_profile_container_box {
   /* border: 20px solid blue; */
-  background-color: rgb(136, 136, 189);
+  background-color: #F2F1EB;
   width:500px;
   margin:0 auto;
   padding:30px;
@@ -506,7 +506,7 @@ div.profile_profile_container_box > div {
 }
 div.profile_profile_container_box > div > div {
   /* border: 3px solid blue; */
-  background-color: rgb(103, 103, 161);
+  background-color: #88AB8E;
   width:500px;
   margin:0 auto;
   padding:30px;
@@ -516,14 +516,14 @@ div.profile_profile_container_box > div > div {
 
 div.profile_container_box_put {
   /* border: 20px solid blue; */
-  background-color: rgb(136, 136, 189);
+  background-color: #88AB8E;
   width:500px;
   margin:0 auto;
   padding:30px;
 }
 div.profile_container_box_put > div {
   /* border: 4px solid blue; */
-  background-color: rgb(103, 103, 161);
+  background-color: #88AB8E;
   width:500px;
   margin:0 auto;
   padding:30px;
