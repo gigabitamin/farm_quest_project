@@ -161,7 +161,7 @@ const DiagnosisUploadResult = () => {
                                                 <div className="diagnosis_result_detect_item_content">
                                                     <div className="diagnosis_result_predict_image">
                                                         {/* {url_crops && (<img src={url_crops} alt={`Crops_${index}`} />)} */}
-                                                        {url_crops && (<img src={"http://52.193.246.6/media/" + url_crops.substring(49)} alt={`Crops_${index}`} />)}
+                                                        {url_crops && (<img src={"http://52.193.246.6/media/" + url_crops.substring(65)} alt={`Crops_${index}`} />)}
                                                     </div>                                        
                                                     <div className="diagnosis_result_detect_content">
                                                         <div>
