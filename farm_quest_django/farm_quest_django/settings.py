@@ -26,10 +26,6 @@ API_KEY = env('serviceKey')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
-
-# ALLOWED_HOSTS = allowed_host.ALLOWED_HOSTS
-SECRET_KEY = db_settings.SECRET_KEY
 
 # Application definition
 

@@ -251,8 +251,7 @@ const DiagnosisUploadResult = () => {
     }
 
     const url_empty = save_file_name
-        // ? `${DjangoServer}/media/diagnosis/yolo/origin_img/${save_file_name}`
-        ? `http://localhost:8000/media/diagnosis/yolo/origin_img/${save_file_name}`
+        ? `${DjangoServer}/media/diagnosis/yolo/origin_img/${save_file_name}`
         : null;
 
     return (
