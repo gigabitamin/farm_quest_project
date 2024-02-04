@@ -143,7 +143,7 @@
 }
 
 .diagnosis_result_analystic_image_img {
-  border: 3px solid white;
+  /* border: 3px solid white; */
   /* padding:3px; */
   width: 100%;
 }
@@ -246,7 +246,7 @@
 }
 
 .diagnosis_result_predict_image>img {
-  border: 3px solid #88AB8E;
+  /* border: 3px solid #88AB8E; */
   /* padding: 3px; */
   /* max-height:170px; */
   /* max-width:170px; */
@@ -267,7 +267,7 @@
 }
 
 .diagnosis_result_predict_item {
-  border: 3px solid #88AB8E;
+  /* border: 3px solid #88AB8E; */
   /* padding: 3px; */
 
 }
@@ -446,7 +446,7 @@
 }
 
 .diagnosis_button:hover {
-  background-color: #ebab3b;
+  background-color: #f5c36c;
 }
 
 .diagnosis_button_1 {

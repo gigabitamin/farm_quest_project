@@ -1,39 +1,11 @@
-from requests import Response
 from rest_framework import serializers
-from community_app.serializers import UserInfoSerializer
-from .models import DiagnosisItemCart, DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
-from gardening_shop_app.models import ShopingTb
-from users_app.models import UsersAppUser 
+from .models import DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb
 
-class UserInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UsersAppUser
-        fields = [
-            "id",
-            "username"
-        ]
-
-class DiagnosisItemCartSerializer(serializers.ModelSerializer):
-    user = UserInfoSerializer(read_only=True)
-    class Meta:
-        model = DiagnosisItemCart
-        fields = [
-            "diagnosis_item_cart_id",
-            "diagnosis_item_cart_list",
-            "user"
-        ]
-        
 
 class PlantTbSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlantTb
         fields = '__all__'
-        
-
-class ShopingTbSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ShopingTb
-        fields = '__all__' 
 
 
 class DiagnosisResultSerializer(serializers.ModelSerializer):
@@ -103,12 +75,12 @@ class PlantSerializer(serializers.ModelSerializer):
             'plant_content',
         ]
         
-class SolutionTbSerializer(serializers.ModelSerializer):
+class SolutionSerializer(serializers.ModelSerializer):
     class Meta:
         model = SolutionTb
-        fields = '__all__'
-
-    def to_representation(self, instance):
-        data = super().to_representation(instance)        
-        data = {key: value[1] if isinstance(value, tuple) else value for key, value in data.items()}
-        return data
+        fields = [
+            'diagnosis_history_no',
+            'diagnosis_history_content',
+            'user_plant_no',
+            'solution_id',
+        ]            

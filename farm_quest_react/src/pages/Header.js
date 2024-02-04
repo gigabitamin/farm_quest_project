@@ -102,10 +102,10 @@ const Header = () => {
                     {/* 진단 페이지 링크 끝 / 헤더 css 수정시 주석 해제 후 진행바람 */}
 
                     <div className="nav-item_hd">
-                        <div className="nav-link_hd"><Link to="/community/main">커뮤니티</Link></div>
+                        <div className="nav-link_hd"><Link reloadDocument to="/community/main">커뮤니티</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div className="btn_hd"><Link to="/community/farmlog">팜로그</Link></div>
-                            <div className="btn_hd"><Link to="/community/qna">질문/답변</Link></div>                    
+                            <div className="btn_hd"><Link reloadDocument to="/community/farmlog">팜로그</Link></div>
+                            <div className="btn_hd"><Link reloadDocument to="/community/qna">질문/답변</Link></div>                    
                         </div>
                     </div>
                     
