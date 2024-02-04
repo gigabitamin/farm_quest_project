@@ -25,7 +25,8 @@ const Top = () => {
                 <Route path="/guide_index" element={<GuideIndex />} />
                 <Route path="/guide_detail" element={<GuideDetail />} />
                 <Route path="/community/:mainType" element={<Community />} />
-                <Route path="Scheduler" element={<Scheduler />} />
+                <Route path="/Scheduler" element={<Scheduler />} />
+                <Route path="/MypageMain" element={<MypageMain />} />
             </Routes>
             {/* <GardeningShopRouter /> */}
             <DiagnosisBoardRoute />
