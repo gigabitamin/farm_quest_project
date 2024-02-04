@@ -14,8 +14,7 @@ class DiagnosisResultAll(models.Model):
         db_table = 'diagnosis_result_all'    
     
     def __str__(self):
-        return self.save_file_name        
-
+        return self.save_file_name       
 
 class DiagnosisResult(models.Model):
     diagnosis_result_id = models.AutoField(primary_key=True)
@@ -113,3 +112,4 @@ class DiagnosisShopingTb(models.Model):
     class Meta:
         managed = False
         db_table = 'shoping_tb'
+        db_table = 'diagnosis_item_cart'
