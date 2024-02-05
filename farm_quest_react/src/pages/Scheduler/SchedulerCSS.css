@@ -22,9 +22,9 @@
 /* 도움말 */
 .questionOverlayContainer {
   display: flex ;
-  padding-right: 4px;
-  padding-bottom: 4px;
-  padding-top: 4px;
+  padding-right: 5px;
+  padding-bottom: 8px;
+  padding-top: 5px;
   
 }
 /* .questionOverlayContainer h2 {
@@ -49,10 +49,6 @@
   cursor:help;
 }
 
-.calendar-container{
-  margin-bottom: 50px;
-}
-
 
 /* #headerInnercontents { */
   /* display:flex row; */
@@ -73,10 +69,11 @@
   padding-right: 20px;
 }
 
-/* #schedularFilter h2 {
-  font-size: 16px;
+#schedularFilter h2 {
+  
+  font-size: 24px;
   margin-bottom: 20px;
-} */
+}
 
 .schedulerBtn {
   font-family: 'neodgm', 'sans';
@@ -105,16 +102,9 @@
 
 #shcedulerDiseaseExp{
   text-align:left;
-  font-size: 16px;
+  font-size: 18px;
 
 }
-
-#schedulerFilter span{
-  text-align:left;
-  font-size: 16px;
-
-}
-
 
 #shcedulerDiseaseExpColor {
   list-style-type: none;
@@ -132,7 +122,7 @@
   border-radius: 3.5px; 
 }
 #schedulerFilter {
-  width: 170px;
+  width: 190px;
   border: 10px  #c1e4bc85;
   border-radius: 8px; 
   border-style: ridge double dashed ridge;
@@ -161,7 +151,7 @@
 }
 
 #schedulerFilterUi label.schedulerFilterUi {
-  font-size: 16px;
+  font-size: 18px;
 
 }
 
@@ -181,16 +171,12 @@
   vertical-align: top;
 
 }
-#weatherselectbox {
-  text-align: center;
-}
-
 
 #schedulerFilterUi input[type="radio"] + label.schedulerFilterUi::before {
   content: '';
   display: inline-block;
-  width: 12px; 
-  height: 12px;
+  width: 14px; 
+  height: 14px;
   border-radius: 20%;
   border: 2px solid rgb(102, 51, 8);
   background-color: rgb(255, 255, 239);
@@ -225,7 +211,7 @@
 
 #printedWeatherInfo{
   margin-top: 10px;
-  text-align: center;
+  
 }
 
 .weatherTextPrint {
@@ -270,7 +256,6 @@
   width:220px;
   display: grid;/*삭제대기*/
   place-items: center;/*삭제대기*/
-  margin-bottom: 150px;
 }
 .weatherPrintTitle.firstItem {
   background-color: #9cc581;
@@ -347,7 +332,7 @@
   align-items: center;
   padding: 10px;
   border-radius: 8px; 
-  margin-bottom: 100px;
+  margin-bottom: 20px;
   width: 580px;
   margin-left :10px;
   margin-right:10px;

@@ -168,7 +168,7 @@ function CalendarBody({ currentDate }) {
             const diseaseCode = diseaseInfoArray[index].disease_code;
             styles[diseaseCode] = {
               background: `${getDiseaseColor(diseaseCode)}`,
-              height: '3px',
+              height: '4px',
               width: '100%', // 선의 전체 너비를 셀의 가로 크기에 맞게 조절
               display: 'block', // block 요소로 설정하여 한 줄에 하나의 선만 표시
             };

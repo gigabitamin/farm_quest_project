@@ -147,7 +147,90 @@
   .login-buttons button {
     margin-right: 10px;
   }
+  
 
+
+
+
+  /* 프로필 */
+
+  /* Profile.css */
+/* 
+.profile_container_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .profile-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .profile-img img {
+    border-radius: 50%;
+  }
+  
+  .texts {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .tags {
+    margin-top: 10px;
+  }
+  
+  .tag {
+    margin: 5px;
+    padding: 5px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+  }
+  
+  .button {
+    margin-top: 20px;
+  }
+  
+  .delete_profile {
+    margin-top: 20px;
+    text-align: center;
+  } */
+  
+  /* For the file upload */
+  /* .file {
+    margin-top: 20px;
+  }
+  
+  .file-label {
+    cursor: pointer;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .file-cta {
+    background-color:#88AB8E;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .file-name {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .input.is-medium {
+    margin-top: 10px;
+  } */
+  
   /* 반응형 */
   @media (max-width: 999px) {
     .container {
@@ -157,115 +240,46 @@
     .profile-img {
       margin-top: 20px;
     }
-  }
-
-  .logoutBtn {
-    border: groove rgb(230, 230, 230);
-    border-radius: 4px;
-    margin-top:-25px;
-    padding: 2px;
-    background-color: #ffffff;    
-    cursor: pointer;
-    padding-right: 10px;
-  }
-
-  .logonUserFunction {
-    text-align: right;
 
   }
-
-  .logoutBtn:hover {
-    background-color: white;
-    color: red;
-  }
-
 
 div.loginUser {
-    border: groove rgb(133, 201, 136);
+    border: none;
     border-radius: 4px;
-    margin-top:4px;
-    padding: 4px;
+    padding: 2px 2px;
     background-color: #4f8959;    
     cursor: pointer;
 }
 
 div.loginUser:hover {
-    background-color: #aa7940;
-    transform: scale(1.05);
-
-}
-
-div.loginUser:active {
-  background-color: #aa7940;
-  transform: scale(0.95);
-  border-style: inset;
+    padding: 2px 2px;
+    background-color: #6ba073;
 }
 
 div.loginBox_hd {
     display: flex;
-    flex-direction: space-between;
+    flex-direction: column;
+    margin:1px;    
 }
-.flexContainer {
-  display: flex;
-  flex-direction: row;
-}
-
-.logonUserNotice {
-  width: 30px;
-  position: relative;
-  top:11px;
-  right:3px;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
-.logonUserNotice:hover {
-  transform: scale(1.05);
-}
-
-
 div.resister {
-    border:2px outset rgb(219, 219, 219);
-    background-color: #c7a430;
-    color: #25146e;
+    border:1px solid white;
     border-radius: 2px;
     font-size: 0.5em;
     margin-bottom:0.6em;
-    font-size: 14px;
-    text-align: center;
-    height: 24px;
-    line-height: 24px;
-    width: 70px;
-    margin-bottom:-8px;
-    margin-top:-25px;
 }
 div.resister:hover {
+    padding: 2px 2px;
     background-color:#487f50;
-    transform: scale(1.05);
 }
-div.login:active {
-  transform: scale(0.95);
-}
+
 div.login {
-    border:2px outset white;
-    background-color: #25146e;
+    border:1px solid white;
     border-radius: 2px;
     font-size: 0.5em;
-    width: 70px;
-    font-size: 14px;
-    text-align: center;
-    height: 24px;
-    line-height: 24px;
-    margin-bottom:-12px;
-
 }
 div.login:hover {
+    padding: 2px 2px;    
     background-color: #427e4a;
-    transform: scale(1.05);
-
-}
-div.login:active {
-  transform: scale(0.95);
 }
 
 div.login_wrap_div_box{
@@ -297,3 +311,208 @@ div.resister_container {
     max-width:350px;
     margin: 0 auto;    
 }
+
+
+
+/* 프로필 */
+
+
+/* user.css */
+
+/* Profile Container */
+/* .profile_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+} */
+
+/* Profile Image Box */
+/* .profile_img_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} */
+
+/* Profile Image Div */
+/* .profile_img_div {
+  margin-top: 20px;
+} */
+
+/* Profile Image 128 */
+
+/* 
+.profile_image_128 img {
+  border-radius: 50%;
+  border: 5px;
+  border-color: #88ab8e;
+  border-style: double;
+  width: 60%;
+} */
+
+/* Profile Texts */
+/* .profile_texts {
+  text-align: center;
+  margin-top: 20px;
+} */
+
+/* Profile Tag Medium
+.profile_tag_medium {
+  margin-top: 10px;
+  display: flex;
+  background-color: #45a049;
+
+}
+
+.profileName {
+  padding:5%;
+  background-color: antiquewhite;
+  width: 130px;
+  margin: 10px;
+}
+
+.profileInfo {
+  padding:5%;
+  background-color: rgb(47, 124, 79);
+  width: 240px;
+  margin: 10px;
+}
+
+.profile_tag {
+  margin-bottom: 10px;
+}
+ */
+
+
+/* Delete Profile Link */
+/* .delete_profile {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+} */
+
+/* Profile Image Upload Box */
+/* .profile_img_is {
+  margin-top: 20px;
+} */
+
+/* Profile Image Label */
+/* .profile_image_label {
+  cursor: pointer;
+} */
+
+/* Profile File Label */
+/* .profil_file_label {
+  font-weight: bold;
+  margin-bottom: 10px;
+} */
+
+/* Profile File Input */
+/* .profile_file_input {
+  display: none;
+} */
+
+/* .file_cta {
+  background-color: rgb(43, 139, 158);
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+} */
+
+/* File Icon */
+/* .file_icon {
+  margin-right: 5px;
+} */
+
+/* Profile Image File */
+/* .profile_image_file {
+  margin-top: 10px;
+  font-weight: bold;
+} */
+
+/* Responsive styles */
+/* @media (max-width: 600px) {
+  .profile_container {
+    margin: 10px;
+  }
+
+  .profile_img_div {
+    margin-top: 20px;
+  }
+} */
+
+
+/* user.css */
+
+/* ... (previous styles) */
+
+/* .profile_update_button {
+  margin-top:10px;
+  font-family : 'neodgm';
+  font-size : '20px';
+  background-color: rgb(43, 139, 158);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+} */
+
+/* Profile Input */
+/* .profile_input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid white;
+  border-radius: 4px;
+} */
+
+/* .profile_button {
+  background-color: rgb(43, 139, 158);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+} */
+
+/* Responsive styles */
+/* @media (max-width: 600px) {
+  .profile_container {
+    margin: 10px;
+  }
+
+  .profile_img_div {
+    margin-top: 20px;
+  } */
+
+  /* .profile_update_button button {
+    width: 100%;
+  } */
+
+  /* .profile_input {
+    width: 100%;
+  }
+} */
+/* 
+.delete_profile {
+  font-family: 'neodgm';
+  background-color: rgb(146, 182, 189);
+  color: rgb(26, 0, 0);
+  font-size: 14px;
+  padding-top:4px;
+  padding-bottom:4px;
+  border-radius: 4px;
+  cursor: pointer;
+  width:100px;
+}
+
+.delete_profile a:visited {
+  color: initial;
+  background-color: initial;
+} */
+
