@@ -414,7 +414,6 @@ div.resister_container {
   display: none;
 } */
 
-/* File CTA */
 /* .file_cta {
   background-color: rgb(43, 139, 158);
   color: white;
@@ -451,7 +450,6 @@ div.resister_container {
 
 /* ... (previous styles) */
 
-/* Profile Update Button */
 /* .profile_update_button {
   margin-top:10px;
   font-family : 'neodgm';
@@ -472,7 +470,6 @@ div.resister_container {
   border-radius: 4px;
 } */
 
-/* Profile Button */
 /* .profile_button {
   background-color: rgb(43, 139, 158);
   color: white;
@@ -516,11 +513,6 @@ div.resister_container {
 
 .delete_profile a:visited {
   color: initial;
-  background-color: initial;
-} */
-
-/* button:active,
-button:focus {
   background-color: initial;
 } */
 

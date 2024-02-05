@@ -22,14 +22,14 @@ const CommunityMain = ({ mainType }) => {
         } else if (mainType === 'farmlog') {
             return '팜로그'
         } else if (mainType === 'qna') {
-            return 'QnA'
+            return 'Q&A'
         }
     }
 
     // 없어서 수작업 했다 ㅠㅠㅠ
     const paginator = (currentPageNum, lastPageNum, range=2) => {
-        const cond1 = 1 < currentPageNum - range;
-        const cond2 = lastPageNum > currentPageNum + range;
+        const cond1 = 1 + range < currentPageNum;
+        const cond2 = currentPageNum < lastPageNum - range;
         let arr = [];
         if (2*range + 1 >= lastPageNum){
             return [...Array(lastPageNum)].map((_, i) => {return i + 1});
@@ -41,10 +41,10 @@ const CommunityMain = ({ mainType }) => {
         };
         if (cond1 && !cond2) {
             arr = arr.concat([-1]);
-            return arr.concat([...Array(lastPageNum + range + 1 - currentPageNum)].map((_, i) => {return currentPageNum - range + i}));
+            return arr.concat([...Array(2*range + 1)].map((_, i) => {return lastPageNum - 2*range + i}));
         };
         if (!cond1 && cond2) {
-            arr = arr.concat([...Array(currentPageNum + range)].map((_, i) => {return i + 1}));
+            arr = arr.concat([...Array(2*range + 1)].map((_, i) => {return i + 1}));
             return arr.concat([-1]);
         };
     };
@@ -128,13 +128,13 @@ const CommunityMain = ({ mainType }) => {
                 }
             </div>
             <div className='community_main_bottom_box'>
-                {mainPage.num > 1 && (<button onClick={toPrevious}>이전</button>)}
+                {mainPage.num > 1 && (<button className="community_mini_button" onClick={toPrevious}>이전</button>)}
                 {
                     pagination.map(idx => {
                         return (
                             <a
                                 style={{
-                                    padding: '4px',
+                                    padding: '4px 6px',
                                     cursor: idx===mainPage.num || idx===-1 ? 'default' : 'pointer',
                                     color: idx===mainPage.num ? 'blue' : 'black',
                                     textDecorationLine: idx===mainPage.num ? 'underline' : 'none',
@@ -146,7 +146,7 @@ const CommunityMain = ({ mainType }) => {
                         )
                     })
                 }
-                {mainPage.num < data.page_count && (<button onClick={toNext}>다음</button>)}
+                {mainPage.num < data.page_count && (<button className="community_mini_button" onClick={toNext}>다음</button>)}
             </div>
         </section>
     );

@@ -24,7 +24,7 @@ const CommunityMainComment = ({ commentItem, loadContent }) => {
         <div className="community_detail_comment_box">
             <div className="community_detail_comment_box_user">{commentItem.user.nickname}</div>
             <div className="community_detail_comment_box_content">{commentItem.cmt_content}</div>
-            <button onClick={onDelete}>삭제</button>
+            <button className="community_mini_button" onClick={onDelete}>삭제</button>
         </div>
     );
 };
