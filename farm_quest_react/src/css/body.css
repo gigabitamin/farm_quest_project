@@ -1,144 +1,51 @@
-/* Button base styles */
-.index_body_wrap{
-    width: 1100px;
-    margin: 0 auto;
+.index_body_wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .index_main_ind {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .index_main_ind div:nth-child(n+5):nth-child(-n+7) {
+    grid-column-start: 2;
+    grid-column-end: -2;
+  }
+  
+  .btn_index_ind {
     position: relative;
-
-}
-
-.btn_index_ind {
-    display: inline-block; /* Adjust as necessary for your layout */
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
-    color: black; /* Adjust the color as needed */
-    font-size: 16px; /* Adjust the font size as needed */
-    line-height: 178px; /* This helps center the text vertically */
-    margin: 5px; /* Adjust spacing between buttons */
-}
-
-/* Specific rectangle styles applied to buttons */
-.Rectangle6 {
-    width: 191px;
-    height: 178px;
-    background: #88AB8E;
-    position: absolute;
-    left: 150px;
-    top: 100px;
-    border-radius: 10px;
-}
-
-.Rectangle7 {
-    width: 192px;
-    height: 178px;
-    background: #88AB8E;
-    position: absolute;
-    left: 368px;
-    top: 100px;
-    border-radius: 10px;
-}
-
-.Rectangle8 {
-    width: 191px;
-    height: 178px;
-    background: #88AB8E;
-    position: absolute;
-    left: 150px;
-    top: 304px;
-    border-radius: 10px;
-}
-
-.Rectangle9 {
-    width: 192px;
-    height: 178px;
-    background: #88AB8E;
-    position: absolute;
-    left: 368px;
-    top: 304px;
-    border-radius: 10px;
-}
-
-.Rectangle10 {
-    width: 276px;
-    height: 153px;
-    background: #88AB8E;
-    position: absolute;
-    left: 635px;
-    top: 100px;
-    border-radius: 10px;
-}
-
-.Rectangle11 {
-    width: 276px;
-    height: 153px;
-    background: #88AB8E;
-    position: absolute;
-    left: 635px;
-    top: 278px;
-    border-radius: 10px;
-}
-
-.Rectangle12 {
-    width: 241px;
-    height: 293px;
-    background: #88AB8E;
-    position: absolute;
-    left: 100px;
-    top: 524px;
-    border-radius: 10px;
-}
-
-.Rectangle13 {
-    width: 241px;
-    height: 293px;
-    background: #88AB8E;
-    position: absolute;
-    left: 368px;
-    top: 524px;
-    border-radius: 10px;
-}
-
-.Rectangle14 {
-    width: 241px;
-    height: 293px;
-    background: #88AB8E;
-    position: absolute;
-    left: 670px;
-    top: 524px;
-    border-radius: 10px;
-}
-
-.Rectangle6:hover {
-    background: #F2F1EB;
-}
-
-.Rectangle7:hover {
-    background: #F2F1EB;
-}
-
-.Rectangle8:hover {
-    background: #F2F1EB;
-}
-
-.Rectangle9:hover {
-    background: #F2F1EB;
-}
-
-.Rectangle10:hover {
-    background: #F2F1EB;
-}
-
-.Rectangle11:hover {
-    background: #F2F1EB;
-}
-
-.Rectangle12:hover {
-    background: #F2F1EB;
-}
-
-.Rectangle13:hover {
-    background: #F2F1EB;
-}
-
-.Rectangle14:hover {
-    background: #F2F1EB;
-}
+    color: #F2F1EB;
+    background-color: #88AB8E;
+    border-radius: 5px;
+  }
+  
+  .btn_index_ind.btn_large::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+  
+  .btn_index_ind i {
+    margin-right: 8px;
+    font-size: 72px;
+  }
+  
+  .btn_index_ind:hover {
+    background-color: #F2F1EB;
+  }
+  
+  .btn_index_ind.btn_photo_ind, .btn_index_ind.btn_qna_ind, .btn_index_ind.btn_calendar_ind {
+    padding: 5px;
+    grid-column: span 4;
+  }
+  
