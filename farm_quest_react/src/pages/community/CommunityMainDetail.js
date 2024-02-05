@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
 import CommunityMainComment from './CommunityMainComment';
 import axios from 'axios';
 import backButton from '../../images/assets/backButton.png'
 
 const CommunityMainDetail = () => {
+    const history = useNavigate();
     const DjangoServer = useSelector(state => state.DjangoServer);
     const threadNo = useSelector(state => state.community.threadNo);
     const initialForm = {cmt_content: '', thread_no: threadNo};
     const dispatch = useDispatch();
     const [item, setItem] = useState({user:{}, thread_comments:[]});
     const [form, setForm] = useState(initialForm);
+    const [loading, setLoading] = useState(true)
     const [cookies] = useCookies(['id']);
 
     const loadContent = async () => {
@@ -19,6 +22,7 @@ const CommunityMainDetail = () => {
         // 테스트 출력 
         // console.log(response.data);
         setItem(response.data);
+        setLoading(false);
     };
 
     const onDelete = (event) => {
@@ -28,6 +32,8 @@ const CommunityMainDetail = () => {
                 }).then(() => {
                     alert('삭제되었습니다.');
                     backToMain();
+                }).catch(() => {
+                    alert('잘못된 접근입니다.');
                 });
         } else {
             event.preventDefault();
@@ -65,13 +71,16 @@ const CommunityMainDetail = () => {
 
     const submitForm = async (event) => {
         event.preventDefault();
-        await axios.post(`${DjangoServer}/community/detail/comment/add/`, form, {
-            headers: { Authorization: `Token  ${cookies.id}` }
-        });
-        const response = await axios.get(`${DjangoServer}/community/detail/show/${threadNo}`);
-        console.log(response.data);
-        resetForm();
-        setItem(response.data);
+        if (cookies.id) {
+            await axios.post(`${DjangoServer}/community/detail/comment/add/`, form, {
+                headers: { Authorization: `Token  ${cookies.id}` }
+            });
+            const response = await axios.get(`${DjangoServer}/community/detail/show/${threadNo}`);
+            resetForm();
+            setItem(response.data);
+        } else if (window.confirm('로그인이 필요한 서비스입니다.\n로그인 화면으로 이동하시겠습니까?')) {
+            history('/login')
+        }
     };
 
     const datetimeShow = (string) => {
@@ -97,11 +106,26 @@ const CommunityMainDetail = () => {
                     </div>
                 </div>
                 <div className="community_detail_content_box_main">
-                    <div className="community_detail_content_box_content">{item.thread_content}</div>
-                    <div className="community_detail_content_box_button">
+                    { loading ? (<p><br/>로딩중...</p>) :
+                        (<div className="community_detail_content_box_content">
+                            {item.thread_content}
+                        </div>)
+                    }
+                    {/* <div className="community_detail_content_box_button">
                         <button className='community_button_default' onClick={onDelete}>삭제</button>
                         <button className='community_button_default' onClick={toUpdate}>수정</button>
-                    </div>
+                    </div> */}
+                    {
+                        (cookies.id && cookies.user.id === item.user.id)
+                        ?
+                        (<div className="community_detail_content_box_button">
+                            <button className='community_button_default' onClick={onDelete}>삭제</button>
+                            <button className='community_button_default' onClick={toUpdate}>수정</button>
+                        </div>)
+                        :
+                        (<div className="community_detail_content_box_button">
+                        </div>)
+                    }
                 </div>
             </div>
             <hr/>

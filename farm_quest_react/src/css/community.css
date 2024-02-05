@@ -6,6 +6,10 @@ article#community {
     margin-bottom: 90px;
 }
 
+article#community textarea {
+    padding: 5px;
+}
+
 div.community_back_button {
     margin: 4px auto 10px auto;
     display: flex;

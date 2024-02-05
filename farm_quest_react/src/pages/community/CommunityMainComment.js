@@ -14,6 +14,8 @@ const CommunityMainComment = ({ commentItem, loadContent }) => {
                 }).then(() => {
                     // alert('삭제되었습니다.');
                     loadContent();
+                }).catch(() => {
+                    alert('잘못된 접근입니다.');
                 });
         } else {
             event.preventDefault();
