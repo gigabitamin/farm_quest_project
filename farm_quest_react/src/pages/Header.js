@@ -82,7 +82,17 @@ const Header = () => {
                 <ul>
                     {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}                                        
                     
-                    <CsLink />
+                    
+
+                    <div className="nav-item_hd">
+                        <div className="nav-link_hd"><CsLink 고객센터 /></div>
+                        {/* <div className="dropdown-menu_hd">
+                            <div className="btn_hd"><Link to='/'>공지사항</Link></div>
+                            <div className="btn_hd"><Link to='/'>FaQ</Link></div>
+                            <div className="btn_hd"><Link to='/'>1대1 문의</Link></div>
+                        </div> */}
+                    </div>     
+
 
                     <div className="nav-item_hd">
                         <div className="nav-link_hd"><Link to="/guide_index">가이드</Link></div>
