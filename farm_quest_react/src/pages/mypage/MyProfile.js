@@ -20,7 +20,8 @@ const Profile = (props) => {
 
   const [lastLogin, setLastLogin] = useState("");
   const [address, setAddress] = useState("");
-  
+  const [favorite, setFavorite] = useState("");
+
   const history = useNavigate()
   const DjangoServer = useSelector(state => state.DjangoServer);
   const [cookies, setCookie] = useCookies(['id', 'user']);
@@ -58,6 +59,7 @@ const Profile = (props) => {
 
     else if (target.name === "last_login") setLastLogin(target.value);
     else if (target.name === "email") setEmail(target.value);
+    else if (target.name === "favorite") setFavorite(target.value);
 
   };
 
@@ -71,10 +73,11 @@ const Profile = (props) => {
     formData.append("user_name", userName);
     formData.append("phone_number", phoneNumber);
     formData.append("address", address);
-
-    formData.append("last_login", lastLogin);
+    // formData.append("last_login", lastLogin);
     formData.append("email", email);
-  
+    formData.append("favorite", favorite);
+
+
     axios
       .patch(`${DjangoServer}/profile/${userId}/`, formData, {
         headers: {
@@ -93,7 +96,7 @@ const Profile = (props) => {
         console.error('Error updating profile:', error);
       });
   };
-  
+
 
   const getProfile = () => {
     const token = cookies.id;
@@ -113,6 +116,7 @@ const Profile = (props) => {
           setAddress(response.data["address"]);
           setLastLogin(response.data["last_login"]);
           setEmail(response.data["email"]);
+          setFavorite(response.data["favorite"]);
           setImage(response.data["profile_image"]);
         }
         console.log('response 121 = ', response.data.profile_image)
@@ -122,25 +126,25 @@ const Profile = (props) => {
   };
 
 
- 
-    const getProfileImage = () => {
-      const userId = cookies.user.id;
-      axios
-        .get(`${DjangoServer}/profile_image/${userId}/`)
-        .then((response) => {
-          console.log('image res = ', response)
-          if (response.data.image_data) {
-            setImageData(response.data.image_data);
-          }
-        })  
-        .catch((error) => {
-          console.error('Error fetching profile image:', error);
-        });
-    };
 
-    useEffect(() => {
-      getProfileImage();
-    }, []);
+  const getProfileImage = () => {
+    const userId = cookies.user.id;
+    axios
+      .get(`${DjangoServer}/profile_image/${userId}/`)
+      .then((response) => {
+        console.log('image res = ', response)
+        if (response.data.image_data) {
+          setImageData(response.data.image_data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching profile image:', error);
+      });
+  };
+
+  useEffect(() => {
+    getProfileImage();
+  }, []);
 
 
 
@@ -157,78 +161,84 @@ const Profile = (props) => {
       return (
         <div className="profile_container_box">
           <div>
-          <div>
-          <div className="profile_img_box">
-            <div className="profile_img_div">
-            <h2>{nickname}</h2>
-              <figure className="profile_image_128">
-                <br />
-                <img src={ProfileImg} alt="프로필" />
-              </figure>
-            </div>
-            <div className="profile_texts">
-              <div className="title" onChange={handleChange}>
-                
-              </div>
+            <div>
+              <div className="profile_img_box">
+                <div className="profile_img_div">
+                  <h2>{nickname}</h2>
+                  <figure className="profile_image_128">
+                    <br />
+                    <img src={ProfileImg} alt="프로필" />
+                  </figure>
+                </div>
+                <div className="profile_texts">
+                  <div className="title" onChange={handleChange}>
 
-              <div className="profile_tag_medium">
-                <div className="profileName">
-                  <div className="profile_tag">
-                  아이디
-                  </div> 
-                  <div className="profile_tag">
-                  성명
-                  </div> 
-                  <div className="profile_tag">
-                  전화번호
-                  </div> 
-                  <div className="profile_tag">
-                  이메일
                   </div>
-                  {/* <div className="profile_tag">
+
+                  <div className="profile_tag_medium">
+                    <div className="profileName">
+                      <div className="profile_tag">
+                        아이디
+                      </div>
+                      <div className="profile_tag">
+                        성명
+                      </div>
+                      <div className="profile_tag">
+                        전화번호
+                      </div>
+                      <div className="profile_tag">
+                        이메일
+                      </div>
+                      {/* <div className="profile_tag">
                   마지막 접속
                   </div> */}
-                  <div className="profile_tag">
-                  마이팜 위치
-                  </div>
-                </div> 
-                <div className="profileInfo">
-                    <div className="profile_tag">
-                    {cookies.user.username}
-                    </div> 
-                    <div className="profile_tag">
-                    {userName}
-                    </div> 
-                    <div className="profile_tag">
-                    {phoneNumber}
-                    </div> 
-                    <div className="profile_tag">
-                    {email}
-                    </div> 
-                    {/* <div className="profile_tag">
+                      <div className="profile_tag">
+                        마이팜 위치
+                      </div>
+                      <div className="profile_tag">
+                        나의 작물
+                      </div>
+                    </div>
+                    <div className="profileInfo">
+                      <div className="profile_tag">
+                        {cookies.user.username}
+                      </div>
+                      <div className="profile_tag">
+                        {userName}
+                      </div>
+                      <div className="profile_tag">
+                        {phoneNumber}
+                      </div>
+                      <div className="profile_tag">
+                        {email}
+                      </div>
+                      {/* <div className="profile_tag">
                     {lastLogin}
                     </div>  */}
-                    <div className="profile_tag">
-                    {address}
-                    </div> 
+                      <div className="profile_tag">
+                        {address}
+                      </div>
+                      <div className="profile_tag">
+                        {favorite}
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+                  <div className="profile_update" onClick={updateClick}>
+                    <button className="profile_update_button" >프로필 수정하기</button>
+                  </div>
+                  <br />
+
                 </div>
               </div>
-
               <br />
-              <div className="profile_update" onClick={updateClick}>
-                <button className="profile_update_button" >프로필 수정하기</button>                                
-              </div>
-              <br />
-              
+              <button className="delete_profile">
+                <Link to="/delete_profile" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  회원탈퇴
+                </Link>
+              </button>
             </div>
-          </div>
-          <br />
-            <button className="delete_profile">
-              <Link to="/delete_profile" style={{ textDecoration: 'none', color: 'inherit' }}>
-                회원탈퇴
-              </Link>
-            </button>
-              </div>
           </div>
         </div>
       );
@@ -236,91 +246,102 @@ const Profile = (props) => {
       return (
         <div className="profile_container_box_put">
           <div id='profileModifyContainer'>
-          <div className="profile_img">
-            <div className="profile_img_box">
-              <div className="profile_img_is">
-              <span className="profile_file_label">
+            <div className="profile_img">
+              <div className="profile_img_box">
+                <div className="profile_img_is">
+                  <span className="profile_file_label">
                     프로필 사진 변경
                   </span>
-                <label className="profile_image_label">
-                  <div className="profileFileImg">
+                  <label className="profile_image_label">
+                    <div className="profileFileImg">
 
                     </div>
 
                     <div className="profileFileImg">
-                    <input
-                      className="profile_file_input"
-                      type="file"
-                      name="profile_image"
-                      onChange={fileChangeHandler}
-                    />
+                      <input
+                        className="profile_file_input"
+                        type="file"
+                        name="profile_image"
+                        onChange={fileChangeHandler}
+                      />
                       <img className="profileFileImg" src={ProfileImg} alt="프로필" />
-                        {/* <i className="file_upload"></i> */}
+                      {/* <i className="file_upload"></i> */}
                     </div>
                   </label>
-              </div>
-            </div>
-            <div id="profileModifyWrap">
-              <div id="profileModify">
-                <div className="profileModifyTitle">
-                    <div className="profile_tag_modify">
-                    닉네임 </div>
-                    <div className="profile_tag_modify">
-                    휴대폰 번호 </div>
-                    <div className="profile_tag_modify">
-                    이메일 </div>
-                    <div className="profile_tag_modify">
-                    마이팜 위치 </div>
                 </div>
+              </div>
+              <div id="profileModifyWrap">
+                <div id="profileModify">
+                  <div className="profileModifyTitle">
+                    <div className="profile_tag_modify">
+                      닉네임 </div>
+                    <div className="profile_tag_modify">
+                      휴대폰 번호 </div>
+                    <div className="profile_tag_modify">
+                      이메일 </div>
+                    <div className="profile_tag_modify">
+                      마이팜 위치 </div>
+                    <div className="profile_tag_modify">
+                      나의 작물 </div>
+                  </div>
 
-              <div className="profileModifyInput">
-              <div className="profile_tag">
-                    <input
-                      className="profile_input input"
-                      type="text"
-                      name="nickname"
-                      onChange={handleChange}
-                      placeholder={nickname}
-                    />
+                  <div className="profileModifyInput">
+                    <div className="profile_tag">
+                      <input
+                        className="profile_input input"
+                        type="text"
+                        name="nickname"
+                        onChange={handleChange}
+                        placeholder={nickname}
+                      />
                     </div>
                     <div className="profile_tag input">
-                    <input
-                      className="profile_input"
-                      type="text"
-                      name="phone_number"
-                      onChange={handleChange}
-                      placeholder={phoneNumber}
-                    />
+                      <input
+                        className="profile_input"
+                        type="text"
+                        name="phone_number"
+                        onChange={handleChange}
+                        placeholder={phoneNumber}
+                      />
                     </div>
                     <div className="profile_tag input">
-                    <input
-                      className="profile_input"
-                      type="text"
-                      name="email"
-                      onChange={handleChange}
-                      placeholder={email}
-                    />
+                      <input
+                        className="profile_input"
+                        type="text"
+                        name="email"
+                        onChange={handleChange}
+                        placeholder={email}
+                      />
                     </div>
                     <div className="profile_tag input">
-                    <input
-                      className="profile_input"
-                      type="text"
-                      name="address"
-                      onChange={handleChange}
-                      placeholder={address}
-                    />
+                      <input
+                        className="profile_input"
+                        type="text"
+                        name="address"
+                        onChange={handleChange}
+                        placeholder={address}
+                      />
                     </div>
+                    <div className="profile_tag input">
+                      <input
+                        className="profile_input"
+                        type="text"
+                        name="favorite"
+                        onChange={handleChange}
+                        placeholder={favorite}
+                      />
+                    </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-              <div>
-              <button className="profile_button" onClick={updateClick}>
-                <span>수정 완료</span>
-              </button>
               </div>
+              <div>
+                <button className="profile_button" onClick={updateClick}>
+                  <span>수정 완료</span>
+                </button>
               </div>
             </div>
           </div>
+        </div>
       );
     }
   };

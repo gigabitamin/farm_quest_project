@@ -2,11 +2,15 @@ import React from 'react';
 import '../css/body.css';
 import { Link } from 'react-router-dom';
 import 'bootstrap-icons/font/bootstrap-icons.css'; // 부트스트랩 아이콘 CSS 추가
+import DiagnosisUpload from './diagnosis/DiagnosisUpload'
 
 function Body() {
   return (
     <div className="index_body_wrap">
+      <div className='diagnosisUpload'><DiagnosisUpload /></div>
+      
       <main className="index_main_ind">
+
         <div className="btn_index_ind btn_large btn_guide_ind">
           <Link to="/">
             <div><i className="bi bi-journal-text"></i></div>

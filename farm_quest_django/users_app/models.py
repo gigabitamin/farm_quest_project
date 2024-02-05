@@ -31,6 +31,7 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=11)
     address = models.CharField(max_length=255)
     diagnosis_cart = models.CharField(max_length=45, blank=True, null=True)
+    favorite = models.CharField(max_length=255, blank=True, null=True)
     
         
     @receiver(post_save, sender=User)
@@ -142,6 +143,7 @@ class User(AbstractUser):
     address = models.CharField(max_length=255, unique=True)
     profile_image = models.CharField(max_length=255, unique=True)
     diagnosis_cart = models.CharField(max_length=45, blank=True, null=True)
+    favorite = models.CharField(max_length=255, blank=True, null=True)
     
     # psh
     # last_login = models.CharField(max_length=45, blank=True, null=True)
@@ -181,6 +183,7 @@ class UsersAppUser(models.Model):
     phone_number = models.CharField(max_length=11, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     diagnosis_cart = models.CharField(max_length=45, blank=True, null=True)
+    favorite = models.CharField(max_length=255, blank=True, null=True)
     
     class Meta:
         managed = False

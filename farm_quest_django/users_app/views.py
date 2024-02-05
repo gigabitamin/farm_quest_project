@@ -81,57 +81,6 @@ class UserProfileDeleteView(APIView):
         return Response({"message": "탈퇴 성공"}, status=status.HTTP_204_NO_CONTENT)
 
 
-
-# class UserProfileDeleteView(APIView):
-#     permission_classes = [permissions.IsAuthenticated]
-
-#     def delete(self, request, *args, **kwargs):
-#         user = request.user
-
-#         # 여기서 토큰 검증을 추가
-#         token = request.data.get('token', None)
-#         if token:
-#             try:
-#                 token_obj = Token.objects.get(key=token)
-#             except Token.DoesNotExist:
-#                 return Response({'error': '토큰 꽝'}, status=status.HTTP_400_BAD_REQUEST)
-
-#             # 토큰이 유효한 경우에만 삭제 진행
-#             user.delete()
-#             return Response({"message": "탈퇴 성공"}, status=status.HTTP_204_NO_CONTENT)
-
-#         return Response({'error': '토큰 없어'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-# class UserProfileDeleteView(APIView):
-#     permission_classes = [IsAuthenticated]
-
-#     def delete(self, request, *args, **kwargs):
-#         try:
-#             ('hi')
-#             user = get_user_model().objects.get(pk=request.user.pk)
-#             user.delete()
-#             return Response({"message": "탈퇴 성공"}, status=status.HTTP_204_NO_CONTENT)
-#         except get_user_model().DoesNotExist:
-#             return Response({"error": "존재하지 않는 사용자"}, status=status.HTTP_404_NOT_FOUND)
-#         except Exception as e:
-#             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-# class UserProfileDeleteView(APIView):
-#     permission_classes = [IsAuthenticatedOrReadOnly]
-
-#     def delete(self, request, *args, **kwargs):
-#         print('hi1')
-#         user = request.user
-#         print('hi2')
-#         user.delete()
-#         print('hi3')
-#         return Response({"message": "탈출 성공"}, status=status.HTTP_204_NO_CONTENT)
-
-
-
 class ProfileImageView(View):
     def get(self, request, pk):
         print('hi1')
@@ -153,36 +102,6 @@ class ProfileImageView(View):
 class ProfileView(generics.RetrieveUpdateAPIView):    
     queryset = User.objects.all()
     serializer_class = ProfileSerializer
-
-    # def patch(self, request):
-    #     profile = Profile.objects.get(user=request.user)
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     data = serializer.validated_data
-    #     profile.nickname = request.data['nickname']
-    #     profile.user_name = request.data['user_name']
-    #     profile.phone_number = request.data['phone_number']
-    #     profile.address = request.data['address']
-    #     print('profile.nickname = ', profile.nickname)
-    #     print('profile.user_name = ', profile.user_name)
-    #     print('profile.phone_number = ', profile.phone_number)
-    #     print('profile.address = ', profile.address)
-    #     print('data = ', data)
-    #     print('request.data = ', request.data)        
-    #     if request.data['image']:
-    #         profile.image = request.data['image']
-    #         print('profile.image = ', profile.image)
-    #     print('profile = ', profile)
-    #     profile.save()
-        
-    #     return Response({"result": "ok"}, status=status.HTTP_206_PARTIAL_CONTENT)
-
-    # def get(self, request):
-    #     profile = Profile.objects.get(user=request.user)
-    #     serializer = self.get_serializer(profile)
-    #     print('serializer 1 = ', serializer)
-    #     return Response(serializer.data)
-
 
 
 @api_view(['POST'])

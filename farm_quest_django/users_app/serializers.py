@@ -46,7 +46,8 @@ class RegisterSerializer(serializers.ModelSerializer):
                   'nickname', 
                   'user_name', 
                   'phone_number', 
-                  'address')
+                  'address',
+                  'favorite',)
                 
     def validate(self, data):        
         if data['password'] != data['password2']:
@@ -78,7 +79,8 @@ class UserSerializers(serializers.ModelSerializer):
                   'nickname', 
                   'user_name', 
                   'phone_number', 
-                  'address']
+                  'address',
+                  'favorite']
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
@@ -103,5 +105,6 @@ class ProfileSerializer(serializers.ModelSerializer):
                   "profile_image",
                 #   psh 추가
                   "email",
-                  "last_login")
+                  "last_login",
+                  "favorite",)
         # extra_kwargs = {"image": {"required": False, "allow_null": True}}

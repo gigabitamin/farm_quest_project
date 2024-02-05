@@ -5,8 +5,7 @@ import { useCookies } from 'react-cookie';
 
 const LoginLink = ({ user }) => {
   const { isLoggedIn, username } = useSelector(state => state.loginUser);
-  const [cookies, setCookie, removeCookie] = useCookies(['id']); 
-  // 구조 분해 할당 하느라 앞에 변수 3개 필요해서 넣은 것이니 오류 떠있어도 수정하지 말 것
+  const [cookies, setCookie, removeCookie] = useCookies(['id']);   
   
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -14,8 +13,8 @@ const LoginLink = ({ user }) => {
       part: 'loginUser',
       type: 'logout'
     });
-    removeCookie('id'); 
-    removeCookie('user');
+    removeCookie('id');    
+    removeCookie('user'); 
     // localStorage.clear();
   };
 
