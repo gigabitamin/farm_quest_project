@@ -29,7 +29,7 @@ const LoginLink = ({ user }) => {
             </button>
           </div>
           <div title="회원정보로 이동" className="loginUser">            
-            <Link to="./profile">
+            <Link to="./MypageMain">
               {username}
             </Link>                        
           </div>

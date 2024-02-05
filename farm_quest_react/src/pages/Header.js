@@ -118,7 +118,7 @@ const Header = () => {
                         </div>
                     {/* </div>                     */}
 
-                    <div className="nav-item_hd">
+                    {/* <div className="nav-item_hd">
                     <div className="nav-link_hd"><Link to="/MypageMain">마이페이지</Link></div>
                         <div className="dropdown-menu_hd">                 
                             <div><a href="{% url 'user_plant' %}" className="btn_hd">나의 작물</a></div>
@@ -126,7 +126,7 @@ const Header = () => {
                             <div><a href="{% url 'user_QnA' %}" className="btn_hd">나의 QnA</a></div>
                             <div><a href="{% url 'user_bookmark' %}" className="btn_hd">즐겨찾기</a></div>                    
                         </div>
-                    </div>
+                    </div> */}
                     
 
                 </ul>
