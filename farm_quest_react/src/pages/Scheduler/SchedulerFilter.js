@@ -78,7 +78,7 @@ const SchedulerFilter = ({ onFetchedDataChange }) => {
     <div>
       <div id="schedulerFilter">
         <div className='questionOverlayContainer'>
-          <h2 id='schedulerselector'>달력 보기</h2>
+          <h3 id='schedulerselector'>달력 보기</h3>
           <CalendarOverlay tooltipText="작물별 질병의 빈발 시기를 알려드립니다." />
         </div>
         {Object.entries(plantNameToNoMapping).map(([plantName, plantNo]) => (

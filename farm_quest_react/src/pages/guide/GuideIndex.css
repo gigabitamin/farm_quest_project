@@ -65,9 +65,8 @@
     width: 240px;
     height: 240px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out, background-color 0.5s ease, transform 0.2s ease;
     padding:15px;
-    transition: background-color 0.5s ease;
 
 }
 
@@ -75,6 +74,8 @@
     box-shadow: 0 10px 12px rgba(0, 0, 0, 0.15); 
     cursor: pointer;
     background-color: rgb(243, 243, 192);
+    transform:scale(1.05);
+
 }
 
 .product_gd img {
@@ -88,21 +89,5 @@
     font-size: 22px;
     text-align: center;
     text-decoration: none;
-    color: inherit;
-}
-
-.product_gd a {
-    text-decoration: none; 
-    color: inherit; 
-  }
-
-.product_gd a:hover {
-    text-decoration: none; 
-    color: inherit; 
-    transform:scale(1.05);
-}
-
-.product_gd p:visited {
     color: initial;
 }
-

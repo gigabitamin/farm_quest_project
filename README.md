@@ -56,7 +56,9 @@ export default "http://localhost:8000"
 
 ====================================================
 <!-- version -->
-###
+### v0.7.6 psh
+- header, footer, etc css 수정
+
 
 ### v0.7.5 psh
 - scheduler, profile css 수정
