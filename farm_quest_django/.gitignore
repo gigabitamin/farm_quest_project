@@ -2,7 +2,6 @@
 ## ff
 allowed_host.py
 db_settings.py
-# db_settings_local.py
 upload
 yolo_model
 tf_model

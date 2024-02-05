@@ -198,7 +198,7 @@
 
   .diagnosis_recommend_section_2_content_1 {
     border: 3px solid #88AB8E;
-    padding: 3px;
+    /* padding: 3px; */
     overflow-y: scroll;
     height: 65vh;
     display: flex;
@@ -208,23 +208,23 @@
 
   .diagnosis_recommend_section_2_content_1_1 {
     border: 3px solid #88AB8E;
-    padding: 3px;
+    /* padding: 3px; */
     flex: 1 0 50%;
   }
 
   .diagnosis_recommend_section_2_content_1_1_1 {
-    border: 3px solid #88AB8E;
-    padding: 3px;
+    /* border: 3px solid #88AB8E; */
+    /* padding: 3px; */
   }
 
   .diagnosis_recommend_section_2_content_1_1_1_1 {
-    border: 3px solid #88AB8E;
-    padding: 3px;
+    /* border: 3px solid #88AB8E; */
+    /* padding: 3px; */
   }
 
   .diagnosis_recommend_section_2_content_1_1_1_1_1 {
-    border: 3px solid #88AB8E;
-    padding: 3px;
+    /* border: 3px solid #88AB8E; */
+    /* padding: 3px; */
     /* width:100px; */
     height: 429px;
     /* height: auto; */
@@ -232,14 +232,14 @@
 
   .diagnosis_recommend_section_2_content_1_1_2 {
     border: 3px solid #88AB8E;
-    padding: 3px;
+    /* padding: 3px; */
     margin: 0 auto;
     display: flex;
     align-items: center;
   }
 
   .diagnosis_recommend_section_2_content_1_1_2_1 {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
   }
 
