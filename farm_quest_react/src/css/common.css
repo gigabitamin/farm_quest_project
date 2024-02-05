@@ -119,12 +119,24 @@ header {
     max-width: 920px;
 }
 
+@media screen and (max-width: 700px) {
+.functionalArea {
+     display: flex;   
+     /* flex-direction: column; */
+        
+    }
+}
+
 .functionalArea {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
+#mainLogoBtn, .portal_search, #userLoginBox {
+    align-items: stretch;
+
+}
 
 .headerMenu a.highlight {
     margin-left: 10px;

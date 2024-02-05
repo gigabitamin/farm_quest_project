@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
+import alarm from '../../images/assets/alarm.png';
+
 
 const LoginLink = ({ user }) => {
   const { isLoggedIn, username } = useSelector(state => state.loginUser);
@@ -9,6 +11,7 @@ const LoginLink = ({ user }) => {
   
   const dispatch = useDispatch();
   const handleLogout = () => {
+    alert('안녕히 가세요, 용사님!');
     dispatch({
       part: 'loginUser',
       type: 'logout'
@@ -18,31 +21,46 @@ const LoginLink = ({ user }) => {
     // localStorage.clear();
   };
 
-
+  
   return (
     <div className="loginBox_hd">
       {isLoggedIn ? (
-        <div>
-          <div className="logout">            
-            <button key="logout" onClick={handleLogout}>
-              로그아웃
-            </button>
+      <div className="flexContainer">
+          <div className='logonUserNotice'>
+            <img className='logonUserNotice' src={alarm} alt="Right-aligned image" />
           </div>
-          <div title="회원정보로 이동" className="loginUser">            
-            <Link to="./MypageMain">
-              {username}
-            </Link>                        
+
+          <div className='loggedinContainer'>
+            <div className="logonUserFunction">
+              <button key="logout" className="logoutBtn" onClick={handleLogout}>
+                <Link to="/" /> 로그아웃
+              </button>
+              <div title="회원정보로 이동" className="loginUser">            
+                <Link to="./MypageMain">
+                  {username}
+                </Link>       
+              </div>                
+            </div>
           </div>
         </div>
       ) : (
         <>
-          <div className="resister">
-            <Link to="/resister">회원가입</Link>
+        <div id='logoffUserFunction'>
+          <div className='userNotice'>
           </div>
-          <div> </div>
-          <div className="login">
-            <Link to="/login">로그인</Link>
-          </div>          
+            <div className='logOn'>
+              <Link to="/resister">
+                <div className="resister">
+                  회원가입
+                </div>
+              </Link>
+              <Link to="/login">
+                <div className="login">
+                  로그인
+                </div>
+              </Link>
+            </div>
+          </div>
         </>
       )}
     </div>

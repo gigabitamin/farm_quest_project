@@ -18,6 +18,7 @@ import Scheduler from './Scheduler/Scheduler';
 import CsRouter from './customerCenter/CsRouter';
 import MypageMain from './mypage/MypageMain';
 import Body from './Body';
+
 const Top = () => {    
 
     return (
@@ -27,7 +28,7 @@ const Top = () => {
                 <Route path="/gardening_shop_index" element={<GardeningShopIndex />} />
                 <Route path="/gardening_shop_detail/:id" element={<GardeningShopDetail />} />
                 <Route path="/gardening_shop_search/:keyword/:user_id" element={<GardeningShopSearch />} />
-                <Route path="/guide_index" element={<GuideIndex />} />
+                <Route path="/guide_index"  element={<GuideIndex />} />
                 <Route path="/guide_detail" element={<GuideDetail />} />
                 <Route path="/guide_detail2" element={<GuideDetail2 />} />
                 <Route path="/guide_detail3" element={<GuideDetail3 />} />

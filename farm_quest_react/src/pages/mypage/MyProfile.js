@@ -232,7 +232,6 @@ const Profile = (props) => {
 
                 </div>
               </div>
-              <br />
               <button className="delete_profile">
                 <Link to="/delete_profile" style={{ textDecoration: 'none', color: 'inherit' }}>
                   회원탈퇴

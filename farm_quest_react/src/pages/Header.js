@@ -9,6 +9,7 @@ import { useCookies } from 'react-cookie';
 
 
 const Header = () => {
+    const DjangoServer = useSelector(state => state.DjangoServer);
     const user = { is_authenticated: false, username: 'exampleUser' };
 
     const [cookies] = useCookies(['id', 'username']);
@@ -95,20 +96,20 @@ const Header = () => {
                                 <div className="dropdown-menu_hd">
                                     {/* <div className="btn_hd"><Link to="/diagnosis_upload_result">진단 결과</Link></div> */}
                                     {/* <div className="btn_hd"><Link to="/diagnosis_recommend/비료">진단 결과 추천상품 임시</Link></div> */}
-                                    <div className="btn_hd"><Link to="/diagnosis_board/main">진단 게시판</Link></div>
-                                    <div className="btn_hd"><Link to="/diagnosis_answer">문진표 작성</Link></div>                    
+                                    <Link to="/diagnosis_answer" className="btn_hd">문진표 작성</Link>            
+                                    <Link to="/diagnosis_board/main" className="btn_hd">진단 게시판</Link>
                                 </div>
                             </div>
 
                             <div className="nav-item_hd">
                                 <div className="nav-link_hd"><Link to="/guide_index">가이드북</Link></div>
                                 <div className="dropdown-menu_hd">
-                                    <div className="btn_hd"><Link to='/guide_detail'>딸기</Link></div>
-                                    <div className="btn_hd"><Link to='/guide_detail2'>포도</Link></div>
-                                    <div className="btn_hd"><Link to='/guide_detail3'>오이</Link></div>
-                                    <div className="btn_hd"><Link to='/guide_detail4'>파프리카</Link></div>
-                                    <div className="btn_hd"><Link to='/guide_detail5'>토마토</Link></div>
-                                    <div className="btn_hd"><Link to='/guide_detail6'>고추</Link></div>
+                                <Link to='/guide_detail' className="btn_hd">딸기</Link>
+                                <Link to='/guide_detail2' className="btn_hd">포도</Link>
+                                <Link to='/guide_detail3' className="btn_hd">오이</Link>
+                                <Link to='/guide_detail4' className="btn_hd">파프리카</Link>
+                                <Link to='/guide_detail5' className="btn_hd">토마토</Link>
+                                <Link to='/guide_detail6' className="btn_hd">고추</Link>
                                 </div>
                             </div>                  
 
@@ -130,15 +131,15 @@ const Header = () => {
                             </div>  
 
                             <div className="nav-item_hd">
-                                <div className="nav-link_hd"><Link to="/Scheduler">스케쥴러</Link></div>
+                                <div className="nav-link_hd"><Link to="/Scheduler">팜 알림판</Link></div>
                             </div>
 
                             <div className="nav-item_hd">
                                 <div className="nav-link_hd"><Link to="/cs_index">고객센터</Link></div>
                                 <div className="dropdown-menu_hd">                    
-                                    <div className="btn_hd"><Link to="/cs_notice">공지사항</Link></div>
-                                    <div className="btn_hd"><Link to="/cs_faq">FAQ</Link></div>
-                                    <div className="btn_hd"><Link to="/cs_one">1대1 문의</Link></div>                    
+                                <Link to="/cs_notice" className="btn_hd">공지사항</Link>
+                                <Link to="/cs_faq" className="btn_hd">FAQ</Link>
+                                <Link to="/cs_one" className="btn_hd">1대1 문의</Link>                    
                                 </div>
                             </div>
 

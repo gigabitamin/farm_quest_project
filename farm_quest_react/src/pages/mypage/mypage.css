@@ -14,6 +14,7 @@
     align-items: center;
     flex-direction: column;
     margin-top: 20px;
+    margin-bottom: 150px;
 
     padding-bottom: 30px;
   }
@@ -142,6 +143,7 @@
   background-color: #f1f1eb;
   width: 500px;
   text-align: center;
+  margin-bottom: 50px;
 }
 
 .profile_img_is {
@@ -371,5 +373,33 @@ div.profile_container_box > div > div {
   background-color: #88ab8e;
   display: grid;
   place-items: center;
+
+}
+
+
+/* 사이드바 */
+
+/* Desktop styles */
+.mypage-sidebar {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border:double #699175 7px;
+  margin-right: 10px;
+  background-color: #ebe5d4;
+}
+
+.sidebar-link {
+  color: #1a1604;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+/* Mobile styles */
+
+.mypageWrap {
+  display: flex;
+  justify-content: center;
+  background-color: #88ab8e;
 
 }
