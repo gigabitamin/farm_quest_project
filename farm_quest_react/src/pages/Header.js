@@ -10,7 +10,6 @@ import { useCookies } from 'react-cookie';
 
 
 const Header = () => {
-    const DjangoServer = useSelector(state => state.DjangoServer);
     const user = { is_authenticated: false, username: 'exampleUser' };
 
     const [cookies] = useCookies(['id', 'username']);
@@ -29,7 +28,7 @@ const Header = () => {
         
         if (selectedCategory === "gardening_shop_search" && keyword) {
             keyword = encodeURIComponent(keyword);
-            window.location.href = `/gardening_shop_search/${keyword}/${user_id}`;
+            window.location.href = `/#/gardening_shop_search/${keyword}/${user_id}`;
         }
 
         return false;
