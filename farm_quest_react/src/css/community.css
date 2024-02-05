@@ -4,6 +4,7 @@ article#community {
     display: flex;
     margin: 4px auto;
     margin-bottom: 90px;
+    text-align: center;
 }
 
 article#community textarea {
@@ -178,6 +179,10 @@ div.community_main_center_box {
     /* overflow-y: scroll; */
 }
 
+div.community_main_center_box p {
+    margin: 0 auto;
+}
+
 div.community_main_bottom_box {
     border-radius: 4px;
     padding: 3px;
@@ -297,6 +302,10 @@ div.community_detail_content_box_time {
 div.community_detail_content_box_main {
     margin-top: 1%;
     margin-bottom: 1%;
+}
+
+div.community_detail_content_box_main p {
+    margin: 0 auto;
 }
 
 div.community_detail_content_box_content {
