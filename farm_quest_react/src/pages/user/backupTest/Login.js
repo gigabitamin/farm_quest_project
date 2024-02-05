@@ -26,7 +26,7 @@ const Login = () => {
     const loginSubmit = (event) => {
         event.preventDefault();
         axios
-            .post("http://127.0.0.1:8000/login/", formData)
+            .post("http://localhost:8000/login/", formData)
             .then((response) => {
                 console.log('reponse = ', response)
                 if (response.status < 300) {
@@ -51,7 +51,7 @@ const Login = () => {
     const checkLoginStatus = () => {
         const token = cookies.id;
         if (token) {            
-            axios.post("http://127.0.0.1:8000/login_check/", { token: token })
+            axios.post("http://localhost:8000/login_check/", { token: token })
                 .then((response) => {
                     if (response.status < 300) {                    
                         dispatch({

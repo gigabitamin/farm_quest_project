@@ -46,33 +46,6 @@ const Login = () => {
         console.log('cookies = ', cookies)
     }
 
-    // useEffect(() => {
-    //     checkLoginStatus();
-    // }, []);
-
-    // const checkLoginStatus = () => {
-    //     const token = cookies.id;
-    //     if (token) {            
-    //         axios.post(`${DjangoServer}/login_check/`, { token: token })
-    //             .then((response) => {
-    //                 if (response.status < 300) {                    
-    //                     dispatch({
-    //                         part: 'loginUser',
-    //                         type: 'login',
-    //                         username: response.data.username
-    //                     });
-    //                     history("/");
-    //                 }
-    //             })
-    //             .catch(() => {                    
-    //                 dispatch({
-    //                     part: 'loginUser',
-    //                     type: 'logout',
-    //                 });
-    //             });
-    //     }
-    // };
-
     return (
       <section className="login_wrap">
         <div className="login_wrap_div_box">

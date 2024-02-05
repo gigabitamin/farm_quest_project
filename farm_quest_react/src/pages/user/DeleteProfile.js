@@ -9,13 +9,9 @@ const DeleteProfile = () => {
     const [cookies, setCookie] = useCookies(['id']);
     const history = useNavigate();    
     const handleDeleteAccount = async () => {
-        try {
-            // const token = cookies.id;
+        try {            
             const token = cookies.id;
-    
             const userId = cookies.user.id;
-            console.log('token 123213', token)
-
             const response = await axios.delete(`${DjangoServer}/delete_profile/${userId}`, 
             {
                 // headers: {
@@ -25,11 +21,10 @@ const DeleteProfile = () => {
                     // "content-type": "multipart/form-data",
                     Authorization: `Token ${token}`,
                 },
-            });
-            console.log('ress', response)
-            alert('회원 탈퇴 완료')
-            history("/");
-            console.log('red',response.data);
+            });            
+            window.confirm('회원 탈퇴를 하시겠습니까?')
+            alert('그동안 팜퀘스트를 이용해 주셔서 감사합니다')
+            history("/");            
            
         } catch (error) {
             console.error('회원 탈퇴 오류:', error);

@@ -1,10 +1,13 @@
 import React from 'react';
 import '../css/body.css';
 import {Link} from 'react-router-dom';
+import DiagnosisUpload from './diagnosis/DiagnosisUpload'
+
 
 function Body() {
   return <div className="index_body_wrap">
   <main className="index_main_ind">
+      <DiagnosisUpload />
       <div className="btn_index_ind btn_guide_ind Rectangle6"><Link to="/">가이드</Link></div>
       <div className="btn_index_ind btn_scheduler_ind Rectangle7"><Link to="/">스케쥴러</Link></div>
       <div className="btn_index_ind btn_search_disease_ind Rectangle8"><Link to="/">질병서치</Link></div>
