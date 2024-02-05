@@ -7,10 +7,10 @@ import { useSelector, useDispatch } from 'react-redux';
 const CsMain = ({ mainType }) => {
     const DjangoServer = useSelector(state => state.DjangoServer);
     const dispatch = useDispatch();
-    const mainPagePreset = {link: `${DjangoServer}/cs_notice/main/${mainType}`, num: 1};
+    const mainPagePreset = { link: `${DjangoServer}/cs_notice/main/${mainType}`, num: 1 };
     const mainPage_ = useSelector(state => state.customerCenter.mainPage);
     const [mainPage, setMainPage] = useState(mainPage_.link ? mainPage_ : mainPagePreset);
-    const [data, setData] = useState({results: []});
+    const [data, setData] = useState({ results: [] });
     const [pagination, setPagination] = useState([]);
 
     const linkPreset = mainPagePreset.link + "?page=";
@@ -27,24 +27,24 @@ const CsMain = ({ mainType }) => {
         }
     }
 
-    const paginator = (currentPageNum, lastPageNum, range=2) => {
+    const paginator = (currentPageNum, lastPageNum, range = 2) => {
         const cond1 = 1 < currentPageNum - range;
         const cond2 = lastPageNum > currentPageNum + range;
         let arr = [];
-        if (2*range + 1 >= lastPageNum){
-            return [...Array(lastPageNum)].map((_, i) => {return i + 1});
+        if (2 * range + 1 >= lastPageNum) {
+            return [...Array(lastPageNum)].map((_, i) => { return i + 1 });
         };
         if (cond1 && cond2) {
             arr = arr.concat([-1]);
-            arr = arr.concat([...Array(2*range + 1)].map((_, i) => {return currentPageNum - range + i}));
+            arr = arr.concat([...Array(2 * range + 1)].map((_, i) => { return currentPageNum - range + i }));
             return arr.concat([-1]);
         };
         if (cond1 && !cond2) {
             arr = arr.concat([-1]);
-            return arr.concat([...Array(lastPageNum + range + 1 - currentPageNum)].map((_, i) => {return currentPageNum - range + i}));
+            return arr.concat([...Array(lastPageNum + range + 1 - currentPageNum)].map((_, i) => { return currentPageNum - range + i }));
         };
         if (!cond1 && cond2) {
-            arr = arr.concat([...Array(currentPageNum + range)].map((_, i) => {return i + 1}));
+            arr = arr.concat([...Array(currentPageNum + range)].map((_, i) => { return i + 1 }));
             return arr.concat([-1]);
         };
     };
@@ -58,23 +58,23 @@ const CsMain = ({ mainType }) => {
 
     const toNext = () => {
         if (data.next) {
-            setMainPage({link: data.next, num: mainPage.num+1});
+            setMainPage({ link: data.next, num: mainPage.num + 1 });
         };
     };
 
     const toPrevious = () => {
         if (data.previous) {
-            setMainPage({link: data.previous, num: mainPage.num-1});
+            setMainPage({ link: data.previous, num: mainPage.num - 1 });
         };
     };
 
     const toPage = (idx) => {
-        if (idx === -1){
+        if (idx === -1) {
             return
         };
         console.log(String(idx))
         const link = linkPreset + String(idx);
-        setMainPage({link: link, num: idx});
+        setMainPage({ link: link, num: idx });
     };
 
     const toDetail = (item) => {
@@ -112,18 +112,18 @@ const CsMain = ({ mainType }) => {
             <div className='cs_notice_main_column_box'>
                 <div className="cs_notice_list_item_display">
                     <div>
-                        <div className="cs_notice_no">번호</div>                        
+                        <div className="cs_notice_no">번호</div>
                     </div>
-                    <div className="cs_notice_title" style={{textAlign: 'center'}}>제목</div>
+                    <div className="cs_notice_title" style={{ textAlign: 'center' }}>제목</div>
                     <div>
-                        <div className="cs_nickname">닉네임</div>
+                        {/* <div className="cs_nickname">닉네임</div> */}
                         <div className="cs_notice_date">작성시간</div>
                         <div className="cs_notice_ctg_type">분류</div>
                     </div>
                 </div>
             </div>
             <div className='cs_notice_main_center_box'>
-                {   
+                {
                     data.results.map(item => {
                         return (
                             <CsNoticeList item={item} />
@@ -139,13 +139,13 @@ const CsMain = ({ mainType }) => {
                             <Link
                                 style={{
                                     padding: '4px',
-                                    cursor: idx===mainPage.num || idx===-1 ? 'default' : 'pointer',
-                                    color: idx===mainPage.num ? 'blue' : 'black',
-                                    textDecorationLine: idx===mainPage.num ? 'underline' : 'none',
+                                    cursor: idx === mainPage.num || idx === -1 ? 'default' : 'pointer',
+                                    color: idx === mainPage.num ? 'blue' : 'black',
+                                    textDecorationLine: idx === mainPage.num ? 'underline' : 'none',
                                 }}
                                 onClick={() => toPage(idx)}
                             >
-                            {idx===-1 ? '...' : idx}
+                                {idx === -1 ? '...' : idx}
                             </Link>
                         )
                     })

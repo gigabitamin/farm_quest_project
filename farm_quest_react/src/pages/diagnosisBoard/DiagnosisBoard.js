@@ -8,6 +8,7 @@ import DiagnosisBoardMainDetail from './DiagnosisBoardMainDetail';
 import DiagnosisBoardMainCreate from './DiagnosisBoardMainCreate';
 import DiagnosisBoardMainUpdate from './DiagnosisBoardMainUpdate';
 import { useSelector, useDispatch } from 'react-redux';
+import './diagnosisBoard.css'
 
 const DiagnosisBoard = () => {
     console.log('hi')
@@ -25,7 +26,7 @@ const DiagnosisBoard = () => {
     }, [mainType]);
     console.log('hi')
     return (
-        <article id="diagnosisBoard">
+        <article className="diagnosisBoard_wrap">
             {/* <DiagnosisBoardLeft setMainType={setMainType} /> */}
             <div className='community_main_box'>
                 {(show === 'main') && <DiagnosisBoardMain mainType={mainType} />}

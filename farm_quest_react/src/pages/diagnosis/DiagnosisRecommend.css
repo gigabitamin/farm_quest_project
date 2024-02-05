@@ -8,6 +8,7 @@
     /* background-color: #e0e0e0; */
     margin: 0 auto;
     max-width: 999px;
+    text-align: center;
   }
 
   .diagnosis_recommend_section_1_wrap {
@@ -287,6 +288,7 @@
     /* background-color: #F2F1EB; */
     margin: 0 auto;
     /* max-width: 1280px; */
+    text-align: center;
   }
 
   .diagnosis_recommend_section_1_wrap {

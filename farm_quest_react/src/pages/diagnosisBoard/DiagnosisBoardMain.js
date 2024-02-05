@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DiagnosisBoardMainList from './DiagnosisBoardMainList';
 // import DiagnosisBoardMainDetail from './DiagnosisBoardMainDetail';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
+import './diagnosisBoard.css'
 
 const DiagnosisBoardMain = ({ mainType }) => {
+    
+    const navigate = useNavigate();
     const DjangoServer = useSelector(state => state.DjangoServer);
     const dispatch = useDispatch();
     const mainPagePreset = { link: `${DjangoServer}/diagnosis_board/${mainType}`, num: 1 };
     // console.log(mainPagePreset)
     const mainPage_ = useSelector(state => state.diagnosisBoard.mainPage);
     const [mainPage, setMainPage] = useState(mainPage_.link ? mainPage_ : mainPagePreset);
-    const [data, setData] = useState({ results: [] });
+    const [data, setData] = useState({ results: [] });    
     const [pagination, setPagination] = useState([]);
 
     const linkPreset = mainPagePreset.link + "?page=";
@@ -50,13 +53,16 @@ const DiagnosisBoardMain = ({ mainType }) => {
     };
     console.log('hi')
     const loadData = async () => {
-        const response = await axios.get(mainPage.link);
+        const response = await axios.get(mainPage.link);        
         console.log('response', response)
+        console.log('9', response.data.results[0])
+        console.log('10', response.data.results[0].detect_result)
+        console.log('11', response.data.results[0].diagnosis_result_all_id)
         setPagination(paginator(mainPage.num, response.data.page_count));
         setData(response.data);
 
     };
-
+    
     const toNext = () => {
         if (data.next) {
             setMainPage({ link: data.next, num: mainPage.num + 1 });
@@ -78,22 +84,14 @@ const DiagnosisBoardMain = ({ mainType }) => {
         setMainPage({ link: link, num: idx });
     };
     console.log('hi')
+
+
+    
     const toDetail = (item) => {
-        const updatedMainPage = mainPage || mainPagePreset;
-        dispatch({
-            part: 'diagnosisBoard',
-            type: 'detail',
-            threadNo: item.thread_no,
-            mainPage: updatedMainPage
-        });
+
+        navigate('/diagnosis_upload_result_board', { state: {file_name : item}});
     };
-    const toCreate = () => {
-        dispatch({
-            part: 'diagnosisBoard',
-            type: 'create',
-            mainPage: mainPage
-        });
-    };
+
 
     useEffect(() => {
         loadData();
@@ -102,18 +100,18 @@ const DiagnosisBoardMain = ({ mainType }) => {
     useEffect(() => {
         setMainPage(mainPagePreset);
     }, [mainType]);
-    console.log('9')
+
     return (
-        <section>
+        <section className='diagnosis_result_board_wrap'>
             <div className='community_main_top_box'>
                 <p>{title()}</p>
-                <button className='community_button_default' onClick={toCreate}>작성</button>
+                <button className='community_button_default'><Link to="/diagnosis_upload">진단</Link></button>
             </div>
             <div className='community_main_column_box'>
                 <div className="community_list_item_display">
                     <div className="thread_no">번호</div>
                     {/* <div className="thread_type">분류</div> */}
-                    <div className="thread_title" style={{ textAlign: 'center' }}>제목</div>
+                    <div className="thread_title" style={{ textAlign: 'center' }}>진단 요약 (상세내용을 보려면 클릭하세요)</div>
                     {/* <div className="nickname">닉네임</div> */}
                     {/* <div className="nums">조회수</div> */}
                 </div>
@@ -121,8 +119,18 @@ const DiagnosisBoardMain = ({ mainType }) => {
             <div className='community_main_center_box'>
                 {
                     data.results.map(item => {
+                        // console.log('itme ddd', item)
                         return (
-                            <Link onClick={() => toDetail(item)}><DiagnosisBoardMainList item={item} /></Link>
+                            
+                            // <Link to={{
+                            //     pathname: '/diagnosis_upload_result_board', 
+                            //     state: item , 
+                            // }}>
+                            //     <DiagnosisBoardMainList item={item} />
+                            // </Link>                            
+
+                            <DiagnosisBoardMainList item={item} />
+                            // <Link onClick={() => toDetail(item)}><DiagnosisBoardMainList item={item} /></Link>
                         );
                     })
                 }

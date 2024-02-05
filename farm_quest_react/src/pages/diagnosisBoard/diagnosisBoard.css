@@ -1,0 +1,12 @@
+article.diagnosisBoard_wrap {
+    display: flex;
+    text-align: center;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;    
+}
+
+
+div.thread_title {
+    font-size: 3vh !important;
+}

@@ -91,6 +91,7 @@ div.cs_one_wrap {
     /* padding : 1px;      */
     margin: 0 auto;
     max-width: 1280px;
+    text-align: center;
 }
 
 .cs_one_form_table_wrap {
@@ -147,6 +148,8 @@ div.cs_one_wrap {
 
 
 /*  */
+
+
 
 
 article#customerCenter {
@@ -283,6 +286,9 @@ div.cs_faq_list_item_display div.nums {
 
 /* Notice */
 
+section.cs_notice_section {
+    text-align: center;
+}
 
 div.cs_notice_main_top_box {
     position: relative;
@@ -367,7 +373,7 @@ div.cs_notice_content_box_list_item {
 div.cs_notice_list_item_display div {    
     width:100%;
 }
-div.cs_notice_title_box {
+div.cs_notice_title_box {    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -398,9 +404,9 @@ div.cs_notice_ctg_type {
     font-size:0.5em !important;
     max-width:80px;
 }
-div.cs_notice_title{
+div.cs_notice_title{    
     font-size:0.5em;
-    max-width:80px;
+    width:100%;
 }
 div.cs_nickname {
     font-size:0.5em;
@@ -437,6 +443,7 @@ div.cs_notice_list_item_display div.nums {
     width: 60px;
     font-size: 13px;
 }
+
 
 
 

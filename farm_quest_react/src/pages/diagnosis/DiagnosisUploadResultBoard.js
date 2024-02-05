@@ -22,7 +22,7 @@ const DiagnosisUploadResult = () => {
 
     // const diagnosis_result_id_list = location.state.file_name.detect_result.diagnosis_result_id_list[0];
     const tf_predict_result_list_sorted = location.state.file_name.detect_result.tf_predict_result_list_sorted;
-    const diagnosis_result_pk = location.state.file_name.diagnosis_result_pk
+    const diagnosis_result_pk = location.state.file_name.diagnosis_result_all_id
     const containerRef = useRef();
     const crops_path_list = location.state.file_name.detect_result.crops_path_list
 
@@ -110,8 +110,9 @@ const DiagnosisUploadResult = () => {
                                             state: { solutionWord: obj_yolo_solution_word }
                                         }}>
                                             <span className='diagnosis_button'>{diagnosis_result_pk}</span>
-                                        </Link>
-                                    </div>
+                                        </Link>                                        
+                                    </div>     
+                                    <span>진단날짜:{location.state.file_name.diagnosis_create_time}</span>                           
                                 </article>
 
                                 <article title="summary" className="diagnosis_result_analystic_summary_box">

@@ -156,8 +156,8 @@ export default function reducer(state=initialState, action) {
         } else if (action.type === 'mainBack') {
             diagnosisBoardState.show = 'main';
             diagnosisBoardState.threadNo = null;
-        } else if (action.type === 'create') {
-            diagnosisBoardState.show = 'create';
+        } else if (action.type === 'diagnosis') {
+            diagnosisBoardState.show = 'diagnosis';
         } else if (action.type === 'update') {
             diagnosisBoardState.show = 'update';
             diagnosisBoardState.item = action.item;

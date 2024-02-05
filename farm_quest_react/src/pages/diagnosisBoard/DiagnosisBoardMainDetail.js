@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import DiagnosisBoardMainComment from './DiagnosisBoardMainComment';
 import axios from 'axios';
 import backButton from '../../images/assets/backButton.png'
+import './diagnosisBoard.css'
 
 const DiagnosisBoardMainDetail = () => {
     const DjangoServer = useSelector(state => state.DjangoServer);

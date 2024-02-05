@@ -7,6 +7,7 @@ import DiagnosisAnswer from "./DiagnosisAnswer";
 // import DiagnosisResult from "./DiagnosisResult";
 import DiagnosisUpload from "./DiagnosisUpload";
 import DiagnosisUploadResult from "./DiagnosisUploadResult";
+import DiagnosisUploadResultBoard from "./DiagnosisUploadResultBoard";
 import DiagnosisRecommend from "./DiagnosisRecommend";
 // import DiagnosisDetail from './DiagnosisDetail';
 
@@ -24,6 +25,7 @@ const DiagnosisRoute = () => {
                 {/* <Route path="/diagnosis_result" element={<DiagnosisResult />} /> */}
                 <Route path="/diagnosis_upload" element={<DiagnosisUpload plantSpecies={plantSpecies} setPlantSpecies={setPlantSpecies} />} />                            
                 <Route path="/diagnosis_upload_result" element={<DiagnosisUploadResult/>} />
+                <Route path="/diagnosis_upload_result_board" element={<DiagnosisUploadResultBoard/>} />
                 <Route path="/diagnosis_recommend/:solutionWord" element={<DiagnosisRecommend />}/>                
                 {/* <Route path="/diagnosis_detail" element={<DiagnosisDetail/>} /> */}
             </Routes>

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from users_app.models import UsersAppUser 
+from diagnosis_app.models import DiagnosisResultAll
 from .models import *
 
 class UserInfoSerializer(serializers.ModelSerializer):
@@ -75,3 +76,19 @@ class DiagnosisBoardCommentModifySerializer(serializers.ModelSerializer):
             "thread_no",
             "user"
         ]
+        
+        
+class DiagnosisResultAllSerializer(serializers.ModelSerializer):    
+    class Meta:
+        model = DiagnosisResultAll
+        # fields = '__all__'
+        fields = [
+            "diagnosis_result_all_id",
+            "detect_result",
+            "save_file_name",
+            "plant_name",
+            "plant_no",
+            "diagnosis_create_time",
+            "user",
+        ]
+        

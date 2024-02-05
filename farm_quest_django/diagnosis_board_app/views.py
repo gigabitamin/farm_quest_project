@@ -7,16 +7,26 @@ from rest_framework.response import Response
 from rest_framework.decorators import APIView
 from rest_framework import status, mixins, generics
 from . import serializers, models, pagination
+from diagnosis_app.models import DiagnosisResultAll
 
-# Create your views here.
+
 class DiagnosisBoardList(generics.ListAPIView):
-    serializer_class = serializers.DiagnosisBoardListShowSerializer
+    serializer_class = serializers.DiagnosisResultAllSerializer
     pagination_class = pagination.DiagnosisBoardPagination
     print('1')
     def get_queryset(self):
         print('2')
-        queryset = models.DiagnosisBoardTb.objects.all()
-        print('3')
+        queryset = DiagnosisResultAll.objects.all().filter().order_by('-diagnosis_result_all_id')
+        # print('diagnosisBoard', queryset)
+        # diagnosisResult = DiagnosisResultAll.objects.all()
+        # print('diagnosisResult', diagnosisResult)
+        
+        # queryset = {
+        #     'diagnosisBoard':queryset,
+        #     'diagnosisResult':diagnosisResult,
+        # }        
+        
+        print('queryset', queryset)
         # if self.kwargs['ctg'] == 'result':
         #     ctg = 0
         # elif self.kwargs['ctg'] == 'share':
@@ -26,8 +36,41 @@ class DiagnosisBoardList(generics.ListAPIView):
         #     return queryset.order_by('-thread_no')
         print('5')
         # return queryset.filter(thread_type=ctg).order_by('-thread_no')
-        return queryset.filter().order_by('-thread_no')
+        
+        return queryset
   
+
+# class DiagnosisBoardList(generics.ListAPIView):
+#     serializer_class = serializers.DiagnosisBoardListShowSerializer
+#     pagination_class = pagination.DiagnosisBoardPagination
+#     print('1')
+#     def get_queryset(self):
+#         print('2')
+#         diagnosisBoard = models.DiagnosisBoardTb.objects.all().filter().order_by('-thread_no')
+#         print('diagnosisBoard', diagnosisBoard)
+#         diagnosisResult = DiagnosisResultAll.objects.all()
+#         print('diagnosisResult', diagnosisResult)
+        
+#         queryset = {
+#             'diagnosisBoard':diagnosisBoard,
+#             'diagnosisResult':diagnosisResult,
+#         }        
+        
+#         print('queryset', queryset)
+#         # if self.kwargs['ctg'] == 'result':
+#         #     ctg = 0
+#         # elif self.kwargs['ctg'] == 'share':
+#         #     ctg = 1
+#         # else:
+#         #     print('4')
+#         #     return queryset.order_by('-thread_no')
+#         print('5')
+#         # return queryset.filter(thread_type=ctg).order_by('-thread_no')
+        
+#         return queryset
+
+
+
 
 class DiagnosisBoardCreate(generics.CreateAPIView):
     print('1')
@@ -43,7 +86,6 @@ class DiagnosisBoardCreate(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):       
         
         if request.auth:
-            
             user_id = request.user.id
             print('user_id',user_id)
             print('request.data',request.data)

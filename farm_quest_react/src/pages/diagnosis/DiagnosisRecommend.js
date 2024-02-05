@@ -4,11 +4,13 @@ import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './DiagnosisRecommend.css';
-import DjangoServer from '../../DjangoServer'
+// import DjangoServer from '../../DjangoServer'
 
 
 const DiagnosisRecommend = () => {
-    // const DjangoServer = useSelector(state => state.DjangoServer);
+    const DjangoServer = useSelector(state => state.DjangoServer);
+    const [cookies, setCookie] = useCookies(['id', 'username']);
+    const user_id = cookies.user ? cookies.user.id : 0;
     const { solutionWord } = useParams();
     const [recommendations, setRecommendations] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
@@ -17,15 +19,15 @@ const DiagnosisRecommend = () => {
     const containerRef = useRef();
     const diagnosisItemCartList = selectedItems.map(item => item.shoping_tb_no);
     const diagnosisItemCartListJSON = JSON.stringify(diagnosisItemCartList);
-    const [cookies, setCookie] = useCookies(['id']);
     const [diagnosisItemCartId, setDiagnosisItemCartId] = useState(null);
     const [diagnosisItemCart, setDiagnosisItemCart] = useState(null);
+    const [recommendedProducts, setRecommendedProducts] = useState([]);
 
-    useEffect(() => {        
+    useEffect(() => {
         if (cookies.diagnosisItemCartId) {
-          setDiagnosisItemCartId(cookies.diagnosisItemCartId);
+            setDiagnosisItemCartId(cookies.diagnosisItemCartId);
         }
-      }, []);
+    }, []);
 
 
     useEffect(() => {
@@ -44,16 +46,16 @@ const DiagnosisRecommend = () => {
 
         if (cookies.diagnosisItemCartId) {
             fetchDiagnosisItemCart();
-        }        
+        }
     }, [cookies.diagnosisItemCartId, cookies.id]);
 
-    
+
 
     const handleLoadButtonClick = async () => {
         try {
             // 불러오기 버튼을 눌렀을 때 API에서 데이터를 받아옴
             const response = await axios.get(`${DjangoServer}/diagnosis_load_cart/?diagnosis_item_cart_id=${diagnosisItemCartId}`);
-            
+
             // 받아온 데이터를 selectedItems 상태로 설정
             setSelectedItems(response.data);
         } catch (error) {
@@ -62,19 +64,19 @@ const DiagnosisRecommend = () => {
         }
     };
 
-    
+
 
 
     const saveDiagnosisItemCart = async () => {
-        try {                        
+        try {
             const response = await axios.post(
-                `${DjangoServer}/diagnosis_save_cart/`, 
-                { 'diagnosis_item_cart_list' : diagnosisItemCartListJSON },
-                { headers: { Authorization: `Token  ${cookies.id}` }}
+                `${DjangoServer}/diagnosis_save_cart/`,
+                { 'diagnosis_item_cart_list': diagnosisItemCartListJSON },
+                { headers: { Authorization: `Token  ${cookies.id}` } }
             );
             console.log('res113 ', response.data);
             alert('목록 저장 완료');
-                  
+
             setDiagnosisItemCartId(response.data.diagnosis_item_cart_id);
             setCookie('diagnosisItemCartId', response.data.diagnosis_item_cart_id);
 
@@ -94,10 +96,10 @@ const DiagnosisRecommend = () => {
     //     }
     // }, [cookies.selectedItems]);
 
-    useEffect(() => {        
+    useEffect(() => {
         const savedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
         setSelectedItems(savedItems);
-    }, []);    
+    }, []);
 
     const fetchRecommendations = useCallback(async () => {
         try {
@@ -140,11 +142,11 @@ const DiagnosisRecommend = () => {
         };
     }, [fetchRecommendations, containerRef]);
 
-    const updateLocalStorage = (items) => {      
+    const updateLocalStorage = (items) => {
         localStorage.setItem('selectedItems', JSON.stringify(items));
     };
 
-    const handleCheckboxChange = (index) => {        
+    const handleCheckboxChange = (index) => {
         setSelectedItems((prevItems) => {
             const isSelected = prevItems.includes(recommendations[index]);
             const updatedItems = isSelected
@@ -158,18 +160,18 @@ const DiagnosisRecommend = () => {
         });
     };
 
-    const handleCheckboxDelete = (index) => {        
+    const handleCheckboxDelete = (index) => {
         setSelectedItems((prevItems) => {
             const selectedItem = selectedItems[index];
             const updatedItems = prevItems.filter(item => item !== selectedItem);
 
             // setCookie('selectedItems', updatedItems, { path: '/' });
             updateLocalStorage(updatedItems);
-    
+
             return updatedItems;
         });
     };
-    
+
     const handleDeleteButtonClick = () => {
         setSelectedItems([]);
         localStorage.removeItem('selectedItems');
@@ -180,8 +182,25 @@ const DiagnosisRecommend = () => {
     }, [selectedItems]);
 
 
-    
-    
+
+    useEffect(() => {
+        fetchRecommendedProducts();
+    }, []);
+
+
+    const fetchRecommendedProducts = async () => {
+
+        try {
+            const response = await axios.get(`${DjangoServer}/api/recommended_products/${user_id}`);
+            setRecommendedProducts(response.data);
+        } catch (error) {
+            console.error("Error fetchin    g recommended products: ", error);
+        }
+    };
+
+
+
+
 
     // console.log('cookie = ', cookies)
     // console.log("cart_list = ", cartList)    
@@ -194,13 +213,13 @@ const DiagnosisRecommend = () => {
 
             <div className="diagnosis_recommend_section_1_wrap">
                 <div className="diagnosis_recommend_section_1_title_wrap">
-                    <div className="diagnosis_recommend_section_1_title_cart">                        
+                    <div className="diagnosis_recommend_section_1_title_cart">
                         <div>No.{diagnosisItemCartId}</div>
                         <div onClick={handleDeleteButtonClick}>삭제</div>
                         <div>장바구니 찜 목록</div>
                         <div onClick={saveDiagnosisItemCart}>저장</div>
-                        <div onClick={handleLoadButtonClick}>불러오기</div>                     
-                    </div>                    
+                        <div onClick={handleLoadButtonClick}>불러오기</div>
+                    </div>
                 </div>
 
                 <div className="diagnosis_recommend_section_1_content_wrap">
@@ -229,7 +248,7 @@ const DiagnosisRecommend = () => {
                                             제거
                                         </div>
                                     </label>
-                                </div>                                
+                                </div>
                             </div>
                         ))}
                         {loading && <p>언제끝나...</p>}
@@ -244,10 +263,47 @@ const DiagnosisRecommend = () => {
                 </div>
 
                 <div className="diagnosis_recommend_section_2_content_wrap">
-                    <div className="diagnosis_recommend_section_2_content_1" ref={containerRef}>
-                        {recommendations.map((recommend, index) => (
-                            <div key={index} className="diagnosis_recommend_section_2_content_1_1">
-                                
+
+                <div className="diagnosis_recommend_section_2_content_1" ref={containerRef}>
+                {cookies.user ? (
+                    // 사용자가 로그인한 경우, recommendedProducts.map을 사용
+                    recommendedProducts.map((recommend, index) => (
+                    <div key={index} className="diagnosis_recommend_section_2_content_1_1">
+
+                                <div className="diagnosis_recommend_section_2_content_1_1_1">
+                                    <div className="diagnosis_recommend_section_2_content_1_1_1_1">
+                                        <img className="diagnosis_recommend_section_2_content_1_1_1_1_1"
+                                            src={recommend.shoping_tb_rss_channel_item_image}
+                                            alt={recommend.shoping_tb_rss_channel_item_title}
+                                        />
+                                    </div>
+                                    <div className="diagnosis_recommend_section_2_content_1_1_2">
+                                        <div className="diagnosis_recommend_section_2_content_1_1_2_1">
+                                            <div className="diagnosis_recommend_section_2_content_1_1_2_1_1">{recommend.shoping_tb_rss_channel_item_title}</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="diagnosis_recommend_section_2_content_1_1_3">{recommend.shoping_tb_rss_channel_item_lprice} 원</div>
+
+                                    <label>
+                                        <div className="diagnosis_recommend_section_2_content_1_1_4">
+                                            <input
+                                                type="checkbox"
+                                                name="addToCart"
+                                                onChange={() => handleCheckboxChange(index)}
+                                                checked={selectedItems.includes(recommend)}
+                                            />
+                                            장바구니에 추가
+                                        </div>
+                                    </label>
+                                </div>
+
+                            </div>
+                        ))
+                    ) : (
+                    // 사용자가 로그인하지 않은 경우, recommendations.map을 사용
+                        recommendations.map((recommend, index) => (
+                          <div key={index} className="diagnosis_recommend_section_2_content_1_1">
                                 <div className="diagnosis_recommend_section_2_content_1_1_1">
                                     <div className="diagnosis_recommend_section_2_content_1_1_1_1">
                                         <img className="diagnosis_recommend_section_2_content_1_1_1_1_1"
@@ -259,7 +315,7 @@ const DiagnosisRecommend = () => {
                                     <div className="diagnosis_recommend_section_2_content_1_1_2">
                                         <div className="diagnosis_recommend_section_2_content_1_1_2_1">
                                             <div className="diagnosis_recommend_section_2_content_1_1_2_1_1">{recommend.shoping_tb_rss_channel_item_title}</div>
-                                        </div>                                    
+                                        </div>
                                     </div>
 
                                     <div className="diagnosis_recommend_section_2_content_1_1_3">{recommend.shoping_tb_rss_channel_item_lprice} 원</div>
@@ -278,13 +334,14 @@ const DiagnosisRecommend = () => {
 
                                 </div>
                             </div>
-                        ))}
+                            ))
+                        )}
                         {loading && <p>언제끝나...</p>}
                     </div>
+
                 </div>
             </div>
-                
-        </div>       
+        </div>
     );
 };
 
