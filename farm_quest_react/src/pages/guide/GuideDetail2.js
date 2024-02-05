@@ -1,7 +1,7 @@
 import React from 'react';
 import './GuideDetail.css'; // Make sure to import your CSS file
 
-function GuideDetail() {
+function GuideDetail2() {
   return (
     <div className="container_gd2">
       <aside className="sidebar_gd2">
@@ -20,20 +20,19 @@ function GuideDetail() {
         <section className="crop-info_gd2">
           <div className="crop-heading_gd2">
             <h1>작물 이름</h1>
-            <p>딸기</p>
+            <p>포도</p>
           </div>
           <div className="crop-body_gd2">
             <div className="crop-description_gd2">
               <h2>작물 설명</h2>
-              <p>딸기는 작고 붉은색을 띠는 과일로, 표면에 작은 씨앗들이 박혀 있습니다.</p> 
-              <p>그 맛은 달콤하면서도 약간의 산미가 있어 상큼한 맛을 줍니다.</p> 
-              <p>딸기는 비타민 C와 항산화 물질이 풍부하여 건강에 좋은 과일로 알려져 있습니다.</p> 
-              <p>이 과일은 생으로 먹거나 잼, 주스, 케이크 등 다양한 요리에 사용됩니다.</p> 
-              <p>딸기는 봄철에 주로 수확되며, 그 때 가장 맛이 좋습니다.</p> 
-              <p>또한 딸기는 그 모양과 색이 예뻐서, 음식의 장식으로도 많이 쓰입니다.</p>
+              <p>포도과의 낙엽성 덩굴식물로 선사시대부터 인류와 함께 한</p> 
+              <p>과일이다. 덩굴손을 길게 뻗어 다른 물체를 감으면서 자란다.</p> 
+              <p>꽃은 담록색을 띠며 대개 5-6월에 핀다. 포도나무의 열매는</p> 
+              <p>식물학적으로 장과(漿果)에 속하며, 한 그루에 적게는 6송이</p> 
+              <p>에서 많게는 300송이가 맺힌다.</p>
             </div>
             <div className="crop-image_gd2">
-              <img src="https://i.ibb.co/0ctDJ5z/01.jpg" alt="작물 사진" width="300" />
+              <img src="https://i.ibb.co/sq6JRqD/02.png" alt="작물 사진" width="300" />
             </div>
           </div>
           <div className="crop-guide_gd2">
@@ -56,4 +55,4 @@ function GuideDetail() {
   );
 }
 
-export default GuideDetail;
+export default GuideDetail2;
