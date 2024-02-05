@@ -1,3 +1,11 @@
+
+/*  전체 폰트 적용 */
+* {
+    font-family: 'neodgm';
+    /* src: url('../fonts/neodgm.woff'); */
+  }
+
+
 /* 리액트 css */
 
 /* App */
