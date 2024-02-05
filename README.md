@@ -1,7 +1,7 @@
 # Final Project Farm Quest with Team Final Farmtasy
 
 <!-- newest virsion-->
-### v0.7.0 kdy
+### v0.7.1 병합테스트
 
 
 <!-- notice -->
@@ -53,6 +53,10 @@ export default "http://localhost:8000"
 
 ====================================================
 <!-- version -->
+
+### v0.7.1 -- 
+- 병합 테스트 kdy jsh psh 폰트 적용 완료  
+
 
 ### v0.7.0 kdy  
 - 고객센터, 유저, 진단 전 페이지 css 완료, 색상 헤더에 통일  
