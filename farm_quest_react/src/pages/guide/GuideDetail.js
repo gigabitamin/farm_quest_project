@@ -10,7 +10,7 @@ function GuideDetail() {
             <li><a href="#strawberry">딸기</a></li>
             <li><a href="#grape">포도</a></li>
             <li><a href="#cucumber">오이</a></li>
-            <li><a href="#bellpepper">피망</a></li>
+            <li><a href="#bellpepper">파프리카</a></li>
             <li><a href="#tomato">토마토</a></li>
             <li><a href="#chili">고추</a></li>
           </ul>

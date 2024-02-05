@@ -19,7 +19,7 @@ function GuideIndex() {
         </div>
         <div className="product_gd 4">
           <img src="/media/images/plant_img/paprika.png" alt="파프리카" />
-          <p>피망</p>
+          <p>파프리카</p>
         </div>
         <div className="product_gd 5">
           <img src="/media/images/plant_img/tomato.png" alt="토마토" />
