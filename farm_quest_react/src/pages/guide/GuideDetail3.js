@@ -1,5 +1,6 @@
 import React from 'react';
 import './GuideDetail.css'; // Make sure to import your CSS file
+import { Link } from 'react-router-dom';
 
 function GuideDetail3() {
   return (
@@ -7,12 +8,12 @@ function GuideDetail3() {
       <aside className="sidebar_gd2">
         <nav className="menu_gd2">
           <ul>
-            <li><a href="#strawberry">딸기</a></li>
-            <li><a href="#grape">포도</a></li>
-            <li><a href="#cucumber">오이</a></li>
-            <li><a href="#bellpepper">파프리카</a></li>
-            <li><a href="#tomato">토마토</a></li>
-            <li><a href="#chili">고추</a></li>
+            <li><Link to="/guide_detail"><p>딸기</p></Link></li>
+            <li><Link to="/guide_detail2"><p>포도</p></Link></li>
+            <li><Link to="/guide_detail3"><p>오이</p></Link></li>
+            <li><Link to="/guide_detail4"><p>파프리카</p></Link></li>
+            <li><Link to="/guide_detail5"><p>토마토</p></Link></li>
+            <li><Link to="/guide_detail6"><p>고추</p></Link></li>
           </ul>
         </nav>
       </aside>
