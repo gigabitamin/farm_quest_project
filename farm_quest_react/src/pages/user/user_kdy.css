@@ -1,11 +1,4 @@
 /* Register.css */
-
-/* font */
-@font-face {
-  font-family: 'neodgm';
-  src: url('../../fonts/neodgm.woff');
-}
-
 .register-main {
     display: flex;
     justify-content: center;
@@ -155,7 +148,7 @@
   /* 프로필 */
 
   /* Profile.css */
-/* 
+
 .profile_container_box {
     display: flex;
     justify-content: center;
@@ -198,10 +191,10 @@
   .delete_profile {
     margin-top: 20px;
     text-align: center;
-  } */
+  }
   
   /* For the file upload */
-  /* .file {
+  .file {
     margin-top: 20px;
   }
   
@@ -214,7 +207,7 @@
   }
   
   .file-cta {
-    background-color:#88AB8E;
+    background-color: rgb(43, 139, 158);
     color: white;
     padding: 10px;
     border-radius: 4px;
@@ -229,7 +222,7 @@
   
   .input.is-medium {
     margin-top: 10px;
-  } */
+  }
   
   /* 반응형 */
   @media (max-width: 999px) {
@@ -247,13 +240,13 @@ div.loginUser {
     border: none;
     border-radius: 4px;
     padding: 2px 2px;
-    background-color: #4f8959;    
+    background-color: rgb(24, 132, 172);    
     cursor: pointer;
 }
 
 div.loginUser:hover {
     padding: 2px 2px;
-    background-color: #6ba073;
+    background-color: rgb(119, 178, 230);
 }
 
 div.loginBox_hd {
@@ -269,7 +262,7 @@ div.resister {
 }
 div.resister:hover {
     padding: 2px 2px;
-    background-color:#487f50;
+    background-color:rgb(16, 125, 147);
 }
 
 div.login {
@@ -279,18 +272,18 @@ div.login {
 }
 div.login:hover {
     padding: 2px 2px;
-    background-color: #7bb483;
+    background-color: rgb(52, 174, 199);
 }
 
 div.login_wrap_div_box{
-    border:10px solid #88AB8E;
+    border:10px solid rgb(52, 174, 199);
     max-width:360px;
     margin: 0 auto;    
 }
 
 div.login_container {    
     border: 1px solid white;
-    background-color:  #88AB8E;
+    background-color:  rgb(52, 174, 199);
     padding:50px;
     max-width:350px;
     margin: 0 auto;    
@@ -298,7 +291,7 @@ div.login_container {
 
 
 div.resister_div_box{
-    border:5px solid #88AB8E;
+    border:5px solid rgb(64, 134, 148);
     max-width:360px;
     margin: 0 auto;
     color:rgb(252, 252, 252);
@@ -306,7 +299,7 @@ div.resister_div_box{
 
 div.resister_container {    
     border: 2px solid white;
-    background-color:  #88AB8E;
+    background-color:  rgb(43, 139, 158);
     padding:25px;
     max-width:350px;
     margin: 0 auto;    
@@ -320,128 +313,106 @@ div.resister_container {
 /* user.css */
 
 /* Profile Container */
-/* .profile_container {
+.profile_container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
-} */
+}
 
 /* Profile Image Box */
-/* .profile_img_box {
+.profile_img_box {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-} */
+}
 
 /* Profile Image Div */
-/* .profile_img_div {
+.profile_img_div {
   margin-top: 20px;
-} */
+}
 
 /* Profile Image 128 */
-
-/* 
 .profile_image_128 img {
   border-radius: 50%;
-  border: 5px;
-  border-color: #88ab8e;
-  border-style: double;
-  width: 60%;
-} */
+}
 
 /* Profile Texts */
-/* .profile_texts {
+.profile_texts {
   text-align: center;
   margin-top: 20px;
-} */
+}
 
-/* Profile Tag Medium
+/* Profile Tag Medium */
 .profile_tag_medium {
   margin-top: 10px;
-  display: flex;
-  background-color: #45a049;
-
 }
 
-.profileName {
-  padding:5%;
-  background-color: antiquewhite;
-  width: 130px;
-  margin: 10px;
-}
-
-.profileInfo {
-  padding:5%;
-  background-color: rgb(47, 124, 79);
-  width: 240px;
-  margin: 10px;
-}
-
+/* Profile Tag */
 .profile_tag {
-  margin-bottom: 10px;
+  margin: 5px;
+  padding: 5px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
 }
- */
 
+/* Profile Update Button */
+.profile_update_button {
+  margin-top: 20px;
+}
 
 /* Delete Profile Link */
-/* .delete_profile {
+.delete_profile {
   margin-top: 20px;
-  margin-bottom: 20px;
   text-align: center;
-} */
+}
 
 /* Profile Image Upload Box */
-/* .profile_img_is {
+.profile_img_is {
   margin-top: 20px;
-} */
+}
 
 /* Profile Image Label */
-/* .profile_image_label {
+.profile_image_label {
   cursor: pointer;
-} */
+}
 
 /* Profile File Label */
-/* .profil_file_label {
+.profil_file_label {
   font-weight: bold;
   margin-bottom: 10px;
-} */
+}
 
 /* Profile File Input */
-/* .profile_file_input {
+.profile_file_input {
   display: none;
-} */
+}
 
 /* File CTA */
-<<<<<<< HEAD
 .file_cta {
-  background-color: #f1f7f2;
-=======
-/* .file_cta {
   background-color: rgb(43, 139, 158);
->>>>>>> 0d759012bd4f951712db6d350976b56e78a1a750
   color: white;
   padding: 10px;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
-} */
+}
 
 /* File Icon */
-/* .file_icon {
+.file_icon {
   margin-right: 5px;
-} */
+}
 
 /* Profile Image File */
-/* .profile_image_file {
+.profile_image_file {
   margin-top: 10px;
   font-weight: bold;
-} */
+}
 
 /* Responsive styles */
-/* @media (max-width: 600px) {
+@media (max-width: 600px) {
   .profile_container {
     margin: 10px;
   }
@@ -449,7 +420,7 @@ div.resister_container {
   .profile_img_div {
     margin-top: 20px;
   }
-} */
+}
 
 
 /* user.css */
@@ -457,108 +428,85 @@ div.resister_container {
 /* ... (previous styles) */
 
 /* Profile Update Button */
-<<<<<<< HEAD
 .profile_update_button button {
-  background-color: #578c5f;
-=======
-/* .profile_update_button {
-  margin-top:10px;
-  font-family : 'neodgm';
-  font-size : '20px';
   background-color: rgb(43, 139, 158);
->>>>>>> 0d759012bd4f951712db6d350976b56e78a1a750
   color: white;
   padding: 10px 20px;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
-} */
+}
 
 /* Profile Input */
-/* .profile_input {
+.profile_input {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  border: 1px solid white;
+  border: 1px solid #ccc;
   border-radius: 4px;
-} */
+}
 
 /* Profile Button */
-<<<<<<< HEAD
 .profile_button {
-  background-color: #578c5f;
-=======
-/* .profile_button {
   background-color: rgb(43, 139, 158);
->>>>>>> 0d759012bd4f951712db6d350976b56e78a1a750
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
-} */
+}
 
 /* Responsive styles */
-/* @media (max-width: 600px) {
+@media (max-width: 600px) {
   .profile_container {
     margin: 10px;
   }
 
   .profile_img_div {
     margin-top: 20px;
-  } */
+  }
 
-  /* .profile_update_button button {
-    width: 100%;
-  } */
-
-  /* .profile_input {
+  .profile_update_button button {
     width: 100%;
   }
-} */
-/* 
+
+  .profile_input {
+    width: 100%;
+  }
+}
+
 .delete_profile {
-<<<<<<< HEAD
-  background-color: #3f8d4b;
+  background-color: rgb(43, 139, 158);
   color: white;
   padding: 10px 20px;
   border: none;
-=======
-  font-family: 'neodgm';
-  background-color: rgb(146, 182, 189);
-  color: rgb(26, 0, 0);
-  font-size: 14px;
-  padding-top:4px;
-  padding-bottom:4px;
->>>>>>> 0d759012bd4f951712db6d350976b56e78a1a750
   border-radius: 4px;
   cursor: pointer;
-  width:100px;
+  margin-top: 10px;
+  color: white;
+  width:130px;
+  margin:0 auto;
 }
 
-.delete_profile a:visited {
-  color: initial;
-  background-color: initial;
-} */
 
-<<<<<<< HEAD
 div.profile_profile_container_box {
   /* border: 20px solid blue; */
-  background-color: #88AB8E;
+  background-color: rgb(136, 136, 189);
   width:500px;
   margin:0 auto;
   padding:30px;
 }
 div.profile_profile_container_box > div {
   /* border: 4px solid blue; */
-  background-color: #f1f7f2;
+  background-color: rgb(255, 255, 255);
   width:500px;
   margin:0 auto;
   padding:30px;
 }
 div.profile_profile_container_box > div > div {
   /* border: 3px solid blue; */
-  background-color: #88AB8E;
+  background-color: rgb(103, 103, 161);
   width:500px;
   margin:0 auto;
   padding:30px;
@@ -568,29 +516,22 @@ div.profile_profile_container_box > div > div {
 
 div.profile_container_box_put {
   /* border: 20px solid blue; */
-  background-color: #88AB8E;
+  background-color: rgb(136, 136, 189);
   width:500px;
   margin:0 auto;
   padding:30px;
 }
 div.profile_container_box_put > div {
   /* border: 4px solid blue; */
-  background-color: #f1f7f2;
+  background-color: rgb(103, 103, 161);
   width:500px;
   margin:0 auto;
   padding:30px;
 }
 div.profile_container_box_put > div > div {
   /* border: 3px solid blue; */
-  background-color: #88AB8E;
+  background-color: rgb(255, 255, 255);
   width:500px;
   margin:0 auto;
   padding:30px;
 }
-=======
-/* button:active,
-button:focus {
-  background-color: initial;
-} */
-
->>>>>>> 0d759012bd4f951712db6d350976b56e78a1a750

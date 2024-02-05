@@ -11,6 +11,7 @@ import GuideIndex from './guide/GuideIndex';
 import GuideDetail from './guide/GuideDetail';
 import Scheduler from './Scheduler/Scheduler';
 import CsRouter from './customerCenter/CsRouter';
+import MypageMain from './mypage/MypageMain';
 import Body from './Body';
 const Top = () => {    
 
@@ -24,7 +25,8 @@ const Top = () => {
                 <Route path="/guide_index" element={<GuideIndex />} />
                 <Route path="/guide_detail" element={<GuideDetail />} />
                 <Route path="/community/:mainType" element={<Community />} />
-                <Route path="Scheduler" element={<Scheduler />} />
+                <Route path="/Scheduler" element={<Scheduler />} />
+                <Route path="/MypageMain" element={<MypageMain />} />
             </Routes>
             {/* <GardeningShopRouter /> */}
             <DiagnosisBoardRoute />

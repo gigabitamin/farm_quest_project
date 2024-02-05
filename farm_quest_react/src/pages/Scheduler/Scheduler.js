@@ -38,16 +38,20 @@ const Scheduler = () => {
 
 
     return (
-        <div className="SchedulerWrapper">
-            <div className="filter-container">
-                <SchedulerFilter />
-            </div>
-                {showModal && <SchedulerModal handleCloseModal={handleCloseModal} />}
-            <div className="calendar-container">
-                <SchedulerCalendar />
-            </div>
-            <div className="weather-container">
-                <GridSelect />
+        <div className='schedulerMainwrap'>
+            <div className="SchedulerWrapper">
+                <div className="filter-container">
+                    <SchedulerFilter />
+                </div>
+                    <div className='SchedulerWrapper2'>
+                        {showModal && <SchedulerModal handleCloseModal={handleCloseModal} />}
+                    <div className="calendar-container">
+                        <SchedulerCalendar />
+                    </div>
+                    <div className="weather-container">
+                        <GridSelect />
+                    </div>
+                </div>
             </div>
         </div>
     );

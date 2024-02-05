@@ -125,7 +125,10 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
-    
+
+# 로그인시간 추가 psh
+# from django.utils import timezone
+# 로그인시간 추가
     
 class User(AbstractUser):
     # pass # 기본 auth_user 테이블과 동일
@@ -139,15 +142,26 @@ class User(AbstractUser):
     address = models.CharField(max_length=255, unique=True)
     profile_image = models.CharField(max_length=255, unique=True)
     diagnosis_cart = models.CharField(max_length=45, blank=True, null=True)
+    
+    # psh
+    # last_login = models.CharField(max_length=45, blank=True, null=True)
+    # email = models.CharField(max_length=45, blank=True, null=True)
 
     # 리액트 
     # email = models.EmailField(unique=True)
-    # email = models.CharField(max_length=254, unique=True)      
+    # email = models.CharField(max_length=254, unique=True)    
     
+# 로그인시간 추가 psh
+    # def save(self, *args, **kwargs):
+    #     self.last_login = timezone.now()
+    #     super().save(*args, **kwargs)
+# 로그인시간 추가
+
+        
     class Meta:
         managed = False
         db_table = 'users_app_user'
-
+    
 class UsersAppUser(models.Model):
     id = models.BigAutoField(primary_key=True)
     password = models.CharField(max_length=128)

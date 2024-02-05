@@ -54,11 +54,13 @@ export default "http://localhost:8000"
 ====================================================
 <!-- version -->
 
-
 ### v0.7.0 kdy  
 - 전 페이지 css 색상 수정 기본 완료
 
-### v0.6.9 jsh  
+### v0.6.9b psh
+- profile page + update page 수정 
+
+### v0.6.9a jsh  
 - 서버 대응 완료
 - 커뮤니티 CSS 수정
 
