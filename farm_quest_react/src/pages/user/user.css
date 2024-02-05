@@ -414,14 +414,8 @@ div.resister_container {
   display: none;
 } */
 
-/* File CTA */
-<<<<<<< HEAD
-.file_cta {
-  background-color: #f1f7f2;
-=======
 /* .file_cta {
   background-color: rgb(43, 139, 158);
->>>>>>> 0d759012bd4f951712db6d350976b56e78a1a750
   color: white;
   padding: 10px;
   border-radius: 4px;
@@ -456,17 +450,11 @@ div.resister_container {
 
 /* ... (previous styles) */
 
-/* Profile Update Button */
-<<<<<<< HEAD
-.profile_update_button button {
-  background-color: #578c5f;
-=======
 /* .profile_update_button {
   margin-top:10px;
   font-family : 'neodgm';
   font-size : '20px';
   background-color: rgb(43, 139, 158);
->>>>>>> 0d759012bd4f951712db6d350976b56e78a1a750
   color: white;
   padding: 10px 20px;
   border-radius: 4px;
@@ -482,14 +470,9 @@ div.resister_container {
   border-radius: 4px;
 } */
 
-/* Profile Button */
-<<<<<<< HEAD
-.profile_button {
-  background-color: #578c5f;
-=======
+
 /* .profile_button {
   background-color: rgb(43, 139, 158);
->>>>>>> 0d759012bd4f951712db6d350976b56e78a1a750
   color: white;
   padding: 10px 20px;
   border: none;
@@ -518,19 +501,12 @@ div.resister_container {
 } */
 /* 
 .delete_profile {
-<<<<<<< HEAD
-  background-color: #3f8d4b;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-=======
   font-family: 'neodgm';
   background-color: rgb(146, 182, 189);
   color: rgb(26, 0, 0);
   font-size: 14px;
   padding-top:4px;
   padding-bottom:4px;
->>>>>>> 0d759012bd4f951712db6d350976b56e78a1a750
   border-radius: 4px;
   cursor: pointer;
   width:100px;
@@ -541,56 +517,3 @@ div.resister_container {
   background-color: initial;
 } */
 
-<<<<<<< HEAD
-div.profile_profile_container_box {
-  /* border: 20px solid blue; */
-  background-color: #88AB8E;
-  width:500px;
-  margin:0 auto;
-  padding:30px;
-}
-div.profile_profile_container_box > div {
-  /* border: 4px solid blue; */
-  background-color: #f1f7f2;
-  width:500px;
-  margin:0 auto;
-  padding:30px;
-}
-div.profile_profile_container_box > div > div {
-  /* border: 3px solid blue; */
-  background-color: #88AB8E;
-  width:500px;
-  margin:0 auto;
-  padding:30px;
-}
-
-
-
-div.profile_container_box_put {
-  /* border: 20px solid blue; */
-  background-color: #88AB8E;
-  width:500px;
-  margin:0 auto;
-  padding:30px;
-}
-div.profile_container_box_put > div {
-  /* border: 4px solid blue; */
-  background-color: #f1f7f2;
-  width:500px;
-  margin:0 auto;
-  padding:30px;
-}
-div.profile_container_box_put > div > div {
-  /* border: 3px solid blue; */
-  background-color: #88AB8E;
-  width:500px;
-  margin:0 auto;
-  padding:30px;
-}
-=======
-/* button:active,
-button:focus {
-  background-color: initial;
-} */
-
->>>>>>> 0d759012bd4f951712db6d350976b56e78a1a750
