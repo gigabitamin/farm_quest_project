@@ -15,7 +15,7 @@ function Body() {
           <Link to="/">
             <div><i className="bi bi-journal-text"></i></div>
             <div>가이드</div>
-          </Link>c
+          </Link>
         </div>
         <div className="btn_index_ind btn_large btn_scheduler_ind">
           <Link to="/">

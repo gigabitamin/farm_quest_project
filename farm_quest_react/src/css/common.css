@@ -53,7 +53,7 @@ a {
 }
 
 .nav-link_hd {
-    text-decoration: none;
+    /* text-decoration: none; */
     color:#88AB8E;
     padding: 10px;
     display: block;
@@ -85,6 +85,9 @@ a {
     display: block;
     white-space: nowrap;
 }
+
+
+
 /* end_navbar */
 
 
@@ -97,19 +100,31 @@ a {
 
 header {
     display: flex;
-    flex-direction: column; /* headerMenu와 navbar를 세로로 배치 */
+    flex-direction: column;
     align-items: center;
     padding: 20px;
     background-color: #88AB8E;
-    color: #F2F1EB;    
+    color: #F2F1EB;   
+    min-width: 630px;
+ 
 }
 
 .headerMenu {
     display: flex;
-    justify-content: space-between;
     width: 100%;
     padding: 10px;
+    align-items: center; /* 세로 중앙 정렬 */
+    width: 100%;
+    padding: 10px;
+    max-width: 920px;
 }
+
+.functionalArea {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 
 .headerMenu a.highlight {
     margin-left: 10px;
@@ -120,7 +135,7 @@ header {
     background-color: #F2F1EB; /* 헤더 색상과 조화를 이루는 배경색 */
     color: #88AB8E; /* 텍스트 색상 */
     border: none;
-
+    width: 120px;
     padding: 8px 12px; /* 패딩 조정 */
     border-radius: 5px; /* 모서리 둥글게 */
     margin-right: 5px;
@@ -189,8 +204,23 @@ header {
 /* navbar */
 .navbar_hd {    
     background-color: #F2F1EB; 
-    font-family: Arial, sans-serif;     
+    font-family: Arial, sans-serif;   
+
 }
+
+.navbar_hd .nav-link_hd:hover {
+    /* background: linear-gradient(to right, #ffffff, #428B77); */
+    transition: background 0.3s;  
+}
+
+.navbar_hd .nav-link_hd a:visited {
+    color: initial;    
+}
+
+.navbar_hd .btn_hd a:visited {
+    color: initial;    
+}
+
 
 .navbar_hd ul {
     list-style-type: none;
