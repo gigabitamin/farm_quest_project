@@ -46,6 +46,7 @@
   
   .btn_index_ind:hover {
     background-color: #F2F1EB;
+    color:#88AB8E;
   }
   
   .btn_index_ind.btn_photo_ind, .btn_index_ind.btn_qna_ind, .btn_index_ind.btn_calendar_ind {
