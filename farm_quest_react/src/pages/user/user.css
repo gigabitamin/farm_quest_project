@@ -214,7 +214,7 @@
   }
   
   .file-cta {
-    background-color: rgb(43, 139, 158);
+    background-color:#88AB8E;
     color: white;
     padding: 10px;
     border-radius: 4px;
@@ -247,13 +247,13 @@ div.loginUser {
     border: none;
     border-radius: 4px;
     padding: 2px 2px;
-    background-color: rgb(24, 132, 172);    
+    background-color: #4f8959;    
     cursor: pointer;
 }
 
 div.loginUser:hover {
     padding: 2px 2px;
-    background-color: rgb(119, 178, 230);
+    background-color: #6ba073;
 }
 
 div.loginBox_hd {
@@ -269,7 +269,7 @@ div.resister {
 }
 div.resister:hover {
     padding: 2px 2px;
-    background-color:rgb(16, 125, 147);
+    background-color:#487f50;
 }
 
 div.login {
@@ -278,19 +278,19 @@ div.login {
     font-size: 0.5em;
 }
 div.login:hover {
-    padding: 2px 2px;
-    background-color: rgb(52, 174, 199);
+    padding: 2px 2px;    
+    background-color: #427e4a;
 }
 
 div.login_wrap_div_box{
-    border:10px solid rgb(52, 174, 199);
+    border:10px solid #88AB8E;
     max-width:360px;
     margin: 0 auto;    
 }
 
 div.login_container {    
     border: 1px solid white;
-    background-color:  rgb(52, 174, 199);
+    background-color:  #88AB8E;
     padding:50px;
     max-width:350px;
     margin: 0 auto;    
@@ -298,7 +298,7 @@ div.login_container {
 
 
 div.resister_div_box{
-    border:5px solid rgb(64, 134, 148);
+    border:5px solid #88AB8E;
     max-width:360px;
     margin: 0 auto;
     color:rgb(252, 252, 252);
@@ -306,7 +306,7 @@ div.resister_div_box{
 
 div.resister_container {    
     border: 2px solid white;
-    background-color:  rgb(43, 139, 158);
+    background-color:  #88AB8E;
     padding:25px;
     max-width:350px;
     margin: 0 auto;    
@@ -468,7 +468,7 @@ div.resister_container {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid white;
   border-radius: 4px;
 } */
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../../shared/App.css";
+// import "../../shared/App.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
@@ -79,6 +79,8 @@ const Login = () => {
           <div className="login_container">
             <div className="login_container_box">
               <div className="login_column_box">
+                <h2>로그인</h2>
+                <hr />
                 <form onSubmit={loginSubmit} className="box">
                   <div className="login_field">
                     <label className="login_label">아이디</label>

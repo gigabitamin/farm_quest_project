@@ -1,4 +1,4 @@
-import React, { useRef} from 'react';
+import React, { useRef } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './DiagnosisUploadResult.css';
@@ -13,6 +13,7 @@ const DiagnosisUploadResult = () => {
     console.log('(location.state.file_name = ', location.state.file_name);
 
     const save_file_name = location.state.file_name.save_file_name;
+    const yolo_plant_name = location.state.file_name.plant_name;
 
     const serialized_results = location.state.file_name.detect_result.serialized_results_list[0];
     // const obj_result_label = serialized_results.names[serialized_results.boxes[0]['label']]
@@ -28,18 +29,18 @@ const DiagnosisUploadResult = () => {
 
     let highestConfidence = 0;
     let selectedBoxIndex = -1;
-    
+
     for (let i = 0; i < serialized_results.boxes.length; i++) {
         const label = serialized_results.boxes[i]['label'];
         const confidence = Number(serialized_results.boxes[i]['confidence']);
-        
+
         // label이 6 이상이고 confidence가 현재까지의 최고값보다 크다면 갱신
         if (label >= 6 && confidence > highestConfidence) {
             highestConfidence = confidence;
             selectedBoxIndex = i;
         }
     }
-    
+
     const obj_result_label = selectedBoxIndex !== -1
         ? serialized_results.names[serialized_results.boxes[selectedBoxIndex]['label']]
         : null;
@@ -47,7 +48,7 @@ const DiagnosisUploadResult = () => {
     const obj_result_prob = selectedBoxIndex !== -1
         ? Number(serialized_results.boxes[selectedBoxIndex]['confidence']).toFixed(4) * 100
         : null;
-    
+
 
     // console.log("솔루션 워드", serialized_results.boxes[selectedBoxIndex]['solution_info']['solution_word'])
 
@@ -55,7 +56,7 @@ const DiagnosisUploadResult = () => {
         ? serialized_results.boxes[selectedBoxIndex]['solution_info']['solution_word']
         : null;
 
-    
+
 
     // const solution_row_list_serialized = location.state.file_name.detect_result.solution_row_list_serialized;
 
@@ -86,7 +87,7 @@ const DiagnosisUploadResult = () => {
         return (
             <div className="diagnosis_result_wrap">
                 <section className="diagnosis_result_section_wrap">
-                    <article title="title" className="diagnosis_result_title"><h1>진단 결과</h1></article>
+                    <article title="title" className="diagnosis_result_title"></article>
                     <article title="notice" className="diagnosis_result_notice"><span></span></article>
                     <article title="content" className="diagnosis_result_content_wrap">
 
@@ -94,31 +95,50 @@ const DiagnosisUploadResult = () => {
 
                             <section className="diagnosis_result_yolo_analystic_wrap">
                                 <article title="info" className="diagnosis_result_analystic_info">
-                                    <div><h3>전체 부위 탐색 결과</h3></div>
+                                    <div>
+                                        <h3>전체 부위 탐색 결과 (진단 작물 :
+                                            <Link title="가이드로 이동" to={{
+                                                pathname: `/diagnosis_recomme/${obj_yolo_solution_word}`,
+                                                state: { solutionWord: obj_yolo_solution_word }
+                                            }}>
+                                                <span className="diagnosis_button">{yolo_plant_name}</span>
+                                            </Link>)
+                                        </h3>
+                                    </div>
                                     <div>진단파일명: {save_file_name}</div>
-                                    <div>진단번호: {diagnosis_result_pk}</div>
+                                    <div>진단번호:
+                                        <Link title="가이드로 이동" to={{
+                                            pathname: `/diagnosis_recomme/${obj_yolo_solution_word}`,
+                                            state: { solutionWord: obj_yolo_solution_word }
+                                        }}>
+                                            <span className='diagnosis_button'>{diagnosis_result_pk}</span>
+                                        </Link>
+                                    </div>
                                 </article>
 
                                 <article title="summary" className="diagnosis_result_analystic_summary_box">
                                     <div className="diagnosis_result_analystic_summary_box_item">
-                                        <div><h3>진단 요약 (
-                                            솔루션 워드 : 
-                                            <Link title="상품추천으로 이동" to={{pathname: `/diagnosis_recommend/${obj_yolo_solution_word}`,
-                                                        state: { solutionWord: obj_yolo_solution_word }
-                                                    }}>
-                                                <span className="diagnosis_button">{ obj_yolo_solution_word}</span>)
-                                            </Link>
+                                        <div><h3>진단 요약
                                         </h3></div>
                                         <div>약 {obj_result_prob} % 의 확률로 <span className='diagnosis_button_1'>{obj_result_label}</span> 일 것으로 예상됩니다</div>
+
+                                        <div>
+                                            솔루션 워드 :
+                                            <Link title="상품추천으로 이동" to={{
+                                                pathname: `/diagnosis_recommend/${obj_yolo_solution_word}`,
+                                                state: { solutionWord: obj_yolo_solution_word }
+                                            }}>
+                                                <span className="diagnosis_button">{obj_yolo_solution_word}</span>
+                                            </Link></div>
                                     </div>
                                     <div className="diagnosis_result_analystic_summary_box_detail">
                                         <div className="diagnosis_result_analystic_image"><img src={url} alt="UploadResult" className="diagnosis_result_analystic_image_img" /></div>
                                         <div className="diagnosis_result_analystic_summary_content">
                                             <div className="diagnosis_result_analystic_summary_solution_item">
-                                                <div ref={containerRef} style={{ overflowY: 'scroll', height: 'calc(440px / 3)' }}>증상 : {tf_predict_result_list_sorted[0][1]['symptom']}</div>
-                                                <div ref={containerRef} style={{ overflowY: 'scroll', height: 'calc(440px / 3)' }}>발생환경 : {tf_predict_result_list_sorted[0][1]['occurence_environment']}</div>
-                                                <div ref={containerRef} style={{ overflowY: 'scroll', height: 'calc(440px / 3)' }}>대처법 : {tf_predict_result_list_sorted[0][1]['solution_content']}</div>
-                                            </div>                                  
+                                                <div ref={containerRef} >증상 : {tf_predict_result_list_sorted[0][1]['symptom']}</div>
+                                                <div ref={containerRef} >발생환경 : {tf_predict_result_list_sorted[0][1]['occurence_environment']}</div>
+                                                <div ref={containerRef} >대처법 : {tf_predict_result_list_sorted[0][1]['solution_content']}</div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -128,75 +148,100 @@ const DiagnosisUploadResult = () => {
                                     {serialized_results.boxes
                                         .filter(box => box.label >= 6)
                                         .map((box, index) => {
-                                        const label = box.label;
-                                        const labelName = serialized_results.names[label];
-                                        const confidence = Number(box.confidence).toFixed(4);
-                                        const isDisease = label >= 6;
-                                        
-                                        // const url_crops = crops_path_list[index]
-                                        // const url_crops = `${process.env.PUBLIC_URL}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg`;
+                                            const label = box.label;
+                                            const labelName = serialized_results.names[label];
+                                            const confidence = Number(box.confidence).toFixed(4);
+                                            const isDisease = label >= 6;
 
-                                        // const modifiedPathList = crops_path_list.map(filePath => {
-                                        //     const parts = filePath.split(/\\/g);
-                                        //     const index = parts.indexOf('upload');
-                                        //     if (index !== -1) {
-                                        //       const relativePath = parts.slice(index + 1).join('/');
-                                        //       const url_crops = `http://localhost:8000/${relativePath}`;
-                                        //       return url_crops;
-                                        //     }
-                                        //     return null;
-                                        //   }).filter(url_crops => url_crops !== null);
-                                          
-                                        // console.log('modifiedPathList)',modifiedPathList);
+                                            // const url_crops = crops_path_list[index]
+                                            // const url_crops = `${process.env.PUBLIC_URL}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg`;
 
-                                        if (!isDisease) {
-                                            return null;
-                                        }
+                                            // const modifiedPathList = crops_path_list.map(filePath => {
+                                            //     const parts = filePath.split(/\\/g);
+                                            //     const index = parts.indexOf('upload');
+                                            //     if (index !== -1) {
+                                            //       const relativePath = parts.slice(index + 1).join('/');
+                                            //       const url_crops = `http://localhost:8000/${relativePath}`;
+                                            //       return url_crops;
+                                            //     }
+                                            //     return null;
+                                            //   }).filter(url_crops => url_crops !== null);
 
-                                        const url_crops = crops_path_list[index];
+                                            // console.log('modifiedPathList)',modifiedPathList);
 
-                                        return (
-                                            <div title="detect" className="diagnosis_result_detect_item" key={index}><hr />
-                                                
-                                                <div className="diagnosis_result_detect_item_content">
-                                                    <div className="diagnosis_result_predict_image">
-                                                        {/* {url_crops && (<img src={url_crops} alt={`Crops_${index}`} />)} */}
-                                                        {url_crops && (<img src={"http://52.193.246.6/media/" + url_crops.substring(65)} alt={`Crops_${index}`} />)}
-                                                    </div>                                        
-                                                    <div className="diagnosis_result_detect_content">
-                                                        <div>
-                                                            {/* {isDisease ? (
+
+
+                                            if (!isDisease) {
+                                                return null;
+                                            }
+
+                                            const url_crops = crops_path_list[index];
+
+                                            // const url_crops = save_file_name && index > 0 ?
+                                            //     crops_path_list[index] :
+                                            //     crops_path_list[index] ;
+                                            // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index + 1}.jpg` :
+                                            // `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index + 1}.jpg` ;
+                                            // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_3/crops/고추탄저병_중기/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_3.jpg`:
+                                            // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_3/crops/고추탄저병_중기/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_32.jpg`;
+
+                                            // const url_crops = crops_path_list[index];
+
+                                            // return (
+                                            //     <div title="detect" className="diagnosis_result_detect_item" key={index}><hr />
+
+                                            //         <div className="diagnosis_result_detect_item_content">
+                                            //             <div className="diagnosis_result_predict_image">
+                                            //                 {url_crops && (<img src={url_crops} alt={`Crops_${index}`} />)}
+                                            //             </div>
+                                            //             <div className="diagnosis_result_detect_content">
+                                            //                 <div>
+                                            //                     {/* {isDisease ? (
+                                            return (
+                                                <div title="detect" className="diagnosis_result_detect_item" key={index}><hr />
+
+                                                    <div className="diagnosis_result_detect_item_content">
+                                                        <div className="diagnosis_result_predict_image">
+                                                            {url_crops && (<img src={url_crops} alt={`Crops_${index}`} />)}
+
+                                                        </div>
+                                                        {/* {url_crops && (<img src={`${DjangoServer}/media/` + url_crops.substring(65)} alt={`Crops_${index}`} />)} */}
+                                                        {/* {console.log('패스', `${DjangoServer}/media/` + url_crops.substring(65), `alt=Crops_${index}`)} */}
+                                                        {/* {console.log('패스2', url_crops, `alt=Crops_${index}`)}) */}
+                                                        <div className="diagnosis_result_detect_content">
+                                                            <div>
+                                                                {/* {isDisease ? (
                                                                     <h3>탐지된 질병</h3>
                                                                 ) : (
                                                                     <h3>탐지된 작물</h3>
                                                                 )} */}
 
-                                                            {/* <h3>탐지된 질병</h3> */}
-                                                            <div className="diagnosis_result_predict_item">
-                                                                <div className="diagnosis_result_detect_item_title">박스_{index + 1}</div>
-                                                                <div className="diagnosis_result_detect_item_1">{labelName}</div>
-                                                                <div className="diagnosis_result_detect_item_2">{confidence * 100} %</div>
+                                                                {/* <h3>탐지된 질병</h3> */}
+                                                                <div className="diagnosis_result_predict_item">
+                                                                    <div className="diagnosis_result_detect_item_title">박스_{index + 1}</div>
+                                                                    <div className="diagnosis_result_detect_item_1">{labelName}</div>
+                                                                    <div className="diagnosis_result_detect_item_2">{confidence * 100} %</div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        );
-                                    })}                         
+                                            );
+                                        })}
                                 </article>
                             </section>
-                            
+
                             <section className="diagnosis_result_tf_analystic_wrap">
                                 <article title="partial_predict_summary" className="diagnosis_result_partial_predict">
                                     <h3>부위별 상세 진단 결과 : 진단 작물 ({tf_predict_result_list_sorted[0][0][1]}) </h3>
                                     {Number(tf_predict_result_list_sorted[0][0][4] * 100) <= 30 ? (
                                         <div>죄송합니다 예상되는 정보를 찾을 수 없습니다</div>
-                                        ) : (
+                                    ) : (
                                         <>
                                             {/* 30 이상일 때의 출력 */}
                                             {/* <div className="diagnosis_result_partial_predict_plant">진단 작물 : {tf_predict_result_list_sorted[0][0][1]}</div> */}
                                             <div className="diagnosis_result_partial_predict_disease">
-                                            {(Number(tf_predict_result_list_sorted[0][0][4] * 100)).toFixed(2) } % 의 확률로 <span className='diagnosis_button_1'>({tf_predict_result_list_sorted[0][0][3]})</span> 일 것으로 예상됩니다
+                                                {(Number(tf_predict_result_list_sorted[0][0][4] * 100)).toFixed(2)} % 의 확률로 <span className='diagnosis_button_1'>({tf_predict_result_list_sorted[0][0][3]})</span> 일 것으로 예상됩니다
                                             </div>
                                             {/* <div className="diagnosis_result_partial_prob">예측 확률 : {(Number(tf_predict_result_list_sorted[0][0][4] * 100)).toFixed(2) } %</div> */}
                                         </>
@@ -207,45 +252,45 @@ const DiagnosisUploadResult = () => {
                                     <h3>부위별 상세 진단 결과 예측 후보</h3>
                                     <div className="diagnosis_result_predict_disease_list_box">
                                         {tf_predict_result_list_sorted.map((predict, index) => {
-                                        const probability = (Number(predict[0][4]) * 100).toFixed(2);
-                                        if (probability <= 30) {
-                                            return null;
-                                        }
+                                            const probability = (Number(predict[0][4]) * 100).toFixed(2);
+                                            if (probability <= 30) {
+                                                return null;
+                                            }
 
-                                        if (index >= 2) {
-                                            return null;
-                                        }
+                                            if (index >= 2) {
+                                                return null;
+                                            }
 
-                                        return (
-                                            <div className="diagnosis_result_predict_disease_item" key={index}>
-                                                <div className="diagnosis_result_predict_disease_item_summary">
-                                                    <div className="diagnosis_result_predict_disease_item_summary_item">
-                                                        {index + 1}. {predict[0][1]} ({predict[0][3]}) : {probability} %
-                                                    </div>                
-                                                    <div className="diagnosis_result_solution_word">
-                                                        솔루션 워드 :    
-                                                        <Link title="상품추천으로 이동" to={{
-                                                            pathname: `/diagnosis_recommend/${predict[1]['solution_word']}`,
-                                                            state: { solutionWord: predict[1]['solution_word'] }
-                                                        }}>
-                                                            <span className="diagnosis_button">{predict[1]['solution_word']}</span>
-                                                        </Link>
-                                                    </div>                        
+                                            return (
+                                                <div className="diagnosis_result_predict_disease_item" key={index}>
+                                                    <div className="diagnosis_result_predict_disease_item_summary">
+                                                        <div className="diagnosis_result_predict_disease_item_summary_item">
+                                                            {index + 1}. {predict[0][1]} ({predict[0][3]}) : {probability} %
+                                                        </div>
+                                                        <div className="diagnosis_result_solution_word">
+                                                            솔루션 워드 :
+                                                            <Link title="상품추천으로 이동" to={{
+                                                                pathname: `/diagnosis_recommend/${predict[1]['solution_word']}`,
+                                                                state: { solutionWord: predict[1]['solution_word'] }
+                                                            }}>
+                                                                <span className="diagnosis_button">{predict[1]['solution_word']}</span>
+                                                            </Link>
+                                                        </div>
                                                         <div className="diagnosis_result_predict_disease_item_content_wrap">
-                                                        <div className="diagnosis_result_symptom">증상 : {predict[1]['symptom']}</div>
-                                                        <div className="diagnosis_result_occurence_environment">발생환경 : {predict[1]['occurence_environment']}</div>
-                                                        <div className="diagnosis_result_guide">대처법 : {predict[1]['solution_content']}</div>
+                                                            <div className="diagnosis_result_symptom">증상 : {predict[1]['symptom']}</div>
+                                                            <div className="diagnosis_result_occurence_environment">발생환경 : {predict[1]['occurence_environment']}</div>
+                                                            <div className="diagnosis_result_guide">대처법 : {predict[1]['solution_content']}</div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        );
+                                            );
                                         })}
                                     </div>
                                 </article>
                             </section>
                         </section>
                     </article>
-                </section>                
+                </section>
             </div>
         );
     }

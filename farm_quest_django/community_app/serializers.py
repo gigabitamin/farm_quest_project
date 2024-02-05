@@ -9,7 +9,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "username",
-            "nickname",
+            "nickname"
         ]
 
 class CommunityCommentSerializer(serializers.ModelSerializer):
@@ -21,29 +21,19 @@ class CommunityCommentSerializer(serializers.ModelSerializer):
             "cmt_content",
             "cmt_date",
             "thread_no",
-            "user",
+            "user"
         ]
-
-class CommunityHitCountSerializer(serializers.RelatedField):
-    def to_representation(self, value):
-        try:
-            return value.get().hits
-        except:
-            return 0
 
 class CommunityListShowSerializer(serializers.ModelSerializer):
     user = UserInfoSerializer(read_only=True)
-    hit_count_generic = CommunityHitCountSerializer(read_only=True)
     class Meta:
         model = CommunityTb
         fields = [
-            "thread_no", 
+            "thread_no",
             "thread_title",
             "thread_date",
             "thread_type",
-            "user",
-            "thread_count",
-            "hit_count_generic",
+            "user"
         ]
 
 class CommunityDetailShowSerializer(serializers.ModelSerializer):
@@ -59,8 +49,7 @@ class CommunityDetailShowSerializer(serializers.ModelSerializer):
             "thread_date",
             "thread_type",
             "user",
-            "thread_comments",
-            "thread_count",
+            "thread_comments"
         ]
 
 class CommunityModifySerializer(serializers.ModelSerializer):
@@ -71,8 +60,9 @@ class CommunityModifySerializer(serializers.ModelSerializer):
             "thread_title",
             "thread_content",
             "thread_img",
+            "thread_date",
             "thread_type",
-            "user",
+            "user"
         ]
 
 class CommunityCommentModifySerializer(serializers.ModelSerializer):
@@ -81,6 +71,7 @@ class CommunityCommentModifySerializer(serializers.ModelSerializer):
         fields = [
             "cmt_no",
             "cmt_content",
+            "cmt_date",
             "thread_no",
-            "user",
+            "user"
         ]

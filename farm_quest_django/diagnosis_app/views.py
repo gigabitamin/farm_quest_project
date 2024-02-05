@@ -9,8 +9,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view   
 from rest_framework import mixins, generics
-from .models import *
-from .serializers import *
+from .models import DiagnosisItemCart, DiagnosisResult, DiagnosisQuestion, DiagnosisQuestionHistory, PlantTb, SolutionTb, DiagnosisResultAll
+from .serializers import DiagnosisItemCartSerializer, ShopingTbSerializer, PlantTbSerializer, DiagnosisResultSerializer, DiagnosisQuestionSerializer, DiagnosisQuestionHistorySerializer, PlantSerializer, SolutionTbSerializer
 from users_app.models import User, UsersAppUser
 
 # yolov8 관련
@@ -22,7 +22,7 @@ import os
 # 추천 상품 관련
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
-# from gardening_shop_app.models import ShopingTb
+from gardening_shop_app.models import ShopingTb
 from django.db.models import Q
 
 from rest_framework.permissions import IsAuthenticated
@@ -33,6 +33,8 @@ import platform
 import pathlib
 
 from django.views.decorators.csrf import csrf_exempt
+
+
 
 
 class DiagnosisItemLoadCartAPIMixins(APIView):
@@ -47,13 +49,13 @@ class DiagnosisItemLoadCartAPIMixins(APIView):
                 diagnosis_item_cart_list = diagnosis_item_cart.diagnosis_item_cart_list
                 print('diagnosis_item_cart_list = ', diagnosis_item_cart_list)
                                 
-                products = DiagnosisShopingTb.objects.filter(Q(shoping_tb_no__in=diagnosis_item_cart_list))
+                products = ShopingTb.objects.filter(Q(shoping_tb_no__in=diagnosis_item_cart_list))
                 print('products = ', products)
-                serializer = DiagnosisShopingTbSerializer(products, many=True)
-                print('serializer =', serializer.data)
+                serializer = ShopingTbSerializer(products, many=True)
+                print('serializer =', serializer)
                 return Response(serializer.data, status=200)
             except DiagnosisItemCart.DoesNotExist:
-                return Response({'error': '없는데?'}, status=404)
+                return Response({'error'    : '없는데?'}, status=404)
         else:
             return Response({'error': '진짜없는데??'}, status=400)
 
@@ -92,7 +94,9 @@ class DiagnosisItemSaveCartAPIMixins(generics.CreateAPIView):
 class DiagnosisRecommendList(APIView):
     def get(self, request, solution_word, format=None):        
         try:
-            print('solution word ', solution_word)            
+            print('solution word ', solution_word)
+            # print('1')
+            # solution_word = '화분'
             page = int(request.GET.get('page', 1))
             page_size = 10
             print('page', page)
@@ -102,13 +106,20 @@ class DiagnosisRecommendList(APIView):
             end_index = start_index + page_size
             print('end_index', end_index)
 
-            recommendations = DiagnosisShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
-            print('recommendations',recommendations)
-            serializer = DiagnosisShopingTbSerializer(recommendations, many=True)
-            print('serializer', serializer.data)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
+            # print('가냐?', recommendations)
+            # print('3')
+            serializer = ShopingTbSerializer(recommendations, many=True)
+            # print('진짜 가냐?', serializer)
+            # print('4')
+            return Response(serializer.data, status=200)
         except Exception as e:
-            return Response({"에러": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"에러": str(e)})
+
+
+
+
+
 
 class SolutionTbAPIMixins(
     mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
@@ -172,10 +183,7 @@ def diagnosis_upload(request):
         
         print('완료, 전송4')
         
-    else:            
-        context = {
-            'error': '로그인이 필요합니다.',
-        }
+
 
     return JsonResponse(context, status=200)
 
@@ -297,6 +305,7 @@ def diagnosis_answer(request):
     return render(request, 'diagnosis_app/diagnosis_answer.html')
 
 
+
 # 크롭 이미지 한글 파싱 문제 -> 해결되서 굳이 유지할 필요 없음, 필요시 삭제
 def view_crop_image(request, file_name, label_name, image_name):    
     print('왔냐1', file_name)
@@ -314,9 +323,3 @@ def view_crop_image(request, file_name, label_name, image_name):
             return HttpResponse(image_file.read(), content_type='image/jpeg')
     except FileNotFoundError:
         return HttpResponse(status=404)
-    
-    
-    
-    
-    
-    

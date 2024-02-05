@@ -84,10 +84,10 @@ const Header = () => {
                     <CsLink />
 
                     <div className="nav-item_hd">
-                        <div><Link to="/guide_index">가이드</Link></div>
+                        <div className="nav-link_hd"><Link to="/guide_index">가이드</Link></div>
                         <div className="dropdown-menu_hd">
-                            <div className="btn_hd"><Link >가이드 안내</Link></div>
-                            <div className="btn_hd"><Link >가이드 상세</Link></div>
+                            <div className="btn_hd"><Link to='/'>가이드 안내</Link></div>
+                            <div className="btn_hd"><Link to='/'>가이드 상세</Link></div>
                         </div>
                     </div>            
 

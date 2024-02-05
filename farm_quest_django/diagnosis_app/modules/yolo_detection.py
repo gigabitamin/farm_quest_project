@@ -30,17 +30,19 @@ from rest_framework import mixins, generics
 from rest_framework import status
 
 from pathlib import Path
-import platform 
-import pathlib 
-plt = platform.system() 
-if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
+# import platform 
+# import pathlib 
+# plt = platform.system() 
+# if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
+
+from db_settings import DjangoServer
 
 
 os.environ['CUDA_VISIBLE_DEVICES'] = 'cpu'
 
 
 def plant_select_result(plant_name):
-        
+    # 여유가 되면 db로 옮긴 후 불러오기
     yolo_class = ['딸기', 
     '토마토', 
     '파프리카', 
@@ -138,7 +140,7 @@ def plant_select_result(plant_name):
     '시설포도노균병반응_중기',
     '시설포도노균병반응_말기'
     ]
-    
+    # tf 고추 ['a8', 'a7', 'b7', 'b3', 'b6', 'b8', 'c7', '0']
     disease_dict = {'1':{'a1':'딸기잿빛곰팡이병','a2':'딸기흰가루병','b1':'냉해피해','b6':'다량원소결핍 (N)','b7':'다량원소결핍 (P)','b8':'다량원소결핍 (K)','c1':'딸기잿빛곰팡이병반응', 'c2':'딸기흰가루병반응'},
         '2':{'a5':'토마토흰가루병','a6':'토마토잿빛곰팡이병','b2':'열과','b3':'칼슘결핍','b6':'다량원소결핍 (N)','b7':'다량원소결핍 (P)','b8':'다량원소결핍 (K)','c5':'토마토흰가루병반응','c6':'토마토잿빛곰팡이병반응',},
         '2':{'b6':'다량원소결핍 (N)','b7':'다량원소결핍 (P)','b8':'다량원소결핍 (K)','a6':'토마토잿빛곰팡이병','a5':'토마토흰가루병','b3':'칼슘결핍','b2':'열과','c6':'토마토잿빛곰팡이병반응','c5':'토마토흰가루병반응',},
@@ -301,10 +303,9 @@ def detect(save_file_path, plant_name, user_select_plant):
         print('crops_path_list 미디어', crops_path_lists)        
 
 
-        for path in crops_path_lists:            
-            modified_path = f'http://localhost:8000/media/{Path(path).as_posix().split("upload/", 1)[-1]}'
-            crops_path_list.append(modified_path)
-            print('미디어', crops_path_list)
+        for path in crops_path_lists:
+            modified_path = f'{DjangoServer}/media/{Path(path).as_posix().split("media/", 1)[-1]}'
+            crops_path_list.append(modified_path)        
         
         print('crops_path_list 미디어', crops_path_list)
                                                             
@@ -514,12 +515,15 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         label = names[label_key]
         print('8', label)
                 
+        print('에라이1')
         path_dir = os.path.dirname(path_origin)
+        print('에라이2')
         path_file = os.path.basename(path_origin)        
+        print('에라이3')
         file_name, file_extension = os.path.splitext(path_file)                
-        result_path = 'result_img'
-        crops_folder = 'crops'
-        label = label
+        # result_path = 'result_img'
+        # crops_folder = 'crops'
+        # label = label
         # crops_path = os.path.join(path_dir, result_path, file_name, crops_folder, label, file_name+'.jpg')
         crops_all = os.path.join(path_dir, 'result_img', file_name, 'crops', '**', '*.jpg')
         print('crops_all', crops_all)
@@ -529,13 +533,13 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         for crops_path in crops_all_list:
             if crops_path.split(os.sep)[-2] not in plant:
                 crops_path_list.append(crops_path)
-        # print('crops_path_list', crops_path_list)
+        print('crops_path_list', crops_path_list)
                 
     # print('plant_name', plant_name)
 
     image_size_x = 256
     image_size_y = 256
-
+    print('에라이8')
     if plant_name == '고추':
         tf_model = load_model('tf_model/pepper.keras')        
     elif plant_name == '딸기':        
@@ -552,7 +556,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         tf_model = load_model('tf_model/tomato.keras')
     elif plant_name == '파프리카':
         tf_model = load_model('tf_model/paprika.keras')
-    
+    print('에라이9')
     # model.summary()
     # print('test 1')
 
@@ -585,7 +589,10 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
             disease_predict_probability.append(disease_predict_prob[0])
 
     # print('disease_predict_probability', disease_predict_probability)
-        
+
+    # disease_code = []
+    # disease_name = []
+    
     for dc, dn, dp in zip(disease_codes, disease_names, disease_predict_probability):
         tf_disease_predict_list.append([user_select_plant, plant_name, dc, dn, dp])
                 

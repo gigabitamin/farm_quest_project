@@ -51,6 +51,8 @@ const Register = () => {
             <div className="resister_container">
             <div className="resister_columns">
                 <div className="resister_column_box">
+                <h2>회원가입</h2>
+                <hr />
                 <form onSubmit={handleSubmit} className="box">
                     <div className="resister_input_field">
                         <label className="resister_input_label">아이디</label>

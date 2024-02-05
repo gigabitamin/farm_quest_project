@@ -31,7 +31,6 @@ class ShopingTb(models.Model):
         db_table = 'shoping_tb'
 
 
-
 class ShoppingReview(models.Model):
     shopping_review_no = models.AutoField(primary_key=True)
     shopping_review_content = models.TextField(blank=True, null=True)  
