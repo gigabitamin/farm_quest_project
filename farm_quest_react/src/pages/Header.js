@@ -29,7 +29,7 @@ const Header = () => {
         
         if (selectedCategory === "gardening_shop_search" && keyword) {
             keyword = encodeURIComponent(keyword);
-            window.location.href = `/gardening_shop_search/${keyword}/${user_id}`;
+            window.location.href = `/#/gardening_shop_search/${keyword}/${user_id}`;
         }
 
         return false;
