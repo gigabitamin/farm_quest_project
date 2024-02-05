@@ -56,6 +56,13 @@ export default "http://localhost:8000"
 
 ====================================================
 <!-- version -->
+###
+
+### v0.7.5 psh
+- scheduler, profile css 수정
+- header css, 구조 일부 수정 (추가수정중)
+- 가이드(북) css, idnex 구조 변경
+- 진단페이지 css 일부 수정
 
 ### v0.7.4 --
 - feather, ltj Merge
