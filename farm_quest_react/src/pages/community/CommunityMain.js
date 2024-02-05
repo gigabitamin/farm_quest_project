@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import CommunityMainList from './CommunityMainList';
 import CommunityMainDetail from './CommunityMainDetail';
 import { useSelector, useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
 
 const CommunityMain = ({ mainType }) => {
+    const [cookies] = useCookies(['id']);
+    const history = useNavigate();
     const DjangoServer = useSelector(state => state.DjangoServer);
     const dispatch = useDispatch();
     const mainPagePreset = {link: `${DjangoServer}/community/main/${mainType}`, num: 1};
@@ -13,6 +16,7 @@ const CommunityMain = ({ mainType }) => {
     const [mainPage, setMainPage] = useState(mainPage_.link ? mainPage_ : mainPagePreset);
     const [data, setData] = useState({results: []});
     const [pagination, setPagination] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     const linkPreset = mainPagePreset.link + "?page=";
 
@@ -55,6 +59,7 @@ const CommunityMain = ({ mainType }) => {
         console.log(response.data);
         setPagination(paginator(mainPage.num, response.data.page_count));
         setData(response.data);
+        setLoading(false)
     };
 
     const toNext = () => {
@@ -88,11 +93,15 @@ const CommunityMain = ({ mainType }) => {
     };
 
     const toCreate = () => {
-        dispatch({
-            part: 'community',
-            type: 'create',
-            mainPage: mainPage
-        });
+        if (cookies.id) {
+            dispatch({
+                part: 'community',
+                type: 'create',
+                mainPage: mainPage
+            });
+        } else if (window.confirm('로그인이 필요한 서비스입니다.\n로그인 화면으로 이동하시겠습니까?')) {
+            history('/login')
+        }
     };
 
     useEffect(() => {
@@ -100,6 +109,7 @@ const CommunityMain = ({ mainType }) => {
     }, [mainPage]);
 
     useEffect(() => {
+        setLoading(true);
         setMainPage(mainPagePreset);
     }, [mainType]);
 
@@ -119,7 +129,7 @@ const CommunityMain = ({ mainType }) => {
                 </div>
             </div>
             <div className='community_main_center_box'>
-                {   
+                { loading ? (<p><br/>로딩중...</p>) :
                     data.results.map(item => {
                         return (
                             <a onClick={() => toDetail(item)}><CommunityMainList item={item} /></a>
