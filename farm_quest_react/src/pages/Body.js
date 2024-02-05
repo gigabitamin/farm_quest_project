@@ -1,21 +1,57 @@
 import React from 'react';
 import '../css/body.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import 'bootstrap-icons/font/bootstrap-icons.css'; // 부트스트랩 아이콘 CSS 추가
 
 function Body() {
-  return <div className="index_body_wrap">
-  <main className="index_main_ind">
-      <div className="btn_index_ind btn_guide_ind Rectangle6"><Link to="/">가이드</Link></div>
-      <div className="btn_index_ind btn_scheduler_ind Rectangle7"><Link to="/">스케쥴러</Link></div>
-      <div className="btn_index_ind btn_search_disease_ind Rectangle8"><Link to="/">질병서치</Link></div>
-      <div className="btn_index_ind btn_community_ind Rectangle9"><Link to="/">커뮤니티</Link></div>
-      <div className="btn_index_ind btn_shop_ind Rectangle10"><Link to="/">가드닝샵</Link></div>
-      <div className="btn_index_ind btn_search_pest_ind Rectangle11"><Link to="/">해충서치</Link></div>
-      <div className="btn_index_ind btn_photo_ind Rectangle12"><Link to="/">Photo</Link></div>
-      <div className="btn_index_ind btn_qna_ind Rectangle13"><Link to="/">QNA</Link></div>
-      <div className="btn_index_ind btn_calendar_ind Rectangle14"><Link to="/">Calendar</Link></div>
-  </main>
-  </div>
+  return (
+    <div className="index_body_wrap">
+      <main className="index_main_ind">
+        <div className="btn_index_ind btn_large btn_guide_ind">
+          <Link to="/">
+            <div><i className="bi bi-journal-text"></i></div>
+            <div>가이드</div>
+          </Link>c
+        </div>
+        <div className="btn_index_ind btn_large btn_scheduler_ind">
+          <Link to="/">
+            <div><i className="bi bi-calendar3"></i></div>
+            <div>스케쥴러</div>
+          </Link>
+        </div>
+        <div className="btn_index_ind btn_large btn_shop_ind">
+          <Link to="/">
+            <div><i className="bi bi-shop"></i></div>
+            <div>가드닝샵</div>
+          </Link>
+        </div>
+        <div className="btn_index_ind btn_large btn_community_ind">
+          <Link to="/">
+            <div><i className="bi bi-people"></i></div>
+            <div>커뮤니티</div>
+          </Link>
+        </div>
+        <div className="btn_index_ind btn_photo_ind">
+          <Link to="/">
+            <div><i className="bi bi-camera"></i></div>
+            <div>Photo</div>
+          </Link>
+        </div>
+        <div className="btn_index_ind btn_qna_ind">
+          <Link to="/">
+            <div><i className="bi bi-question-circle"></i></div>
+            <div>QNA</div>
+          </Link>
+        </div>
+        <div className="btn_index_ind btn_calendar_ind">
+          <Link to="/">
+            <div><i className="bi bi-calendar2-week"></i></div>
+            <div>Calendar</div>
+          </Link>
+        </div>
+      </main>
+    </div>
+  );
 }
 
 export default Body;
