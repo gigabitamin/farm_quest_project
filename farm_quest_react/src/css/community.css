@@ -6,6 +6,10 @@ article#community {
     margin-bottom: 90px;
 }
 
+article#community textarea {
+    padding: 5px;
+}
+
 div.community_back_button {
     margin: 4px auto 10px auto;
     display: flex;
@@ -14,22 +18,31 @@ div.community_back_button {
 
 div.community_back_button button {
     border-radius: 50%;
-    background-color: #a3ce9b;
-    width: 50px;
-    height: 50px;
+    background-color: #a8d1b0db;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 div.community_back_button img {
     margin: 3px 0;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 }
 
 button.community_button_default {
     border-radius: 5px;
-    background-color: #a3ce9b;
+    background-color: #a8d1b0db;
     width: 40px;
     height: 30px;
+}
+
+button.community_mini_button {
+    border-radius: 5px;
+    background-color: #adb6afdb;
+    width: 35px;
+    height: 18px;
 }
 
 
@@ -382,7 +395,7 @@ div.community_form_box {
     padding: 15px 4%;
     margin: 1% auto;
     width: 95%;
-    background: #2de0b6;
+    background: #adb6afdb;
 }
 
 div.community_form_box table {

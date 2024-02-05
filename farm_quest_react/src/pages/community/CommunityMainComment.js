@@ -14,6 +14,8 @@ const CommunityMainComment = ({ commentItem, loadContent }) => {
                 }).then(() => {
                     // alert('삭제되었습니다.');
                     loadContent();
+                }).catch(() => {
+                    alert('잘못된 접근입니다.');
                 });
         } else {
             event.preventDefault();
@@ -24,7 +26,7 @@ const CommunityMainComment = ({ commentItem, loadContent }) => {
         <div className="community_detail_comment_box">
             <div className="community_detail_comment_box_user">{commentItem.user.nickname}</div>
             <div className="community_detail_comment_box_content">{commentItem.cmt_content}</div>
-            <button onClick={onDelete}>삭제</button>
+            <button className="community_mini_button" onClick={onDelete}>삭제</button>
         </div>
     );
 };

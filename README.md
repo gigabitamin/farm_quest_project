@@ -1,7 +1,10 @@
 # Final Project Farm Quest with Team Final Farmtasy
 
 <!-- newest virsion-->
-### v0.7.1 병합테스트
+
+### 병합테스트 240205 1505
+
+### v0.7.2 jsh
 
 
 <!-- notice -->
@@ -53,6 +56,12 @@ export default "http://localhost:8000"
 
 ====================================================
 <!-- version -->
+
+### v0.7.3 psh
+- 가이드, 커뮤니티 css 일부 수정
+
+### v0.7.2 jsh 
+- community 기능상 구현 완료
 
 ### v0.7.1 -- 
 - 병합 테스트 kdy jsh psh 폰트 적용 완료  

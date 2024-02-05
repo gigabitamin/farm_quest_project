@@ -31,16 +31,23 @@ const CommunityMainUpdate = () => {
     };
 
     const submitForm = (event) => {
-        if (window.confirm('수정하시겠습니까?')) {
-            // var formData = new FormData(document.formData);
-            axios.put(`${DjangoServer}/community/detail/modify/${item.thread_no}`, form, {
+        let check = true
+        if (form.thread_title === '') {
+            alert('제목을 입력하세요.');
+            check = false;
+        } else if (form.thread_content === '') {
+            alert('내용을 입력하세요.');
+            check = false;
+        }
+
+        if (check && window.confirm('수정하시겠습니까?')) {
+            axios.post(`${DjangoServer}/community/detail/modify/${item.thread_no}`, form, {
                 headers: { Authorization: `Token  ${cookies.id}` }
-            }).then(
-                response => {
-                    alert("수정되었습니다.");
-                    // dispatch({type: 'back'});
-                }
-            );
+            }).then(() => {
+                alert("수정되었습니다.");
+            }).catch(() => {
+                alert('잘못된 접근입니다.');
+            });
         } else {
             event.preventDefault();
         };
@@ -69,8 +76,7 @@ const CommunityMainUpdate = () => {
                         <th>분류</th>
                         <td>
                             <select className='type' name='thread_type' defaultValue={item.thread_type} onChange={changeForm} >
-                                <option>분류 선택</option>
-                                <option value='0'>일반</option>
+                                <option value='0'>팜로그</option>
                                 <option value='1'>질문</option>
                             </select>
                         </td>
