@@ -6,6 +6,8 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from rest_framework.decorators import APIView
 from rest_framework import status, mixins, generics
+from hitcount.views import HitCountMixin
+from hitcount.models import HitCount
 from . import models, serializers, pagination
 
 # Create your views here.
@@ -43,6 +45,11 @@ class CommunityDetailShow(generics.RetrieveAPIView):
     serializer_class = serializers.CommunityDetailShowSerializer
     lookup_field = 'thread_no'
 
+    def get(self, request, *args, **kwargs):
+        hit_count = HitCount.objects.get_for_object(self.get_object())
+        hit_count_resp = HitCountMixin.hit_count(request, hit_count)
+        return self.retrieve(request, *args, **kwargs)
+
 
 class CommunityDetailModify(generics.UpdateAPIView, generics.DestroyAPIView):
     queryset = models.CommunityTb.objects.all()
@@ -54,9 +61,6 @@ class CommunityDetailModify(generics.UpdateAPIView, generics.DestroyAPIView):
     def put(self, request, *args, **kwargs):
         self.is_right_user(request)
         return self.update(request, *args, **kwargs)
-
-    # def patch(self, request, *args, **kwargs):
-    #     return self.partial_update(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         self.is_right_user(request)
@@ -78,7 +82,6 @@ class CommunityCommentAdd(generics.CreateAPIView):
         if request.auth:
             user_id = request.user.id
             request.data['user'] = user_id
-            print('post : ', request.data)
             return self.create(request, *args, **kwargs)
         raise PermissionError('You have no token information.')
     

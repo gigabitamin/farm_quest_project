@@ -52,7 +52,7 @@ const CommunityMain = ({ mainType }) => {
     const loadData = async () => {
         const response = await axios.get(mainPage.link);
         // 테스트 출력
-        // console.log(response.data);
+        console.log(response.data);
         setPagination(paginator(mainPage.num, response.data.page_count));
         setData(response.data);
     };
