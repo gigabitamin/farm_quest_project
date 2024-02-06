@@ -86,7 +86,7 @@ const DiagnosisBoardMain = ({ mainType }) => {
     console.log('hi')
 
 
-    
+
     const toDetail = (item) => {
 
         navigate('/diagnosis_upload_result_board', { state: {file_name : item}});
@@ -119,6 +119,7 @@ const DiagnosisBoardMain = ({ mainType }) => {
             <div className='community_main_center_box'>
                 {
                     data.results.map(item => {
+                        console.log('item', item)
                         // console.log('itme ddd', item)
                         return (
                             

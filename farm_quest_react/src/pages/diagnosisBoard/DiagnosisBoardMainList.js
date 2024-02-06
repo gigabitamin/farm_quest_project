@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate} from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './diagnosisBoard.css'
 
 const DiagnosisBoardMainList = ({ item }) => {
@@ -11,6 +11,8 @@ const DiagnosisBoardMainList = ({ item }) => {
 
     let highestConfidence = 0;
     let selectedBoxIndex = -1;
+
+    console.log('item', item)
 
     for (let i = 0; i < serialized_results.boxes.length; i++) {
         const label = serialized_results.boxes[i]['label'];
@@ -39,7 +41,7 @@ const DiagnosisBoardMainList = ({ item }) => {
         ? `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${save_file_name}`
         : null;
 
-    const location = useLocation();
+    // const location = useLocation();
     const navigate = useNavigate();
 
     const handleClick = () => {
