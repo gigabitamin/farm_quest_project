@@ -1,62 +1,69 @@
 .index_body_wrap {
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;    
-  }
-  
-  .diagnosisUpload {
-    margin-top:5px;
-    margin-bottom:5px;
-  }
-  .index_main_ind {
 
-    text-align: center;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
-    width: 100%;
-    max-width: 600px;
-  }
-  
-  .index_main_ind a{
-    color: #F2F1EB;
-  }
-  .index_main_ind div:nth-child(n+5):nth-child(-n+7) {
-    grid-column-start: 2;
-    grid-column-end: -2;
-  }
-  
-  .btn_index_ind {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: #F2F1EB;
-    background-color: #88AB8E;
-    border-radius: 5px;
-  }
-  
-  .btn_index_ind.btn_large::before {
-    content: "";
-    display: block;
-    padding-top: 100%;
-  }
-  
-  .btn_index_ind i {
-    margin-right: 8px;
-    font-size: 72px;
-  }
-  
-  .btn_index_ind:hover {
-    background-color: #F2F1EB;
-    color:#88AB8E;
-  }
-  
-  .btn_index_ind.btn_photo_ind, .btn_index_ind.btn_qna_ind, .btn_index_ind.btn_calendar_ind {
-    padding: 5px;
-    grid-column: span 4;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagnosisUpload {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.index_main_ind {
+
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.index_main_ind a {
+  color: #F2F1EB;
+}
+
+.index_main_ind div:nth-child(n+5):nth-child(-n+7) {
+  grid-column-start: 2;
+  grid-column-end: -2;
+}
+
+.btn_index_ind {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #F2F1EB;
+  background-color: #88AB8E;
+  border-radius: 5px;
+}
+
+.btn_index_ind.btn_large::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.btn_index_ind i {
+  margin-right: 8px;
+  font-size: 72px;
+}
+
+.btn_index_ind:hover {
+  background-color: #F2F1EB;
+  color: #88AB8E;
+}
+
+.btn_index_ind.btn_photo_ind,
+.btn_index_ind.btn_qna_ind,
+.btn_index_ind.btn_calendar_ind {
+  padding: 5px;
+  grid-column: span 4;
+}
+
+div.Calender {
+  width: 300px;
+}
