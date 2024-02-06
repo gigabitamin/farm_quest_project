@@ -30,7 +30,7 @@ div.community_back_button button {
 }
 
 div.community_back_button img {
-    margin: 3px 0;
+    margin: 2px -2px;
     width: 30px;
     height: 30px;
 }
@@ -40,13 +40,17 @@ button.community_button_default {
     background-color: #F2F1EB;
     width: 40px;
     height: 30px;
+    text-indent: -1px;
+    white-space: nowrap;
 }
 
 button.community_mini_button {
     border-radius: 5px;
     background-color: #88AB8E;
     width: 35px;
-    height: 18px;
+    height: 20px;
+    text-indent: -3px;
+    white-space: nowrap;
 }
 
 
@@ -279,7 +283,7 @@ div.community_detail_content_box_info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: auto;
     border-top: solid 1px black;
     padding: 3px;
 }
