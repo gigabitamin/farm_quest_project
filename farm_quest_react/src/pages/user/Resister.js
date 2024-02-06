@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../../shared/App.css";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
