@@ -270,8 +270,12 @@ div.login:active {
 
 div.login_wrap_div_box{
     border:10px solid #88AB8E;
-    max-width:360px;
+    max-width:270px;
     margin: 0 auto;    
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
 }
 
 div.login_container {    
@@ -295,5 +299,6 @@ div.resister_container {
     background-color:  #88AB8E;
     padding:25px;
     max-width:350px;
-    margin: 0 auto;    
+    margin: 0 auto; 
+    text-align: center;   
 }

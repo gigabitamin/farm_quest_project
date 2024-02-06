@@ -1,9 +1,9 @@
 /* footer */
 footer {
     text-align: center;
-    position: fixed;
+    /* position: absolute; */
     bottom: 0;
-    width: 100%;
+    width: 100%;    
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -11,6 +11,7 @@ footer {
     background-color: #88AB8E;
     color: #F2F1EB;
     padding: 20px;
+    margin-top:100px;
 }
 
 .footerDivision{
