@@ -270,8 +270,7 @@ const DiagnosisRecommend = () => {
                 {cookies.user ? (
                     // 사용자가 로그인한 경우, recommendedProducts.map을 사용
                     recommendedProducts.map((recommend, index) => (
-                    <div key={index} className="diagnosis_recommend_section_2_content_1_1">
-
+                        <div key={index} className="diagnosis_recommend_section_2_content_1_1">
                                 <div className="diagnosis_recommend_section_2_content_1_1_1">
                                     <div className="diagnosis_recommend_section_2_content_1_1_1_1">
                                         <img className="diagnosis_recommend_section_2_content_1_1_1_1_1"
