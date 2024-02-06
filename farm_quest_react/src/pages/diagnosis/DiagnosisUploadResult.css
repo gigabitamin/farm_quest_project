@@ -14,7 +14,7 @@
   }
 
   div.diagnosis_result_analystic_summary_box_item {
-    margin-bottom: 20px;
+    margin-bottom: 20px;    
   }
 
 
@@ -71,6 +71,28 @@
   flex-direction: column;
   margin: 0 auto;
 }
+
+
+
+
+
+.diagnosis_result_public_select {
+  margin-top:10px;
+  padding:20px;
+  background-color:#F2F1EB;
+  border:#88AB8E 31px solid ;
+}
+.diagnosis_result_public_select > div {
+  margin-top:10px;
+  padding:10px;    
+}
+
+.diagnosis_result_public_select label:hover {
+  padding: 10px;
+  background-color: #88AB8E;
+}
+
+
 
 .diagnosis_result_title {
   /* border: 3px solid #88AB8E; */
@@ -141,6 +163,10 @@
   /* min-height:200px; */
   /* max-height:500px; */
 
+}
+
+div.diagnosis_result_analystic_summary_box_item {
+  margin-bottom: 20px;    
 }
 
 .diagnosis_result_analystic_image {

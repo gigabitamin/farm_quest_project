@@ -104,7 +104,21 @@ const DiagnosisUploadResult = () => {
                         <section className="diagnosis_result_analystic_wrap">
 
                             <section className="diagnosis_result_yolo_analystic_wrap">
+                                    <div className='diagnosis_result_public_select'>
+                                        <div>진단 결과 게시물을 커뮤니티에 공개하시는데 동의하시면 '예' 를 선택 해주세요</div>
+                                        <div>
+                                            <label>
+                                                예
+                                                <input type="radio" name="public_choice" value="yes" />
+                                            </label>
+                                            <label>
+                                                아니오
+                                                <input type="radio" name="public_choice" value="no" />
+                                            </label>
+                                        </div>
+                                    </div>
                                 <article title="info" className="diagnosis_result_analystic_info">
+                                    
                                     <div>
                                         <h3>전체 부위 탐색 결과 (진단 작물 :
                                             <Link title="가이드로 이동" to={{
@@ -113,6 +127,7 @@ const DiagnosisUploadResult = () => {
                                                 <span className="diagnosis_button">{yolo_plant_name}</span>
                                             </Link>)
                                         </h3>
+
                                     </div>
                                     <div>진단파일명: {save_file_name}</div>
                                     <div>진단번호:
