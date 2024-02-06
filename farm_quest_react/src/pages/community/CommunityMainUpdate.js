@@ -31,6 +31,7 @@ const CommunityMainUpdate = () => {
     };
 
     const submitForm = (event) => {
+        event.preventDefault();
         let check = true
         if (form.thread_title === '') {
             alert('제목을 입력하세요.');
@@ -41,19 +42,18 @@ const CommunityMainUpdate = () => {
         }
 
         if (check && window.confirm('수정하시겠습니까?')) {
-            axios.post(`${DjangoServer}/community/detail/modify/${item.thread_no}`, form, {
+            axios.put(`${DjangoServer}/community/detail/modify/${item.thread_no}`, form, {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(() => {
                 alert("수정되었습니다.");
+                backToDetail();
             }).catch(() => {
                 alert('잘못된 접근입니다.');
             });
-        } else {
-            event.preventDefault();
         };
     };
 
-    const backToMain = () => {
+    const backToDetail = () => {
         dispatch({
             part: 'community',
             type: 'detailBack'
@@ -63,7 +63,7 @@ const CommunityMainUpdate = () => {
     return (
         <div className='community_form_box'>
             <div className="community_back_button">
-                <button onClick={backToMain}><img src={backButton}/></button>
+                <button onClick={backToDetail}><img src={backButton}/></button>
             </div>
             <form name='formData' onSubmit={submitForm}>
                 <table>
