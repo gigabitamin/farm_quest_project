@@ -2,8 +2,6 @@
 
 <!-- newest virsion-->
 
-### 병합테스트 완료 psh kdy ltj 240206 1014
-
 ### v0.7.8 jsh
 
 
