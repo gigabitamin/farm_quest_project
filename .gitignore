@@ -1,6 +1,8 @@
 # server
 server_nginx/
 
+DjangoServer.js
+DjangoServer
 DjangoServer/
 ## ff
 allowed_host.py

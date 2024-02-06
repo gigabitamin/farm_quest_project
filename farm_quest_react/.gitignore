@@ -6,6 +6,8 @@
 .pnp.js
 .env
 DjangoServer.js
+DjangoServer
+DjangoServer/
 
 # testing
 /coverage
