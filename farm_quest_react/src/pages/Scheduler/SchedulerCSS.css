@@ -23,7 +23,6 @@
 .questionOverlayContainer {
   display: flex ;
   padding-right: 4px;
-  padding-bottom: 4px;
   padding-top: 4px;
   
 }
@@ -132,11 +131,11 @@
   border-radius: 3.5px; 
 }
 #schedulerFilter {
-  width: 170px;
+  width: 120px;
   border: 10px  #c1e4bc85;
   border-radius: 8px; 
   border-style: ridge double dashed ridge;
-  padding: 10px;
+  padding: 0px 10px 10px 0px;
   padding-left: 16px;
 }
 
@@ -213,8 +212,9 @@
   border-radius: 4px;
   display: block;
   align-items: center;
-
 }
+
+
 .weatherPrintContainer {
   display: flex;
   /* background-color: #5a007e; */
@@ -456,12 +456,12 @@
 
 /* 지역 */
 
-/* .questionOverlayContainer.wet {
+.questionOverlayContainer {
   text-align: center;
   align-content: center;
   align-items: center;
 
-} */
+}
 .locationSelectorBox {
   text-align: center;
   align-content: center;
