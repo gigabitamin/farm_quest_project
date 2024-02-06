@@ -89,7 +89,7 @@ const GardeningShopSearch = () => {
     };
 
     return (
-        <div>
+        <div className="product_wraps_pw">
             <h1 className="product-top">검색 결과: {keyword}</h1>
             <div className="product-list">
                 {Array.isArray(searchResults) && searchResults.map((product, index) => (

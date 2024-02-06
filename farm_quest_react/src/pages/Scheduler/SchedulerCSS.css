@@ -22,9 +22,9 @@
 /* 도움말 */
 .questionOverlayContainer {
   display: flex ;
-  padding-right: 5px;
-  padding-bottom: 8px;
-  padding-top: 5px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+  padding-top: 4px;
   
 }
 /* .questionOverlayContainer h2 {
@@ -49,6 +49,10 @@
   cursor:help;
 }
 
+.calendar-container{
+  margin-bottom: 50px;
+}
+
 
 /* #headerInnercontents { */
   /* display:flex row; */
@@ -69,11 +73,10 @@
   padding-right: 20px;
 }
 
-#schedularFilter h2 {
-  
-  font-size: 24px;
+/* #schedularFilter h2 {
+  font-size: 16px;
   margin-bottom: 20px;
-}
+} */
 
 .schedulerBtn {
   font-family: 'neodgm', 'sans';
@@ -102,9 +105,16 @@
 
 #shcedulerDiseaseExp{
   text-align:left;
-  font-size: 18px;
+  font-size: 16px;
 
 }
+
+#schedulerFilter span{
+  text-align:left;
+  font-size: 16px;
+
+}
+
 
 #shcedulerDiseaseExpColor {
   list-style-type: none;
@@ -122,7 +132,7 @@
   border-radius: 3.5px; 
 }
 #schedulerFilter {
-  width: 190px;
+  width: 170px;
   border: 10px  #c1e4bc85;
   border-radius: 8px; 
   border-style: ridge double dashed ridge;
@@ -151,7 +161,7 @@
 }
 
 #schedulerFilterUi label.schedulerFilterUi {
-  font-size: 18px;
+  font-size: 16px;
 
 }
 
@@ -171,12 +181,16 @@
   vertical-align: top;
 
 }
+#weatherselectbox {
+  text-align: center;
+}
+
 
 #schedulerFilterUi input[type="radio"] + label.schedulerFilterUi::before {
   content: '';
   display: inline-block;
-  width: 14px; 
-  height: 14px;
+  width: 12px; 
+  height: 12px;
   border-radius: 20%;
   border: 2px solid rgb(102, 51, 8);
   background-color: rgb(255, 255, 239);
@@ -211,7 +225,7 @@
 
 #printedWeatherInfo{
   margin-top: 10px;
-  
+  text-align: center;
 }
 
 .weatherTextPrint {
@@ -256,6 +270,7 @@
   width:220px;
   display: grid;/*삭제대기*/
   place-items: center;/*삭제대기*/
+  margin-bottom: 150px;
 }
 .weatherPrintTitle.firstItem {
   background-color: #9cc581;
@@ -332,7 +347,7 @@
   align-items: center;
   padding: 10px;
   border-radius: 8px; 
-  margin-bottom: 20px;
+  margin-bottom: 100px;
   width: 580px;
   margin-left :10px;
   margin-right:10px;
@@ -352,7 +367,7 @@
 
   #calendarTitle {
     background-color: beige;
-
+    text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
     margin-bottom: 10px;

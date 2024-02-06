@@ -8,15 +8,6 @@
 
 /* 리액트 css */
 
-/* App */
-
-.App {
-    text-align: center;
-  }
-
-* {
-    font-family: 'neodgm';
-}
 
 
 /* 태그 전역 설정 */
@@ -62,7 +53,7 @@ a {
 }
 
 .nav-link_hd {
-    text-decoration: none;
+    /* text-decoration: none; */
     color:#88AB8E;
     padding: 10px;
     display: block;
@@ -94,6 +85,9 @@ a {
     display: block;
     white-space: nowrap;
 }
+
+
+
 /* end_navbar */
 
 
@@ -106,18 +100,42 @@ a {
 
 header {
     display: flex;
-    flex-direction: column; /* headerMenu와 navbar를 세로로 배치 */
+    flex-direction: column;
     align-items: center;
     padding: 20px;
     background-color: #88AB8E;
-    color: #F2F1EB;    
+    color: #F2F1EB;   
+    min-width: 630px;
+ 
 }
 
 .headerMenu {
     display: flex;
-    justify-content: space-between;
     width: 100%;
     padding: 10px;
+    align-items: center; /* 세로 중앙 정렬 */
+    width: 100%;
+    padding: 10px;
+    max-width: 920px;
+}
+
+@media screen and (max-width: 700px) {
+.functionalArea {
+     display: flex;   
+     /* flex-direction: column; */
+        
+    }
+}
+
+.functionalArea {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#mainLogoBtn, .portal_search, #userLoginBox {
+    align-items: stretch;
+
 }
 
 .headerMenu a.highlight {
@@ -129,7 +147,7 @@ header {
     background-color: #F2F1EB; /* 헤더 색상과 조화를 이루는 배경색 */
     color: #88AB8E; /* 텍스트 색상 */
     border: none;
-
+    width: 120px;
     padding: 8px 12px; /* 패딩 조정 */
     border-radius: 5px; /* 모서리 둥글게 */
     margin-right: 5px;
@@ -198,8 +216,23 @@ header {
 /* navbar */
 .navbar_hd {    
     background-color: #F2F1EB; 
-    font-family: Arial, sans-serif;     
+    font-family: Arial, sans-serif;   
+
 }
+
+.navbar_hd .nav-link_hd:hover {
+    /* background: linear-gradient(to right, #ffffff, #428B77); */
+    transition: background 0.3s;  
+}
+
+.navbar_hd .nav-link_hd a:visited {
+    color: initial;    
+}
+
+.navbar_hd .btn_hd a:visited {
+    color: initial;    
+}
+
 
 .navbar_hd ul {
     list-style-type: none;
@@ -251,113 +284,3 @@ header {
     white-space: nowrap;
 }
 /* end_navbar */
-
-/* footer */
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    background-color: #88AB8E;
-    color: #F2F1EB;
-    padding: 20px;
-}
-
-footer ul {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-}
-
-.btn_kdy2 {        
-    color: white;
-    padding: 0.2em;
-    text-decoration: none;
-    border-radius: 5px;        
-    transition: background-color 0.3s ease;    
-}
-
-.btn_ltj {
-    display: inline-block;
-    background-color: #F2F1EB;
-    color: #88AB8E;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin: 10px;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-
-    /*** kdy Footer ***/
-.footer .btn.btn-social {
-    margin-right: 5px;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--light);
-    border: 1px solid rgba(255,255,255,0.5);
-    border-radius: 35px;
-    transition: .3s;
-}
-
-.footer .btn.btn-social:hover {
-    color: var(--primary);
-    border-color: var(--light);
-}
-
-.footer .btn.btn-link {
-    display: block;
-    margin-bottom: 5px;
-    padding: 0;
-    text-align: left;
-    font-size: 15px;
-    font-weight: normal;
-    text-transform: capitalize;
-    transition: .3s;
-}
-
-.footer .btn.btn-link::before {
-    position: relative;
-    content: "\f105";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    margin-right: 10px;
-}
-
-.footer .btn.btn-link:hover {
-    letter-spacing: 1px;
-    box-shadow: none;
-}
-
-.footer .form-control {
-    border-color: rgba(255,255,255,0.5);
-}
-
-.footer .copyright {
-    padding: 25px 0;
-    font-size: 15px;
-    border-top: 1px solid rgba(256, 256, 256, .1);
-}
-
-.footer .copyright a {
-    color: var(--light);
-}
-
-.footer .footer-menu a {
-    margin-right: 15px;
-    padding-right: 15px;
-    border-right: 1px solid rgba(255, 255, 255, .1);
-}
-
-.footer .footer-menu a:last-child {
-    margin-right: 0;
-    padding-right: 0;
-    border-right: none;
-}
-/* end footer */

@@ -1,3 +1,7 @@
+#diagnosisWrap {
+  background-color: #88AB8E;
+}
+
 .diagnosis_ready_wrap {
   /* border: 3px solid #88AB8E; */
   /* padding:3px; */
@@ -8,7 +12,7 @@
 }
 
 .diagnosis_ready_section_wrap {
-  border: 3px solid #88AB8E;
+  border: 3px solid #d6e2d8;
   /* padding:3px; */
   display: flex;
   flex-direction: column;

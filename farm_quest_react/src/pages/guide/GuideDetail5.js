@@ -2,7 +2,7 @@ import React from 'react';
 import './GuideDetail.css'; // Make sure to import your CSS file
 import { Link } from 'react-router-dom';
 
-function GuideDetail() {
+function GuideDetail5() {
   return (
     <div className="container_gd2">
       <aside className="sidebar_gd2">
@@ -21,20 +21,20 @@ function GuideDetail() {
         <section className="crop-info_gd2">
           <div className="crop-heading_gd2">
             <h1>작물 이름</h1>
-            <p>딸기</p>
+            <p>토마토</p>
           </div>
           <div className="crop-body_gd2">
             <div className="crop-description_gd2">
               <h2>작물 설명</h2>
-              <p>딸기는 작고 붉은색을 띠는 과일로, 표면에 작은 씨앗들이 박혀 있습니다.</p> 
-              <p>그 맛은 달콤하면서도 약간의 산미가 있어 상큼한 맛을 줍니다.</p> 
-              <p>딸기는 비타민 C와 항산화 물질이 풍부하여 건강에 좋은 과일로 알려져 있습니다.</p> 
-              <p>이 과일은 생으로 먹거나 잼, 주스, 케이크 등 다양한 요리에 사용됩니다.</p> 
-              <p>딸기는 봄철에 주로 수확되며, 그 때 가장 맛이 좋습니다.</p> 
-              <p>또한 딸기는 그 모양과 색이 예뻐서, 음식의 장식으로도 많이 쓰입니다.</p>
+              <p>토마토는 빨간색으로 잘 알려진 과일이며, 많이 소비되고 있습니다. </p> 
+              <p>토마토는 식용으로 가장 널리 사용되며, 신선한 상태에서 </p> 
+              <p>주로 샐러드, 소스, 스무디 등 다양한 요리에 사용됩니다.</p> 
+              <p>뿐만 아니라 풍부한 비타민 C와 카로틴을 함유하고 있어 건강에도 도움이 됩니다</p> 
+              <p>더불어 토마토는 자연의 감미료로 감미료를 대체하는 데도 사용되며,</p> 
+              <p>다양한 형태로 가공되어 시장에 나와 있습니다.</p>
             </div>
             <div className="crop-image_gd2">
-              <img src="https://i.ibb.co/0ctDJ5z/01.jpg" alt="작물 사진" width="300" />
+              <img src="https://i.ibb.co/NSvvbnK/05.png" alt="작물 사진" width="300" />
             </div>
           </div>
           <div className="crop-guide_gd2">
@@ -57,4 +57,4 @@ function GuideDetail() {
   );
 }
 
-export default GuideDetail;
+export default GuideDetail5;

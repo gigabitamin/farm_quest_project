@@ -138,7 +138,7 @@ const GardeningShopIndex = () => {
     };
 
     return (
-        <div>
+        <div className="product_wraps_pw">
             <h1 className="product-top">오늘의 추천상품</h1>
             <div className="product-list">
                 {recommendedProducts.slice(0, 10).map((product, index) => (

@@ -14,6 +14,7 @@
     align-items: center;
     flex-direction: column;
     margin-top: 20px;
+    margin-bottom: 250px;
 
     padding-bottom: 30px;
   }
@@ -96,6 +97,8 @@
   margin: 10px;
   justify-content: space-between;
   cursor:default;
+  border:#a7caac dotted;
+
 }
 
 .profileName span{
@@ -111,18 +114,18 @@
   border-radius:2mm;
   cursor:default;
   box-sizing: border-box;
+  border:#cac2a7 dotted;
+
 }
 
 .profile_tag {
   margin-bottom: 10px;
 }
 
-.profileName:hover,
+/* .profileName:hover,
 .profileInfo:hover {
-  transform: scale(1.00);
-  border:#a7caac dotted;
-  
-}
+  transform: scale(1.05);
+ } */
 
 /* Delete Profile Link */
 .delete_profile {
@@ -139,6 +142,8 @@
   border: 10px ridge rgb(214, 231, 221);
   background-color: #f1f1eb;
   width: 500px;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 .profile_img_is {
@@ -198,19 +203,19 @@
   margin: 10px;
   justify-content: space-between;
   cursor:default;
-
+  border:#a7caac dotted;
 }
 
 .profileModifyInput{
   /* justify-content: end; */
-  padding:4% 4% 2% 4%;
+  padding:4%;
   background-color: rgb(197, 230, 210);
   width: 240px;
-  margin: 5px;
+  margin: 10px;
   border-radius:2mm;
   cursor:default;
   box-sizing: border-box;
-
+  border: #cac2a7 dotted;
 }
 
 .profile_tag_modify {
@@ -220,9 +225,10 @@
 
 .profile_tag input {  
   width: 100%;
-  padding: 7px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin:-2px;
 }
 
 /* File CTA */
@@ -351,6 +357,7 @@ div.profile_container_box {
   font-family: 'neodgm';
   background-color: #88ab8e;
   margin:0 auto;
+  text-align: center;
 }
 
 div.profile_container_box > div > div {
@@ -359,6 +366,7 @@ div.profile_container_box > div > div {
   border: 10px ridge rgb(214, 231, 221);
   background-color: #f1f1eb;
   width:500px;
+  margin-bottom: 150px;
 }
 
 .profile_container_box_put {
@@ -366,5 +374,33 @@ div.profile_container_box > div > div {
   background-color: #88ab8e;
   display: grid;
   place-items: center;
+
+}
+
+
+/* 사이드바 */
+
+/* Desktop styles */
+.mypage-sidebar {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border:double #699175 7px;
+  margin-right: 10px;
+  background-color: #ebe5d4;
+}
+
+.sidebar-link {
+  color: #1a1604;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+/* Mobile styles */
+
+.mypageWrap {
+  display: flex;
+  justify-content: center;
+  background-color: #88ab8e;
 
 }

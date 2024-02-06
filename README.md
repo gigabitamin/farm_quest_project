@@ -4,7 +4,7 @@
 
 ### 병합테스트 240205 1505
 
-### v0.7.2 jsh
+### v0.7.4 --
 
 
 <!-- notice -->
@@ -56,6 +56,18 @@ export default "http://localhost:8000"
 
 ====================================================
 <!-- version -->
+### v0.7.6 psh
+- header, footer, etc css 수정
+
+
+### v0.7.5 psh
+- scheduler, profile css 수정
+- header css, 구조 일부 수정 (추가수정중)
+- 가이드(북) css, idnex 구조 변경
+- 진단페이지 css 일부 수정
+
+### v0.7.4 --
+- feather, ltj Merge
 
 ### v0.7.5a kdy
 - 진단 게시판 완료 진단 사진 + 진단 요약 -> 클릭시 해당 진단번호에 맞는 진단 상세 결과 페이지

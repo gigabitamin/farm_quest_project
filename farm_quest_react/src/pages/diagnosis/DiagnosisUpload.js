@@ -81,6 +81,7 @@
 
 
         return (
+            <div id='diagnosisWrap'>
             <div className="diagnosis_ready_wrap">
                 <section className="diagnosis_ready_section_wrap">
                     <article title="title" className="diagnosis_ready_title"><h1>작물 진단</h1></article>
@@ -169,6 +170,7 @@
                     </article>
                 </section>
             </div>
+        </div>
         );
     };
 

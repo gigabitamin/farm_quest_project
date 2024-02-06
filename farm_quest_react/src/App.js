@@ -27,7 +27,7 @@ function App() {
         <Header/>
         {/* <SideNav/> */}
         <Top />
-        {/* <Footer/> */}
+        <Footer/>
         {/* <FooterJS/> */}
       {/* <div className="footer_wrap"></div>       */}
     </div>

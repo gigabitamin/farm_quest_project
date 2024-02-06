@@ -1,3 +1,11 @@
+.product_wraps_pw{
+  text-align: center;
+}
+
+.product_wraps_pw a{
+  color: #232323;
+}
+
 .product-top{
   padding-top:30px;
 }
