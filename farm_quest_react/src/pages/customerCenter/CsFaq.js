@@ -104,7 +104,7 @@ const CsFaq = ({ mainType }) => {
   
       return (
           <section class="cs_faq_section">
-              <div><h2>FAQ</h2></div>
+              <div className='cs_faq_main_top_title'><h2>FAQ</h2></div>
               <div className='cs_faq_main_top_box'>
                   <p>{title()}</p>
                   <button onClick={toCreate}>작성</button>

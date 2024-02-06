@@ -62,9 +62,9 @@ const DiagnosisAnswer = () => {
               <br />
               {diagnosisQuestions.map((question) => (
                 <div key={question.diagnosis_question_no}>
-                  <div>{question.diagnosis_question_content}</div>
+                  <div className="diagnosis_answer_q1">{question.diagnosis_question_content}</div>
                   <label>
-                    <input
+                    <input className="diagnosis_answer_a1"
                       type="radio"
                       name={`question_${question.diagnosis_question_no}`}
                       value="예"                      
@@ -81,6 +81,7 @@ const DiagnosisAnswer = () => {
                     />
                     아니오
                   </label>
+                  <p className="diagnosis_answer_a2"></p>
                 </div>
               ))}
               <br />      

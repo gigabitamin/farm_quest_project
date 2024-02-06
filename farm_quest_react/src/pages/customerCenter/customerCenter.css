@@ -31,36 +31,36 @@
     border: none;
     border-radius: 4px;
     padding: 10px 15px;
-    background-color: antiquewhite;
+    background-color: #F2F1EB;
     color: black;
     cursor: pointer;
   }
 .cs_notice:hover {
-    background-color: rgb(235, 143, 101);
+    background-color: #88AB8E;
   }
 
 .cs_faq {        
     border: none;
     border-radius: 4px;
     padding: 10px 15px;
-    background-color: antiquewhite;
+    background-color: #F2F1EB;
     color: black;
     cursor: pointer;
   }
 .cs_faq:hover {
-    background-color: rgb(235, 143, 101);
+    background-color: #88AB8E;
   }
 
 .cs_one {        
     border:none;
     border-radius: 4px;
     padding: 10px 15px;
-    background-color: antiquewhite;
+    background-color: #F2F1EB;
     color: black;
     cursor: pointer;
   }
 .cs_one:hover {
-    background-color: rgb(235, 143, 101);
+    background-color: #88AB8E;
   }
 
 .cs_content_area {
@@ -69,6 +69,7 @@
 
 
 section.cs_faq_section {    
+    padding-top: 50px;
     margin: 0 auto;
     max-width: 1280px;
 }
@@ -77,6 +78,7 @@ section.cs_notice_section {
     max-width: 1280px;
 }
 div.cs_one_wrap {    
+    padding-top: 50px;
     margin: 0 auto;
     max-width : 1280px;
 }
@@ -108,9 +110,9 @@ div.cs_one_wrap {
   }
   
   .cs_one_form_table td {
-    border: 1px solid rgb(235, 143, 101);
+    border: 1px solid #88AB8E;
     padding: 10px;
-    background-color: rgb(235, 143, 101);
+    background-color: #88AB8E;
     color : rgb(0, 0, 0);
   }
   
@@ -133,13 +135,13 @@ div.cs_one_wrap {
     border: 1px solid white;
     border-radius: 4px;
     padding: 10px 15px;
-    background-color: orange;
+    background-color: #88AB8E;
     color: white;        
     cursor: pointer;
   }
   
   .cs_one_form_table button:hover {
-    background-color: rgb(254, 198, 94);
+    background-color: #F2F1EB;
     color: black; 
   }
   
@@ -154,6 +156,7 @@ div.cs_one_wrap {
 
 article#customerCenter {
     /* position: relative; */
+    padding-top: 50px;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
@@ -179,11 +182,15 @@ div.customerCenter\_main_box {
 
 
 /****** 중앙 게시물 내부 관련 양식 ******/
+.cs_faq_main_top_title{
+    text-align: center;
+}
+
 div.cs_faq_main_top_box {    
     position: relative;
     margin: 0 auto;
     height: 40px;
-    background:rgb(235, 143, 101);
+    background:#88AB8E;
 }
 
 div.cs_faq_main_top_box p {
@@ -225,7 +232,7 @@ div.cs_faq_main_center_box {
 
 div.cs_faq_main_bottom_box {    
     margin: 0 auto;
-    background: rgb(235, 143, 101);
+    background: #88AB8E;
 }
 
 
@@ -234,7 +241,7 @@ div.cs_faq_content_box_list_item {
     padding: 3px;
     margin: 0.5% auto;
     width: 95%;
-    background: antiquewhite;
+    background: #F2F1EB;
     cursor: pointer;
     /* border-bottom: solid 1px black; */
 }
@@ -287,6 +294,7 @@ div.cs_faq_list_item_display div.nums {
 /* Notice */
 
 section.cs_notice_section {
+    padding-top: 50px;
     text-align: center;
 }
 
@@ -294,7 +302,7 @@ div.cs_notice_main_top_box {
     position: relative;
     margin: 0 auto;
     height: 40px;
-    background: rgb(235, 143, 101);
+    background: #88AB8E;
 }
 
 div.cs_notice_main_top_box p {
@@ -350,7 +358,7 @@ div.cs_notice_main_center_box {
 
 div.cs_notice_main_bottom_box {
     margin: 0 auto;
-    background: rgb(235, 143, 101);
+    background: #88AB8E;
 }
 
 
@@ -359,7 +367,7 @@ div.cs_notice_content_box_list_item {
     padding: 3px;
     margin: 0.5% auto;
     width: 95%;
-    background: rgb(255, 232, 221);
+    background: #F2F1EB;
     cursor: pointer;
 
 }
