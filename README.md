@@ -60,6 +60,7 @@ export default "http://localhost:8000"
 
 ### v0.7.9 kdy   
 - 메인 진단 페이지 링크 수정
+- 진단 추천 상품 페이지 버그 수정  
 
 ### v0.7.8 jsh  
 - 기준점
