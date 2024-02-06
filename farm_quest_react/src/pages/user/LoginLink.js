@@ -35,12 +35,12 @@ const LoginLink = ({ user }) => {
           <div className='loggedinContainer'>
             <div className="logonUserFunction">
               <button key="logout" className="logoutBtn" onClick={handleLogout}>
-                {/* <Link to="/">로그아웃</Link> */}
+                <Link to="/">로그아웃</Link>
               </button>
               <div title="회원정보로 이동" className="loginUser">            
-                {/* <Link to="./MypageMain">
+                <Link to="/">
                   {username}
-                </Link>        */}
+                </Link> 
               </div>                
             </div>
           </div>
