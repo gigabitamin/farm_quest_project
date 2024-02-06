@@ -363,11 +363,11 @@ const getRenderName = (originalCategory) => {
 };
     
     return (
-        <div id="weatherInfoViewer">
+        <div id="weatherInfoViewer" >
             <div className='locationSelectorBox'>
 
-            <div id='weatherselectbox'>
-                <div className='questionOverlayContainer wet'>
+            <div id='weatherselectbox' >
+                <div className='questionOverlayContainer wet' >
                 <h3>날씨정보</h3>
                 <CalendarOverlay tooltipText={<>선택하신 지역의 현재 날씨를 알려드립니다.
                 <br />1시부터 1시 사이에는 날씨 정보가 제공되지 않습니다.</>} />
@@ -409,7 +409,7 @@ const getRenderName = (originalCategory) => {
                 </div>
             </div>
 
-                <ul style={{ listStyleType: 'none' }}>
+                <ul style={{ listStyleType: 'none' ,marginLeft:'-40px'}}>
                 {Object.keys(weatherInfo).map((time, index) => (
                         <li key={time}>
                         <div id='printedWeatherInfo'>
