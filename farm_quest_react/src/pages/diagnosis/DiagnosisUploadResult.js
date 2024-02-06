@@ -96,8 +96,7 @@ const DiagnosisUploadResult = () => {
                                     <div>
                                         <h3>전체 부위 탐색 결과 (진단 작물 :
                                             <Link title="가이드로 이동" to={{
-                                                pathname: `/diagnosis_recomme/${obj_yolo_solution_word}`,
-                                                state: { solutionWord: obj_yolo_solution_word }
+                                                pathname: `/guide_detail6`,
                                             }}>
                                                 <span className="diagnosis_button">{yolo_plant_name}</span>
                                             </Link>)
@@ -105,12 +104,7 @@ const DiagnosisUploadResult = () => {
                                     </div>
                                     <div>진단파일명: {save_file_name}</div>
                                     <div>진단번호:
-                                        <Link title="가이드로 이동" to={{
-                                            pathname: `/diagnosis_recomme/${obj_yolo_solution_word}`,
-                                            state: { solutionWord: obj_yolo_solution_word }
-                                        }}>
-                                            <span className='diagnosis_button'>{diagnosis_result_pk}</span>
-                                        </Link>
+                                        <Link to="/diagnosis_board/main"><span className='diagnosis_button'>{diagnosis_result_pk}</span></Link>
                                     </div>
                                 </article>
 
@@ -118,7 +112,7 @@ const DiagnosisUploadResult = () => {
                                     <div className="diagnosis_result_analystic_summary_box_item">
                                         <div><h3>진단 요약
                                         </h3></div>
-                                        <div>약 {obj_result_prob} % 의 확률로 <span className='diagnosis_button_1'>{obj_result_label}</span> 일 것으로 예상됩니다</div>
+                                        <div>약 {obj_result_prob} % 의 확률로 <Link to="/Scheduler"><span className='diagnosis_button_1'>{obj_result_label}</span></Link> 일 것으로 예상됩니다</div>
 
                                         <div>
                                             솔루션 워드 :
