@@ -319,7 +319,7 @@ div.community_detail_content_box_content {
     border-radius: 4px;
     text-align: left;
     margin: 1% auto;
-    width: 98%;
+    width: auto;
     min-height: 300px;
     padding: 10px;
     background: #f7fdfcf9;
@@ -410,7 +410,7 @@ div.community_form_box {
     border-radius: 5px;
     padding: 15px 4%;
     margin: 1% auto;
-    width: 95%;
+    width: 90%;
     background: #88AB8E;
 }
 
@@ -421,7 +421,7 @@ div.community_form_box table {
 
 div.community_form_box table td {
     /* 내부 요소 위치를 지정하기위한 설정 */
-    position: relative; 
+    text-align: left;
 }
 
 div.community_form_box table th {
@@ -433,20 +433,19 @@ div.community_form_box table th {
 div.community_form_box input.title {
     font-size: 15px;
     height: 25px;
-    width: 100%;   
+    width: 96%;   
 }
 
 div.community_form_box select {
-    font-size: 12px;
-    position: absolute;
-    top: 15%;
-    left: 0;
+    font-size: 15px;
+    margin: 2px;
+    padding: 2px;
 }
 
 div.community_form_box textarea.content {
     padding: 2px;
     font-size: 12px;
-    width: 100%;
+    width: 96%; 
     height: 300px;
     resize: none;
     overflow-y: scroll;
