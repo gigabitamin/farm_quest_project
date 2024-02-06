@@ -5,28 +5,15 @@ import './DiagnosisUploadResult.css';
 
 
 const DiagnosisUploadResult = () => {
-
     const location = useLocation();
-
     const DjangoServer = useSelector(state => state.DjangoServer);
-    console.log('(location.state = ', location.state);
-
-    console.log('(location.state.file_name = ', location.state.file_name);
-
     const save_file_name = location.state.file_name.save_file_name;
     const yolo_plant_name = location.state.file_name.plant_name;
-
     const serialized_results = location.state.file_name.detect_result.serialized_results_list[0];
-    // const obj_result_label = serialized_results.names[serialized_results.boxes[0]['label']]
-    // const obj_result_prob = Number(serialized_results.boxes[0]['confidence']).toFixed(4) * 100
-
-    // const diagnosis_result_id_list = location.state.file_name.detect_result.diagnosis_result_id_list[0];
     const tf_predict_result_list_sorted = location.state.file_name.detect_result.tf_predict_result_list_sorted;
     const diagnosis_result_pk = location.state.file_name.diagnosis_result_pk
     const containerRef = useRef();
     const crops_path_list = location.state.file_name.detect_result.crops_path_list
-
-    console.log('crops_path_list', crops_path_list)
 
     let highestConfidence = 0;
     let selectedBoxIndex = -1;
@@ -35,7 +22,6 @@ const DiagnosisUploadResult = () => {
         const label = serialized_results.boxes[i]['label'];
         const confidence = Number(serialized_results.boxes[i]['confidence']);
 
-        // label이 6 이상이고 confidence가 현재까지의 최고값보다 크다면 갱신
         if (label >= 6 && confidence > highestConfidence) {
             highestConfidence = confidence;
             selectedBoxIndex = i;
@@ -55,44 +41,27 @@ const DiagnosisUploadResult = () => {
         : null;
 
 
-
-
-
-
     const navigate = useNavigate();
     const recommendClick = () => {
         navigate(`/diagnosis_recommend/${obj_yolo_solution_word}`, { solutionWord: obj_yolo_solution_word });
     };
 
-
-
-
-
-    // const solution_row_list_serialized = location.state.file_name.detect_result.solution_row_list_serialized;
-
-    // console.log(save_file_name)
-    // console.log('diagnosis_result_id_lsit = ', diagnosis_result_id_list)
-    // console.log('serialized_results = ', serialized_results)
-    // console.log(serialized_results.boxes)
-    // console.log('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
-    // console.log(tf_predict_result_list_sorted[0])
-    // console.log(tf_predict_result_list_sorted[0][0])
-    // console.log(tf_predict_result_list_sorted[0][0][1])
-    // console.log(tf_predict_result_list_sorted[0][0][4])
-    // console.log(solution_row_list_serialized)
-    // console.log(solution_row_list_serialized[0])
-    // console.log(solution_row_list_serialized[0][0])
-    // console.log(solution_row_list_serialized[0][0]['solution_word'])
-    // const firstKey = Object.keys(tf_predict_desease_list)[0];
-    // const tf_predict_desease = tf_predict_desease_list[firstKey];
+        const publicChoice = (event) => {
+            event.preventDefault();
+            const choice = event.target.querySelector('input[name="public_choice"]:checked').value;
+            if (choice === 'yes') {
+                alert('진단 결과 게시에 동의하셨습니다');
+            } else {
+                alert('진단 결과 게시에 동의하지 않으셨습니다');
+            }
+        };
+    
 
     if (serialized_results && serialized_results.boxes && tf_predict_result_list_sorted[0]) {
 
         const url = save_file_name
             ? `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${save_file_name}`
             : null;
-
-        // const file_name = save_file_name.split('.')[0];
 
         return (
             <div className="diagnosis_result_wrap">
@@ -106,16 +75,19 @@ const DiagnosisUploadResult = () => {
                             <section className="diagnosis_result_yolo_analystic_wrap">
                                     <div className='diagnosis_result_public_select'>
                                         <div>진단 결과 게시물을 커뮤니티에 공개하시는데 동의하시면 '예' 를 선택 해주세요</div>
-                                        <div>
-                                            <label>
-                                                예
-                                                <input type="radio" name="public_choice" value="yes" />
-                                            </label>
-                                            <label>
-                                                아니오
-                                                <input type="radio" name="public_choice" value="no" />
-                                            </label>
-                                        </div>
+                                        <form onSubmit={publicChoice}>
+                                            <div>
+                                                <label>
+                                                    예
+                                                    <input type="radio" name="public_choice" value="yes" />
+                                                </label>
+                                                <label>
+                                                    아니오
+                                                    <input type="radio" name="public_choice" value="no" />
+                                                </label>
+                                                <button type="submit">제출</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 <article title="info" className="diagnosis_result_analystic_info">
                                     
@@ -168,23 +140,6 @@ const DiagnosisUploadResult = () => {
                                             const confidence = Number(box.confidence).toFixed(4);
                                             const isDisease = label >= 6;
 
-                                            // const url_crops = crops_path_list[index]
-                                            // const url_crops = `${process.env.PUBLIC_URL}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg`;
-
-                                            // const modifiedPathList = crops_path_list.map(filePath => {
-                                            //     const parts = filePath.split(/\\/g);
-                                            //     const index = parts.indexOf('upload');
-                                            //     if (index !== -1) {
-                                            //       const relativePath = parts.slice(index + 1).join('/');
-                                            //       const url_crops = `http://localhost:8000/${relativePath}`;
-                                            //       return url_crops;
-                                            //     }
-                                            //     return null;
-                                            //   }).filter(url_crops => url_crops !== null);
-
-                                            // console.log('modifiedPathList)',modifiedPathList);
-
-
 
                                             if (!isDisease) {
                                                 return null;
@@ -192,26 +147,7 @@ const DiagnosisUploadResult = () => {
 
                                             const url_crops = crops_path_list[index];
 
-                                            // const url_crops = save_file_name && index > 0 ?
-                                            //     crops_path_list[index] :
-                                            //     crops_path_list[index] ;
-                                            // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index + 1}.jpg` :
-                                            // `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index + 1}.jpg` ;
-                                            // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_3/crops/고추탄저병_중기/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_3.jpg`:
-                                            // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_3/crops/고추탄저병_중기/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_32.jpg`;
-
-                                            // const url_crops = crops_path_list[index];
-
-                                            // return (
-                                            //     <div title="detect" className="diagnosis_result_detect_item" key={index}><hr />
-
-                                            //         <div className="diagnosis_result_detect_item_content">
-                                            //             <div className="diagnosis_result_predict_image">
-                                            //                 {url_crops && (<img src={url_crops} alt={`Crops_${index}`} />)}
-                                            //             </div>
-                                            //             <div className="diagnosis_result_detect_content">
-                                            //                 <div>
-                                            //                     {/* {isDisease ? (
+       
                                             return (
                                                 <div title="detect" className="diagnosis_result_detect_item" key={index}><hr />
 
@@ -220,9 +156,7 @@ const DiagnosisUploadResult = () => {
                                                             {url_crops && (<img src={url_crops} alt={`Crops_${index}`} />)}
 
                                                         </div>
-                                                        {/* {url_crops && (<img src={`${DjangoServer}/media/` + url_crops.substring(65)} alt={`Crops_${index}`} />)} */}
-                                                        {/* {console.log('패스', `${DjangoServer}/media/` + url_crops.substring(65), `alt=Crops_${index}`)} */}
-                                                        {/* {console.log('패스2', url_crops, `alt=Crops_${index}`)}) */}
+                      
                                                         <div className="diagnosis_result_detect_content">
                                                             <div>
                                                                 {/* {isDisease ? (
@@ -252,13 +186,11 @@ const DiagnosisUploadResult = () => {
                                     {Number(tf_predict_result_list_sorted[0][0][4] * 100) <= 30 ? (
                                         <div>죄송합니다 예상되는 정보를 찾을 수 없습니다</div>
                                     ) : (
-                                        <>
-                                            {/* 30 이상일 때의 출력 */}
-                                            {/* <div className="diagnosis_result_partial_predict_plant">진단 작물 : {tf_predict_result_list_sorted[0][0][1]}</div> */}
+                                        <>                                            
                                             <div className="diagnosis_result_partial_predict_disease">
                                                 {(Number(tf_predict_result_list_sorted[0][0][4] * 100)).toFixed(2)} % 의 확률로 <span className='diagnosis_button_1'>({tf_predict_result_list_sorted[0][0][3]})</span> 일 것으로 예상됩니다
                                             </div>
-                                            {/* <div className="diagnosis_result_partial_prob">예측 확률 : {(Number(tf_predict_result_list_sorted[0][0][4] * 100)).toFixed(2) } %</div> */}
+                                           
                                         </>
                                     )}
                                 </article>

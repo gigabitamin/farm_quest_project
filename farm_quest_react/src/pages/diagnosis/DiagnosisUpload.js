@@ -142,12 +142,6 @@ const DiagnosisUpload = () => {
                                                 <div key={plant.plant_no} className="diagnosis_choice_map_one">
                                                     <label>
                                                         <div className="diagnosis_choice_select_box">
-                                                            {/* <input
-                                                                type="radio"
-                                                                name="choice_plant"
-                                                                value={plant.plant_no}
-                                                                onChange={handlePlantChange}
-                                                            />  */}
                                                             <div>
                                                                 <img
                                                                     src={plant.plant_main_img}

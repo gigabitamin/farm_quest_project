@@ -4,8 +4,6 @@ import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './DiagnosisRecommend.css';
-// import DjangoServer from '../../DjangoServer'
-
 
 const DiagnosisRecommend = () => {
     const DjangoServer = useSelector(state => state.DjangoServer);
@@ -16,11 +14,8 @@ const DiagnosisRecommend = () => {
     const [selectedItems, setSelectedItems] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
-    const containerRef = useRef();
-    console.log('selectedItems', selectedItems)
-    const diagnosisItemCartList = selectedItems.map(item => item?.shoping_tb_no);
-    ;
-
+    const containerRef = useRef();    
+    const diagnosisItemCartList = selectedItems.map(item => item?.shoping_tb_no);    
     const diagnosisItemCartListJSON = JSON.stringify(diagnosisItemCartList);
     const [diagnosisItemCartId, setDiagnosisItemCartId] = useState(null);
     const [diagnosisItemCart, setDiagnosisItemCart] = useState(null);
@@ -56,18 +51,13 @@ const DiagnosisRecommend = () => {
 
     const handleLoadButtonClick = async () => {
         try {
-            // 불러오기 버튼을 눌렀을 때 API에서 데이터를 받아옴
             const response = await axios.get(`${DjangoServer}/diagnosis_load_cart/?diagnosis_item_cart_id=${diagnosisItemCartId}`);
-
-            // 받아온 데이터를 selectedItems 상태로 설정
             setSelectedItems(response.data);
         } catch (error) {
             console.error('데이터 불러오기 에러:', error);
             alert('데이터 불러오기에 실패했습니다.');
         }
     };
-
-
 
 
     const saveDiagnosisItemCart = async () => {
@@ -87,17 +77,7 @@ const DiagnosisRecommend = () => {
             console.error('에러났다:', error);
             alert('삐삐에러발생');
         }
-    };
-    console.log('diagnosis_item_cart_id = ', diagnosisItemCartId);
-
-
-
-    // useEffect(() => {
-    //     const savedItems = cookies.selectedItems;
-    //     if (savedItems) {
-    //         setSelectedItems(savedItems);
-    //     }
-    // }, [cookies.selectedItems]);
+    };    
 
     useEffect(() => {
         const savedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
@@ -156,7 +136,6 @@ const DiagnosisRecommend = () => {
                 ? prevItems.filter(item => item !== recommendations[index])
                 : [...prevItems, recommendations[index]];
 
-            // setCookie('selectedItems', updatedItems, { path: '/' });
             updateLocalStorage(updatedItems);
 
             return updatedItems;
@@ -168,7 +147,6 @@ const DiagnosisRecommend = () => {
             const selectedItem = selectedItems[index];
             const updatedItems = prevItems.filter(item => item !== selectedItem);
 
-            // setCookie('selectedItems', updatedItems, { path: '/' });
             updateLocalStorage(updatedItems);
 
             return updatedItems;
@@ -196,19 +174,9 @@ const DiagnosisRecommend = () => {
         try {
             const response = await axios.get(`${DjangoServer}/api/recommended_products/${user_id}`);
             setRecommendedProducts(response.data);
-        } catch (error) {
-            console.error("Error fetchin    g recommended products: ", error);
+        } catch (error) {            
         }
     };
-
-
-
-
-
-    // console.log('cookie = ', cookies)
-    // console.log("cart_list = ", cartList)    
-    // console.log("localStorage = ", localStorage)
-    console.log('diagnosisItemCart = ', diagnosisItemCart)
 
 
     return (
@@ -268,7 +236,7 @@ const DiagnosisRecommend = () => {
 
                     <div className="diagnosis_recommend_section_2_content_1" ref={containerRef}>
                         {cookies.user ? (
-                            // 사용자가 로그인한 경우, recommendedProducts.map을 사용
+
                             recommendedProducts.map((recommend, index) => (
                                 <div key={index} className="diagnosis_recommend_section_2_content_1_1">
                                     <div className="diagnosis_recommend_section_2_content_1_1_1">
@@ -302,7 +270,7 @@ const DiagnosisRecommend = () => {
                                 </div>
                             ))
                         ) : (
-                            // 사용자가 로그인하지 않은 경우, recommendations.map을 사용
+
                             recommendations.map((recommend, index) => (
                                 <div key={index} className="diagnosis_recommend_section_2_content_1_1">
                                     <div className="diagnosis_recommend_section_2_content_1_1_1">

@@ -154,50 +154,13 @@ const DiagnosisUploadResult = () => {
                                             const confidence = Number(box.confidence).toFixed(4);
                                             const isDisease = label >= 6;
 
-                                            // const url_crops = crops_path_list[index]
-                                            // const url_crops = `${process.env.PUBLIC_URL}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}.jpg`;
-
-                                            // const modifiedPathList = crops_path_list.map(filePath => {
-                                            //     const parts = filePath.split(/\\/g);
-                                            //     const index = parts.indexOf('upload');
-                                            //     if (index !== -1) {
-                                            //       const relativePath = parts.slice(index + 1).join('/');
-                                            //       const url_crops = `http://localhost:8000/${relativePath}`;
-                                            //       return url_crops;
-                                            //     }
-                                            //     return null;
-                                            //   }).filter(url_crops => url_crops !== null);
-
-                                            // console.log('modifiedPathList)',modifiedPathList);
-
-
-
+      
                                             if (!isDisease) {
                                                 return null;
                                             }
 
                                             const url_crops = crops_path_list[index];
 
-                                            // const url_crops = save_file_name && index > 0 ?
-                                            //     crops_path_list[index] :
-                                            //     crops_path_list[index] ;
-                                            // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index + 1}.jpg` :
-                                            // `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${file_name}/crops/${labelName}/${file_name}${index + 1}.jpg` ;
-                                            // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_3/crops/고추탄저병_중기/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_3.jpg`:
-                                            // `http://localhost:8000/media/diagnosis/yolo/origin_img/result_img/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_3/crops/고추탄저병_중기/f703b8eee4074a678b99c7bfc33a2e81_고추병충해탄저병_32.jpg`;
-
-                                            // const url_crops = crops_path_list[index];
-
-                                            // return (
-                                            //     <div title="detect" className="diagnosis_result_detect_item" key={index}><hr />
-
-                                            //         <div className="diagnosis_result_detect_item_content">
-                                            //             <div className="diagnosis_result_predict_image">
-                                            //                 {url_crops && (<img src={url_crops} alt={`Crops_${index}`} />)}
-                                            //             </div>
-                                            //             <div className="diagnosis_result_detect_content">
-                                            //                 <div>
-                                            //                     {/* {isDisease ? (
                                             return (
                                                 <div title="detect" className="diagnosis_result_detect_item" key={index}><hr />
 
@@ -206,9 +169,7 @@ const DiagnosisUploadResult = () => {
                                                             {url_crops && (<img src={url_crops} alt={`Crops_${index}`} />)}
 
                                                         </div>
-                                                        {/* {url_crops && (<img src={`${DjangoServer}/media/` + url_crops.substring(65)} alt={`Crops_${index}`} />)} */}
-                                                        {/* {console.log('패스', `${DjangoServer}/media/` + url_crops.substring(65), `alt=Crops_${index}`)} */}
-                                                        {/* {console.log('패스2', url_crops, `alt=Crops_${index}`)}) */}
+                              
                                                         <div className="diagnosis_result_detect_content">
                                                             <div>
                                                                 {/* {isDisease ? (
@@ -239,12 +200,9 @@ const DiagnosisUploadResult = () => {
                                         <div>죄송합니다 예상되는 정보를 찾을 수 없습니다</div>
                                     ) : (
                                         <>
-                                            {/* 30 이상일 때의 출력 */}
-                                            {/* <div className="diagnosis_result_partial_predict_plant">진단 작물 : {tf_predict_result_list_sorted[0][0][1]}</div> */}
                                             <div className="diagnosis_result_partial_predict_disease">
                                                 {(Number(tf_predict_result_list_sorted[0][0][4] * 100)).toFixed(2)} % 의 확률로 <span className='diagnosis_button_1'>({tf_predict_result_list_sorted[0][0][3]})</span> 일 것으로 예상됩니다
-                                            </div>
-                                            {/* <div className="diagnosis_result_partial_prob">예측 확률 : {(Number(tf_predict_result_list_sorted[0][0][4] * 100)).toFixed(2) } %</div> */}
+                                            </div>                                          
                                         </>
                                     )}
                                 </article>

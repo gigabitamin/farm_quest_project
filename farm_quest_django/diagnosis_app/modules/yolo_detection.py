@@ -224,10 +224,7 @@ def detect(save_file_path, plant_name, user_select_plant):
         if not os.path.exists(serialized_results_path):
             os.makedirs(serialized_results_path)
         # print(plant_name)
-            
-        # model.info()
-        # print('모델 클래스 개수 : ', len(model.names))        
-        # print('모델 클래스 이름 : ', model.names)
+
 
         # 예측
         results = yolo_model.predict(
@@ -269,38 +266,23 @@ def detect(save_file_path, plant_name, user_select_plant):
         # 예측 결과 이미지 서버 media/result_img 에 저장
         
         for result in results:
-            print('되냐')
+
             im_array = result.plot()
             im = Image.fromarray(im_array[..., ::-1])
             # im.show()
             result_path = os.path.join(project_path, os.path.basename(save_file_path))
             # print('result_path', result_path)
             im.save(result_path)
-            # print('저장 완료')
-            # print('result 추출 : ', result)
+
             sr_result, serialized_boxes = yolo_results(result, user_select_plant, disease_dict, disease_codes, disease_names, disease_items, yolo_class)
             # print('sr_result : ', sr_result)
             serialized_results_lists.append(sr_result)
-            
-            print('되냐고')
-        
-        # save_to_json(serialized_results_list, serialized_results_file_path)
-        # print('serialized_results_list[0] = ', serialized_results_list[0])
+   
 
         serialized_results_list = yolo_solution_service(serialized_results_lists)
-        # print('serialized_results_list : ', serialized_results_list)
-        # print('뭐야')
+
         with open(serialized_results_file_path, 'w') as file:
             json.dump(serialized_results_list[0], file, indent=2)
-            print('json 저장완료')
-                
-        # diagnosis_result_id_list = save_results_to_database(serialized_results_list)
-        # print('diagnosis_result_id_list : ', diagnosis_result_id_list)
-        # print('\njson db 저장완료\n')
-        
-        # print('serialized_results_list : ', serialized_results_list)
-                   
-        print('test ex')
 
         if len(serialized_boxes) > 0 :
             tf_predict_disease_list, crops_path_lists = tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, disease_dict, disease_names, disease_codes)
@@ -308,15 +290,13 @@ def detect(save_file_path, plant_name, user_select_plant):
         
         tf_predict_result_list_sorted = tf_solution_service(tf_predict_disease_list)
         
-        print('crops_path_list 미디어', crops_path_lists)        
 
 
         for path in crops_path_lists:
             modified_path = f'{DjangoServer}/media/{Path(path).as_posix().split("media/", 1)[-1]}'
             crops_path_list.append(modified_path)        
         
-        print('crops_path_list 미디어', crops_path_list)
-                                                            
+                                                
     except Exception as e:
         print(f"Error: {e}")
         
@@ -327,8 +307,7 @@ def detect(save_file_path, plant_name, user_select_plant):
                'serialized_results_list': serialized_results_list,                
                'tf_predict_result_list_sorted': tf_predict_result_list_sorted,            
     }
-    print ('전송')
-            
+
     return detect_result    
 
 
@@ -337,13 +316,11 @@ def yolo_results(results, user_select_plant, disease_dict, disease_names, diseas
     disease_codes_list = []
     serialized_boxes = []
     
-    # print('sr 없냐')
+
     if results:
-        # print('sr 진짜 없냐')
-            
+
         for result in results:
-            # print('sr 진짜 진짜 없냐')
-            
+  
             confidence_values = result.boxes.conf.tolist() if hasattr(result.boxes, 'conf') else None
             label_values = result.boxes.cls.tolist() if hasattr(result.boxes, 'cls') else None
             xyxy_values = result.boxes.xyxy.tolist() if hasattr(result.boxes, 'xyxy') else None
@@ -359,9 +336,9 @@ def yolo_results(results, user_select_plant, disease_dict, disease_names, diseas
                 except ValueError:
                     pass                
                 
-                # print('label_value', label_value)        
+   
                 class_name = yolo_class[label_value]
-                # print('class_name', class_name)
+
                 if '_' in class_name:
                     class_name = class_name.split('_')[0]                
                 else:
@@ -398,15 +375,9 @@ def yolo_results(results, user_select_plant, disease_dict, disease_names, diseas
                     'scores': scores_values,
                     'labels': labels_values,
                 })
-            # print('serialized_keypoints : ', serialized_keypoints)
-
+  
         print('데이타')
-        
-        # 'orig_img'를 Base64로 인코딩하여 추가
-        # orig_img_base64 = None
-        # if results and hasattr(results[0], 'orig_img') and results[0].orig_img is not None:
-        #     orig_img_base64 = base64.b64encode(results[0].orig_img.tobytes()).decode('utf-8')
-        
+
         serializable_data = {
             # 'diagnosis_result_id':diagnosis_result_id,
             'user_select_plant':user_select_plant,
@@ -508,8 +479,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
     if serialized_results_list[0]['boxes']:
         box = serialized_results_list[0]['boxes'] 
         print(len(box))
-    
-    # print('3',box)
+
         
     if len(box) > 0:
         label_key = int(box[0]['label'][0])
@@ -521,13 +491,11 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         conf = box[0]['confidence']
         # print('7', conf)
         label = names[label_key]
-        print('8', label)
-                
-        print('에라이1')
+
         path_dir = os.path.dirname(path_origin)
-        print('에라이2')
+
         path_file = os.path.basename(path_origin)        
-        print('에라이3')
+
         file_name, file_extension = os.path.splitext(path_file)                
         # result_path = 'result_img'
         # crops_folder = 'crops'
@@ -542,8 +510,6 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
             if crops_path.split(os.sep)[-2] not in plant:
                 crops_path_list.append(crops_path)
         print('crops_path_list', crops_path_list)
-                
-    # print('plant_name', plant_name)
 
     image_size_x = 512
     image_size_y = 512
@@ -564,9 +530,7 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         tf_model = load_model('tf_model/tomato.keras')
     elif plant_name == '파프리카':
         tf_model = load_model('tf_model/paprika.keras')
-    print('에라이9')
-    # model.summary()
-    # print('test 1')
+
 
     if len(box) > 0:            
         for fname in crops_path_list:
@@ -581,26 +545,17 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         X_t.append(data)
     
     X_t = np.array(X_t)
-    
-    # print('X_t', X_t)
-    # print('Y_t', Y_t)
             
     if len(X_t) > 0:
         pred_prob = tf_model.predict(X_t)  
                     
-    # print('pred_prob = ', pred_prob)
-        
+    
     if len(pred_prob) > 0:
         for pred in pred_prob[0]:
-            # print('오우야')
             disease_predict_prob = [float(number.replace(',', '')) for number in str(pred).strip('[]').split()]
             disease_predict_probability.append(disease_predict_prob[0])
 
-    # print('disease_predict_probability', disease_predict_probability)
 
-    # disease_code = []
-    # disease_name = []
-    
     for dc, dn, dp in zip(disease_codes, disease_names, disease_predict_probability):
         tf_disease_predict_list.append([user_select_plant, plant_name, dc, dn, dp])
                 
@@ -609,29 +564,19 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
 
 def tf_solution_service(tf_predict_disease_list):  
     solution_row_list = []
-    # solution_row_list_serialized = []
-    # print('len = ', len(tf_predict_desease_list_sorted))
-    
+
     for i in range(len(tf_predict_disease_list)):
         plant_no = tf_predict_disease_list[i][0]
         disease_code = tf_predict_disease_list[i][2]
+            
+        if disease_code != '0':            
+            solution_row = SolutionTb.objects.filter(Q(disease_code__contains=disease_code) & Q(plant_no__contains=plant_no))            
+            serializer = SolutionTbSerializer(solution_row, many=True)            
+            serialized_data = serializer.data            
+            solution_row_list.append(serialized_data)    
     
-        # print('disease_code = ', disease_code)
-        if disease_code != '0':
-            # solution_row = SolutionTb.objects.filter(Q(disease_code__contains=disease_code))            
-            solution_row = SolutionTb.objects.filter(Q(disease_code__contains=disease_code) & Q(plant_no__contains=plant_no))
-            # print('solution_row', solution_row)
-            serializer = SolutionTbSerializer(solution_row, many=True)
-            # print('serializer', serializer)
-            serialized_data = serializer.data
-            # print('serialized_data', serialized_data)
-            solution_row_list.append(serialized_data)
-    # print('solution_row_list = ', solution_row_list)
-    
-    tf_predict_result_list = [[dl, sl[0]] for dl, sl in zip(tf_predict_disease_list, solution_row_list)]    
-    # print('tf_predict_result_list = ', tf_predict_result_list)
-    tf_predict_result_list_sorted = sorted(tf_predict_result_list, key=lambda x: x[0][4], reverse=True)    
-    # print('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
+    tf_predict_result_list = [[dl, sl[0]] for dl, sl in zip(tf_predict_disease_list, solution_row_list)]        
+    tf_predict_result_list_sorted = sorted(tf_predict_result_list, key=lambda x: x[0][4], reverse=True)        
     
     return tf_predict_result_list_sorted
 
