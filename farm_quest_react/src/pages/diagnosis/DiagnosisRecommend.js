@@ -17,7 +17,9 @@ const DiagnosisRecommend = () => {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const containerRef = useRef();
+    console.log('selectedItems', selectedItems)
     const diagnosisItemCartList = selectedItems.map(item => item.shoping_tb_no);
+    
     const diagnosisItemCartListJSON = JSON.stringify(diagnosisItemCartList);
     const [diagnosisItemCartId, setDiagnosisItemCartId] = useState(null);
     const [diagnosisItemCart, setDiagnosisItemCart] = useState(null);

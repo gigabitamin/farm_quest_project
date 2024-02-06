@@ -42,7 +42,6 @@ const SchedulerFilter = ({ onFetchedDataChange }) => {
 
   };
   
-
   useEffect(() => {
     if (selectedPlant !== null) {
       const plantNo = plantNameToNoMapping[selectedPlant];
