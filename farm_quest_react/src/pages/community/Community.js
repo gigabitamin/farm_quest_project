@@ -22,7 +22,7 @@ const Community = () => {
     }, [mainType]);
 
     return (
-        <article id="community">
+        <article id="community" className='communityBox_ltj'>
             <CommunityLeft setMainType={setMainType} />
             <div className='community_main_box'>
                 { (show === 'main') && <CommunityMain mainType={mainType} /> }

@@ -1,3 +1,6 @@
+.communityBox_ltj{
+    padding-top: 50px;
+}
 
 article#community {
     /* flex 왤캐 헷갈리냐 */
@@ -19,7 +22,7 @@ div.community_back_button {
 
 div.community_back_button button {
     border-radius: 50%;
-    background-color: #a8d1b0db;
+    background-color: #F2F1EB;
     width: 40px;
     height: 40px;
     margin-top: 10px;
@@ -34,14 +37,14 @@ div.community_back_button img {
 
 button.community_button_default {
     border-radius: 5px;
-    background-color: #a8d1b0db;
+    background-color: #F2F1EB;
     width: 40px;
     height: 30px;
 }
 
 button.community_mini_button {
     border-radius: 5px;
-    background-color: #adb6afdb;
+    background-color: #88AB8E;
     width: 35px;
     height: 18px;
 }
@@ -58,11 +61,11 @@ div.community_main_box {
 /****** 좌우 게시물 관련 양식 ******/
 aside#community_left_menu, aside#community_right_menu {
     display: flex;
-    background: #9ab195;
+    background: #88AB8E;
 }
 
 div.community_left_box, div.community_right_box {
-    background: #dbe4dc;
+    background: #F2F1EB;
     /* 이미지로 대체될 예정? */
     text-align: center;
     cursor: pointer;
@@ -139,7 +142,7 @@ div.community_main_top_box {
     margin: 0 auto;
     width: 98%;
     height: 50px;
-    background: #adb6afdb;
+    background: #88AB8E;
 }
 
 div.community_main_top_box p {
@@ -164,7 +167,7 @@ div.community_main_column_box div.community_list_item_display {
 div.community_main_column_box div.community_list_item_display div {
     border-radius: 6px;
     margin: 1px;
-    background: #adb6afdb;
+    background: #88AB8E;
     height: 25px;
     line-height: 25px;
     font-size: 16px;
@@ -188,7 +191,7 @@ div.community_main_bottom_box {
     padding: 3px;
     width: 98%;
     margin: 0 auto;
-    background: #adb6afdb;
+    background: #88AB8E;
 }
 
 
@@ -198,7 +201,7 @@ div.community_content_box_list_item {
     padding: 3px;
     margin: 0.5% auto;
     width: 95%;
-    background: #dbe6dd;
+    background: #F2F1EB;
     cursor: pointer;
     /* border-bottom: solid 1px black; */
 }
@@ -216,16 +219,16 @@ div.community_list_item_display div {
 div.community_list_item_display div.thread_no {
     border-left: none;
     width: 50px;
-    font-size: 13px;
+    font-size: 17px;
 }
 
 div.community_list_item_display div.thread_type {
     width: 60px;
-    font-size: 13px;
+    font-size: 17px;
 }
 
 div.community_list_item_display div.thread_title {
-    font-size: 13px;
+    font-size: 17px !important;
     flex: 1 1 0;
     padding: 0 5px;
     text-align: left;
@@ -240,7 +243,7 @@ div.community_list_item_display div.nickname {
 
 div.community_list_item_display div.nums {
     width: 60px;
-    font-size: 13px;
+    font-size: 17px;
 }
 
 
@@ -404,7 +407,7 @@ div.community_form_box {
     padding: 15px 4%;
     margin: 1% auto;
     width: 95%;
-    background: #adb6afdb;
+    background: #88AB8E;
 }
 
 div.community_form_box table {

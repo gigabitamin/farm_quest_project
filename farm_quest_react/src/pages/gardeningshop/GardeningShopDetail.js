@@ -76,22 +76,25 @@ const GardeningShopDetail = () => {
                 <h3 className="reviews-title">리뷰</h3>
                 {/* 로그인 상태에 따른 리뷰 작성 폼 표시 */}
                 {isLoggedIn && (
-                    <div>
-                        <h3>Write a Review</h3>
+                    <div class="my-review-container">
+                        <h3 class="my-review-title">리뷰 작성하기</h3>
                         <textarea
+                            class="my-review-textarea"
                             value={newReviewContent}
                             onChange={(e) => setNewReviewContent(e.target.value)}
-                            placeholder="Review content"
+                            placeholder="내용"
                         />
                         <input
                             type="number"
+                            class="my-review-rating"
                             value={newReviewRank}
                             onChange={(e) => setNewReviewRank(e.target.value)}
                             min="1" max="5"
                             placeholder="Rating (1-5)"
                         />
-                        <button onClick={submitReview}>Submit Review</button>
+                        <button class="my-review-button" onClick={submitReview}>작성</button>
                     </div>
+
                 )}
                 {reviews.map((review, index) => (
                     <div key={index} className="review-item">
