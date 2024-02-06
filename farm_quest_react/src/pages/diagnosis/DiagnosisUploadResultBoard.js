@@ -95,32 +95,34 @@ const DiagnosisUploadResult = () => {
                                 <article title="info" className="diagnosis_result_analystic_info">
                                     <div>
                                         <h3>전체 부위 탐색 결과 (진단 작물 :
-                                            <Link title="가이드로 이동" to={{
-                                                pathname: `/diagnosis_recomme/${obj_yolo_solution_word}`,
-                                                state: { solutionWord: obj_yolo_solution_word }
-                                            }}>
+                                            <Link title="가이드로 이동" to="/guide_detail6">
                                                 <span className="diagnosis_button">{yolo_plant_name}</span>
                                             </Link>)
                                         </h3>
                                     </div>
                                     <div>진단파일명: {save_file_name}</div>
                                     <div>진단번호:
-                                        <Link title="가이드로 이동" to={{
-                                            pathname: `/diagnosis_recomme/${obj_yolo_solution_word}`,
-                                            state: { solutionWord: obj_yolo_solution_word }
-                                        }}>
+                                        <Link title="진단 게시판으로 이동" to="/diagnosis_board">
                                             <span className='diagnosis_button'>{diagnosis_result_pk}</span>
-                                        </Link>                                        
-                                    </div>     
-                                    <span>진단날짜:{location.state.file_name.diagnosis_create_time}</span>                           
+                                        </Link>
+                                    </div>
+                                    <span>진단날짜:{location.state.file_name.diagnosis_create_time}</span>
                                 </article>
 
                                 <article title="summary" className="diagnosis_result_analystic_summary_box">
                                     <div className="diagnosis_result_analystic_summary_box_item">
                                         <div><h3>진단 요약
                                         </h3></div>
-                                        <div>약 {obj_result_prob} % 의 확률로 <span className='diagnosis_button_1'>{obj_result_label}</span> 일 것으로 예상됩니다</div>
-
+                                        <div>약 {obj_result_prob}  % 의 확률로
+                                            <span className='diagnosis_button_1'>
+                                                <Link title="스케쥴러" to={{
+                                                    pathname: '/Scheduler'
+                                                }}>
+                                                    {obj_result_label}
+                                                </Link>
+                                            </span>
+                                            일 것으로 예상됩니다
+                                        </div>
                                         <div>
                                             솔루션 워드 :
                                             <Link title="상품추천으로 이동" to={{
