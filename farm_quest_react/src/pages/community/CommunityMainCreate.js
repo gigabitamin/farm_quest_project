@@ -30,6 +30,7 @@ const CommunityMainCreate = () => {
     };
 
     const submitForm = (event) => {
+        event.preventDefault();
         let check = true
         if (form.thread_title === '') {
             alert('제목을 입력하세요.');
@@ -45,12 +46,11 @@ const CommunityMainCreate = () => {
                 headers: { Authorization: `Token  ${cookies.id}` }
             }).then(() => {
                     alert("등록되었습니다.");
+                    backToMain();
                     // dispatch({type: 'back'});
             }).catch(() => {
                 alert('잘못된 접근입니다.');
             });
-        } else {
-            event.preventDefault();
         };
     };
 
