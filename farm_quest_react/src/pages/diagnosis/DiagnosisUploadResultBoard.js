@@ -102,7 +102,7 @@ const DiagnosisUploadResult = () => {
                                     </div>
                                     <div>진단파일명: {save_file_name}</div>
                                     <div>진단번호:
-                                        <Link title="진단 게시판으로 이동" to="/diagnosis_board">
+                                        <Link title="진단 게시판으로 이동" to="/diagnosis_board/main">
                                             <span className='diagnosis_button'>{diagnosis_result_pk}</span>
                                         </Link>
                                     </div>

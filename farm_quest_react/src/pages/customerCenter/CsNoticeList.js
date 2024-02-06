@@ -21,8 +21,7 @@ const CommunityMainList = ({ item }) => {
                                 {isExpanded && (
                                     <div class="cs_notice_content_item">
                                         <div>{item.cs_notice_content}</div>
-                                        <img className="diagnosis_upload_image_content_img" src={item.cs_notice_img} alt="진단할 작물"/>
-                                        {/* <div className="cs_notice_img"><img src={item.cs_notice_img}  alt="개발UI"/></div> */}
+                                        {/* <img className="diagnosis_upload_image_content_img" src={item.cs_notice_img} alt="진단할 작물"/> */} 
                                     </div>                                    
                                 )}
                             </div>

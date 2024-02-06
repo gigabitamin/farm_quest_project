@@ -61,6 +61,7 @@ const DiagnosisBoardMainList = ({ item }) => {
                     <span>{obj_result_prob}% | </span>
                     <span>솔루션 워드({obj_yolo_solution_word}) | </span>
                     <span>{item.diagnosis_create_time} | </span>
+                    <span className="result_span_last">즐겨찾기</span>
                 </div>
             </div>
         </div>

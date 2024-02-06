@@ -3,10 +3,24 @@ article.diagnosisBoard_wrap {
     text-align: center;
     margin: 0 auto;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
 }
 
 
-div.thread_title {
+div.thread_title_d {
     font-size: 3vh !important;
+}
+
+section.diagnosis_result_board_wrap {
+    margin: 0 auto;
+    max-width: 720px;
+}
+
+
+.diagnosis_result_analystic_image {
+    max-width: 720px;
+}
+
+.diagnosis_result_analystic_image_img {
+    width: 100%;
 }

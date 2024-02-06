@@ -107,7 +107,7 @@ const CsMain = ({ mainType }) => {
             <div><h2>공지사항</h2></div>
             <div className='cs_notice_main_top_box'>
                 <p>{title()}</p>
-                <button onClick={toCreate}>작성</button>
+                {/* <button onClick={toCreate}>작성</button> */}
             </div>
             <div className='cs_notice_main_column_box'>
                 <div className="cs_notice_list_item_display">
