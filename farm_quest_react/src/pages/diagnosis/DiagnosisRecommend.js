@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -216,7 +216,7 @@ const DiagnosisRecommend = () => {
                     <div className="diagnosis_recommend_section_1_title_cart">
                         <div>No.{diagnosisItemCartId}</div>
                         <div onClick={handleDeleteButtonClick}>삭제</div>
-                        <div>장바구니 찜 목록</div>
+                        <Link to="/gardening_shop_index"><div>장바구니 찜 목록</div></Link>
                         <div onClick={saveDiagnosisItemCart}>저장</div>
                         <div onClick={handleLoadButtonClick}>불러오기</div>
                     </div>
