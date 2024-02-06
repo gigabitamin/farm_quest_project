@@ -7,191 +7,192 @@
 }
 
 .register-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-section {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.register-article {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-wrap {
+  text-align: center;
+}
+
+#register_form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.register-article h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.register-article>div {
+  margin-bottom: 15px;
+}
+
+.register-article label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.register-article input[type="text"],
+.register-article input[type="email"],
+.register-article input[type="password"] {
+  width: 100%;
+}
+
+.register-article input[type="submit"] {
+  background-color: rgb(43, 139, 158);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.register-article input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Login.css */
+.login-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-section {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.login-article {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-wrap {
+  text-align: center;
+}
+
+#login_form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.login-article h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.login-article>div {
+  margin-bottom: 15px;
+}
+
+.login-article label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.login-article input[type="text"],
+.login-article input[type="password"] {
+  width: 100%;
+}
+
+.login-article input[type="submit"] {
+  background-color: rgb(43, 139, 158);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-article input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.login-content {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.login-buttons button {
+  margin-right: 10px;
+}
+
+/* 반응형 */
+@media (max-width: 999px) {
+  .container {
+    margin: 10px;
   }
-  
-  .register-section {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-  }
-  
-  .register-article {
-    background-color: #f8f8f8;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .register-wrap {
-    text-align: center;
-  }
-  
-  #register_form {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .register-article h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .register-article > div {
-    margin-bottom: 15px;
-  }
-  
-  .register-article label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5px;
-  }
-  
-  .register-article input[type="text"],
-  .register-article input[type="email"],
-  .register-article input[type="password"] {
-    width: 100%;
-  }
-  
-  .register-article input[type="submit"] {
-    background-color: rgb(43, 139, 158);
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .register-article input[type="submit"]:hover {
-    background-color: #45a049;
-  }
-  
-  /* Login.css */
-  .login-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .login-section {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-  }
-  
-  .login-article {
-    background-color: #f8f8f8;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .login-wrap {
-    text-align: center;
-  }
-  
-  #login_form {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .login-article h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .login-article > div {
-    margin-bottom: 15px;
-  }
-  
-  .login-article label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5px;
-  }
-  
-  .login-article input[type="text"],
-  .login-article input[type="password"] {
-    width: 100%;
-  }
-  
-  .login-article input[type="submit"] {
-    background-color: rgb(43, 139, 158);
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .login-article input[type="submit"]:hover {
-    background-color: #45a049;
-  }
-  
-  .login-content {
-    text-align: center;
+
+  .profile-img {
     margin-top: 20px;
   }
-  
-  .login-buttons {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .login-buttons button {
-    margin-right: 10px;
-  }
+}
 
-  /* 반응형 */
-  @media (max-width: 999px) {
-    .container {
-      margin: 10px;
-    }
-  
-    .profile-img {
-      margin-top: 20px;
-    }
-  }
+.logoutBtn {
+  border: groove rgb(230, 230, 230);
+  border-radius: 4px;
+  margin-top: -25px;
+  padding: 2px;
+  background-color: #ffffff;
+  color:black;
+  cursor: pointer;
+  padding-right: 10px;
+}
 
-  .logoutBtn {
-    border: groove rgb(230, 230, 230);
-    border-radius: 4px;
-    margin-top:-25px;
-    padding: 2px;
-    background-color: #ffffff;    
-    cursor: pointer;
-    padding-right: 10px;
-  }
+.logonUserFunction {
+  text-align: center;
 
-  .logonUserFunction {
-    text-align: right;
+}
 
-  }
-
-  .logoutBtn:hover {
-    background-color: white;
-    color: red;
-  }
+.logoutBtn:hover {
+  background-color: white;
+  color: red;
+}
 
 
 div.loginUser {
-    border: groove rgb(133, 201, 136);
-    border-radius: 4px;
-    margin-top:4px;
-    padding: 4px;
-    background-color: #4f8959;    
-    cursor: pointer;
+  border: groove rgb(133, 201, 136);
+  border-radius: 4px;
+  margin-top: 4px;
+  padding: 4px;
+  background-color: #4f8959;
+  cursor: pointer;
 }
 
 div.loginUser:hover {
-    background-color: #aa7940;
-    transform: scale(1.05);
+  background-color: #aa7940;
+  transform: scale(1.05);
 
 }
 
@@ -202,9 +203,10 @@ div.loginUser:active {
 }
 
 div.loginBox_hd {
-    display: flex;
-    flex-direction: space-between;
+  display: flex;
+  flex-direction: space-between;
 }
+
 .flexContainer {
   display: flex;
   flex-direction: row;
@@ -213,8 +215,8 @@ div.loginBox_hd {
 .logonUserNotice {
   width: 30px;
   position: relative;
-  top:11px;
-  right:3px;
+  top: 11px;
+  right: 3px;
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -225,80 +227,85 @@ div.loginBox_hd {
 
 
 div.resister {
-    border:2px outset rgb(219, 219, 219);
-    background-color: #c7a430;
-    color: #25146e;
-    border-radius: 2px;
-    font-size: 0.5em;
-    margin-bottom:0.6em;
-    font-size: 14px;
-    text-align: center;
-    height: 24px;
-    line-height: 24px;
-    width: 70px;
-    margin-bottom:-8px;
-    margin-top:-25px;
+  border: 2px outset rgb(219, 219, 219);
+  background-color: #c7a430;
+  color: #25146e;
+  border-radius: 2px;
+  font-size: 0.5em;
+  margin-bottom: 0.6em;
+  font-size: 14px;
+  text-align: center;
+  height: 24px;
+  line-height: 24px;
+  width: 70px;
+  margin-bottom: -8px;
+  margin-top: -25px;
 }
+
 div.resister:hover {
-    background-color:#487f50;
-    transform: scale(1.05);
+  background-color: #487f50;
+  transform: scale(1.05);
 }
+
 div.login:active {
   transform: scale(0.95);
 }
+
 div.login {
-    border:2px outset white;
-    background-color: #25146e;
-    border-radius: 2px;
-    font-size: 0.5em;
-    width: 70px;
-    font-size: 14px;
-    text-align: center;
-    height: 24px;
-    line-height: 24px;
-    margin-bottom:-12px;
+  border: 2px outset white;
+  background-color: #25146e;
+  border-radius: 2px;
+  font-size: 0.5em;
+  width: 70px;
+  font-size: 14px;
+  text-align: center;
+  height: 24px;
+  line-height: 24px;
+  margin-bottom: -12px;
 
 }
+
 div.login:hover {
-    background-color: #427e4a;
-    transform: scale(1.05);
+  background-color: #427e4a;
+  transform: scale(1.05);
 
 }
+
 div.login:active {
   transform: scale(0.95);
 }
 
-div.login_wrap_div_box{
-    border:10px solid #88AB8E;
-    max-width:270px;
-    margin: 0 auto;    
-    text-align: center;
-    display: flex;
-    justify-content: center;
+div.login_wrap_div_box {
+  border: 10px solid #88AB8E;
+  max-width: 270px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 
 }
 
-div.login_container {    
-    border: 1px solid white;
-    background-color:  #88AB8E;
-    padding:50px;
-    max-width:350px;
-    margin: 0 auto;    
+div.login_container {
+  border: 1px solid white;
+  background-color: #88AB8E;
+  padding: 50px;
+  max-width: 350px;
+  margin: 0 auto;
 }
 
 
-div.resister_div_box{
-    border:5px solid #88AB8E;
-    max-width:360px;
-    margin: 0 auto;
-    color:rgb(252, 252, 252);
+div.resister_div_box {
+  border: 5px solid #88AB8E;
+  max-width: 360px;
+  margin: 0 auto;
+  color: rgb(252, 252, 252);
 }
 
-div.resister_container {    
-    border: 2px solid white;
-    background-color:  #88AB8E;
-    padding:25px;
-    max-width:350px;
-    margin: 0 auto; 
-    text-align: center;   
+div.resister_container {
+  border: 2px solid white;
+  background-color: #88AB8E;
+  padding: 25px;
+  max-width: 350px;
+  margin: 0 auto;
+  text-align: center;
 }

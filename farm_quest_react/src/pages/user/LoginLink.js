@@ -16,7 +16,7 @@ const LoginLink = ({ user }) => {
     dispatch({
       part: 'loginUser',
       type: 'logout'
-    })
+    }).then()
     removeCookie('id');    
     removeCookie('user'); 
     // localStorage.clear();
@@ -35,12 +35,12 @@ const LoginLink = ({ user }) => {
           <div className='loggedinContainer'>
             <div className="logonUserFunction">
               <button key="logout" className="logoutBtn" onClick={handleLogout}>
-                <Link to="/">로그아웃</Link>
+                {/* <Link to="/">로그아웃</Link> */}
               </button>
               <div title="회원정보로 이동" className="loginUser">            
-                <Link to="/">
+                {/* <Link to="./MypageMain">
                   {username}
-                </Link>       
+                </Link>        */}
               </div>                
             </div>
           </div>
