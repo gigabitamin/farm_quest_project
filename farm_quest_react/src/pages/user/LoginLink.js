@@ -35,10 +35,10 @@ const LoginLink = ({ user }) => {
           <div className='loggedinContainer'>
             <div className="logonUserFunction">
               <button key="logout" className="logoutBtn" onClick={handleLogout}>
-                <Link to="/">로그아웃</Link>
+                <Link to="/"></Link>로그아웃
               </button>
-              <div title="회원정보로 이동" className="loginUser">            
-                <Link to="/">
+              <div style={{textAlign: 'center'}} title="회원정보로 이동" className="loginUser">            
+                <Link to="/MyPageMain">
                   {username}
                 </Link>       
               </div>                
