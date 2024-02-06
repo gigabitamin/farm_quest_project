@@ -24,7 +24,7 @@ const CommunityMainComment = ({ commentItem, loadContent }) => {
     
     return (
         <div className="community_detail_comment_box">
-            <div className="community_detail_comment_box_user">{commentItem.user.nickname}</div>
+            <div className="community_detail_comment_box_user">{commentItem.user ? commentItem.user.nickname : '정보없음'}</div>
             <div className="community_detail_comment_box_content">{commentItem.cmt_content}</div>
             <button className="community_mini_button" onClick={onDelete}>삭제</button>
         </div>

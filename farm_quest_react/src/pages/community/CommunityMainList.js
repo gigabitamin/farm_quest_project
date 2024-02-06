@@ -7,7 +7,7 @@ const CommunityMainList = ({item}) => {
                 <div className="thread_no">{item.thread_no}</div>
                 <div className="thread_type">{item.thread_type===0 ? '팜로그' : '질문'}</div>
                 <div className="thread_title">{item.thread_title}</div>
-                <div className="nickname">{item.user.nickname}</div>
+                <div className="nickname">{item.user ? item.user.nickname : '정보없음'}</div>
                 <div className="nums">{item.hit_count_generic}</div>
             </div>
         </div>

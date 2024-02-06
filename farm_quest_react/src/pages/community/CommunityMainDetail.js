@@ -101,7 +101,7 @@ const CommunityMainDetail = () => {
                     <div className="community_detail_content_box_title">{item.thread_title}</div>
                     <div className="community_detail_content_box_info">
                         <div className="community_detail_content_box_type">{item.thread_type===0 ? '팜로그' : '질문'}</div>
-                        <div className="community_detail_content_box_user">{item.user.nickname}</div>
+                        <div className="community_detail_content_box_user">{item.user ? item.user.nickname : '정보없음'}</div>
                         <div className="community_detail_content_box_time">{item.thread_date ? datetimeShow(item.thread_date) : null}</div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@ const CommunityMainDetail = () => {
                         <button className='community_button_default' onClick={toUpdate}>수정</button>
                     </div> */}
                     {
-                        (cookies.id && cookies.user.id === item.user.id)
+                        (cookies.id && cookies.user.id === (item.user ? item.user.id : undefined))
                         ?
                         (<div className="community_detail_content_box_button">
                             <button className='community_button_default' onClick={onDelete}>삭제</button>
