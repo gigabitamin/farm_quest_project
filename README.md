@@ -4,7 +4,7 @@
 
 
 =======
-### v0.7.8 jsh
+### v0.7.9a kdy
 
 
 <!-- notice -->
@@ -58,9 +58,10 @@ export default "http://localhost:8000"
 <!-- version -->
 
 
-### v0.7.9 kdy   
+### v0.7.9a kdy   
 - 메인 진단 페이지 링크 수정
 - 진단 추천 상품 페이지 버그 수정  
+- 진단 컴포넌트 css 수정
 
 ### v0.7.8 jsh  
 - 기준점

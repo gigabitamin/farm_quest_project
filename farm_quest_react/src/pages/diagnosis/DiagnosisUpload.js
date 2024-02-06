@@ -17,7 +17,7 @@ const DiagnosisUpload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState('');
     const [selectedPlant, setSelectedPlant] = useState(null);
-    const [diagnosisReadyNotice, setDiagnosisReadyNotice] = useState('이미지를 업로드 후 작물 종을 선택하세요')
+    const [diagnosisReadyNotice, setDiagnosisReadyNotice] = useState('이미지를 업로드 해주세요')
 
     useEffect(() => {
         plantLoadData();

@@ -1,20 +1,22 @@
 #diagnosisWrap {
   margin: 10px 0;
   background-color: #88AB8E;
+  border-radius: 6px;
 }
 
 .diagnosis_ready_wrap {
-  border: 10px solid #88AB8E;
-  border-radius: 5px; 
+  /* border: 10px solid #88AB8E; */
+  /* border-radius: 5px;  */
   /* padding:3px; */
-  background-color: #F2F1EB;
+  /* background-color: #F2F1EB; */
   margin: 0 auto;
   max-width: 560px;
   text-align: center;
+
 }
 
 .diagnosis_ready_section_wrap {
-  border-radius: 5px; 
+  /* border-radius: 5px;  */
   /* padding:3px; */
   display: flex;
   flex-direction: column;
@@ -22,8 +24,8 @@
 }
 
 .diagnosis_ready_title {
-  padding: 10px;
-  /* padding:3px;   */
+  padding: 10px;  
+  color:white;
 }
 
 .diagnosis_ready_notice {
@@ -45,13 +47,13 @@
 .diagnosis_ready_process_upload_image {
   /* padding:3px; */
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  ;
 }
 
 .diagnosis_ready_submit_setThumbnailOne {
   margin-top: 10px;
   padding: 10px;
-  background-color: #88AB8E;
+  background-color: #F2F1EB;
   color: black;
   border: none;
   border-radius: 5px;
@@ -60,7 +62,7 @@
 }
 
 .diagnosis_ready_submit_setThumbnailOne[type="submit"]:hover {
-  background-color: #e7dc9a;
+  background-color: #d5d2c3;
 }
 
 .diagnosis_ready_submit_setThumbnailOne[type="file"] {
@@ -75,7 +77,10 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  /* margin:0 auto; */
+  /* margin:0 auto; */    
+}
+.diagnosis_ready_process_upload_image{
+  margin-bottom:7px;
 }
 
 .diagnosis_ready_submit_handleUploadSubmit[type="submit"]:hover {
@@ -106,10 +111,12 @@
 }
 
 .diagnosis_upload_image_content_img_box {
-  /* border: 3px solid #88AB8E; */
+  border: 3px solid #F2F1EB;
   /* padding:3px; */
   flex-grow: 1;
   max-width: 30em;
+  margin-left:22px;
+  border-radius: 5px;
 }
 
 .diagnosis_upload_image_content_img {
@@ -140,6 +147,10 @@
   margin: 0 auto;
   width: 100%;
 }
+.diagnosis_upload_image_select_plant_box:hover {
+  background-color: #F2F1EB;
+  border-radius: 5px;
+}
 
 
 
@@ -162,7 +173,7 @@
 }
 
 .diagnosis_choice_plant_image_box {
-  border: 3px solid white;
+  border: 3px solid #F2F1EB;
   /* padding: 3px;   */
   width: 130px;
   /* display: grid;
@@ -241,10 +252,4 @@
   align-items: center;
   margin: 0 auto;
   width: 100%;
-}
-
-.diagnosis_choice_plant_image_box {
-  /* border: 3px solid #88AB8E; */
-  /* padding: 3px; */
-  width: 130px;
 }

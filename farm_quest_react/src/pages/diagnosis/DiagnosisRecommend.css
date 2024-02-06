@@ -490,7 +490,7 @@
   }
 
   .diagnosis_recommend_section_2_content_1_1_1 {
-    /* border: 3px solid #88AB8E; */
+    border: 3px solid #88AB8E;
     /* padding: 3px;   */
     display: flex;
     flex-direction: column;
@@ -498,7 +498,7 @@
   }
 
   .diagnosis_recommend_section_2_content_1_1_1_1 {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px;   */
   }
 
@@ -516,12 +516,12 @@
   }
 
   .diagnosis_recommend_section_2_content_1_1_2_1 {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
   }
 
   .diagnosis_recommend_section_2_content_1_1_3 {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
   }
 
