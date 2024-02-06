@@ -12,7 +12,7 @@
 
 /* 태그 전역 설정 */
 a {
-    text-decoration: none;
+    text-decoration: none;    
 }
 
 
@@ -207,11 +207,11 @@ header {
 }
 
 /* Basic Reset */
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+} */
 
 /* navbar */
 .navbar_hd {    
