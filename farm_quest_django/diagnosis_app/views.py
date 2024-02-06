@@ -39,8 +39,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 class DiagnosisItemLoadCartAPIMixins(APIView):
     def get(self, request, *args, **kwargs):
-        diagnosis_item_cart_id = request.query_params.get('diagnosis_item_cart_id', None)
-        print('diagnosis_item_cart_id = ', diagnosis_item_cart_id)
+        diagnosis_item_cart_id = request.query_params.get('diagnosis_item_cart_id', None)        
         
         if diagnosis_item_cart_id:
             try:
@@ -67,19 +66,15 @@ class DiagnosisItemSaveCartAPIMixins(generics.CreateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     
-    def post(self, request, *args, **kwargs):
-        print('Received POST data:', request.data)
+    def post(self, request, *args, **kwargs):        
         if request.auth:
             user_id = request.user.id
             user_instance = get_object_or_404(UsersAppUser, id=user_id)            
             diagnosis_item_cart_list_str = request.data.get('diagnosis_item_cart_list', '[]')
             diagnosis_item_cart_list = json.loads(diagnosis_item_cart_list_str)
 
-            request.data['user'] = user_instance.id
-            print('user_instance.id = ', user_instance.id)            
-            
-            request.data['diagnosis_item_cart_list'] = diagnosis_item_cart_list
-            print('request.data = ', request.data)
+            request.data['user'] = user_instance.id            
+            request.data['diagnosis_item_cart_list'] = diagnosis_item_cart_list            
                         
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
@@ -93,32 +88,19 @@ class DiagnosisItemSaveCartAPIMixins(generics.CreateAPIView):
 
 class DiagnosisRecommendList(APIView):
     def get(self, request, solution_word, format=None):        
-        try:
-            print('solution word ', solution_word)
-            # print('1')
-            # solution_word = '화분'
+        try:            
             page = int(request.GET.get('page', 1))
-            page_size = 10
-            print('page', page)
+            page_size = 10            
 
-            start_index = (page - 1) * page_size
-            print('start_index', start_index)
-            end_index = start_index + page_size
-            print('end_index', end_index)
+            start_index = (page - 1) * page_size            
+            end_index = start_index + page_size            
 
             recommendations = ShopingTb.objects.filter(Q(shoping_tb_rss_channel_item_title__contains=solution_word))[start_index:end_index]
-            # print('가냐?', recommendations)
-            # print('3')
             serializer = ShopingTbSerializer(recommendations, many=True)
-            # print('진짜 가냐?', serializer)
-            # print('4')
+
             return Response(serializer.data, status=200)
         except Exception as e:
             return Response({"에러": str(e)})
-
-
-
-
 
 
 class SolutionTbAPIMixins(
@@ -137,22 +119,18 @@ class SolutionTbAPIMixins(
 @api_view(['POST'])   
 def diagnosis_upload(request):
     plt = platform.system() 
-    if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
-    print('plt',plt)
+    if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath    
 
     if request.method == "POST":
         origin_file = request.FILES.get('imgFile')       
-        fs = FileSystemStorage() # ../media
-        print('fs', fs)
+        fs = FileSystemStorage() # ../media        
 
-        plant_name = request.POST.get('plant_name')
-        print(plant_name)
+        plant_name = request.POST.get('plant_name')        
         plant_no = request.POST.get('plant_no')
 
         uuid = uuid4().hex
         save_file_name = uuid + '_' +  origin_file.name
-        save_file_path = os.path.join('diagnosis', 'yolo', 'origin_img', save_file_name)
-        print('save_file_path : ', save_file_path)
+        save_file_path = os.path.join('diagnosis', 'yolo', 'origin_img', save_file_name)        
                 
         fs.save(save_file_path, origin_file)
     
@@ -167,10 +145,9 @@ def diagnosis_upload(request):
         }
         
         diagnosis_result_instance = diagnosis_upload_user(data)
-        print('돼냐?',diagnosis_result_instance)
+
         diagnosis_result_instance.save()        
-        
-        print('완료, 전송3')
+
         diagnosis_result_pk = diagnosis_result_instance.pk
 
         context = {
@@ -181,12 +158,7 @@ def diagnosis_upload(request):
             'diagnosis_result_pk': diagnosis_result_pk,
         }
         
-        print('완료, 전송4')
-        
-
-
     return JsonResponse(context, status=200)
-
 
 
 @csrf_exempt
@@ -199,8 +171,6 @@ def diagnosis_upload_user(data):
             plant_no=data['plant_no'],
             user_id=data['user'],
         )
-        # print('diagnosis_result_instance', diagnosis_result_instance)
-        # print('diagnosis_result_instance', diagnosis_result_instance)
 
         return diagnosis_result_instance
     except Exception as e:
@@ -305,18 +275,13 @@ def diagnosis_answer(request):
     return render(request, 'diagnosis_app/diagnosis_answer.html')
 
 
-
 # 크롭 이미지 한글 파싱 문제 -> 해결되서 굳이 유지할 필요 없음, 필요시 삭제
-def view_crop_image(request, file_name, label_name, image_name):    
-    print('왔냐1', file_name)
+def view_crop_image(request, file_name, label_name, image_name):        
     decoded_file_name = unquote(file_name)
     decoded_label_name = unquote(label_name)
     decoded_image_name = unquote(image_name)
-    
-    
-    print('왔냐2', decoded_file_name)
-    image_path = os.path.join(settings.MEDIA_ROOT, 'diagnosis/yolo/origin_img/result_img', decoded_file_name, 'crops', decoded_label_name, decoded_image_name)
-    print('왔냐3', image_path)
+        
+    image_path = os.path.join(settings.MEDIA_ROOT, 'diagnosis/yolo/origin_img/result_img', decoded_file_name, 'crops', decoded_label_name, decoded_image_name)    
     
     try:
         with open(image_path, 'rb') as image_file:

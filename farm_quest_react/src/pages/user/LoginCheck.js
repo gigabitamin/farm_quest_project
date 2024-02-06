@@ -1,16 +1,13 @@
 import{ useEffect } from 'react';
-// import React, { useEffect } from 'react';
 import axios from "axios";
 import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
 
 const LoginCheck = () => {
     const DjangoServer = useSelector(state => state.DjangoServer);
     const [cookies] = useCookies(['id', 'username']);
     const dispatch = useDispatch();
-    // const history = useNavigate();
 
     useEffect(() => {
         checkLoginStatus();
@@ -28,7 +25,7 @@ const LoginCheck = () => {
                             type: 'login',
                             username: response.data.username
                         });
-                        // history("/");                        
+                    
                     }
                 })
                 .catch(() => {                    
@@ -40,12 +37,9 @@ const LoginCheck = () => {
         }
     };
 
-    console.log('cookies.id = ', cookies.id)
-    console.log('cookies = ', cookies)
-    console.log('cookie.username = ', cookies.username)
 
     return null;
-    // return <div></div>;
+
 };
 
 export default LoginCheck;

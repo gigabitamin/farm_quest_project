@@ -8,8 +8,7 @@ const UserInfo = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    
-    // 토큰이 있는 경우에만 사용자 정보를 불러옴
+
     if (token) {
       axios.get(`${DjangoServer}/user_info/`, {
         headers: {
@@ -33,7 +32,7 @@ const UserInfo = () => {
           <p>이메일: {user.email}</p>          
         </div>
       ) : (
-        <p>카레 먹고 싶다</p>
+        <p>loading..</p>
       )}
     </div>
   );

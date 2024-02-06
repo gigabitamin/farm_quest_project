@@ -5,29 +5,15 @@ import './DiagnosisUploadResult.css';
 
 
 const DiagnosisUploadResult = () => {
-
     const location = useLocation();
-
     const DjangoServer = useSelector(state => state.DjangoServer);
-    console.log('(location.state = ', location.state);
-
-    console.log('(location.state.file_name = ', location.state.file_name);
-
     const save_file_name = location.state.file_name.save_file_name;
     const yolo_plant_name = location.state.file_name.plant_name;
-
     const serialized_results = location.state.file_name.detect_result.serialized_results_list[0];
-    // const obj_result_label = serialized_results.names[serialized_results.boxes[0]['label']]
-    // const obj_result_prob = Number(serialized_results.boxes[0]['confidence']).toFixed(4) * 100
-
-    // const diagnosis_result_id_list = location.state.file_name.detect_result.diagnosis_result_id_list[0];
     const tf_predict_result_list_sorted = location.state.file_name.detect_result.tf_predict_result_list_sorted;
     const diagnosis_result_pk = location.state.file_name.diagnosis_result_all_id
     const containerRef = useRef();
     const crops_path_list = location.state.file_name.detect_result.crops_path_list
-
-    console.log('crops_path_list', crops_path_list)
-
     let highestConfidence = 0;
     let selectedBoxIndex = -1;
 
@@ -35,7 +21,6 @@ const DiagnosisUploadResult = () => {
         const label = serialized_results.boxes[i]['label'];
         const confidence = Number(serialized_results.boxes[i]['confidence']);
 
-        // label이 6 이상이고 confidence가 현재까지의 최고값보다 크다면 갱신
         if (label >= 6 && confidence > highestConfidence) {
             highestConfidence = confidence;
             selectedBoxIndex = i;
@@ -55,32 +40,11 @@ const DiagnosisUploadResult = () => {
         : null;
 
 
-
-    // const solution_row_list_serialized = location.state.file_name.detect_result.solution_row_list_serialized;
-
-    // console.log(save_file_name)
-    // console.log('diagnosis_result_id_lsit = ', diagnosis_result_id_list)
-    // console.log('serialized_results = ', serialized_results)
-    // console.log(serialized_results.boxes)
-    // console.log('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
-    // console.log(tf_predict_result_list_sorted[0])
-    // console.log(tf_predict_result_list_sorted[0][0])
-    // console.log(tf_predict_result_list_sorted[0][0][1])
-    // console.log(tf_predict_result_list_sorted[0][0][4])
-    // console.log(solution_row_list_serialized)
-    // console.log(solution_row_list_serialized[0])
-    // console.log(solution_row_list_serialized[0][0])
-    // console.log(solution_row_list_serialized[0][0]['solution_word'])
-    // const firstKey = Object.keys(tf_predict_desease_list)[0];
-    // const tf_predict_desease = tf_predict_desease_list[firstKey];
-
     if (serialized_results && serialized_results.boxes && tf_predict_result_list_sorted[0]) {
 
         const url = save_file_name
             ? `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${save_file_name}`
             : null;
-
-        // const file_name = save_file_name.split('.')[0];
 
         return (
             <div className="diagnosis_result_wrap">

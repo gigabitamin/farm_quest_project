@@ -15,62 +15,9 @@ class DiagnosisBoardList(generics.ListAPIView):
     pagination_class = pagination.DiagnosisBoardPagination
     print('1')
     def get_queryset(self):
-        print('2')
         queryset = DiagnosisResultAll.objects.all().filter().order_by('-diagnosis_result_all_id')
-        # print('diagnosisBoard', queryset)
-        # diagnosisResult = DiagnosisResultAll.objects.all()
-        # print('diagnosisResult', diagnosisResult)
-        
-        # queryset = {
-        #     'diagnosisBoard':queryset,
-        #     'diagnosisResult':diagnosisResult,
-        # }        
-        
-        print('queryset', queryset)
-        # if self.kwargs['ctg'] == 'result':
-        #     ctg = 0
-        # elif self.kwargs['ctg'] == 'share':
-        #     ctg = 1
-        # else:
-        #     print('4')
-        #     return queryset.order_by('-thread_no')
-        print('5')
-        # return queryset.filter(thread_type=ctg).order_by('-thread_no')
-        
         return queryset
   
-
-# class DiagnosisBoardList(generics.ListAPIView):
-#     serializer_class = serializers.DiagnosisBoardListShowSerializer
-#     pagination_class = pagination.DiagnosisBoardPagination
-#     print('1')
-#     def get_queryset(self):
-#         print('2')
-#         diagnosisBoard = models.DiagnosisBoardTb.objects.all().filter().order_by('-thread_no')
-#         print('diagnosisBoard', diagnosisBoard)
-#         diagnosisResult = DiagnosisResultAll.objects.all()
-#         print('diagnosisResult', diagnosisResult)
-        
-#         queryset = {
-#             'diagnosisBoard':diagnosisBoard,
-#             'diagnosisResult':diagnosisResult,
-#         }        
-        
-#         print('queryset', queryset)
-#         # if self.kwargs['ctg'] == 'result':
-#         #     ctg = 0
-#         # elif self.kwargs['ctg'] == 'share':
-#         #     ctg = 1
-#         # else:
-#         #     print('4')
-#         #     return queryset.order_by('-thread_no')
-#         print('5')
-#         # return queryset.filter(thread_type=ctg).order_by('-thread_no')
-        
-#         return queryset
-
-
-
 
 class DiagnosisBoardCreate(generics.CreateAPIView):
     print('1')
@@ -112,9 +59,6 @@ class DiagnosisBoardDetailModify(generics.UpdateAPIView, generics.DestroyAPIView
         self.is_right_user(request)
         return self.update(request, *args, **kwargs)
 
-    # def patch(self, request, *args, **kwargs):
-    #     return self.partial_update(request, *args, **kwargs)
-
     def delete(self, request, *args, **kwargs):
         self.is_right_user(request)
         return self.destroy(request, *args, **kwargs)
@@ -153,3 +97,4 @@ class DiagnosisBoardCommentDelete(generics.DestroyAPIView):
         if request.user.id != comment.user_id:
             raise PermissionDenied("You have no permission to control this comment.")
         return self.destroy(request, *args, **kwargs)
+    

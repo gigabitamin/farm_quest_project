@@ -57,18 +57,15 @@ class DiagnosisQuestionHistorySerializer(serializers.ModelSerializer):
         model = DiagnosisQuestionHistory
         fields = '__all__'
 
-    def create(self, validated_data):
-        # 각각의 질문에 대한 답변을 validated_data에서 추출
+    def create(self, validated_data):        
         question_answers = {}
         for i in range(1, 11):
             key = f"diagnosis_question_{i}"
             if key in validated_data:
                 question_answers[key] = validated_data.pop(key)
-            else:
-                # 특정 키가 없을 경우 기본값으로 null 또는 원하는 값을 설정
+            else:                
                 question_answers[key] = None
-
-        # 나머지 부분은 원래의 create 메서드 수행
+        
         instance = DiagnosisQuestionHistory.objects.create(**validated_data, **question_answers)
         return instance
 

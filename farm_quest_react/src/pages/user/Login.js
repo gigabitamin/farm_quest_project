@@ -29,8 +29,7 @@ const Login = () => {
         event.preventDefault();
         axios
             .post(`${DjangoServer}/login/`, formData)
-            .then((response) => {
-                console.log('reponse = ', response)
+            .then((response) => {                
                 if (response.status < 300) {
                     setCookie('id', response.data.token);
                     setCookie('user', response.data.user);                    
@@ -38,12 +37,10 @@ const Login = () => {
                         part: 'loginUser',
                         type: 'login',
                         username: formData.username
-                    });
-                    console.log(response.data.header)
+                    });                    
                     history("/");
                 }
-            });
-        console.log('cookies = ', cookies)
+            });        
     }
 
     return (

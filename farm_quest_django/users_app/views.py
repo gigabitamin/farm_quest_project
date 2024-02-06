@@ -56,17 +56,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 
 
-# last_login 갱신
-
-# from django.contrib.auth.signals import user_logged_in
-# from django.dispatch import receiver
-# from django.utils import timezone
-
-# @receiver(user_logged_in)
-# def update_last_login(sender, request, user, **kwargs):
-#     user.last_login = timezone.now()
-#     user.save()
-# 갱신 끝
 
 class UserProfileDeleteView(APIView):
     authentication_classes = [TokenAuthentication]
@@ -294,15 +283,3 @@ def user_QnA_render(request):
 def user_bookmark_render(request):
     return render(request, 'users_app/mypages/user_bookmark.html')
 
-
-# 로그인시간저장 psh
-# from django.contrib.auth.signals import user_logged_in
-# from django.dispatch import receiver
-# from django.utils import timezone
-
-# @receiver(user_logged_in)
-# def update_last_login(sender, user, request, **kwargs):
-#     print(f"update_last_login called for user: {user.username}")
-
-#     user.last_login = timezone.now()
-#     user.save()

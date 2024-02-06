@@ -4,11 +4,11 @@ from . import views
 
 urlpatterns = [
     # 장고
-    path('diagnosis_index/', views.diagnosis_index, name='diagnosis_index'),
-    path('diagnosis_result/', views.diagnosis_result, name='diagnosis_result'),
-    path('choice/', views.diagnosis_choice, name='diagnosis_choice'),
-    path('answer/', views.diagnosis_answer, name='diagnosis_answer'),
-    path('image/', views.diagnosis_image, name='diagnosis_image'),
+    # path('diagnosis_index/', views.diagnosis_index, name='diagnosis_index'),
+    # path('diagnosis_result/', views.diagnosis_result, name='diagnosis_result'),
+    # path('choice/', views.diagnosis_choice, name='diagnosis_choice'),
+    # path('answer/', views.diagnosis_answer, name='diagnosis_answer'),
+    # path('image/', views.diagnosis_image, name='diagnosis_image'),
     
     # 리액트
     path("diagnosis_questions_api/", views.DiagnosisQuestionsAPIMixins.as_view()),
