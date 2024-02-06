@@ -13,31 +13,26 @@ from diagnosis_app.models import DiagnosisResultAll
 class DiagnosisBoardList(generics.ListAPIView):
     serializer_class = serializers.DiagnosisResultAllSerializer
     pagination_class = pagination.DiagnosisBoardPagination
-    print('1')
     def get_queryset(self):
         queryset = DiagnosisResultAll.objects.all().filter().order_by('-diagnosis_result_all_id')
         return queryset
   
 
 class DiagnosisBoardCreate(generics.CreateAPIView):
-    print('1')
     queryset = models.DiagnosisBoardTb.objects.all()
-    print('2',queryset)
+
     authentication_classes = [TokenAuthentication]
-    print('3')
+
     permission_classes = [IsAuthenticated]
-    print('4')
+
     serializer_class = serializers.DiagnosisBoardModifySerializer
-    print('5', serializer_class)
+
     
     def post(self, request, *args, **kwargs):       
         
         if request.auth:
             user_id = request.user.id
-            print('user_id',user_id)
-            print('request.data',request.data)
             request.data['user'] = user_id
-            print('request.data',request.data)
             return self.create(request, *args, **kwargs)
         raise PermissionError('You have no token information.')
 
@@ -79,7 +74,6 @@ class DiagnosisBoardCommentAdd(generics.CreateAPIView):
         if request.auth:
             user_id = request.user.id
             request.data['user'] = user_id
-            print('post : ', request.data)
             return self.create(request, *args, **kwargs)
         raise PermissionError('You have no token information.')
     
