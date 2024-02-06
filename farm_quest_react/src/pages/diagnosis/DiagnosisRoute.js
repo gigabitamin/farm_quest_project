@@ -14,6 +14,7 @@ import DiagnosisRecommend from "./DiagnosisRecommend";
 const DiagnosisRoute = () => {
     // const [currentPath, setCurrentPath] = useState('/');
     const [plantSpecies, setPlantSpecies] = useState(5);
+    const [solutionKeyword, setSolutionKeyword] = useState('고추탄저')
 
     return (
         <div>
@@ -26,7 +27,7 @@ const DiagnosisRoute = () => {
                 <Route path="/diagnosis_upload" element={<DiagnosisUpload plantSpecies={plantSpecies} setPlantSpecies={setPlantSpecies} />} />                            
                 <Route path="/diagnosis_upload_result" element={<DiagnosisUploadResult/>} />
                 <Route path="/diagnosis_upload_result_board" element={<DiagnosisUploadResultBoard/>} />
-                <Route path="/diagnosis_recommend/:solutionWord" element={<DiagnosisRecommend />}/>                
+                <Route path="/diagnosis_recommend/:solutionWord" element={<DiagnosisRecommend solutionKeyword={solutionKeyword} setSolutionKeyword={setSolutionKeyword} />} />
                 {/* <Route path="/diagnosis_detail" element={<DiagnosisDetail/>} /> */}
             </Routes>
         </div>

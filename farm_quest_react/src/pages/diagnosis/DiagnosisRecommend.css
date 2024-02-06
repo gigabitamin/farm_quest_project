@@ -35,7 +35,7 @@
     background-color: #88AB8E;
     padding: 10px;
   }
-  
+
 
   .diagnosis_recommend_section_1_title_cart>div:nth-child(1) {
     /* border: 1px solid #ffffff; */
@@ -71,17 +71,17 @@
   }
 
 
-  .diagnosis_recommend_section_1_title_cart>div:nth-child(3) {
+  .recommendProductTo {
     border: 1px solid white;
     padding: 7px;
     background-color: #88AB8E;
     color: rgb(46, 31, 5);
     border-radius: 5px;
-    /* cursor: pointer;   */
+    cursor: pointer;
     margin: 0 auto;
   }
 
-  .diagnosis_recommend_section_1_title_cart>div:nth-child(3):hover {
+  .recommendProductTo:hover {
     background-color: #97d4b1;
     cursor: pointer;
   }
@@ -172,12 +172,12 @@
 
   .diagnosis_recommend_section_1_content_1_2_1 {
     /* border: 3px solid #88AB8E; */
-    padding: 3px;
+    /* padding: 3px; */
   }
 
   .diagnosis_recommend_section_1_content_1_2_2 {
     /* border: 3px solid #88AB8E; */
-    padding: 3px;
+    /* padding: 3px; */
   }
 
 
@@ -186,19 +186,19 @@
 
 
   .diagnosis_recommend_section_2_title_wrap {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
   }
 
   .diagnosis_recommend_section_2_content_wrap {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
   }
 
 
 
   .diagnosis_recommend_section_2_content_1 {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
     overflow-y: scroll;
     height: 65vh;
@@ -208,13 +208,11 @@
   }
 
   .diagnosis_recommend_section_2_content_1_1 {
-    border: 3px solid #88AB8E;
-    /* padding: 3px; */
-    flex: 1 0 50%;
-  }
+    width: calc(33.3%);
+}
 
   .diagnosis_recommend_section_2_content_1_1_1 {
-    /* border: 3px solid #88AB8E; */
+    border: 3px solid #88AB8E;
     /* padding: 3px; */
   }
 
@@ -226,13 +224,12 @@
   .diagnosis_recommend_section_2_content_1_1_1_1_1 {
     /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
-    /* width:100px; */
-    height: 429px;
-    /* height: auto; */
+    max-width:300px;
+    max-height: 429px;    
   }
 
   .diagnosis_recommend_section_2_content_1_1_2 {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
     margin: 0 auto;
     display: flex;
@@ -245,13 +242,13 @@
   }
 
   .diagnosis_recommend_section_2_content_1_1_3 {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
   }
 
   .diagnosis_recommend_section_2_content_1_1_4 {
     /* border: 3px solid #88AB8E; */
-    padding: 3px;
+    /* padding: 3px; */
     margin-top: 10px;
     padding: 1px;
     background-color: #88AB8E;
@@ -350,18 +347,18 @@
   }
 
 
-  .diagnosis_recommend_section_1_title_cart>div:nth-child(3) {
+  .recommendProductTo {
     border: 1px solid white;
     padding: 5px;
     background-color: #88AB8E;
     color: rgb(46, 31, 5);
     border-radius: 5px;
-    /* cursor: pointer;   */
+    cursor: pointer;
     margin: 0 auto;
   }
 
-  .diagnosis_recommend_section_1_title_cart>div:nth-child(3):hover {
-    background-color: #97d4b1;
+  .recommendProductTo:hover {
+    background-color: #b5dec6;
     cursor: pointer;
   }
 
@@ -469,7 +466,7 @@
   }
 
   .diagnosis_recommend_section_2_content_wrap {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
   }
 
@@ -484,9 +481,9 @@
   }
 
   .diagnosis_recommend_section_2_content_1_1 {
-    border: 3px solid #88AB8E;
+    /* border: 3px solid #88AB8E; */
     /* padding: 3px; */
-    flex: 1 0 50%;
+    flex: 1 0 48%;
     /* margin:0 auto; */
     /* display: flex; */
     /* align-items: center; */

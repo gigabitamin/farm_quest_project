@@ -89,6 +89,8 @@ const Header = () => {
                 <div className='navArea'>
                     <nav className="navbar_hd">
                         <ul>
+
+                            <DiagnosisLink />
                             {/* 네비게이션 드롭다운 수정, 최상단 className="navbar" 에 맞췄으니 수정시 주의 -kdy */}     
 
                             <div className="nav-item_hd">

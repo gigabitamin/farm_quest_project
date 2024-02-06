@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './DiagnosisUploadResult.css';
 
@@ -53,6 +53,18 @@ const DiagnosisUploadResult = () => {
     const obj_yolo_solution_word = selectedBoxIndex !== -1
         ? serialized_results.boxes[selectedBoxIndex]['solution_info']['solution_word']
         : null;
+
+
+
+
+
+
+    const navigate = useNavigate();
+    const recommendClick = () => {
+        navigate(`/diagnosis_recommend/${obj_yolo_solution_word}`, { solutionWord: obj_yolo_solution_word });
+    };
+
+
 
 
 
@@ -114,14 +126,10 @@ const DiagnosisUploadResult = () => {
                                         </h3></div>
                                         <div>약 {obj_result_prob} % 의 확률로 <Link to="/Scheduler"><span className='diagnosis_button_1'>{obj_result_label}</span></Link> 일 것으로 예상됩니다</div>
 
-                                        <div>
+                                        <div className="toRecommend" onClick={recommendClick}>
                                             솔루션 워드 :
-                                            <Link title="상품추천으로 이동" to={{
-                                                pathname: `/diagnosis_recommend/${obj_yolo_solution_word}`,
-                                                state: { solutionWord: obj_yolo_solution_word }
-                                            }}>
-                                                <span className="diagnosis_button">{obj_yolo_solution_word}</span>
-                                            </Link></div>
+                                            <span className="diagnosis_button">{obj_yolo_solution_word}</span>
+                                        </div>
                                     </div>
                                     <div className="diagnosis_result_analystic_summary_box_detail">
                                         <div className="diagnosis_result_analystic_image"><img src={url} alt="UploadResult" className="diagnosis_result_analystic_image_img" /></div>

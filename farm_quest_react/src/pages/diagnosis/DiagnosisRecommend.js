@@ -18,8 +18,9 @@ const DiagnosisRecommend = () => {
     const [loading, setLoading] = useState(false);
     const containerRef = useRef();
     console.log('selectedItems', selectedItems)
-    const diagnosisItemCartList = selectedItems.map(item => item.shoping_tb_no);
-    
+    const diagnosisItemCartList = selectedItems.map(item => item?.shoping_tb_no);
+    ;
+
     const diagnosisItemCartListJSON = JSON.stringify(diagnosisItemCartList);
     const [diagnosisItemCartId, setDiagnosisItemCartId] = useState(null);
     const [diagnosisItemCart, setDiagnosisItemCart] = useState(null);
@@ -218,7 +219,7 @@ const DiagnosisRecommend = () => {
                     <div className="diagnosis_recommend_section_1_title_cart">
                         <div>No.{diagnosisItemCartId}</div>
                         <div onClick={handleDeleteButtonClick}>삭제</div>
-                        <Link to="/gardening_shop_index"><div>장바구니 찜 목록</div></Link>
+                        <Link to="/gardening_shop_index"><div className='recommendProductTo'>오늘의 추천상품</div></Link>
                         <div onClick={saveDiagnosisItemCart}>저장</div>
                         <div onClick={handleLoadButtonClick}>불러오기</div>
                     </div>
@@ -230,14 +231,14 @@ const DiagnosisRecommend = () => {
                             <div key={index} className="diagnosis_recommend_section_1_content_1_1">
                                 <div className="diagnosis_recommend_section_1_content_1_1_1">
                                     <img className="diagnosis_recommend_section_1_content_1_1_1_1"
-                                        src={recommend.shoping_tb_rss_channel_item_image}
-                                        alt={recommend.shoping_tb_rss_channel_item_title}
+                                        src={recommend?.shoping_tb_rss_channel_item_image} 
+                                        alt={recommend?.shoping_tb_rss_channel_item_title}
                                     />
                                 </div>
                                 <div className="diagnosis_recommend_section_1_content_1_2">
                                     <div className="diagnosis_recommend_section_1_content_1_2">
-                                        <div className="diagnosis_recommend_section_1_content_1_2_1">{recommend.shoping_tb_rss_channel_item_title}</div>
-                                        <div className="diagnosis_recommend_section_1_content_1_2_2">{recommend.shoping_tb_rss_channel_item_lprice} 원</div>
+                                        <div className="diagnosis_recommend_section_1_content_1_2_1">{recommend?.shoping_tb_rss_channel_item_title}</div>
+                                        <div className="diagnosis_recommend_section_1_content_1_2_2">{recommend?.shoping_tb_rss_channel_item_lprice} 원</div>
                                     </div>
                                     <label>
                                         <div className="diagnosis_recommend_section_2_content_1_1_4">
@@ -254,7 +255,6 @@ const DiagnosisRecommend = () => {
                             </div>
                         ))}
                         {loading && <p>언제끝나...</p>}
-
                     </div>
                 </div>
             </div>
@@ -266,75 +266,75 @@ const DiagnosisRecommend = () => {
 
                 <div className="diagnosis_recommend_section_2_content_wrap">
 
-                <div className="diagnosis_recommend_section_2_content_1" ref={containerRef}>
-                {cookies.user ? (
-                    // 사용자가 로그인한 경우, recommendedProducts.map을 사용
-                    recommendedProducts.map((recommend, index) => (
-                        <div key={index} className="diagnosis_recommend_section_2_content_1_1">
-                                <div className="diagnosis_recommend_section_2_content_1_1_1">
-                                    <div className="diagnosis_recommend_section_2_content_1_1_1_1">
-                                        <img className="diagnosis_recommend_section_2_content_1_1_1_1_1"
-                                            src={recommend.shoping_tb_rss_channel_item_image}
-                                            alt={recommend.shoping_tb_rss_channel_item_title}
-                                        />
-                                    </div>
-                                    <div className="diagnosis_recommend_section_2_content_1_1_2">
-                                        <div className="diagnosis_recommend_section_2_content_1_1_2_1">
-                                            <div className="diagnosis_recommend_section_2_content_1_1_2_1_1">{recommend.shoping_tb_rss_channel_item_title}</div>
-                                        </div>
-                                    </div>
-
-                                    <div className="diagnosis_recommend_section_2_content_1_1_3">{recommend.shoping_tb_rss_channel_item_lprice} 원</div>
-
-                                    <label>
-                                        <div className="diagnosis_recommend_section_2_content_1_1_4">
-                                            <input
-                                                type="checkbox"
-                                                name="addToCart"
-                                                onChange={() => handleCheckboxChange(index)}
-                                                checked={selectedItems.includes(recommend)}
+                    <div className="diagnosis_recommend_section_2_content_1" ref={containerRef}>
+                        {cookies.user ? (
+                            // 사용자가 로그인한 경우, recommendedProducts.map을 사용
+                            recommendedProducts.map((recommend, index) => (
+                                <div key={index} className="diagnosis_recommend_section_2_content_1_1">
+                                    <div className="diagnosis_recommend_section_2_content_1_1_1">
+                                        <div className="diagnosis_recommend_section_2_content_1_1_1_1">
+                                            <img className="diagnosis_recommend_section_2_content_1_1_1_1_1"
+                                                src={recommend.shoping_tb_rss_channel_item_image}
+                                                alt={recommend.shoping_tb_rss_channel_item_title}
                                             />
-                                            장바구니에 추가
                                         </div>
-                                    </label>
-                                </div>
+                                        <div className="diagnosis_recommend_section_2_content_1_1_2">
+                                            <div className="diagnosis_recommend_section_2_content_1_1_2_1">
+                                                <div className="diagnosis_recommend_section_2_content_1_1_2_1_1">{recommend.shoping_tb_rss_channel_item_title}</div>
+                                            </div>
+                                        </div>
 
-                            </div>
-                        ))
-                    ) : (
-                    // 사용자가 로그인하지 않은 경우, recommendations.map을 사용
-                        recommendations.map((recommend, index) => (
-                          <div key={index} className="diagnosis_recommend_section_2_content_1_1">
-                                <div className="diagnosis_recommend_section_2_content_1_1_1">
-                                    <div className="diagnosis_recommend_section_2_content_1_1_1_1">
-                                        <img className="diagnosis_recommend_section_2_content_1_1_1_1_1"
-                                            src={recommend.shoping_tb_rss_channel_item_image}
-                                            alt={recommend.shoping_tb_rss_channel_item_title}
-                                        />
+                                        <div className="diagnosis_recommend_section_2_content_1_1_3">{recommend.shoping_tb_rss_channel_item_lprice} 원</div>
+
+                                        <label>
+                                            <div className="diagnosis_recommend_section_2_content_1_1_4">
+                                                <input
+                                                    type="checkbox"
+                                                    name="addToCart"
+                                                    onChange={() => handleCheckboxChange(index)}
+                                                    checked={selectedItems.includes(recommend)}
+                                                />
+                                                장바구니에 추가
+                                            </div>
+                                        </label>
                                     </div>
-
-                                    <div className="diagnosis_recommend_section_2_content_1_1_2">
-                                        <div className="diagnosis_recommend_section_2_content_1_1_2_1">
-                                            <div className="diagnosis_recommend_section_2_content_1_1_2_1_1">{recommend.shoping_tb_rss_channel_item_title}</div>
-                                        </div>
-                                    </div>
-
-                                    <div className="diagnosis_recommend_section_2_content_1_1_3">{recommend.shoping_tb_rss_channel_item_lprice} 원</div>
-
-                                    <label>
-                                        <div className="diagnosis_recommend_section_2_content_1_1_4">
-                                            <input
-                                                type="checkbox"
-                                                name="addToCart"
-                                                onChange={() => handleCheckboxChange(index)}
-                                                checked={selectedItems.includes(recommend)}
-                                            />
-                                            장바구니에 추가
-                                        </div>
-                                    </label>
 
                                 </div>
-                            </div>
+                            ))
+                        ) : (
+                            // 사용자가 로그인하지 않은 경우, recommendations.map을 사용
+                            recommendations.map((recommend, index) => (
+                                <div key={index} className="diagnosis_recommend_section_2_content_1_1">
+                                    <div className="diagnosis_recommend_section_2_content_1_1_1">
+                                        <div className="diagnosis_recommend_section_2_content_1_1_1_1">
+                                            <img className="diagnosis_recommend_section_2_content_1_1_1_1_1"
+                                                src={recommend.shoping_tb_rss_channel_item_image}
+                                                alt={recommend.shoping_tb_rss_channel_item_title}
+                                            />
+                                        </div>
+
+                                        <div className="diagnosis_recommend_section_2_content_1_1_2">
+                                            <div className="diagnosis_recommend_section_2_content_1_1_2_1">
+                                                <div className="diagnosis_recommend_section_2_content_1_1_2_1_1">{recommend.shoping_tb_rss_channel_item_title}</div>
+                                            </div>
+                                        </div>
+
+                                        <div className="diagnosis_recommend_section_2_content_1_1_3">{recommend.shoping_tb_rss_channel_item_lprice} 원</div>
+
+                                        <label>
+                                            <div className="diagnosis_recommend_section_2_content_1_1_4">
+                                                <input
+                                                    type="checkbox"
+                                                    name="addToCart"
+                                                    onChange={() => handleCheckboxChange(index)}
+                                                    checked={selectedItems.includes(recommend)}
+                                                />
+                                                장바구니에 추가
+                                            </div>
+                                        </label>
+
+                                    </div>
+                                </div>
                             ))
                         )}
                         {loading && <p>언제끝나...</p>}

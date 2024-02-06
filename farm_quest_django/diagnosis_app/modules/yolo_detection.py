@@ -140,7 +140,6 @@ def plant_select_result(plant_name):
     '시설포도노균병반응_중기',
     '시설포도노균병반응_말기'
     ]
-    
     # tf
     # 딸기 ['a2', 'a1', 'b1', 'b6', 'b8', 'b7', '0', 'c1', 'c2']
     # 토마토 ['a6', 'a5', 'b8', 'b7', 'b6', 'b3', 'b2', 'c6', 'c5', '0']
@@ -236,7 +235,7 @@ def detect(save_file_path, plant_name, user_select_plant):
             project=project_path, 
             name=file_name,
             save=True, 
-            imgsz=416, 
+            imgsz=640, 
             conf=0.4,
             max_det=1000,
             # show_labels=True,
@@ -516,11 +515,11 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         label_key = int(box[0]['label'][0])
         print('4', label_key)        
         names = serialized_results_list[0]['names']
-        print('5', names)
+        # print('5', names)
         name = names[label_key]
-        print('6', name)
+        # print('6', name)
         conf = box[0]['confidence']
-        print('7', conf)
+        # print('7', conf)
         label = names[label_key]
         print('8', label)
                 
@@ -545,23 +544,25 @@ def tf_detect(serialized_results_list, plant_name, user_select_plant, img_path, 
         print('crops_path_list', crops_path_list)
                 
     # print('plant_name', plant_name)
+
     image_size_x = 512
     image_size_y = 512
-
     print('에라이8')
     if plant_name == '고추':
         tf_model = load_model('tf_model/pepper.keras')        
     elif plant_name == '딸기':        
-        # image_size_x = 256
-        # image_size_y = 256
         tf_model = load_model('tf_model/strawberry.keras')
     elif plant_name == '포도':
+        image_size_x = 512
+        image_size_y = 512
         tf_model = load_model('tf_model/grape.keras')
     elif plant_name == '오이':
         tf_model = load_model('tf_model/cucumber.keras')
-    elif plant_name == '토마토':        
+    elif plant_name == '토마토':
+        image_size_x = 512
+        image_size_y = 512
         tf_model = load_model('tf_model/tomato.keras')
-    elif plant_name == '파프리카':        
+    elif plant_name == '파프리카':
         tf_model = load_model('tf_model/paprika.keras')
     print('에라이9')
     # model.summary()
@@ -630,7 +631,7 @@ def tf_solution_service(tf_predict_disease_list):
     tf_predict_result_list = [[dl, sl[0]] for dl, sl in zip(tf_predict_disease_list, solution_row_list)]    
     # print('tf_predict_result_list = ', tf_predict_result_list)
     tf_predict_result_list_sorted = sorted(tf_predict_result_list, key=lambda x: x[0][4], reverse=True)    
-    
+    # print('tf_predict_result_list_sorted = ', tf_predict_result_list_sorted)
     
     return tf_predict_result_list_sorted
 
