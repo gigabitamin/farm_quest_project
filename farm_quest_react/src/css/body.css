@@ -55,6 +55,10 @@
     color:#88AB8E;
   }
   
+  .btn_index_ind a:hover {
+    color:#88AB8E;
+  }
+
   .btn_index_ind.btn_photo_ind, .btn_index_ind.btn_qna_ind, .btn_index_ind.btn_calendar_ind {
     padding: 5px;
     grid-column: span 4;

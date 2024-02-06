@@ -32,10 +32,11 @@
 
 /* 상품 리스트 스타일 */
 .product-list {
+  max-width: 65%;
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5개의 열 */
   grid-gap: 16px; /* 열 사이의 간격 */
-  margin: 20px; /* 주변 여백 */
+  margin: 20px auto; /* 주변 여백 */
 }
 
 /* 개별 상품 스타일 */

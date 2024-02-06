@@ -90,7 +90,7 @@ const GardeningShopIndex = () => {
         // 처음 페이지로 이동
         pages.push(
             <li className="page-item">
-                <a className="page-link" href="#" onClick={() => handlePageChange(1)}>
+                <a className="page-link" onClick={() => handlePageChange(1)}>
                     <span className="ion-chevron-left">&laquo;</span>
                     <span className="ion-chevron-left"></span>
                 </a>
@@ -100,7 +100,7 @@ const GardeningShopIndex = () => {
         // 이전 페이지
         pages.push(
             <li className="page-item">
-                <a className="page-link" href="#" onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>
+                <a className="page-link" onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>
                     <span className="ion-chevron-left">&lt;</span>
                 </a>
             </li>
@@ -110,7 +110,7 @@ const GardeningShopIndex = () => {
         for (let i = Math.max(1, currentPage - pageLimit); i <= Math.min(totalPages, currentPage + pageLimit); i++) {
             pages.push(
                 <li className={`page-item ${i === currentPage ? 'active' : ''}`}>
-                    <a className="page-link" href="#" onClick={() => handlePageChange(i)}>{i}</a>
+                    <a className="page-link" onClick={() => handlePageChange(i)}>{i}</a>
                 </li>
             );
         }
@@ -118,7 +118,7 @@ const GardeningShopIndex = () => {
         // 다음 페이지
         pages.push(
             <li className="page-item">
-                <a className="page-link" href="#" onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}>
+                <a className="page-link" onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}>
                     <span className="ion-chevron-right">&gt;</span>
                 </a>
             </li>
@@ -127,7 +127,7 @@ const GardeningShopIndex = () => {
         // 마지막 페이지로 이동
         pages.push(
             <li className="page-item">
-                <a className="page-link" href="#" onClick={() => handlePageChange(totalPages)}>
+                <a className="page-link" onClick={() => handlePageChange(totalPages)}>
                     <span className="ion-chevron-right">&raquo;</span>
                     <span className="ion-chevron-right"></span>
                 </a>

@@ -56,6 +56,9 @@ export default "http://localhost:8000"
 
 ====================================================
 <!-- version -->
+### v0.7.7 ltj
+- 메인, 가드닝샵 css,링크 수정
+
 ### v0.7.6 psh
 - header, footer, etc css 수정
 
