@@ -8,7 +8,7 @@ const CommunityMainCreate = () => {
     const initialForm = {
         thread_title: '',
         thread_content: '',
-        thread_type: ''
+        thread_type: 0
     };
 
     const DjangoServer = useSelector(state => state.DjangoServer);
