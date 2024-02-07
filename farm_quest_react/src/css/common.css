@@ -11,7 +11,8 @@
 
 
 /* 태그 전역 설정 */
-a {
+.nav-link_hd a {
+    color: black;
     text-decoration: none;    
 }
 
