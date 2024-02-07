@@ -17,6 +17,7 @@
 
 ### v0.8.0 - test
 - server test
+- 가드닝 샵, common 수정
 
 ### v0.7.9c kdy
 - 진단 컴포넌트 css 수정
