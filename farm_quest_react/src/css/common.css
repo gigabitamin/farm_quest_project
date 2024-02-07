@@ -11,8 +11,7 @@
 
 
 /* 태그 전역 설정 */
-.nav-link_hd a {
-    color: black;
+a {
     text-decoration: none;    
 }
 
@@ -219,6 +218,10 @@ header {
     background-color: #F2F1EB; 
     font-family: Arial, sans-serif;   
 
+}
+
+.nav-link_hd a {
+    color: black;
 }
 
 .navbar_hd .nav-link_hd:hover {
