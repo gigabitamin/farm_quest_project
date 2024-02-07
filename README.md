@@ -4,61 +4,19 @@
 
 
 =======
-### kdy fix 240207_0202
-### v0.7.9c kdy
-### v0.7.9b jsh
-### v0.7.9a kdy
+- v0.8.0 -> v1.0.0
 
 
 <!-- notice -->
 ### 공지
-
-### v0.6.4 jsh
-> setting.py에서 db_settings.py와 allowed_host.py로 분리되어있던 관련 변수를 모두 db_settings.py로 통합하였다.  
-> 서버 실행시 변수 오류가 생길 경우 db_settings.py의 수정이 필요하다.
->```python
-># db_settings.py 예시 코드
->
->import pymysql
->pymysql.install_as_MySQLdb() # react build시 MySQL 대응 설정
->
->DATABASES = {
->    "default": {
->        "ENGINE": "django.db.backends.mysql",  # 엔진
->        "NAME": "final2",  # 데이터베이스 이름
->        "USER": "root",  # 사용자
->        "PASSWORD": "1234",  # 비밀번호
->        "HOST": "localhost",  # 호스트
->        "PORT": "3306",  # 포트번호
->    }
->}
->
->SECRET_KEY = "*" # 가지고 있는 키 값 입력
->
-># 아래는 원래 allowde_host.py에서 관리하던 변수지만 통합했음
->ALLOWED_HOSTS = ['localhost', '127.0.0.1']
->
->CORS_ALLOWED_ORIGINS = [
->    'http://localhost:8000',
->    'http://127.0.0.1:8000',
->]
->```
-<br>
-
-### v0.6.2 jsh
-> 서버 대응을 위해서 Django 서버 링크를 외부로 빼내었다.   
-> farm_quest_react/src 디렉토리 내부에 DjangoServer.js 파일을 생성하여 저장할 필요가 있다.   
-> .gitignore에 설정되어 있으므로 공유되지 않는다.   
-
-```javascript
-// DjangoServer.js 내부
-export default "http://localhost:8000"
-```
-<br>
+- 팜 퀘스트 프로젝트 완료
 
 
 ====================================================
 <!-- version -->
+
+### v0.8.0 - test
+- server test
 
 ### v0.7.9c kdy
 - 진단 컴포넌트 css 수정

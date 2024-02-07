@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import './diagnosisBoard.css'
+import { useNavigate } from 'react-router-dom';
+import './diagnosisBoard.css';
 
 const DiagnosisBoardMainList = ({ item }) => {
     const DjangoServer = useSelector(state => state.DjangoServer);
@@ -12,27 +12,27 @@ const DiagnosisBoardMainList = ({ item }) => {
     let highestConfidence = 0;
     let selectedBoxIndex = -1;
 
-    console.log('item', item)
+    if (serialized_results.boxes && serialized_results.boxes.length > 0) {
+        for (let i = 0; i < serialized_results.boxes.length; i++) {
+            const label = serialized_results.boxes[i]['label'];
+            const confidence = Number(serialized_results.boxes[i]['confidence']);
 
-    for (let i = 0; i < serialized_results.boxes.length; i++) {
-        const label = serialized_results.boxes[i]['label'];
-        const confidence = Number(serialized_results.boxes[i]['confidence']);
-
-        if (label >= 6 && confidence > highestConfidence) {
-            highestConfidence = confidence;
-            selectedBoxIndex = i;
+            if (label >= 6 && confidence > highestConfidence) {
+                highestConfidence = confidence;
+                selectedBoxIndex = i;
+            }
         }
     }
 
-    const obj_result_label = selectedBoxIndex !== -1
+    const obj_result_label = selectedBoxIndex !== -1 && serialized_results.boxes
         ? serialized_results.names[serialized_results.boxes[selectedBoxIndex]['label']]
         : null;
 
-    const obj_result_prob = selectedBoxIndex !== -1
+    const obj_result_prob = selectedBoxIndex !== -1 && serialized_results.boxes
         ? Number(serialized_results.boxes[selectedBoxIndex]['confidence']).toFixed(4) * 100
         : null;
 
-    const obj_yolo_solution_word = selectedBoxIndex !== -1
+    const obj_yolo_solution_word = selectedBoxIndex !== -1 && serialized_results.boxes
         ? serialized_results.boxes[selectedBoxIndex]['solution_info']['solution_word']
         : null;
 
@@ -41,7 +41,6 @@ const DiagnosisBoardMainList = ({ item }) => {
         ? `${DjangoServer}/media/diagnosis/yolo/origin_img/result_img/${save_file_name}`
         : null;
 
-    // const location = useLocation();
     const navigate = useNavigate();
 
     const handleClick = () => {
