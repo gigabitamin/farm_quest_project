@@ -220,6 +220,10 @@ header {
 
 }
 
+.nav-link_hd a {
+    color: black;
+}
+
 .navbar_hd .nav-link_hd:hover {
     /* background: linear-gradient(to right, #ffffff, #428B77); */
     transition: background 0.3s;  
